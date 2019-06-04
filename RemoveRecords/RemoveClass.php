@@ -1,16 +1,16 @@
-<?php include "../basecode-create_connection.php";
-session_start(); 
-
+<?php
+session_start();
+ include "../basecode-create_connection.php";
 //Script to remove class
-$_SESSION["classNumber"] = $_POST["classNumber"]; 
-$_SESSION["sectionAlpha"] = $_POST["sectionAlpha"]; 
+//$_SESSION["classNumber"] = $_POST["classNumber"];
+//$_SESSION["sectionAlpha"] = $_POST["sectionAlpha"];
 
 //$_SESSION["addAll"] = $_POST["sendArray"];
 //print_r($_SESSION) ;
 
-function removeItem() {
-	alert ($datetime1);
-}
+$as = $_POST;
+	print_r ($_POST); //Since header is defined in the last line - this echo cannot be seen
+
 
 /*
 $classNumber = $_POST["classNumber"];
@@ -28,7 +28,7 @@ $sectionAlphaSafe = $mysqli->real_escape_string($sectionAlpha);
 // prepare and bind
 
 	if (($_SESSION["classNumber"] == "") || ($_SESSION["sectionAlpha"] == "")) {
-		
+
 		$message = "Access Violation <br /> Go to <a href = '../../'>Home</a>";
 		exit($message);
 		}
@@ -36,7 +36,7 @@ $sectionAlphaSafe = $mysqli->real_escape_string($sectionAlpha);
 	else {
 		$stmt = $mysqli->prepare("INSERT INTO classsections (classNumber, sectionAlpha) VALUES (?, ?)");
 		$stmt->bind_param("ss", $classNumberSafe, $sectionAlphaSafe);
-	} 
+	}
 	$stmt->execute();
 
 	if (!$stmt->execute()) {
@@ -50,9 +50,6 @@ $sectionAlphaSafe = $mysqli->real_escape_string($sectionAlpha);
 
 $stmt->close();
 $mysqli->close();
-	//echo "<h4><a href='../../SetUpPages/newClasses.php'>Add More</a></h4>";
-	header('Location: ../SetUpPages/newClasses.php');*/
+	//echo "<h4><a href='../../SetUpPages/newClasses.php'>Add More</a></h4>";*/
+	header('Location: ../SetUpPages/newclasssections.php');
 ?>
-
-				
-			

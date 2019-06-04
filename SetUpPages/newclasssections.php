@@ -1,4 +1,7 @@
-<?php include "basecode-create_connection.php"; 
+<?php
+	//include "basecode-create_connection.php";
+	include "../basecode-create_connection.php";
+//include "../RemoveRecords/RemoveClass.php";
 	$pageHeading = "Set Up your Classes and Sections";
 
 ?>
@@ -17,10 +20,11 @@
 		<link type="text" href="./Modals/modaltest.html"/link>
 	<link rel="stylesheet" type="text/css" href="/stylesheet.css"  />
 		<script src="../../Scripts/js/ajaxCalls.js"></script>
-		<script src="../RemoveRecords/RemoveClass.php"></script>
+
 		<script type="text/javascript">
 			var addMultiple = [];
-			
+
+
 		</script>
 	</head>
 	<body class="body">
@@ -35,7 +39,7 @@
 					<div class="col-sm-5"></div>
 				</div>
 			</div>
-		
+
 			<div class="col-sm-9" style="border: 1px solid Grey;">
 
 				<form name="newClassForm" action="../AddNew/addnewclass.php" method="post">
@@ -63,11 +67,11 @@
 					<option id="E">E</option>
 					<option id="F">F</option>
 					</select>
-					<input type="button" id="chkRec" value="CHECK" onclick="ajaxChkClassFunction()"/> 
+					<input type="button" id="chkRec" value="CHECK" onclick="ajaxChkClassFunction()"/>
 					<button name="Submit" id="submit" type="submit">SUBMIT</button>
 				</form>
 			</div>
-			
+
 			<div class="col-sm-3 centered" style="border: 1px solid Grey;">
 				<?php include "../AddNew/existingclasssections.php"; ?>
 			</div>
@@ -83,7 +87,7 @@
 					<button id="addAll" onclick="" style="display: none;"></button>
 				</div>
 			</div>
-				
+
 		</div>
 		<div id="bottom"><?php include "../Components/bottom.php"; ?></div>
 	</body>

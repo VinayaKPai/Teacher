@@ -1,4 +1,4 @@
-<?php include "basecode-create_connection.php"; 
+<?php include "basecode-create_connection.php";
 	$pageHeading = "Teachers Tool logged in as <span class='loggedin'>Guest</span>" ;
 ?>
 
@@ -21,9 +21,9 @@
 	<hr>
 	<h3 class="centered"><?php include "Components/top.php"; ?></h3>
 	<hr>
-	
+
 	<div class="container">
-	
+
 		<hr />
 	<div class="row grid-container centered" style="flex-wrap: wrap; padding: 5px;">
 		<div class="btn roundsqbtn centered dropdown">
@@ -83,14 +83,6 @@
 			</div>
 		</div>
 	</div>
-	<?php include "./Modals/reportsModal.php"; ?>
-	<?php include "./Modals/newClassModal.php"; ?>
-	<?php include "./Modals/newQuestionModal.php"; ?>
-	<?php include "./Modals/newSubjectModal.php"; ?>
-	<?php include "./Modals/newStudentModal.php"; ?>
-	<?php include "./Modals/newTestModal.php"; ?>
-	<?php include "./Modals/newTopicModal.php"; ?>
-
 
 
 		<div class="skewed" style="text-align: right">

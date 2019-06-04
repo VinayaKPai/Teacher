@@ -1,0 +1,98 @@
+.body {
+    margin:10;
+	padding:10;
+	background: #DDDDDD;
+	height: 100%;
+}
+.bottom {
+	background-color: #684654; 
+	color: White;
+	min-height: 100px;
+}
+.centered {
+	text-align: center;
+}
+.grid-container {
+	background-color: #F5F5F5;
+}
+.headingcolor {
+	background: #DEB887;
+}
+.roundedsquare {
+	border-radius: 25px;
+	border-bottom: 2px solid #4B0082;
+ 	background: #DEB887;
+  	font-size: 10px;
+  	text-align: center;
+}
+.roundsqbtn {
+	display: flex inline;
+   	align-items: center; 
+   	justify-content: center;
+	border-radius: 25px;
+ 	background: #6f42c1;
+	width: 20%;
+	min-height: 100px;
+	line-height: 50px;
+  	font-size: 10px;
+  	text-align: center;
+	vertical-align: middle;
+	margin: 3px;
+	color: White;
+	background-image: radial-gradient(#ADADAD, #83677B, #64485C, #401B1D, #2E1114); 
+}
+.datadisplay {
+	background-color: #F5F5F5;
+	height: 90%;
+	overflow: scroll;
+}
+.hiddenList {
+	display: none;
+}
+.skewed {
+	background-color: #D8BFD8;
+	width: 100%;
+  	height: 80px;
+	font-size: 50px;
+  	text-align: center;
+  	-ms-transform: skewX(120deg); /* IE 9 */
+  	-webkit-transform: skewX(120deg); /* Safari */
+  	transform: skewX(120deg); /* Standard syntax */
+}	
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropdown-content {
+	display: none;
+	position: absolute;
+	border-radius: 3px;
+	line-height: 20px;
+	width: 80%;
+	background-color: #DFD4CC;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	z-index: 1;
+}
+.dropdown-content a:hover {
+	background-color: #684654; 
+	color: White;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+	
+}
+.maroon {
+	background-color: #D8BFD8;
+}
+.panel-heading .accordion-toggle:after {
+    /* symbol for "opening" panels */
+    font-family: 'Glyphicons Halflings';  /* essential for enabling glyphicon */
+    content: "\e114";    /* adjust as needed, taken from bootstrap.css */
+    float: right;        /* adjust as needed */
+    color: grey;         /* adjust as needed */
+}
+.panel-heading .accordion-toggle.collapsed:after {
+    /* symbol for "collapsed" panels */
+    content: "\e080";    /* adjust as needed, taken from bootstrap.css */
+}

@@ -1,0 +1,7 @@
+<div class="row grid-container centered">
+		<button id="Reports" class="col-sm-2 roundedsquare centered" data-toggle="modal" data-target="#newReportsModal"><h6>Reports</h6></button>
+		<button id="Test" class="col-sm-2 roundedsquare centered" data-toggle="modal" data-target="#newTestModal"><h6>New Test</h6></button>
+		<button id="Question" class="col-sm-2 roundedsquare centered" data-toggle="modal" data-target="#newQuestionModal"><h6>New Question</h6></button>
+		<button id="Student" class="col-sm-2 roundedsquare centered" data-toggle="modal" data-target="#newStudentModal"><h6>New Student</h6></button>
+		<div class="col-sm-2"><?php include "./AddNew/allNewAddsBtn.php" ; ?></div>
+	</div>

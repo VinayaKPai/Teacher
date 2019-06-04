@@ -1,0 +1,60 @@
+	<div class="row grid-container centered">
+		<div class="col-sm-3 roundedsquare centered">
+			<h5>Reports</h5>
+			<div class="centered">
+				<div class="datadisplay">
+					<?php include "reports.php"; ?>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-3 roundedsquare centered">
+			<h5>New Test</h5>
+			<div class="centered">
+				<div class="datadisplay">
+					<?php include "./AddNew/addnewtest.php"; ?>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-3 roundedsquare centered">
+			<h5>New Question</h5>
+			<div class="centered">
+					<div class="datadisplay">
+						<?php include "./AddNew/addnewquestion.php"; ?>
+					</div>
+			</div>
+		</div>
+
+		<div class="col-sm-3 roundedsquare centered">
+			<h5>Existing Students </h5>
+			<?php $query = $mysqli->query("SELECT * FROM studentdetails");
+						$rowcount=mysqli_num_rows($query);
+						echo "Currently ".$rowcount." students<br />"; 
+					?>
+			<div class="centered">
+				<div class="datadisplay">
+					<h5>Add New Student</h5>
+					<?php include "students.php"; ?>
+					
+					<?php include "adduser.php"; ?>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="grid-container centered">
+		<div class="roundedsquare centered">
+			<h5>New Test Paper </h5>
+			<div class="centered">
+				<div class="datadisplay">
+					<?php echo "New qustions will be added here"; ?>
+				</div>
+			</div>
+		</div>
+		<div class="roundedsquare centered">
+			<h5>Create New Test</h5>
+			<div class="centered">
+				<div class="datadisplay">
+					<?php echo "Questions added to the test will be displayed here"; ?>
+				</div>
+			</div>
+		</div>
+	</div>

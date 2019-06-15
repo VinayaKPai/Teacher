@@ -1,13 +1,15 @@
 <?php include "../basecode-create_connection.php";
-session_start(); 
+session_start();
 
-$_SESSION["classNumber"] = $_POST["classNumber"]; 
-$_SESSION["sectionAlpha"] = $_POST["sectionAlpha"]; 
+$_SESSION["classNumber"] = $_POST["classNumber"];
+$_SESSION["sectionAlpha"] = $_POST["sectionAlpha"];
 
 $_SESSION["addAll"] = $_POST["sendArray"];
-print_r($_SESSION) ;
 
-/*
+if ($_SESSION["classNumber"] && $_SESSION["sectionAlpha"] && $_SESSION["addAll"]) {print_r($_SESSION) ;}
+else
+
+
 $classNumber = $_POST["classNumber"];
 $classNumberSafe = $mysqli->real_escape_string($classNumber);
 
@@ -23,15 +25,15 @@ $sectionAlphaSafe = $mysqli->real_escape_string($sectionAlpha);
 // prepare and bind
 
 	if (($_SESSION["classNumber"] == "") || ($_SESSION["sectionAlpha"] == "")) {
-		
+
 		$message = "Access Violation <br /> Go to <a href = '../../'>Home</a>";
 		exit($message);
 		}
-	}
+	
 	else {
 		$stmt = $mysqli->prepare("INSERT INTO classsections (classNumber, sectionAlpha) VALUES (?, ?)");
 		$stmt->bind_param("ss", $classNumberSafe, $sectionAlphaSafe);
-	} 
+	}
 	$stmt->execute();
 
 	if (!$stmt->execute()) {
@@ -45,9 +47,6 @@ $sectionAlphaSafe = $mysqli->real_escape_string($sectionAlpha);
 
 $stmt->close();
 $mysqli->close();
-	//echo "<h4><a href='../../SetUpPages/newClasses.php'>Add More</a></h4>";
-	header('Location: ../SetUpPages/newClasses.php');*/
+	//echo "<h4><a href='../../SetUpPages/newClasses.php'>Add More</a></h4>";*/
+	{header('Location: ../SetUpPages/newClasssections.php');}
 ?>
-
-				
-			

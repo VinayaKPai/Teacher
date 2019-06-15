@@ -1,55 +1,24 @@
 <?php
 session_start();
- include "../basecode-create_connection.php";
+ include "../basecode-create_connection.php"; //working fine DO NOT TOUCH!
 //Script to remove class
-//$_SESSION["classNumber"] = $_POST["classNumber"];
-//$_SESSION["sectionAlpha"] = $_POST["sectionAlpha"];
 
-//$_SESSION["addAll"] = $_POST["sendArray"];
-//print_r($_SESSION) ;
+$cn = $_GET['cn'];
+$sa = $_GET['sa'];
+echo "<br>^^^^^^^^^^^^^^^^^^^<br>";
+echo "From Remove class<script>console.log('" . json_encode($cn) . "-" . $cn . "~~~~" . json_encode($sa) . "-"  . $sa ."');</script>";
 
-$as = $_POST;
-	print_r ($_POST); //Since header is defined in the last line - this echo cannot be seen
-
-
-/*
-$classNumber = $_POST["classNumber"];
-$classNumberSafe = $mysqli->real_escape_string($classNumber);
-
-$sectionAlpha = $_POST["sectionAlpha"];
-$sectionAlphaSafe = $mysqli->real_escape_string($sectionAlpha);
-
-	$query = $mysqli->query("SELECT * FROM classsections");
-
-	if ($query) {
-		$rowcount=mysqli_num_rows($query);
-	}
-
-// prepare and bind
-
-	if (($_SESSION["classNumber"] == "") || ($_SESSION["sectionAlpha"] == "")) {
-
-		$message = "Access Violation <br /> Go to <a href = '../../'>Home</a>";
-		exit($message);
-		}
-	}
-	else {
-		$stmt = $mysqli->prepare("INSERT INTO classsections (classNumber, sectionAlpha) VALUES (?, ?)");
-		$stmt->bind_param("ss", $classNumberSafe, $sectionAlphaSafe);
-	}
-	$stmt->execute();
-
-	if (!$stmt->execute()) {
-		$errno = $stmt->errno;
-		$message = "Could not add $classNumberSafe $sectionAlphaSafe - If the error reoccurs, please contact admin with $errno";
-	}
-	else {
-		$message = $classNumberSafe."-".$sectionAlphaSafe." has been added to the database";
-	}
+if ($cn && $sa) {
+  echo $cn , $sa;
+}
+else {
+  echo "<script>console.log('failed');</script>"
+}
+// $query = mysqli->query("SELECT * classsections" WHERE 'className' = $cn && 'sectionAlpha' = $sa);
 
 
-$stmt->close();
-$mysqli->close();
-	//echo "<h4><a href='../../SetUpPages/newClasses.php'>Add More</a></h4>";*/
-	header('Location: ../SetUpPages/newclasssections.php');
+// $stmt->close();
+// $mysqli->close();
+	//echo "<h4><a href='../../SetUpPages/newClasses.php'>Add More</a></h4>";
+	//header('Location: ../SetUpPages/newclasssections.php');
 ?>

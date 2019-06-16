@@ -2,7 +2,7 @@
          <!--
 //--------------------------------------Browser Support Code-------------------------------------------------------------------
 		 function ajaxGetRemoveClass(a,b) {
-          alert (a);
+          alert (a.innerHTML);
           alert (b);
           var classNumber = a;
           var sectionAlpha = b;

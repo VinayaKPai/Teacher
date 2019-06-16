@@ -26,8 +26,8 @@
 						  $slno++;
               $cn = $row['classNumber'];
               $sa = $row['sectionAlpha'];
-              
-              echo "<script>console.log($cn,$sa);</script>";
+
+              echo "<script>console.log($cn,$sa, 'existing classes');</script>";
 						  $remIdDB = $row['classNumber']."-".$row['sectionAlpha'];
 
             //  $paras = $cn.",".$sa;

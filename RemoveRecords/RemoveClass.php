@@ -5,15 +5,16 @@
 $remId = $_GET['cn'].$_GET['sa'];
 
 $t = gettype($remId);
-$query = ("DELETE FROM classsections WHERE 'Id' = $remId");
+$query = ("DELETE FROM classsections WHERE Id = '$remId'");
+$mysqli->query($query);
 if ($mysqli->query($query) === TRUE)
 {
-  echo "Removed";
+  echo 1;
 } else
-{"Error deleting record: " . $query->error;}
-//$query->execute();
+{
+  echo 0;
+}
 
-// $stmt->close();
 // $mysqli->close();
 	//echo "<h4><a href='../../SetUpPages/newClasses.php'>Add More</a></h4>";
 	//header('Location: ../SetUpPages/newclasssections.php');

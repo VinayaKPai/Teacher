@@ -22,7 +22,7 @@ if (isset($_POST["classNumber"]) && !empty($_POST["classNumber"]) && isset($_POS
  else {
     trigger_error('U-U!!!! Looks like some fields were empty! :-(');
 }
-echo "<script>console.log('done');</script>";
+
 
 
 

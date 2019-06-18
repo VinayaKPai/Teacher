@@ -31,7 +31,7 @@
             // div section in the same page.
 
             ajaxRequest.onreadystatechange = function() {
-	//------------collect values of the class name and section alpha of the row ---------------------
+
 
 
     				   if(ajaxRequest.readyState == 4) {
@@ -41,19 +41,19 @@
                   //should hold 1 key value pair if exists
 
                   var ajaxDeleteResponse = document.getElementById("status");
-
-                  	//div that will display the response to user
-
-      					  //AJAX call has to query the removeClass php, perform the action and return a success or failure message
-
-      					  if (ajaxReturn) {//Step 1: Record already present in db
-      						        console.log(ajaxReturn);
+	                 //div that will display the response to user
+                   //AJAX call has to query the removeClass php, perform the action and return a success or failure message
+                   var message;
+      					  if (ajaxReturn == 1) {
+                      message = "Removed"+ atext + btext ;
+      						        console.log(message);
 
                           ajaxDeleteResponse.innerHTML = ajaxReturn;
       					   }
       					   //
       					   else {
-                     console.log("failed");;
+                     message = "Couldn't remove "+ atext + btext ;
+                     console.log(message);
       					   }
                 }
 

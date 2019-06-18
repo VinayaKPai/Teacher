@@ -2,10 +2,8 @@
          <!--
 //--------------------------------------Browser Support Code-------------------------------------------------------------------
 		 function ajaxGetRemoveClass(a,b) {
-          alert (a.innerHTML);
-          alert (b);
-          var classNumber = a;
-          var sectionAlpha = b;
+          var atext = a.innerHTML;
+          var btext = b.innerHTML;
             var ajaxRequest;  // The variable that makes Ajax possible!
 
             try {
@@ -42,12 +40,16 @@
                   //relevant code that sends the response is in checkclasssections.php
                   //should hold 1 key value pair if exists
 
-      					  var ajaxResponse = document.getElementById('status');	//div that will display the response to user
+                  var ajaxDeleteResponse = document.getElementById("status");
+
+                  	//div that will display the response to user
 
       					  //AJAX call has to query the removeClass php, perform the action and return a success or failure message
 
-      					  if (ajaxReturn[0] === "Removed") {//Step 1: Record already present in db
-      						        console.log("success");
+      					  if (ajaxReturn) {//Step 1: Record already present in db
+      						        console.log(ajaxReturn);
+
+                          ajaxDeleteResponse.innerHTML = ajaxReturn;
       					   }
       					   //
       					   else {
@@ -59,7 +61,7 @@
 
             // Now get the value from user and pass it to
             // server script.
-            var queryString = "/RemoveRecords/RemoveClass.php?cn=" + classNumber + "&&sa=" + sectionAlpha ;
+            var queryString = "/RemoveRecords/RemoveClass.php?cn=" + atext + "&&sa=" + btext ;
 
             ajaxRequest.open("GET", queryString, true);
             ajaxRequest.send(null);

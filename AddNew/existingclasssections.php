@@ -23,11 +23,12 @@
 
 					while ($row = $query->fetch_assoc())  {
 						{
+              $rescn = strip_tags($row['classNumber']);
 						  $slno++;
               $cn = $row['classNumber'];
               $sa = $row['sectionAlpha'];
 
-              echo "<script>console.log($cn,$sa, 'existing classes');</script>";
+              
 						  $remIdDB = $row['classNumber']."-".$row['sectionAlpha'];
 
             //  $paras = $cn.",".$sa;

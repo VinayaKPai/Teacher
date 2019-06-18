@@ -72,7 +72,8 @@
 								addDiv.setAttribute("id",addDivId);         //set the id of the div
 								addDiv.innerHTML = classNumber + "-" + sectionAlpha;    //set the display text
                 //append the element to ajax response div
-								document.getElementById("ajaxRes").appendChild(addDiv);
+								//document.getElementById("ajaxRes").appendChild(addDiv);
+								ajaxResponse.appendChild(addDiv);
 
 								//create a remove text element to go with the q'd record
 

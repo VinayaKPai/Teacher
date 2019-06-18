@@ -1,21 +1,17 @@
 <?php
-session_start();
+
  include "../basecode-create_connection.php"; //working fine DO NOT TOUCH!
 //Script to remove class
+$remId = $_GET['cn'].$_GET['sa'];
 
-$cn = json_encode($_GET['cn']);
-$sa = json_encode($_GET['sa']);
-echo "<br>^^^^^^^^^^^^^^^^^^^<br>";
-echo "From Remove class<script>console.log('" . json_encode($cn) . "-" . $cn . "~~~~" . json_encode($sa) . "-"  . $sa ."');</script>";
-
-if ($cn && $sa) {
-  echo $cn , $sa;
-}
-else {
-  echo "<script>console.log('failed');</script>";
-}
-// $query = mysqli->query("SELECT * classsections" WHERE 'className' = $cn && 'sectionAlpha' = $sa);
-
+$t = gettype($remId);
+$query = ("DELETE FROM classsections WHERE 'Id' = $remId");
+if ($mysqli->query($query) === TRUE)
+{
+  echo "Removed";
+} else
+{"Error deleting record: " . $query->error;}
+//$query->execute();
 
 // $stmt->close();
 // $mysqli->close();

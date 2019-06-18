@@ -1,40 +1,30 @@
 <?php include "../basecode-create_connection.php";
 session_start();
 
-$_SESSION["classNumber"] = $_POST["classNumber"];
-$_SESSION["sectionAlpha"] = $_POST["sectionAlpha"];
 
-$_SESSION["addAll"] = $_POST["sendArray"];
+if (isset($_POST["classNumber"]) && !empty($_POST["classNumber"]) && isset($_POST["sectionAlpha"]) && !empty($_POST["sectionAlpha"])) {
+	$classNumber = $_POST["classNumber"];
+	$classNumberSafe = $mysqli->real_escape_string($classNumber);
 
-if ($_SESSION["classNumber"] && $_SESSION["sectionAlpha"] && $_SESSION["addAll"]) {print_r($_SESSION) ;}
-else
-
-
-$classNumber = $_POST["classNumber"];
-$classNumberSafe = $mysqli->real_escape_string($classNumber);
-
-$sectionAlpha = $_POST["sectionAlpha"];
-$sectionAlphaSafe = $mysqli->real_escape_string($sectionAlpha);
-
+	$sectionAlpha = $_POST["sectionAlpha"];
+	$sectionAlphaSafe = $mysqli->real_escape_string($sectionAlpha);
+		$array = [];
 	$query = $mysqli->query("SELECT * FROM classsections");
 
-	if ($query) {
-		$rowcount=mysqli_num_rows($query);
-	}
 
-// prepare and bind
+	// // prepare and bind
+	$newId = $classNumberSafe.$sectionAlphaSafe;
+	$stmt = $mysqli->prepare("INSERT INTO classsections (Id, classNumber, sectionAlpha) VALUES (?, ?, ?)");
+	$stmt->bind_param("sss", $newId, $classNumberSafe, $sectionAlphaSafe);
 
-	if (($_SESSION["classNumber"] == "") || ($_SESSION["sectionAlpha"] == "")) {
-
-		$message = "Access Violation <br /> Go to <a href = '../../'>Home</a>";
-		exit($message);
-		}
-	
-	else {
-		$stmt = $mysqli->prepare("INSERT INTO classsections (classNumber, sectionAlpha) VALUES (?, ?)");
-		$stmt->bind_param("ss", $classNumberSafe, $sectionAlphaSafe);
-	}
 	$stmt->execute();
+}
+ else {
+    trigger_error('U-U!!!! Looks like some fields were empty! :-(');
+}
+echo "<script>console.log('done');</script>";
+
+
 
 	if (!$stmt->execute()) {
 		$errno = $stmt->errno;
@@ -47,6 +37,6 @@ $sectionAlphaSafe = $mysqli->real_escape_string($sectionAlpha);
 
 $stmt->close();
 $mysqli->close();
-	//echo "<h4><a href='../../SetUpPages/newClasses.php'>Add More</a></h4>";*/
+
 	{header('Location: ../SetUpPages/newClasssections.php');}
 ?>

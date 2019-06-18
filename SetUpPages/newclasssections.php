@@ -3,6 +3,8 @@
 	include "../basecode-create_connection.php";
 	//include "../RemoveRecords/RemoveClass.php";
 	include "../Scripts/php/addNewClasses.php";
+//	include "../RemoveRecords/RemoveClass.php";
+
 	$pageHeading = "Set Up your Classes and Sections";
 
 ?>
@@ -26,7 +28,7 @@
 		<script type="text/javascript">
 			var addMultiple = [];
 function removeItem(e) {alert (e);}
-function addNewClasses() {
+function addNewClasses() {	//for ADD ALL button
 	//document.getElementById("status").innerHTML = "Add New Classes triggered";
 
 	$('#status').html("Add New Classes triggered");

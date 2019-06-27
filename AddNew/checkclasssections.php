@@ -2,21 +2,20 @@
 
 	include "../basecode-create_connection.php";
 
-//this script gets parameters from the ajaxcalls.js script
-//uses the GET variables in the url
+
 // Retrieve data from Query String
 $classNumber = $_GET['classNumber'];
-// Escape User Input to help prevent SQL Injection and reassign to same variable
+// Escape User Input to help prevent SQL Injection
 $classNumber = $mysqli->real_escape_string($classNumber);
 $sectionAlpha = $_GET['sectionAlpha'];
-// Escape User Input to help prevent SQL Injection and reassign to same variable
+// Escape User Input to help prevent SQL Injection
 $sectionAlpha = $mysqli->real_escape_string($sectionAlpha);
 
-//queries the db/table for a row matching the parameters from the url
+//$rowcount = 0;
 $query = $mysqli->query("SELECT * FROM classsections WHERE classNumber = '$classNumber' AND sectionAlpha = '$sectionAlpha'");
 
-	$rowcount=mysqli_num_rows($query); //number of results returned by the query - either 0 (if not present) or 1 (if present)
-	$row=mysqli_fetch_assoc($query);	//fetch all columns of the query results
+	$rowcount=mysqli_num_rows($query); //number of results returned by the query - either 0 or 1
+	$row=mysqli_fetch_assoc($query);	//fetch all colums of the query results
 
 		$rowId = $row['Id'];	//Id of the returned row
 

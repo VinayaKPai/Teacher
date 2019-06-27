@@ -1,7 +1,7 @@
 <?php include "../basecode-create_connection.php";
 session_start();
 
-//Adding a single record
+
 if (isset($_POST["classNumber"]) && !empty($_POST["classNumber"]) && isset($_POST["sectionAlpha"]) && !empty($_POST["sectionAlpha"])) {
 	$classNumber = $_POST["classNumber"];
 	$classNumberSafe = $mysqli->real_escape_string($classNumber);
@@ -23,6 +23,9 @@ if (isset($_POST["classNumber"]) && !empty($_POST["classNumber"]) && isset($_POS
     trigger_error('U-U!!!! Looks like some fields were empty! :-(');
 }
 
+
+
+
 	if (!$stmt->execute()) {
 		$errno = $stmt->errno;
 		$message = "Could not add $classNumberSafe $sectionAlphaSafe - If the error reoccurs, please contact admin with $errno";
@@ -34,8 +37,6 @@ if (isset($_POST["classNumber"]) && !empty($_POST["classNumber"]) && isset($_POS
 
 $stmt->close();
 $mysqli->close();
-
-
 
 	{header('Location: ../SetUpPages/newClasssections.php');}
 ?>

@@ -2,7 +2,7 @@
 	//include "basecode-create_connection.php";
 	include "../basecode-create_connection.php";
 	//include "../RemoveRecords/RemoveClass.php";
-	//include "../Scripts/php/addNewClasses.php";
+	include "../Scripts/php/addNewClasses.php";
 //	include "../RemoveRecords/RemoveClass.php";
 
 	$pageHeading = "Set Up your Classes and Sections";
@@ -23,16 +23,16 @@
 		<link type="text" href="./Modals/modaltest.html"/link>
 	<link rel="stylesheet" type="text/css" href="/stylesheet.css"  />
 		<script src="../../Scripts/js/ajaxCalls.js"></script>
+		<script src="../../Scripts/js/ajaxcallstest.js"></script>
 		<script src="../../Scripts/js/addRecords.js"></script>
 		<script type="text/javascript">
 			var addMultiple = [];
-			function addNewClasses() {	//for ADD ALL button
-			 //document.getElementById("status").innerHTML = "Add New Classes triggered";
+function removeItem(e) {alert (e);}
+function addNewClasses() {	//for ADD ALL button
+	//document.getElementById("status").innerHTML = "Add New Classes triggered";
 
-
-			 $('#status').html(addMultiple);
-			}
-
+	$('#status').html("Add New Classes triggered");
+}
 		</script>
 	</head>
 	<body class="body">
@@ -111,9 +111,7 @@
 						<div class="col-sm-5">
 							<div id="recsInQ" style="color: blue; font-weight: bold;">
 							</div>
-							<div class="centered">
-								<button id="addAll" class="btn-primary"  onclick="ajaxAddAll()" style="display: none;"></button>
-							</div>
+							<div class="centered"><button id="addAll" class="btn-primary" onclick="addNewClasses()" style="display: none;"></button></div>
 						</div>
 				</div>
 				</div>

@@ -29,42 +29,56 @@
 		<div class="btn roundsqbtn centered dropdown">
 			<div>Reports</div>
 			<div class="dropdown-content centered" style="float: center;">
+				<a href="../../SetUpPages/newReports.php">Add New</a>
+				<br>
 				<a href="../../SetUpPages/newReports.php">Manage </a>
 			</div>
 		</div>
 		<div class="btn roundsqbtn centered dropdown">
 			<div>Classes Sections</div>
 			<div class="dropdown-content centered" style="float: center;">
-				<a href="../../SetUpPages/newclasssections.php">Manage </a>
+				<a href="../../SetUpPages/newclasssections.php">Add New</a>
+				<br>
+				<a href="../../AddNew/existingclasssections.php">Manage </a>
 			</div>
 		</div>
 		<div class="btn roundsqbtn centered dropdown">
 			<div>Subjects</div>
 			<div class="dropdown-content centered" style="float: center;">
+				<a href="../../SetUpPages/newSubjects.php">Add New</a>
+				<br>
 				<a href="../../SetUpPages/newSubjects.php">Manage </a>
 			</div>
 		</div>
 		<div class="btn roundsqbtn centered dropdown">
 			<div>Units</div>
 			<div class="dropdown-content centered" style="float: center;">
+				<a href="../../SetUpPages/newUnits.php">Add New</a>
+				<br>
 				<a href="../../SetUpPages/newUnits.php">Manage </a>
 			</div>
 		</div>
 		<div class="btn roundsqbtn centered dropdown">
 			<div>Topics</div>
 			<div class="dropdown-content centered" style="float: center;">
+				<a href="../../SetUpPages/newTopics.php">Add New</a>
+				<br>
 				<a href="../../SetUpPages/newTopics.php">Manage </a>
 			</div>
 		</div>
 		<div class="btn roundsqbtn centered dropdown">
 			<div>Tests</div>
 			<div class="dropdown-content centered" style="float: center;">
+				<a href="../../SetUpPages/newTests.php">Add New</a>
+				<br>
 				<a href="../../SetUpPages/newTests.php">Manage </a>
 			</div>
 		</div>
 		<div class="btn roundsqbtn centered dropdown">
 			<div>Students</div>
 			<div class="dropdown-content centered" style="float: center;">
+				<a href="../../SetUpPages/newStudents.php">Add New</a>
+				<br>
 				<a href="../../SetUpPages/newStudents.php">Manage </a>
 			</div>
 		</div>

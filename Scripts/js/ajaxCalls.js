@@ -33,7 +33,8 @@
 	//------------collect values (from 2 drop down select elements to be sent to ajax---------------------
 				var classNumber = document.getElementById("classNumber").value;
 				var sectionAlpha = document.getElementById("sectionAlpha").value;
-
+				//var addMultiple = [];
+//alert ("Add Multiple *" + typeof addMultiple + "* ....");
 
 				   if(ajaxRequest.readyState == 4) {
 
@@ -55,8 +56,8 @@
 					  if (ajaxReturn[0] === 1) {//Step 1: Record already present in db
 						alert (classNumber + "-" + sectionAlpha + " already exists in the db. ");
 					   }
-
-					  else {//Step 2: check Q'd items
+					   //
+					   else {//Step 2: check Q'd items
 						  var chkAddId = (classNumber + sectionAlpha);
 						   var chkAddRecordQ = document.getElementById(chkAddId); //if elements exists this will return it
 
@@ -95,9 +96,8 @@
 								sa.selectedIndex = 0;
 
 								//add the selections to an array for further processing
-								var newRowData = {classNumber , sectionAlpha };	//create an object of 2 key value pairs
+								var newRowData = "[className=>" + classNumber + ",sectionAlpha=>" + sectionAlpha + "]";	//create an object of 2 key value pairs
 
-                //addMultipleis defined in the calling file ie newClasssections.php
 								addMultiple.push(newRowData);										//push the object into the array that holds records q'd for insertion to db
 
 								var arrayPopulation = (addMultiple.length);
@@ -114,7 +114,6 @@
 							var hideSubmit = document.getElementById("submit");
 							hideSubmit.style.display = "none";
               document.getElementById("addAll").style.display = "block";
-
 							}
 							else {
 								recText = "record";	//Single reord - singular
@@ -158,33 +157,3 @@
          }
          //-->
 		 //--------------------------------------------AJAX FOR EXISTING RECORDS ENDS----------------------------------------------------------------------
-     function ajaxAddAll() {
-       var lnl = "../../Scripts/php/addNewClasses.php?";
-       var cs = JSON.stringify(addMultiple);
-       console.log(addMultiple);
-         console.log(cs);
-
-       lnl += "arraypost=" + cs;
-       // var cslen = addMultiple.length;
-       // for (i=0;i<cslen-1;i++) {
-       //   var item = addMultiple[i]; //eg classNumber:I, sectionAlpha:A
-       //  var cnum = item.classNumber;
-       //  var cnumkey = "cnum" + i;
-       //  var salphkey = "salph" + i;
-       //  var salph = item.sectionAlpha;
-       //  lnl += cnumkey + "=" + cnum + "&&" + salphkey + "=" + salph + "&&";
-       //
-       // }
-       // var cnumlast = addMultiple[cslen-1].classNumber;
-       // var salphlast = addMultiple[cslen-1].sectionAlpha;
-       // lnl += "cnumlast=" + cnumlast + "&&salphlast=" + salphlast;
-
-    $.ajax({
-            type : "GET",  //type of method
-            url  : lnl,  //your page
-            //data : addMultiple,// passing the values
-            success: function(res){
-                  console.log (res + " res in success myfunction");                  //do what you want here...
-                    }
-        });
-    }

@@ -74,6 +74,26 @@
 								//document.getElementById("ajaxRes").appendChild(addDiv);
 								ajaxResponse.appendChild(addDiv);
 
+                //now create two hidden fields for class number and section alpha and append to the form with id addMultiplefrm
+                var addCNinput = document.createElement("input"); //create a div
+								var addCNinputId = classNumber; //create its id
+								//addCNinput.setAttribute("id",addCNinputId);         //set the id of the div
+                addCNinput.setAttribute("name",addCNinputId);         //set the id of the div
+                addCNinput.value = classNumber;
+								addCNinput.innerHTML = classNumber;    //set the display text
+
+								addMultiplefrm.appendChild(addCNinput);
+
+                var addSAinput = document.createElement("input"); //create a div
+								var addSAinputId = sectionAlpha; //create its id
+								//addSAinput.setAttribute("id",addSAinputId);         //set the id of the div
+                addSAinput.setAttribute("name",addSAinputId);         //set the id of the div
+                addSAinput.value = sectionAlpha;    //set the display text
+								addSAinput.innerHTML = sectionAlpha;    //set the display text
+
+								addMultiplefrm.appendChild(addSAinput);
+
+
 								//create a remove text element to go with the q'd record
 
 								var remId = "rem" + addDivId; //create an id to help removal
@@ -159,19 +179,5 @@
          //-->
 		 //--------------------------------------------AJAX FOR EXISTING RECORDS ENDS----------------------------------------------------------------------
      function ajaxAddAll(arrs) {
-       console.log(arrs);
-       var lnl = "../../Scripts/php/addNewClasses.php";
-       var csi = arrs[0].classNumber + arrs[0].sectionAlpha;
-       var csii = arrs[1].classNumber + arrs[1].sectionAlpha;
-       var csiii = arrs[2].classNumber + arrs[2].sectionAlpha;
-       var ssd = ("{'data1':'"+csi+"'},{'data2':'"+csii+"'},{'data3':'"+csiii+"'}");
 
-    $.ajax({
-            type : "POST",  //type of method
-            url  : lnl,  //your page
-            data : ssd,// passing the values
-            success: function(res){
-                  console.log ("RESPONSE FROM PHP INTO AJAX\n" + res);                  //do what you want here...
-                    }
-        });
     }

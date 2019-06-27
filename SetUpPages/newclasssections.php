@@ -112,7 +112,10 @@
 							<div id="recsInQ" style="color: blue; font-weight: bold;">
 							</div>
 							<div class="centered">
-								<button id="addAll" class="btn-primary"  onclick="ajaxAddAll(addMultiple)" style="display: none;"></button>
+								<form action="../Scripts/php/addNewClasses.php" method="POST" id="addMultiplefrm">
+									
+									<button id="addAll" class="btn-primary"  type="submit" style="display: none;"></button>
+								</form>
 							</div>
 						</div>
 				</div>

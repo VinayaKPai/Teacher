@@ -28,7 +28,7 @@
               $cn = $row['classNumber'];
               $sa = $row['sectionAlpha'];
 
-              
+
 						  $remIdDB = $row['classNumber']."-".$row['sectionAlpha'];
 
             //  $paras = $cn.",".$sa;
@@ -39,7 +39,6 @@
                       <td>".($row['sectionAlpha'])."</td>
                       <td>
                         <a id=$remIdDB name=$remIdDB  href='$url'>REMOVE</a>
-                        <button onclick='ajaxGetRemoveClass($cn,$sa)'>REMOVE</button>
                       </td>
                     </tr>";
 

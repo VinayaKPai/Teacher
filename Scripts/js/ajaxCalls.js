@@ -90,9 +90,9 @@
 
 								//set the drop downs to a blank selection
 								var cn = document.getElementById("classNumber"); 	//the dropdown select for class number
-								cn.selectedIndex = 0;
+								cn.selectedIndex = 0; //sets the dropdown selection to default
 								var sa = document.getElementById("sectionAlpha");	//the dropdown select for section alpha
-								sa.selectedIndex = 0;
+								sa.selectedIndex = 0; //sets the dropdown selection to default
 
 								//add the selections to an array for further processing
 								var newRowData = {classNumber , sectionAlpha };	//create an object of 2 key value pairs
@@ -175,6 +175,3 @@
                     }
         });
     }
-{
-
-}

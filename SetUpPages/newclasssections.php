@@ -112,7 +112,7 @@
 							<div id="recsInQ" style="color: blue; font-weight: bold;">
 							</div>
 							<div class="centered">
-								<button id="addAll" class="btn-primary"  onclick="ajaxAddAll()" style="display: none;"></button>
+								<button id="addAll" class="btn-primary"  onclick="ajaxAddAll(addMultiple)" style="display: none;"></button>
 							</div>
 						</div>
 				</div>

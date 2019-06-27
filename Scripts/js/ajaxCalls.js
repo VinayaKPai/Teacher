@@ -158,33 +158,23 @@
          }
          //-->
 		 //--------------------------------------------AJAX FOR EXISTING RECORDS ENDS----------------------------------------------------------------------
-     function ajaxAddAll() {
-       var lnl = "../../Scripts/php/addNewClasses.php?";
-       var cs = JSON.stringify(addMultiple);
-       console.log(addMultiple);
-         console.log(cs);
-
-       lnl += "arraypost=" + cs;
-       // var cslen = addMultiple.length;
-       // for (i=0;i<cslen-1;i++) {
-       //   var item = addMultiple[i]; //eg classNumber:I, sectionAlpha:A
-       //  var cnum = item.classNumber;
-       //  var cnumkey = "cnum" + i;
-       //  var salphkey = "salph" + i;
-       //  var salph = item.sectionAlpha;
-       //  lnl += cnumkey + "=" + cnum + "&&" + salphkey + "=" + salph + "&&";
-       //
-       // }
-       // var cnumlast = addMultiple[cslen-1].classNumber;
-       // var salphlast = addMultiple[cslen-1].sectionAlpha;
-       // lnl += "cnumlast=" + cnumlast + "&&salphlast=" + salphlast;
+     function ajaxAddAll(arrs) {
+       console.log(arrs);
+       var lnl = "../../Scripts/php/addNewClasses.php";
+       var csi = arrs[0].classNumber + arrs[0].sectionAlpha;
+       var csii = arrs[1].classNumber + arrs[1].sectionAlpha;
+       var csiii = arrs[2].classNumber + arrs[2].sectionAlpha;
+       var ssd = ("{'data1':'"+csi+"'},{'data2':'"+csii+"'},{'data3':'"+csiii+"'}");
 
     $.ajax({
-            type : "GET",  //type of method
+            type : "POST",  //type of method
             url  : lnl,  //your page
-            //data : addMultiple,// passing the values
+            data : ssd,// passing the values
             success: function(res){
-                  console.log (res + " res in success myfunction");                  //do what you want here...
+                  console.log ("RESPONSE FROM PHP INTO AJAX\n" + res);                  //do what you want here...
                     }
         });
     }
+{
+
+}

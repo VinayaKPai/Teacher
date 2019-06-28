@@ -40,7 +40,7 @@
 	<body class="body">
 		<div class="container">
 			<hr>
-			<h3 class="centered"><?php include "../Components/top.php"; ?></h3>
+			<h3 class="centered"><?php include "../Components/top.php"; ?>(Master)</h3>
 			<hr>
 			<div>
 				<div>
@@ -75,45 +75,43 @@
 				<div class="col-sm-9" style="padding: 10px;">
 <hr>
 					<form name="newStudentForm" action="../AddNew/addnewstudent.php" method="post">
-						First Name <input id="fn" name="fn" required />
-						First Name <input id="ln" name="ln" required />
-						Class/Std <select name="classNumber" id="classNumber" required>
-								<option id="blankcn"></option>
-								<option id="I">I</option>
-								<option id="II">II</option>
-								<option id="III">III</option>
-								<option id="IV">IV</option>
-								<option id="V">V</option>
-								<option id="VI">VI</option>
-								<option id="VII">VII</option>
-								<option id="VIII">VIII</option>
-								<option id="IX">IX</option>
-								<option id="X">X</option>
-								<option id="XI">XI</option>
-								<option id="XII">XII</option>
-						</select>
-						Section <select name="sectionAlpha" id="sectionAlpha" required>
-								<option id="blanksa"></option>
-								<option id="A">A</option>
-								<option id="B">B</option>
-								<option id="C">C</option>
-								<option id="D">D</option>
-								<option id="E">E</option>
-								<option id="F">F</option>
-						</select>
-						Roll Number <input id="rollNumber" name="rollNumber" />
-						First Name <input id="email" name="email" />
-						First Name <input id="pw" name="pw" />
-						Join Year <select id="joinYear" name="joinYear" >
-								<option id="blanksa"></option>
-								<option id="2017">2017</option>
-								<option id="2018">2018</option>
-								<option id="2019">2019</option>
-								<option id="2020">2020</option>
-								<option id="2021">2021</option>
-								<option id="2022">2022</option>
-						</select>
-						End Year <select id="endYear" name="endYear" >
+						<div class="form-group">
+							First Name <input id="fn" name="fn" required />
+							Last Name <input id="ln" name="ln" required />
+						</div>
+						<div class="form-group">
+							Class/Std <select name="classNumber" id="classNumber" required>
+									<option id="blankcn"></option>
+									<option id="I">I</option>
+									<option id="II">II</option>
+									<option id="III">III</option>
+									<option id="IV">IV</option>
+									<option id="V">V</option>
+									<option id="VI">VI</option>
+									<option id="VII">VII</option>
+									<option id="VIII">VIII</option>
+									<option id="IX">IX</option>
+									<option id="X">X</option>
+									<option id="XI">XI</option>
+									<option id="XII">XII</option>
+							</select>
+							Section <select name="sectionAlpha" id="sectionAlpha" required>
+									<option id="blanksa"></option>
+									<option id="A">A</option>
+									<option id="B">B</option>
+									<option id="C">C</option>
+									<option id="D">D</option>
+									<option id="E">E</option>
+									<option id="F">F</option>
+							</select>
+							Roll Number <input id="rollNumber" name="rollNumber" />
+						</div>
+						<div class="form-group">
+							Email <input id="email" name="email" />
+							phoneMobile <input id="phoneMobile" name="phoneMobile" />
+						</div>
+						<div class="form-group">
+							Join Year <select id="joinYear" name="joinYear" >
 								<option id="blanksa"></option>
 								<option id="2017">2017</option>
 								<option id="2018">2018</option>
@@ -121,8 +119,18 @@
 								<option id="2020">2020</option>
 								<option id="2021">2021</option>
 								<option id="2022">2022</option>
-						</select>
-						phoneMobile <input id="phoneMobile" name="phoneMobile" />
+							</select>
+							End Year <select id="endYear" name="endYear" >
+								<option id="blanksa"></option>
+								<option id="2017">2017</option>
+								<option id="2018">2018</option>
+								<option id="2019">2019</option>
+								<option id="2020">2020</option>
+								<option id="2021">2021</option>
+								<option id="2022">2022</option>
+							</select>
+							Temp PW <input id="pw" name="pw" />
+						</div>
 
 						<input type="button" id="chkRec" value="CHECK" onclick="ajaxChkStudentFunction()"/>
 						<button name="Submit" id="submit" type="submit">SUBMIT</button>

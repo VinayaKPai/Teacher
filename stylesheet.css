@@ -5,7 +5,7 @@
 	height: 100%;
 }
 .bottom {
-	background-color: #684654; 
+	background-color: #684654;
 	color: White;
 	min-height: 100px;
 }
@@ -27,7 +27,7 @@
 }
 .roundsqbtn {
 	display: flex inline;
-   	align-items: center; 
+   	align-items: center;
    	justify-content: center;
 	border-radius: 25px;
  	background: #6f42c1;
@@ -39,7 +39,7 @@
 	vertical-align: middle;
 	margin: 3px;
 	color: White;
-	background-image: radial-gradient(#ADADAD, #83677B, #64485C, #401B1D, #2E1114); 
+	background-image: radial-gradient(#ADADAD, #83677B, #64485C, #401B1D, #2E1114);
 }
 .datadisplay {
 	background-color: #F5F5F5;
@@ -58,7 +58,7 @@
   	-ms-transform: skewX(120deg); /* IE 9 */
   	-webkit-transform: skewX(120deg); /* Safari */
   	transform: skewX(120deg); /* Standard syntax */
-}	
+}
 .dropdown {
   position: relative;
   display: inline-block;
@@ -74,13 +74,13 @@
 	z-index: 1;
 }
 .dropdown-content a:hover {
-	background-color: #684654; 
+	background-color: #684654;
 	color: White;
 }
 
 .dropdown:hover .dropdown-content {
   display: block;
-	
+
 }
 .maroon {
 	background-color: #D8BFD8;
@@ -95,4 +95,16 @@
 .panel-heading .accordion-toggle.collapsed:after {
     /* symbol for "collapsed" panels */
     content: "\e080";    /* adjust as needed, taken from bootstrap.css */
+}
+.topbanner {
+  background-color: #9B797B;
+  font-size: 18px;
+  color: White;
+  padding: 10px;
+}
+.left {
+  border-right: 1px	solid #2E1114;
+}
+.right {
+  border-left: 1px solid #2E1114;
 }

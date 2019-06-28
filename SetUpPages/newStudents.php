@@ -76,11 +76,11 @@
 <hr>
 					<form name="newStudentForm" action="../AddNew/addnewstudent.php" method="post">
 						<div class="form-group">
-							First Name <input id="fn" name="fn" required />
-							Last Name <input id="ln" name="ln" required />
+							<label for="fn">First Name</label> <input id="fn" name="fn" class="form-control" required />
+							<label for="ln">Last Name</label> <input id="ln" name="ln" class="form-control" required />
 						</div>
 						<div class="form-group">
-							Class/Std <select name="classNumber" id="classNumber" required>
+							<label for="classNumber">Class/Std</label> <select name="classNumber" id="classNumber" required>
 									<option id="blankcn"></option>
 									<option id="I">I</option>
 									<option id="II">II</option>
@@ -95,7 +95,7 @@
 									<option id="XI">XI</option>
 									<option id="XII">XII</option>
 							</select>
-							Section <select name="sectionAlpha" id="sectionAlpha" required>
+							<label for="sectionAlpha">Section</label> <select name="sectionAlpha" id="sectionAlpha" required>
 									<option id="blanksa"></option>
 									<option id="A">A</option>
 									<option id="B">B</option>
@@ -104,14 +104,14 @@
 									<option id="E">E</option>
 									<option id="F">F</option>
 							</select>
-							Roll Number <input id="rollNumber" name="rollNumber" />
+							<label for="rollNumber">Roll Number</label><input id="rollNumber" name="rollNumber" />
 						</div>
 						<div class="form-group">
-							Email <input id="email" name="email" />
-							phoneMobile <input id="phoneMobile" name="phoneMobile" />
+							<label for="email">Email</label><input id="email" name="email" class="form-control" />
+							<label for="phoneMobile">Mobile</label> <input id="phoneMobile" name="phoneMobile" class="form-control" />
 						</div>
 						<div class="form-group">
-							Join Year <select id="joinYear" name="joinYear" >
+							<label for="joinYear">Join Year</label> <select id="joinYear" name="joinYear" >
 								<option id="blanksa"></option>
 								<option id="2017">2017</option>
 								<option id="2018">2018</option>
@@ -120,7 +120,7 @@
 								<option id="2021">2021</option>
 								<option id="2022">2022</option>
 							</select>
-							End Year <select id="endYear" name="endYear" >
+							<label for="endYear">End Year</label><select id="endYear" name="endYear" >
 								<option id="blanksa"></option>
 								<option id="2017">2017</option>
 								<option id="2018">2018</option>
@@ -129,7 +129,7 @@
 								<option id="2021">2021</option>
 								<option id="2022">2022</option>
 							</select>
-							Temp PW <input id="pw" name="pw" />
+							<label for="tpw">Assign Temp PW </label><input id="tpw" name="tpw" />
 						</div>
 
 						<input type="button" id="chkRec" value="CHECK" onclick="ajaxChkStudentFunction()"/>

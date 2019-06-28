@@ -1,6 +1,6 @@
 <?php
 	include "../basecode-create_connection.php";
-	
+
 		$firstName = $_POST["firstName"];
 		$firstNameSafe = $mysqli->real_escape_string($firstName);
 
@@ -13,8 +13,8 @@
 		$phoneMobile = $_POST["phoneMobile"];
 		$phoneMobileSafe = $mysqli->real_escape_string($phoneMobile);
 
-	
-		echo "UNsafe first Name ".$firstName." and safe first Name ".$firstNameSafe."<br /><br />"; 
+
+		echo "UNsafe first Name ".$firstName." and safe first Name ".$firstNameSafe."<br /><br />";
 		echo "UNsafe last Name ".$lastName." and safe last Name ".$lastNameSafe."<br /><br />";
 
 
@@ -23,7 +23,7 @@
 			if ($query) {
 				echo "table found  ";
 				$rowcount=mysqli_num_rows($query);
-				echo "Currently ".$rowcount." students<br />"; 
+				echo "Currently ".$rowcount." students<br />";
 			}
 		// prepare and bind
 
@@ -47,6 +47,6 @@
 
 		$stmt->close();
 		$mysqli->close();
-			
+
 mysqli_close($mysqli);
 ?>

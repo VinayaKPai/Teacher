@@ -8,9 +8,10 @@
 		$sectionAlphaSafe = $mysqli->real_escape_string($sectionAlpha);
 
 		$subjectName = $_POST["subjectName"];
+		$strippedsubjectName = str_replace(' ', '', $subjectName);
 		$subjectNameSafe = $mysqli->real_escape_string($subjectName);
 
-		$newId = $subjectNameSafe.$classNumberSafe.$sectionAlphaSafe;
+		$newId = $strippedsubjectName.$classNumberSafe.$sectionAlphaSafe;
 
 		$query = $mysqli->query("SELECT * FROM subjects");
 

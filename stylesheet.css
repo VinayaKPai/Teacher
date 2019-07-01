@@ -1,3 +1,6 @@
+table tr:nth-child(even){background-color: #9B797B;}
+table tr:nth-child(odd){background-color: #C5B2B3;}
+table td {text-align: center;}
 .body {
     margin:10;
 	padding:10;

@@ -1,7 +1,7 @@
 //--------------------------------------------AJAX STARTS----------------------------------------------------------------------
          <!--
 //--------------------------------------Browser Support Code-------------------------------------------------------------------
-		 function ajaxChkClassFunction() {
+		 function ajaxChkStudentFunction() {
 
             var ajaxRequest;  // The variable that makes Ajax possible!
 
@@ -31,9 +31,9 @@
 
             ajaxRequest.onreadystatechange = function() {
 	//------------collect values (from 2 drop down select elements to be sent to ajax---------------------
-				var classNumber = document.getElementById("classNumber").value;
-				var sectionAlpha = document.getElementById("sectionAlpha").value;
-
+				var firstName = document.getElementById("firstName").value;
+				var lastName = document.getElementById("lastName").value;
+        var phoneMobile = document.getElementById("phoneMobile").value;
 
 				   if(ajaxRequest.readyState == 4) {
 
@@ -166,17 +166,18 @@
 
             // Now get the value from user and pass it to
             // server script.
-      var classNumber = document.getElementById('classNumber').value;
-			var sectionAlpha = document.getElementById('sectionAlpha').value;
-			if (classNumber && sectionAlpha) {
-            var queryString = "/AddNew/checkclasssections.php?classNumber=" + classNumber + "&&sectionAlpha=" + sectionAlpha ;
+      var firstName = document.getElementById('firstName').value;
+			var lastName = document.getElementById('lastName').value;
+      var phoneMobile = document.getElementById('phoneMobile').value;
+			if (classNumber && sectionAlpha && phoneMobile) {
+            var queryString = "/AddNew/checkclasssections.php?classNumber=" + classNumber + "&&sectionAlpha=" + sectionAlpha + "&&phoneMobile" + phoneMobile;
 
             ajaxRequest.open("GET", queryString, true);
             ajaxRequest.send(null);
 			}
 
 			 else {
-				 alert ("Select both");
+				 alert ("FIll in FN, LN and mobile");
 			 }
          }
          //-->

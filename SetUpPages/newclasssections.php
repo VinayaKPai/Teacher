@@ -126,7 +126,7 @@
 				</div>
 <hr>
 		</div>
-		</div>
 		<div id="bottom"><?php include "../Components/bottom.php"; ?></div>
+		</div>
 	</body>
 </html>

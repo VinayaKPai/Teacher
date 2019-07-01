@@ -1,6 +1,5 @@
-<?php 
-	echo "<hr>
-			<div class='row'>
+<hr>
+<div id="bottom" class='row' style="padding: 1px;">
 
 					<div class='col-sm-4' style='background-color: #684654; color: White;'>Quick Links
 						<hr>
@@ -20,6 +19,5 @@
 						<li>About 2</li>
 						<li>About 3</li>
 					</div>
-		
-		</div>";
-?>
+
+</div>

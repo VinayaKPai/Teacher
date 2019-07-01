@@ -1,9 +1,9 @@
 <div id="top" class="row" style="padding: 1px;">
 	<div class="col-sm-4 topbanner left">
 		<span style="float: left;">
-			<i class="glyphicon glyphicon-home"></i>
+			<a href="/index.php"><i class="glyphicon glyphicon-home" style="color: White;"></i></a>
 		</span><span style="float: right;">
-    <img class="svg" src="../Images/logo-purple.png" alt="LOGO" width="20" height="20">
+    <img class="svg" src="../Images/logo-purple.png" alt="LOGO" width="7%">
   Logo</span>
 	</div>
 	<div class="col-sm-4 topbanner">

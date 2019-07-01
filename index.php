@@ -18,6 +18,7 @@
 
 </head>
 <body class="body">
+	<div class="container">
 	<hr>
 	<h3 class="centered"><?php include "Components/top.php"; ?></h3>
 	<hr>
@@ -76,5 +77,6 @@
 		</div>
 	</div>
 	<?php include "Components/bottom.php"; ?>
+</div>
   </body>
 </html>

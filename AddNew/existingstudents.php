@@ -1,6 +1,6 @@
 <style>
- table tr:nth-child(even){background-color: ##9B797B;}
- table tr:nth-child(odd){background-color: #C5B2B3;}
+ table tr:nth-child(even){background-color: #b69092; color: #fff}
+ table tr:nth-child(odd){background-color: #684654; color: #fff}
  table td {text-align: center;}
 </style>
 
@@ -27,21 +27,18 @@
 						  $slno++;
               $fn = $row['firstName'];
               $ln = $row['lastName'];
-							$cn = $row['classNumber'];
-							$sa = $row['sectionAlpha'];
+              $pm = $row['phoneMobile'];
+						  $remIdDB = $row['firstName']."-".$row['lastName'].$row['phoneMobile'];
 
-						  $remIdDB = $row['firstName']."-".$row['lastName'];
-
-            //  $paras = $fn.",".$ln;
-              $url = "../../RemoveRecords/RemoveClass.php?cn=".$fn."&sa=".$ln;
+              $url = "../../RemoveRecords/RemoveStudent.php?fn=".$fn."&ln=".$ln."&pm=".$pm;
 						  echo "<tr>
                       <td>".$slno."</td>
                       <td>".($row['firstName'])."</td>
                       <td>".($row['lastName'])."</td>
-											<td>".$cn."</td>
-                      <td>".$sa."</td>
+											<td>".$fn."</td>
+                      <td>".$ln."</td>
                       <td>
-                        <a id=$remIdDB name=$remIdDB  href='$url'>REMOVE</a>
+                        <a id=$remIdDB name=$remIdDB  href='$url'><span class='glyphicon glyphicon-trash' style='background-color: Red; color: White; padding: 4px;'></span></a>
                       </td>
                     </tr>";
 
@@ -54,6 +51,6 @@
 				}
 
 	echo "</div>";
-	mysqli_close($mysqli);
+	// mysqli_close($mysqli);
 ?>
 </table>

@@ -1,5 +1,6 @@
 <?php
-	include "../../basecode-create_connection.php";
+	include "../basecode-create_connection.php";
+	print_r($_POST);
 
 		$firstName = $_POST["firstName"];
 		$firstNameSafe = $mysqli->real_escape_string($firstName);
@@ -7,33 +8,41 @@
 		$lastName = $_POST["lastName"];
 		$lastNameSafe = $mysqli->real_escape_string($lastName);
 
+		$classNumber = $_POST["classNumber"];
+		$classNumberSafe = $mysqli->real_escape_string($classNumber);
+
+		$sectionAlpha = $_POST["sectionAlpha"];
+		$sectionAlphaSafe = $mysqli->real_escape_string($sectionAlpha);
+
 		$email = $_POST["email"];
 		$emailSafe = $mysqli->real_escape_string($email);
 
 		$phoneMobile = $_POST["phoneMobile"];
 		$phoneMobileSafe = $mysqli->real_escape_string($phoneMobile);
 
+		$joinYear = $_POST["joinYear"];
+		$joinYearSafe = $mysqli->real_escape_string($joinYear);
 
-		echo "UNsafe first Name ".$firstName." and safe first Name ".$firstNameSafe."<br /><br />";
-		echo "UNsafe last Name ".$lastName." and safe last Name ".$lastNameSafe."<br /><br />";
+		$endYear = $_POST["endYear"];
+		$endYearSafe = $mysqli->real_escape_string($endYear);
 
+		$systemEmail = $firstNameSafe.$lastNameSafe."@mydomain.com" ;
 
-			$query = $mysqli->query("SELECT * FROM studentdetails");
+		$newId = $classNumberSafe.$lastName.$phoneMobileSafe;
+		$query = $mysqli->query("SELECT * FROM studentdetails");
 
 			if ($query) {
-				echo "table found  ";
 				$rowcount=mysqli_num_rows($query);
-				echo "Currently ".$rowcount." students<br />";
+				//echo "Currently ".$rowcount." students<br />";
 			}
 		// prepare and bind
 
-			$stmt = $mysqli->prepare("INSERT INTO studentdetails (firstName, lastName, email, phoneMobile) VALUES (?, ?, ?, ?)");
-			$stmt->bind_param("ssss", $firstNameSafe, $lastNameSafe, $email, $phoneMobile);
+			$stmt = $mysqli->prepare("INSERT INTO studentdetails (Id, firstName, lastName, joinYear, endYear, email, systemEmail, phoneMobile) VALUES (?,?, ?, ?, ?, ?, ?,?)");
+			$stmt->bind_param("ssssssss", $newId, $firstNameSafe, $lastNameSafe, $joinYearSafe, $endYearSafe, $emailSafe, $systemEmail, $phoneMobileSafe);
 
 			//$stmt->execute();
 			if (!$stmt->execute()) {
 				if (($stmt->errno) == '1062') {
-					//echo "Could not add the Class-Section as ".$firstNameSafe." ".$lastNameSafe." and ".$email." and ".$phoneMobile." already exists in the database!";
 					$message = "Could not add the Class-Section as ".$firstNameSafe." ".$lastNameSafe." and ".$email." and ".$phoneMobile." already exists in the database!";
 					echo "<script type='text/javascript'>alert('$message');</script>";
 				}
@@ -42,11 +51,10 @@
 				}
 			}
 			else {
-				echo "Done";
+				echo $firstNameSafe . $lastNameSafe . "added to setup";
 			}
 
 		$stmt->close();
 		$mysqli->close();
-
-mysqli_close($mysqli);
+	{header('Location: ../SetUpPages/newStudents.php');}
 ?>

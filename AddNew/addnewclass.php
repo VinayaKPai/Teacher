@@ -8,7 +8,7 @@ if (isset($_POST["classNumber"]) && !empty($_POST["classNumber"]) && isset($_POS
 
 	$sectionAlpha = $_POST["sectionAlpha"];
 	$sectionAlphaSafe = $mysqli->real_escape_string($sectionAlpha);
-		$array = [];
+
 	$query = $mysqli->query("SELECT * FROM classsections");
 
 

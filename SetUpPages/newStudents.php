@@ -23,7 +23,7 @@
 		<link type="text" href="./Modals/modaltest.html"/link>
 	<link rel="stylesheet" type="text/css" href="/stylesheet.css"  />
 		<script src="../../Scripts/js/ajaxCallStudents.js"></script>
-		<script src="../../Scripts/js/addRecords.js"></script>
+
 		<script type="text/javascript">
 			var addMultiple = [];
 			var cntr = 0;
@@ -42,9 +42,13 @@
 			<hr>
 			<h3 class="centered"><?php include "../Components/top.php"; ?>(Master)</h3>
 			<hr>
-			<div>
-				<div>
-					<h5 class="centered" style="background-color: #C5B2B3;">Instructions</h5>
+		  <div>
+		    <div>
+					<h5  class="panel-title" style="background-color: #C5B2B3;">
+        		<a data-toggle="collapse" href="#collapse1">Instructions</a>
+					</h5>
+				</div>
+				<div id="collapse1" class="panel-collapse collapse">
 					<div class="col-sm-6" style="font-size: x-small;">
 						<h7 style="font-weight: bold;">Add a Single record</h7>
 						<div style="margin-top: 5px;">
@@ -65,19 +69,17 @@
 							<li>Click on ADD ALL to complete the process of inserting these records</li>
 						</div>
 					</div>
-
-
 				</div>
-
 			</div>
 			<div>
 
 				<div class="col-sm-9" style="padding: 10px;">
-<hr>
+					<hr>
 					<form name="newStudentForm" action="../AddNew/addnewstudent.php" method="post">
 						<div class="form-group">
-							<label for="fn">First Name</label> <input id="fn" name="fn" class="form-control" required />
-							<label for="ln">Last Name</label> <input id="ln" name="ln" class="form-control" required />
+							<label for="firstName">First Name</label> <input id="firstName" name="firstName" class="form-control" required />
+							<label for="lastName">Last Name</label> <input id="lastName" name="lastName" class="form-control" required />
+							<input type="button" id="chkRec" value="CHECK" onclick="ajaxChkStudentFunction()"/>
 						</div>
 						<div class="form-group">
 							<label for="classNumber">Class/Std</label> <select name="classNumber" id="classNumber" required>
@@ -132,7 +134,6 @@
 							<label for="tpw">Assign Temp PW </label><input id="tpw" name="tpw" />
 						</div>
 
-						<input type="button" id="chkRec" value="CHECK" onclick="ajaxChkStudentFunction()"/>
 						<button name="Submit" id="submit" type="submit">SUBMIT</button>
 					</form>
 					<hr>
@@ -153,7 +154,7 @@
 								</form>
 							</div>
 						</div>
-				</div>
+					</div>
 				</div>
 
 				<div class="col-sm-3 centered" style="border-left: 1px solid Grey;">
@@ -162,9 +163,9 @@
 
 					<div id="status">Statuc</div>
 				</div>
-<hr>
-		</div>
+				<hr>
 		</div>
 		<div id="bottom"><?php include "../Components/bottom.php"; ?></div>
+		</div>
 	</body>
 </html>

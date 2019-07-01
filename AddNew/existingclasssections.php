@@ -1,6 +1,6 @@
 <style>
- table tr:nth-child(even){background-color: #E1F7D8;}
- table tr:nth-child(odd){background-color: #DEF3FF;}
+ table tr:nth-child(even){background-color: #9B797B;}
+ table tr:nth-child(odd){background-color: #C5B2B3;}
  table td {text-align: center;}
 </style>
 

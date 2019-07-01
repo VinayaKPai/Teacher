@@ -19,6 +19,11 @@
 </head>
 <body class="body">
 	<div class="container">
+
+
+				<div style="text-align: right">
+					<?php echo $datetime1; ?>
+				</div>
 	<hr>
 	<h3 class="centered"><?php include "Components/top.php"; ?></h3>
 	<hr>
@@ -27,54 +32,60 @@
 
 		<hr />
 	<div class="row grid-container centered" style="flex-wrap: wrap; padding: 5px;">
-		<div class="btn roundsqbtn centered dropdown">
-			<div>Reports</div>
+		<div class="col-sm-2" style="border-right: 1px solid #64485C;">
+			<h4>Reports</h4>
+			<div class="btn roundsqbtn centered dropdown" style="width: 70%;">
+				<div>Reports</div>
+			</div>
 			<div class="dropdown-content centered" style="float: center;">
 				<a href="../../SetUpPages/newReports.php">Manage </a>
 			</div>
 		</div>
-		<div class="btn roundsqbtn centered dropdown">
-			<div>Classes Sections</div>
-			<div class="dropdown-content centered" style="float: center;">
-				<a href="../../SetUpPages/newclasssections.php">Manage </a>
+		<div class="col-sm-2" style="border-right: 1px solid #64485C;">
+			<h4>Activity</h4>
+			<div class="btn roundsqbtn centered dropdown" style="width: 70%;">
+				<div>Tests</div>
+				<div class="dropdown-content centered" style="float: center;">
+					<a href="../../SetUpPages/newTests.php">Manage </a>
+				</div>
 			</div>
 		</div>
-		<div class="btn roundsqbtn centered dropdown">
-			<div>Subjects</div>
-			<div class="dropdown-content centered" style="float: center;">
-				<a href="../../SetUpPages/newSubjects.php">Manage </a>
-			</div>
-		</div>
-		<div class="btn roundsqbtn centered dropdown">
-			<div>Units</div>
-			<div class="dropdown-content centered" style="float: center;">
-				<a href="../../SetUpPages/newUnits.php">Manage </a>
-			</div>
-		</div>
-		<div class="btn roundsqbtn centered dropdown">
-			<div>Topics</div>
-			<div class="dropdown-content centered" style="float: center;">
-				<a href="../../SetUpPages/newTopics.php">Manage </a>
-			</div>
-		</div>
-		<div class="btn roundsqbtn centered dropdown">
-			<div>Tests</div>
-			<div class="dropdown-content centered" style="float: center;">
-				<a href="../../SetUpPages/newTests.php">Manage </a>
-			</div>
-		</div>
-		<div class="btn roundsqbtn centered dropdown">
-			<div>Students</div>
-			<div class="dropdown-content centered" style="float: center;">
-				<a href="../../SetUpPages/newStudents.php">Manage </a>
-			</div>
-		</div>
-	</div>
+		<div class="col-sm-8">
+			<h4>Setup</h4>
 
-
-		<div style="text-align: right">
-			<?php echo $datetime1; ?>
+			<div class="btn roundsqbtn centered dropdown"  style="width: 15%;">
+				<div>Classes Sections</div>
+				<div class="dropdown-content centered" style="float: center;">
+					<a href="../../SetUpPages/newclasssections.php">Manage </a>
+				</div>
+			</div>
+			<div class="btn roundsqbtn centered dropdown"  style="width: 15%;">
+				<div>Subjects</div>
+				<div class="dropdown-content centered" style="float: center;">
+					<a href="../../SetUpPages/newSubjects.php">Manage </a>
+				</div>
+			</div>
+			<div class="btn roundsqbtn centered dropdown"  style="width: 15%;">
+				<div>Units</div>
+				<div class="dropdown-content centered" style="float: center;">
+					<a href="../../SetUpPages/newUnits.php">Manage </a>
+				</div>
+			</div>
+			<div class="btn roundsqbtn centered dropdown"  style="width: 15%;">
+				<div>Topics</div>
+				<div class="dropdown-content centered" style="float: center;">
+					<a href="../../SetUpPages/newTopics.php">Manage </a>
+				</div>
+			</div>
+			<div class="btn roundsqbtn centered dropdown"  style="width: 15%;">
+				<div>Students</div>
+				<div class="dropdown-content centered" style="float: center;">
+					<a href="../../SetUpPages/newStudents.php">Manage </a>
+				</div>
+			</div>
 		</div>
+		</div>
+
 	</div>
 	<?php include "Components/bottom.php"; ?>
 </div>

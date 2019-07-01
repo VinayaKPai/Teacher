@@ -45,7 +45,7 @@
 		  <div>
 		    <div>
 					<h5  class="panel-title" style="background-color: #C5B2B3;">
-        		<a data-toggle="collapse" href="#collapse1">Instructions</a>
+        		<a data-toggle="collapse" href="#collapse1">Instructions<span class="glyphicon glyphicon-plus-sign" style="float: right; color: Red"></span></a>
 					</h5>
 				</div>
 				<div id="collapse1" class="panel-collapse collapse">
@@ -77,8 +77,9 @@
 					<hr>
 					<form name="newStudentForm" action="../AddNew/addnewstudent.php" method="post">
 						<div class="form-group">
-							<label for="firstName">First Name</label> <input id="firstName" name="firstName" class="form-control" required />
-							<label for="lastName">Last Name</label> <input id="lastName" name="lastName" class="form-control" required />
+							<label for="firstName">First Name<span class="glyphicon glyphicon-asterisk" style="color: Red"></span></label> <input id="firstName" name="firstName" class="form-control" required />
+							<label for="lastName">Last Name<span class="glyphicon glyphicon-asterisk" style="color: Red"></span></label> <input id="lastName" name="lastName" class="form-control" required />
+							<label for="phoneMobile">Mobile<span class="glyphicon glyphicon-asterisk" style="color: Red"></span></label> <input id="phoneMobile" name="phoneMobile" class="form-control" />
 							<input type="button" id="chkRec" value="CHECK" onclick="ajaxChkStudentFunction()"/>
 						</div>
 						<div class="form-group">
@@ -110,7 +111,6 @@
 						</div>
 						<div class="form-group">
 							<label for="email">Email</label><input id="email" name="email" class="form-control" />
-							<label for="phoneMobile">Mobile</label> <input id="phoneMobile" name="phoneMobile" class="form-control" />
 						</div>
 						<div class="form-group">
 							<label for="joinYear">Join Year</label> <select id="joinYear" name="joinYear" >

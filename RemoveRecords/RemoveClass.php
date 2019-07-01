@@ -11,7 +11,7 @@ $effRows = mysqli_affected_rows($mysqli);
 
 if ($effRows = 1){
   echo $effRows;
-  $message = $classNumberSafe."-".$sectionAlphaSafe." has been added to the database";
+  $message = $classNumberSafe."-".$sectionAlphaSafe." has been deleted from the database";
 }
 else {
   echo $effRows;

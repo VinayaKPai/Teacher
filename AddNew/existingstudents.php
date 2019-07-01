@@ -3,7 +3,7 @@
  table tr:nth-child(odd){background-color: #684654; color: #fff}
  table td {text-align: center;}
 </style>
-
+<hr>
 <table id="existTable" style="width: 100%; padding: 5px; border-spacing: 2px; border-collapse: separate; align: 'center';">
 	<?php
 	//Script to display existing classes and sections in the class section table
@@ -13,9 +13,13 @@
 
 	$slno = 0;
 	$query = $mysqli->query("SELECT * FROM studentdetails");
-//`Id``firstName``lastName``rollNumber``classNumber``sectionAlpha``email``pw``joinYear``endYear``phoneMobile`
+ 
 				if ($query) {
 					$rowcount=mysqli_num_rows($query);
+          if ($rowcount > 0) {
+						$cls = "'color: Green;'";
+					}
+					else { $cls = "'color: Red;'";}
 				}
 				echo "<h4 class='topbanner'>Currently $rowcount Students in your setup</h4>" ;
 

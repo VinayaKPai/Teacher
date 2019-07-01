@@ -1,6 +1,6 @@
 <style>
- table tr:nth-child(even){background-color: #9B797B;}
- table tr:nth-child(odd){background-color: #C5B2B3;}
+ table tr:nth-child(even){background-color: #b69092; color: #fff}
+ table tr:nth-child(odd){background-color: #684654; color: #fff}
  table td {text-align: center;}
 </style>
 
@@ -16,6 +16,10 @@
 
 				if ($query) {
 					$rowcount=mysqli_num_rows($query);
+          if ($rowcount > 0) {
+						$cls = "'color: Green;'";
+					}
+					else { $cls = "'color: Red;'";}
 				}
 				echo "<h4 style='color: Green; background-color: LightGrey;'>Currently $rowcount classes</h4>" ;
 
@@ -38,7 +42,7 @@
                       <td>".($row['classNumber'])."</td>
                       <td>".($row['sectionAlpha'])."</td>
                       <td>
-                        <a id=$remIdDB name=$remIdDB  href='$url'>REMOVE</a>
+                        <a id=$remIdDB name=$remIdDB  href='$url'><span class='glyphicon glyphicon-trash' style='background-color: Red; color: White; padding: 4px;'></span></a>
                       </td>
                     </tr>";
 

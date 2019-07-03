@@ -27,8 +27,12 @@
 			<h3 class="centered"><?php include "../Components/top.php"; ?></h3>
 			<hr>
 			<div>
-				<div>
-					<h5 class="centered" style="background-color: #C5B2B3;">Instructions</h5>
+		    <div>
+					<h5  class="panel-title" style="background-color: #C5B2B3;">
+        		<a data-toggle="collapse" href="#collapse1">Instructions<span class="glyphicon glyphicon-plus-sign" style="float: right; color: Red"></span></a>
+					</h5>
+				</div>
+				<div id="collapse1" class="panel-collapse collapse">
 					<div class="col-sm-6" style="font-size: x-small;">
 						<h7 style="font-weight: bold;">Add a Single record</h7>
 						<div style="margin-top: 5px;">
@@ -49,10 +53,7 @@
 							<li>Click on ADD ALL to complete the process of inserting these records</li>
 						</div>
 					</div>
-
-
 				</div>
-
 			</div>
 			<div>
 

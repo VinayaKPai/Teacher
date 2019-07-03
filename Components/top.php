@@ -20,17 +20,3 @@
 		<span style="float: right;">Search</span>
 	</div>
 </div>
-<style>
-	.topbanner {
-		background-color: #9B797B;
-		font-size: 18px;
-		color: White;
-		padding: 10px;
-	}
-	.left {
-		border-right: 1px	solid #2E1114;
-	}
-	.right {
-		border-left: 1px solid #2E1114;
-	}
-</style>

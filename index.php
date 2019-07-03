@@ -14,7 +14,7 @@
 <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<link type="text" href="./Modals/modaltest.html"/link>
@@ -44,12 +44,12 @@
 			<hr style="border-top: 1px solid maroon;"/>
 			<h4>Run Reports</h4>
 			<h5>Quizzes</h5>
-			<ul style="margin-left: 10%;">
-				<li style="text-align: left;"><a href="#">By Class</a></li>
-				<li style="text-align: left;"><a href="#">By Class and Section</a></li>
-				<li style="text-align: left;"><a href="#">By Class and Subject</a></li>
-				<li style="text-align: left;"><a href="#">By Subject and Topic</a></li>
-			</ul>
+				<ul style="margin-left: 10%;">
+					<li style="text-align: left;"><a href="#">By Class</a></li>
+					<li style="text-align: left;"><a href="#">By Class and Section</a></li>
+					<li style="text-align: left;"><a href="#">By Class and Subject</a></li>
+					<li style="text-align: left;"><a href="#">By Subject and Topic</a></li>
+				</ul>
 			<h5>Assignments</h5>
 			<ul style="margin-left: 10%;">
 				<li style="text-align: left;"><a href="#">By Class</a></li>
@@ -58,6 +58,13 @@
 				<li style="text-align: left;"><a href="#">By Subject and Topic</a></li>
 			</ul>
 			<h5>Tests</h5>
+			<ul style="margin-left: 10%;">
+				<li style="text-align: left;"><a href="#">By Class</a></li>
+				<li style="text-align: left;"><a href="#">By Class and Section</a></li>
+				<li style="text-align: left;"><a href="#">By Class and Subject</a></li>
+				<li style="text-align: left;"><a href="#">By Subject and Topic</a></li>
+			</ul>
+			<h5>Students</h5>
 			<ul style="margin-left: 10%;">
 				<li style="text-align: left;"><a href="#">By Class</a></li>
 				<li style="text-align: left;"><a href="#">By Class and Section</a></li>

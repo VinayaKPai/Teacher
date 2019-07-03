@@ -11,6 +11,10 @@
 <title>Teachers Tools LH</title>
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<link type="text" href="./Modals/modaltest.html"/link>
@@ -78,12 +82,6 @@
 					<a href="../../SetUpPages/newAssignments.php">Manage </a>
 				</div>
 			</div>
-			<div class="btn roundsqbtn centered dropdown" style="width: 70%;">
-				<div>Tests</div>
-				<div class="dropdown-content centered" style="float: center;">
-					<a href="../../SetUpPages/newTests.php">Manage </a>
-				</div>
-			</div><h4>Activity</h4>
 			<div class="btn roundsqbtn centered dropdown" style="width: 70%;">
 				<div>Tests</div>
 				<div class="dropdown-content centered" style="float: center;">

@@ -67,6 +67,24 @@
 		<div class="col-sm-2" style="border-right: 1px solid #64485C;">
 			<h4>Activity</h4>
 			<div class="btn roundsqbtn centered dropdown" style="width: 70%;">
+				<div>Quizzes</div>
+				<div class="dropdown-content centered" style="float: center;">
+					<a href="../../SetUpPages/newQuizzes.php">Manage </a>
+				</div>
+			</div>
+			<div class="btn roundsqbtn centered dropdown" style="width: 70%;">
+				<div>Assignments</div>
+				<div class="dropdown-content centered" style="float: center;">
+					<a href="../../SetUpPages/newAssignments.php">Manage </a>
+				</div>
+			</div>
+			<div class="btn roundsqbtn centered dropdown" style="width: 70%;">
+				<div>Tests</div>
+				<div class="dropdown-content centered" style="float: center;">
+					<a href="../../SetUpPages/newTests.php">Manage </a>
+				</div>
+			</div><h4>Activity</h4>
+			<div class="btn roundsqbtn centered dropdown" style="width: 70%;">
 				<div>Tests</div>
 				<div class="dropdown-content centered" style="float: center;">
 					<a href="../../SetUpPages/newTests.php">Manage </a>

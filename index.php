@@ -40,6 +40,29 @@
 			<div class="dropdown-content centered" style="float: center;">
 				<a href="../../SetUpPages/newReports.php">Manage </a>
 			</div>
+			<hr style="border-top: 1px solid maroon;"/>
+			<h4>Run Reports</h4>
+			<h5>Quizzes</h5>
+			<ul style="margin-left: 10%;">
+				<li style="text-align: left;"><a href="#">By Class</a></li>
+				<li style="text-align: left;"><a href="#">By Class and Section</a></li>
+				<li style="text-align: left;"><a href="#">By Class and Subject</a></li>
+				<li style="text-align: left;"><a href="#">By Subject and Topic</a></li>
+			</ul>
+			<h5>Assignments</h5>
+			<ul style="margin-left: 10%;">
+				<li style="text-align: left;"><a href="#">By Class</a></li>
+				<li style="text-align: left;"><a href="#">By Class and Section</a></li>
+				<li style="text-align: left;"><a href="#">By Class and Subject</a></li>
+				<li style="text-align: left;"><a href="#">By Subject and Topic</a></li>
+			</ul>
+			<h5>Tests</h5>
+			<ul style="margin-left: 10%;">
+				<li style="text-align: left;"><a href="#">By Class</a></li>
+				<li style="text-align: left;"><a href="#">By Class and Section</a></li>
+				<li style="text-align: left;"><a href="#">By Class and Subject</a></li>
+				<li style="text-align: left;"><a href="#">By Subject and Topic</a></li>
+			</ul>
 		</div>
 		<div class="col-sm-2" style="border-right: 1px solid #64485C;">
 			<h4>Activity</h4>

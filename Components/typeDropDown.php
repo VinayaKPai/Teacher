@@ -15,7 +15,7 @@
 
 
 
-      echo "Q Type : <select name='typeName' id='typeName' name='typeName'><option id='blanktypeName'></option>";
+      echo "Q Type : <select class='form-group' id='typeName' name='typeName'><option id='blanktypeName'></option>";
       while ($row = $query->fetch_assoc())  {
         {
           $tn = strip_tags($row['typeName']);

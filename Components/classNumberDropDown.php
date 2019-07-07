@@ -14,7 +14,7 @@
     }
     else {echo "KUCHHH TO GADBAD HAI!";};
 
-      echo "Class/Std: <select name='classNumber' id='classNumber' name='classNumber' required><option id='blankclassNumber'></option>";
+      echo "Class/Std: <select class='form-group' id='classNumber' name='classNumber' required><option id='blankclassNumber'></option>";
       while ($row = $query->fetch_assoc())  {
         {
           $cn = strip_tags($row['classNumber']);

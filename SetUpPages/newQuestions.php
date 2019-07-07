@@ -22,7 +22,7 @@
 	  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<link type="text" href="./Modals/modaltest.html"/link>
 	<link rel="stylesheet" type="text/css" href="/stylesheet.css"  />
-		<script src="../../Scripts/js/ajaxCallStudents.js"></script>
+		<script src="../../Scripts/js/ajaxCallQuestions.js"></script>
 
 	</head>
 	<body class="body">
@@ -103,44 +103,31 @@
 						<button name="Submit" id="submit" type="submit">SUBMIT</button>
 					</form>
 					<hr>
-					<div  class="row">
-						<div id="ajaxRes" class="col-sm-2">
 
-						</div>
-						<div id="remBtn" class="col-sm-5">
-
-						</div>
-						<div class="col-sm-5">
-							<div id="recsInQ" style="color: blue; font-weight: bold;">
-							</div>
-						</div>
-					</div>
 				</div>
 
-				<div class="col-sm-6 centered style="border-left: 1px solid Grey; height: 50%; padding: 1%;">
+				<div class="col-sm-6 centered" style="border-left: 1px solid Grey; height: 50%; padding: 1%;">
 
           <div style="margin-top: 3px;">
-						<p class="bannerxs">Select the below options to display questions</p>
-						<form action="../AddNew/existingquestions.php" method="post">
-							<?php
-									include "../Components/classNumberDropDown.php";
-									include "../Components/subjectDropDown.php"; ?>
-									<br>
-							<?php
-									include "../Components/topicDropDown.php";
-									include "../Components/typeDropDown.php";
+						<p class="panel-title" style="background-color: #C5B2B3;">Select the below options to display questions</p>
+					</div>
 
-							?>
-							<button class="btn" type="submit">FETCH</button>
-						</form>
-						<?php include "../AddNew/existingquestions.php"; ?>
-          </div>
+						<?php include "../Components/classNumberDropDown.php"; ?>
 
+						<?php	include "../Components/subjectDropDown.php"; ?>
+						<br>
+						<?php		include "../Components/topicDropDown.php"; ?>
 
-					<div id="status"></div>
+						<?php include "../Components/typeDropDown.php"; ?>
+
+						<div>
+							<button type="button" class="btn btn-default" onclick="ajaxChkQuestionsFunction()">FETCH  </button>
+						</div>
+						<hr>
 				</div>
-				<hr>
-		</div>
+					<div id="status"></div>
+
+		<hr>
 		<div id="bottom"><?php include "../Components/bottom.php"; ?></div>
 		</div>
 	</body>

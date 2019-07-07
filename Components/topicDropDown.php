@@ -15,7 +15,7 @@
 
 
 
-      echo "Topic : <select name='topicName' id='topicName' name='topicName' required><option id='blanktopicName></option>'";
+      echo "Topic : <select class='form-group' id='topicName' name='topicName' required><option id='blanktopicName></option>'";
       while ($row = $query->fetch_assoc())  {
         {
           $tn = strip_tags($row['topicName']);

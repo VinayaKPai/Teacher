@@ -11,12 +11,20 @@
 	include "../basecode-create_connection.php";
 //select questions to display
 //Select by first class, second subject, third topic and fourth - optional, sqlite_fetch_column_types
-print_r($_POST);
+if ($_GET) {
+print_r($_GET);
+$classNumber = $_GET['classNumber'];
+$subjectName = $_GET['subjectName'];
+$topic = $_GET['topicName'];
+$typeName = $_GET['typeName'];
+echo $classNumber;
+
+
+$query = $mysqli->query("SELECT * FROM questionbank WHERE classNumber = '$classNumber' AND subjectName = '$subjectName' AND topic = '$topic' AND type = '$typeName'");
 
 echo "<div>";
 
 	$slno = 0;
-	$query = $mysqli->query("SELECT * FROM questionbank");
 
 				if ($query) {
 					$rowcount=mysqli_num_rows($query);
@@ -58,7 +66,7 @@ echo "<div>";
                       <td>$sn</td>
                       <td>$tp</td>
 											<td>$ty</td>
-                      <td>$qn</td>
+                      <td style='float: left;'>$qn</td>
                       <td>
                         <a id=$remIdDB name=$remIdDB  href='$url'><span class='glyphicon glyphicon-trash' style='background-color: Red; color: White; padding: 4px;'></span></a>
                       </td>
@@ -68,12 +76,13 @@ echo "<div>";
 					}
 
 				}
+      }
 			if(!$query) {
 					echo "Looks like your set up has not been started. Please add existingquestions to the database, so that you can get the benefit of all the features of the App";
 				}
 
 	echo "</div>";
-  // {header('Location: ../SetUpPages/newQuestions.php');}
+  {header('Location: ../SetUpPages/newQuestions.php');}
 	// mysqli_close($mysqli);
 ?>
 </table>

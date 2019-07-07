@@ -15,7 +15,7 @@
 
 
 
-      echo "Subject: <select name='subjectName' id='subjectName' name='subjectName' required><option id='blanksubjectName'></option>";
+      echo "Subject: <select class='form-group' id='subjectName' name='subjectName' required><option id='blanksubjectName'></option>";
       while ($row = $query->fetch_assoc())  {
         {
           $sn = strip_tags($row['subjectName']);

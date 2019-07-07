@@ -123,6 +123,12 @@
 				</div>
 			</div>
 			<div class="btn roundsqbtn centered dropdown" style="float: center; width: 70%;">
+				<div>Question Bank</div>
+				<div class="dropdown-content centered">
+					<a href="../../SetUpPages/newQuestions.php">Manage </a>
+				</div>
+			</div>
+			<div class="btn roundsqbtn centered dropdown" style="float: center; width: 70%;">
 				<div>Students</div>
 				<div class="dropdown-content centered">
 					<a href="../../SetUpPages/newStudents.php">Manage </a>

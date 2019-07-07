@@ -60,21 +60,8 @@
 				<div class="col-sm-9" style="padding: 10px;">
 <hr>
 					<form name="newSubjectForm" action="../AddNew/addnewsubject.php" method="post">
-						Class/Std <select name="classNumber" id="classNumber" required>
-						<option id="blankcn"></option>
-						<option id="I">I</option>
-						<option id="II">II</option>
-						<option id="III">III</option>
-						<option id="IV">IV</option>
-						<option id="V">V</option>
-						<option id="VI">VI</option>
-						<option id="VII">VII</option>
-						<option id="VIII">VIII</option>
-						<option id="IX">IX</option>
-						<option id="X">X</option>
-						<option id="XI">XI</option>
-						<option id="XII">XII</option>
-						</select>
+						<?php include "../Components/classNumberDropDown.php";?>
+						<?php include "../Components/sectionAlphaDropDown.php";?>
 						Section <select name="sectionAlpha" id="sectionAlpha" required>
 						<option id="blanksa"></option>
 						<option id="A">A</option>
@@ -84,7 +71,7 @@
 						<option id="E">E</option>
 						<option id="F">F</option>
 						</select>
-						Section <select name="subjectName" id="subjectName" required>
+						Subject <select name="subjectName" id="subjectName" required>
 						<option id="blanksa"></option>
 						<option id="English">English</option>
 						<option id="Hindi">Hindi</option>

@@ -5,7 +5,7 @@
 	//include "../Scripts/php/addNewClasses.php";
 //	include "../RemoveRecords/RemoveClass.php";
 
-	$pageHeading = "Set Up your Student Details";
+	$pageHeading = "Set Up your Question Bank";
 
 ?>
 
@@ -163,7 +163,7 @@
 					<?php include "../AddNew/existingstudents.php"; ?>
 
 
-					<div id="status">Statuc</div>
+					<div id="status"></div>
 				</div>
 				<hr>
 		</div>

@@ -20,9 +20,12 @@
 	<link rel="stylesheet" type="text/css" href="/stylesheet.css"  />
 		<script src="../../Scripts/js/ajaxCallQuestions.js"></script>
 		<script>
-			function testalert(e) {
-				console.log(this);
-				console.log(this.id);
+			function testalert(dropDownId) {
+				var selector = document.getElementById(dropDownId);
+				var value = selector[selector.selectedIndex].value;
+				// The line below can be used to update a certain section of your visualisation, so that the page doesnt reload
+				//document.getElementById('display').innerHTML = value;
+				console.log(value);
 			}
 		</script>
 	</head>
@@ -113,27 +116,27 @@
 						<p class="panel-title" style="background-color: #C5B2B3;">Select the below options to display questions</p>
 					</div>
 					<form action="filteredquestions.php" method="post">
-						Class/STD: <select id="clName" onchange="testalert()">
-							<option id=""></option>
-							<option id="A">A</option>
-							<option id="B">B</option>
-							<option id="C">C</option>
+						Class/STD: <select id="clName" onchange="testalert('clName')">
+							<option id="" value=""></option>
+							<option id="A" value="A">A</option>
+							<option id="B" value="B">B</option>
+							<option id="C" value="C">C</option>
 							<!-- <?php include "../Components/classNumberDropDown.php" ; ?>-->
 						</select>
-						Subject: <select id="subName" onchange="testalert()">
-									<option id=""></option>
-									<option id="D">D</option>
-									<option id="E">E</option>
-									<option id="F">F</option>
+						Subject: <select id="subName" onchange="testalert('subName')">
+									<option id="" value=""></option>
+									<option id="D" value="D">D</option>
+									<option id="E" value="E">E</option>
+									<option id="F" value="F">F</option>
 							<!-- <?php include "../Components/subjectDropDown.php" ; ?>-->
 						</select>
-						Topic: <select id= "toName" onchange="testalert()">
+						Topic: <select id= "toName" onchange="testalert('toName')">
 									<option id=""></option>
 									<option id="G">G</option>
 									<option id="H">H</option>
 							<!-- <?php include "../Components/topicDropDown.php" ; ?>-->
 						</select>
-						Q Type: <select id="tyName" onchange="testalert()">
+						Q Type: <select id="tyName" onchange="testalert('tyName')">
 									<option id=""></option>
 									<option id="I">I</option>
 									<option id="J">J</option>

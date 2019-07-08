@@ -6,30 +6,35 @@
 
 
 	<?php
+  $classNumber = $_POST['classNumberDG'];
+    $subjectName = $_POST['$subjectNameDG'];
+      $topicName = $_POST['$topicNameDG'];
+        $typeName = $_POST['$typeNameDG'];
 	//Script to display existing classes and sections in the class section table
 	include "../basecode-create_connection.php";
 
-$query = $mysqli->query("SELECT * FROM questionbank");
-$rowcount=mysqli_num_rows($query); //number of results returned by the query - either 0 (if not present)
+$query = $mysqli->query("SELECT * FROM questionbank WHERE classNumber = $classNumber AND subjectName = $subjectName AND topicName = $topicName AND typeName = $typeName");
+//$rowcount=mysqli_num_rows($query); //number of results returned by the query - either 0 (if not present)
+echo "<table>";
 while ($row=mysqli_fetch_assoc($query)) {
 	//fetch all columns of the query results
 
   $rowId = $row['Id'];	//Id of the returned row
-  echo "<tr id=$rowId>";
+  echo "<tr>";
   $rowClassNumber = $row['classNumber']	;
   echo "<td class='col-sm-1'>".$rowClassNumber."</td>";
-  $rowSubject = $row['subjectName'];	//Id of the returned row
+  $rowSubject = $row['subjectName'];
   echo "<td class='col-sm-3'>".$rowSubject."</td>";
-  $rowTopic = $row['topicName'];	//Id of the returned row
+  $rowTopic = $row['topicName'];
   echo "<td class='col-sm-2'>".$rowTopic."</td>";
-  $rowType = $row['typeName'];	//Id of the returned row
+  $rowType = $row['typeName'];
   echo "<td class='col-sm-2'>".$rowType."</td>";
-  $rowQuestion = $row['question'];	//Id of the returned row
+  $rowQuestion = $row['question'];
   echo "<td class='col-sm-4'>".$rowQuestion."</td>";
   echo "</tr>";
 
 }
-
+echo "</table>";
   // {header('Location: ../SetUpPages/newQuestions.php');}
 	// mysqli_close($mysqli);
 ?>

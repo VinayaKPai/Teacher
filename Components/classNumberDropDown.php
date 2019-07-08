@@ -14,14 +14,14 @@
     }
     else {echo "KUCHHH TO GADBAD HAI!";};
 
-      echo "Class/Std: <select class='form-group' id='classNumber' name='classNumber' required><option id='blankclassNumber'></option>";
+
       while ($row = $query->fetch_assoc())  {
         {
           $cn = strip_tags($row['classNumber']);
-          echo "<option>$cn</option>";
+          echo "<option id='$cn'>$cn</option>";
 
         }
       }
-      echo "</select>";
+
 
 ?>

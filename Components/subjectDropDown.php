@@ -1,7 +1,7 @@
 <?php
   	include "../basecode-create_connection.php";
 
-  	$query = $mysqli->query("SELECT DISTINCT subjectName FROM subjects");
+  	$query = $mysqli->query("SELECT * FROM subjects");
 
     //catch errors
     if ($mysqli->connect_errno) {
@@ -14,16 +14,16 @@
     else {echo "KUCHHH TO GADBAD HAI!";};
 
 
+echo $rowcount;
 
-      echo "Subject: <select class='form-group' id='subjectName' name='subjectName' required><option id='blanksubjectName'></option>";
       while ($row = $query->fetch_assoc())  {
         {
-          $sn = strip_tags($row['subjectName']);
-
-          echo "<option>$sn</option>";
+          $sn = $row['subjectName'];
+          $snid = $row['subjectName'];
+          echo "<option id=$snid>$sn</option>";
 
         }
       }
-      echo "</select>";
+
 
 ?>

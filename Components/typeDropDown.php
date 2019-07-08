@@ -13,17 +13,15 @@
     }
     else {echo "KUCHHH TO GADBAD HAI!";};
 
+    while ($row = $query->fetch_assoc())  {
+      {
+        $tyn = strip_tags($row['typeName']);
+        $tynid = $row['Id'];
+        echo "<option id='$tynid' value='$tynid'>$tyn</option>";
 
-
-      echo "Q Type : <select class='form-group' id='typeName' name='typeName'><option id='blanktypeName'></option>";
-      while ($row = $query->fetch_assoc())  {
-        {
-          $tn = strip_tags($row['typeName']);
-
-          echo "<option>$tn</option>";
-
-        }
       }
-      echo "</select>";
+    }
+
+
 
 ?>

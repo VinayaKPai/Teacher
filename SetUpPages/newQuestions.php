@@ -1,9 +1,5 @@
 <?php
-	//include "basecode-create_connection.php";
 	include "../basecode-create_connection.php";
-	//include "../RemoveRecords/RemoveClass.php";
-	//include "../Scripts/php/addNewClasses.php";
-//	include "../RemoveRecords/RemoveClass.php";
 
 	$pageHeading = "Set Up your Question Bank";
 
@@ -23,7 +19,12 @@
 		<link type="text" href="./Modals/modaltest.html"/link>
 	<link rel="stylesheet" type="text/css" href="/stylesheet.css"  />
 		<script src="../../Scripts/js/ajaxCallQuestions.js"></script>
-
+		<script>
+			function testalert(e) {
+				console.log(this);
+				console.log(this.id);
+			}
+		</script>
 	</head>
 	<body class="body">
 		<div class="container">
@@ -106,26 +107,52 @@
 
 				</div>
 
-				<div class="col-sm-6 centered" style="border-left: 1px solid Grey; height: 50%; padding: 1%;">
+				<div class="col-sm-6 centered" style="border-left: 1px solid Grey; height: 400px; padding: 1%; overflow: scroll;">
 
           <div style="margin-top: 3px;">
 						<p class="panel-title" style="background-color: #C5B2B3;">Select the below options to display questions</p>
 					</div>
-
-						<?php include "../Components/classNumberDropDown.php"; ?>
-
-						<?php	include "../Components/subjectDropDown.php"; ?>
-						<br>
-						<?php		include "../Components/topicDropDown.php"; ?>
-
-						<?php include "../Components/typeDropDown.php"; ?>
-
-						<div>
-							<button type="button" class="btn btn-default" onclick="ajaxChkQuestionsFunction()">FETCH  </button>
-						</div>
+					<form action="filteredquestions.php" method="post">
+						Class/STD: <select id="clName" onchange="testalert()">
+							<option id=""></option>
+							<option id="A">A</option>
+							<option id="B">B</option>
+							<option id="C">C</option>
+							<!-- <?php include "../Components/classNumberDropDown.php" ; ?>-->
+						</select>
+						Subject: <select id="subName" onchange="testalert()">
+									<option id=""></option>
+									<option id="D">D</option>
+									<option id="E">E</option>
+									<option id="F">F</option>
+							<!-- <?php include "../Components/subjectDropDown.php" ; ?>-->
+						</select>
+						Topic: <select id= "toName" onchange="testalert()">
+									<option id=""></option>
+									<option id="G">G</option>
+									<option id="H">H</option>
+							<!-- <?php include "../Components/topicDropDown.php" ; ?>-->
+						</select>
+						Q Type: <select id="tyName" onchange="testalert()">
+									<option id=""></option>
+									<option id="I">I</option>
+									<option id="J">J</option>
+									<!-- <?php include "../Components/typeDropDown.php" ; ?>-->
+						</select>
+					</form>
 						<hr>
+						<style>
+						table tr:nth-child(even){background-color: #b69092; color: #fff}
+						table tr:nth-child(odd){background-color: #684654; color: #fff}
+						table td {text-align: center;}
+						</style>
+						<table id="existTable" style="width: 100%; padding: 5px; border-spacing: 2px; border-collapse: separate; align: 'center';">
+							<?php include "../AddNew/existingquestions.php"; ?>
+						</table>
 				</div>
-					<div id="status"></div>
+					<div id="status">STATUS
+
+				</div>
 
 		<hr>
 		<div id="bottom"><?php include "../Components/bottom.php"; ?></div>

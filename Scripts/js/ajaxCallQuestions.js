@@ -31,25 +31,24 @@
 
             ajaxRequest.onreadystatechange = function() {
 	//------------collect values (from 4 drop down select elements to be sent to ajax---------------------
-				var classNumber = document.getElementById("classNumber").value;
-				var subjectName = document.getElementById("subjectName").value;
-        var topicName = document.getElementById("topicName").value;
-        var typeName = document.getElementById("typeName").value;
+				var classNumberDG = document.getElementById("classNumberDG").value;
+				var subjectNameDG = document.getElementById("subjectNameDG").value;
+        var topicNameDG = document.getElementById("topicNameDG").value;
+        var typeNameDG = document.getElementById("typeNameDG").value;
 
 				   if(ajaxRequest.readyState == 4) {
-var ajaxReturn = ajaxRequest.responseText;
-					  //var ajaxReturn = JSON.parse(ajaxRequest.responseText);	//ajaxRequest.responseText contains the result of the query send by this function
-					  var statusponse = document.getElementById('status');	//div that will display the response to user
-
+             var ajaxReturn = JSON.parse(ajaxRequest.responseText);
+             var status = document.getElementById("status");
+             status.inerHTML = ajaxReturn;
                }
 
             }
 
-			if (classNumber && subjectName && topicName && typeName) {
-            var queryString = "/AddNew/existingquestions.php?classNumber=" + classNumber + "&&subjectName=" + subjectName + "&&topicName" + topicName + "&&typeName" + typeName;
-
+			if (classNumberDG && subjectNameDG && topicNameDG && typeNameDG) {
+        console.log(classNumberDG + subjectNameDG + topicNameDG + typeNameDG);
+            var queryString = "/AddNew/existingquestions.php?classNumberDG=" + classNumberDG + "&&subjectNameDG=" + subjectNameDG + "&&topicNameDG=" + topicNameDG + "&&typeNameDG=" + typeNameDG;
             ajaxRequest.open("GET", queryString, true);
-            ajaxRequest.send(null);
+            ajaxRequest.send();
 			}
 
 			 else {

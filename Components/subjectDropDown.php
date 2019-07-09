@@ -18,10 +18,8 @@ echo $rowcount;
 
       while ($row = $query->fetch_assoc())  {
         {
-          $sn = $row['subjectName'];
-          $snid = $row['subjectName'];
-          echo "<option id=$snid>$sn</option>";
-
+          $sn = strip_tags($row['subjectName']);
+          echo "<option id='$sn' name='$sn'>$sn</option>";
         }
       }
 

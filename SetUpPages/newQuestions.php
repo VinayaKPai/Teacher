@@ -67,7 +67,7 @@
 			</div>
 			<div>
 
-				<div class="col-sm-6" style="padding: 10px;">
+				<div class="col-sm-4" style="padding: 10px;">
 					<hr>
 					<form name="newQuestionForm" action="../AddNew/addnewstudent.php" method="post">
 						<div class="form-group">
@@ -110,38 +110,60 @@
 
 				</div>
 
-				<div class="col-sm-6 centered" style="border-left: 1px solid Grey; height: 400px; padding: 1%; overflow: scroll;">
-
+				<div class="col-sm-8 centered" style="border-left: 1px solid Grey; height: 400px; padding: 1%; overflow: scroll;">
+					<hr>
           <div style="margin-top: 3px;">
 						<p class="panel-title" style="background-color: #C5B2B3;">Select the below options to display questions</p>
 					</div>
-					<form action="filteredquestions.php" method="post">
-						Class/STD: <select id="clName" onchange="testalert('clName')">
+					<form action="../AddNew/filteredquestions.php" method="POST">
+						<p>(Dynamically generated selects)</p>
+							Class/STD: <select id="clNameDG" name="clNameDG" onchange="testalert('clNameDG')">
+								<option id="" value=""></option>
+								<?php include "../Components/classNumberDropDown.php" ; ?>
+							</select>
+							Subject: <select id="subNameDG" name="subNameDG" onchange="testalert('subNameDG')">
+									<option id="" value=""></option>
+								 <?php include "../Components/subjectDropDown.php" ; ?>
+							</select>
+							Topic: <select id= "toNameDG" name="toNameDG" onchange="testalert('toNameDG')">
+										<option id=""></option>
+										<?php include "../Components/topicDropDown.php" ; ?>
+							</select>
+							Q Type: <select id="tyNameDG" name="tyNameDG"onchange="testalert('tyNameDG')">
+										<option id=""></option>
+										<?php include "../Components/typeDropDown.php" ; ?>
+							</select>
+							<button class="btn btn-default" type="submit">Submit</button>
+						</form>
+							<hr>
+							<p>(Adi's code)</p>
+							<form action="../AddNew/filteredquestions.php" method="POST">
+							Class/STD: <select id="clName" name="clName" onchange="testalert('clName')">
 							<option id="" value=""></option>
-							<option id="A" value="A">A</option>
+							<option id="A" value="IX" name="IX">IX</option>
 							<option id="B" value="B">B</option>
 							<option id="C" value="C">C</option>
-							<!-- <?php include "../Components/classNumberDropDown.php" ; ?>-->
 						</select>
-						Subject: <select id="subName" onchange="testalert('subName')">
+						Subject: <select id="subName" name="subName"onchange="testalert('subName')">
 									<option id="" value=""></option>
-									<option id="D" value="D">D</option>
+									<option id="SocialStudies" value="SocialStudies" name="SocialStudies">Social Studies</option>
 									<option id="E" value="E">E</option>
 									<option id="F" value="F">F</option>
-							<!-- <?php include "../Components/subjectDropDown.php" ; ?>-->
+
 						</select>
-						Topic: <select id= "toName" onchange="testalert('toName')">
+						Topic: <select id= "toName" name= "toName" onchange="testalert('toName')">
 									<option id=""></option>
-									<option id="G">G</option>
+									<option id="FrRev" name="FrRev" value="FrRev">FrRev</option>
 									<option id="H">H</option>
-							<!-- <?php include "../Components/topicDropDown.php" ; ?>-->
+
 						</select>
-						Q Type: <select id="tyName" onchange="testalert('tyName')">
+						Q Type: <select id="tyName" name="tyName"onchange="testalert('tyName')">
 									<option id=""></option>
-									<option id="I">I</option>
+									<option id="MCQ" name="MCQ" value="MCQ">MCQ</option>
 									<option id="J">J</option>
-									<!-- <?php include "../Components/typeDropDown.php" ; ?>-->
+
 						</select>
+						<button class="btn btn-default" type="submit">Submit</button>
 					</form>
 						<hr>
 						<style>
@@ -153,7 +175,7 @@
 							<?php include "../AddNew/existingquestions.php"; ?>
 						</table>
 				</div>
-					<div id="status">STATUS
+					<div id="status">STATUS<?php include "../AddNew/filteredquestions.php"; ?>
 
 				</div>
 

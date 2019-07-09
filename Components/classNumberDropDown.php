@@ -14,11 +14,10 @@
     }
     else {echo "KUCHHH TO GADBAD HAI!";};
 
-
       while ($row = $query->fetch_assoc())  {
         {
           $cn = strip_tags($row['classNumber']);
-          echo "<option id='$cn'>$cn</option>";
+          echo "<option id='$cn' name='$cn'>$cn</option>";
 
         }
       }

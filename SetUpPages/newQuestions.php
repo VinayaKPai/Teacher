@@ -178,13 +178,9 @@
 						</style>
 						<table id="existTable" style="width: 100%; padding: 5px; border-spacing: 2px; border-collapse: separate; align: 'center';">
 							<?php
-							if ($_GET){
-								$cln = $_GET['cn'];
-
-								$url= "../AddNew/existingquestions".$cln.".php";
-								include $url; }
-								else { $url= "../AddNew/existingquestions.php";
-								include $url; }
+								if ($_GET){ $cln = $_GET['cn'];}
+								else { $cln = "all";}
+								include "../AddNew/existingquestions.php";
 								?>
 
 						</table>

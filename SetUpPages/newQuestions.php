@@ -108,7 +108,7 @@
 
 						<button name="Submit" id="submit" type="submit">SUBMIT</button>
 					</form>
-					<hr>
+
 
 				</div>
 
@@ -139,7 +139,7 @@
 							<input type="button" class="btn btn-primary btn-xs" onclick="getAll()" value="All" />
 							<!-- <button class="btn btn-default btn-xs" type="submit">Submit</button>-->
 						</form>
-							<hr>
+<div>
 							<!-- <p>(Adi's code)</p>
 							<form action="../AddNew/filteredquestions.php" method="POST">
 							Class/STD: <select id="clName" name="clName" onchange="testalert('clName')">
@@ -169,6 +169,7 @@
 						</select>
 						<button class="btn btn-default" type="submit">Submit</button>
 					</form> -->
+</div>
 						<hr>
 						<style>
 						table tr:nth-child(even){background-color: #b69092; color: #fff}
@@ -176,15 +177,21 @@
 						table td {text-align: center;}
 						</style>
 						<table id="existTable" style="width: 100%; padding: 5px; border-spacing: 2px; border-collapse: separate; align: 'center';">
-							<?php echo $_GET['cn']; ?>
-							<?php include "../AddNew/existingquestions.php"; ?>
+							<?php
+							if ($_GET){
+								$cln = $_GET['cn'];
+
+								$url= "../AddNew/existingquestions".$cln.".php";
+								include $url; }
+								else { $url= "../AddNew/existingquestions.php";
+								include $url; }
+								?>
+
 						</table>
 				</div>
-					<div id="status">STATUS
+				<div id="status" class="centered" ><?php echo $datetime1;?></div>
 
-				</div>
-
-		<hr>
+				<hr>
 		<div id="bottom"><?php include "../Components/bottom.php"; ?></div>
 		</div>
 	</body>

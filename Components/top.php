@@ -8,7 +8,7 @@
 	</div>
 	<div class="col-sm-4 topbanner dropdown">
 		<?php echo $pageHeading; ?>
-		<span class="glyphicon glyphicon-chevron-down"></span>
+		<small><span class="glyphicon glyphicon-chevron-down" style="color: #fff;"></span></small>
 		<div class="dropdown-content centered h6" style="float: center;">
 			<a href="../../SetUpPages/newReports.php">Reports </a><br>
 			<a href="../../SetUpPages/newclasssections.php">Class-Sections </a><br>

@@ -1,10 +1,10 @@
 <?php
 	include "../basecode-create_connection.php";
 
-		$classNumber = $_POST["classNumber"];
+		$classNumber = $_POST["classNumberDG"];
 		$classNumberSafe = $mysqli->real_escape_string($classNumber);
 
-		$sectionAlpha = $_POST["sectionAlpha"];
+		$sectionAlpha = $_POST["sectionAlphaDG"];
 		$sectionAlphaSafe = $mysqli->real_escape_string($sectionAlpha);
 
 		$subjectName = $_POST["subjectName"];

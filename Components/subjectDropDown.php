@@ -1,7 +1,7 @@
 <?php
   	include "../basecode-create_connection.php";
 
-  	$query = $mysqli->query("SELECT * FROM subjects");
+  	$query = $mysqli->query("SELECT DISTINCT subjectName FROM subjects");
 
     //catch errors
     if ($mysqli->connect_errno) {

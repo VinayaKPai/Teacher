@@ -60,17 +60,15 @@
 				<div class="col-sm-9" style="padding: 10px;">
 <hr>
 					<form name="newSubjectForm" action="../AddNew/addnewsubject.php" method="post">
-						<?php include "../Components/classNumberDropDown.php";?>
-						<?php include "../Components/sectionAlphaDropDown.php";?>
-						Section <select name="sectionAlpha" id="sectionAlpha" required>
-						<option id="blanksa"></option>
-						<option id="A">A</option>
-						<option id="B">B</option>
-						<option id="C">C</option>
-						<option id="D">D</option>
-						<option id="E">E</option>
-						<option id="F">F</option>
+						Class/STD: <select id="classNumberDG" name="classNumberDG" onchange="testalert('classNumberDG')">
+							<option id="" value=""></option>
+							<?php include "../Components/classNumberDropDown.php" ; ?>
 						</select>
+						Section: <select id="sectionAlphaDG" name="sectionAlphaDG" onchange="testalert('sectionAlphaDG')">
+							<option id="" value=""></option>
+						<?php include "../Components/sectionAlphaDropDown.php";?>
+					</select>
+
 						Subject <select name="subjectName" id="subjectName" required>
 						<option id="blanksa"></option>
 						<option id="English">English</option>

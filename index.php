@@ -125,7 +125,21 @@
 			<div class="btn roundsqbtn centered dropdown" style="float: center; width: 70%;">
 				<div>Question Bank</div>
 				<div class="dropdown-content centered">
-					<a href="../../SetUpPages/newQuestions.php">Manage </a>
+					<ul>
+						<li><a href="../../SetUpPages/newQuestions.php">Manage </a></li>
+						<?php include "basecode-create_connection.php";
+						$query = $mysqli->query("SELECT DISTINCT classNumber FROM classsections");
+						while ($row = $query->fetch_assoc())  {
+			        {
+			          $cn = strip_tags($row['classNumber']);
+			          echo "<a href='../../SetUpPages/newQuestions.php?cn=$cn'><li id='$cn' name='$cn'>$cn</li></a>";
+
+			        }
+			      }
+						?>
+
+					</ul>
+
 				</div>
 			</div>
 			<div class="btn roundsqbtn centered dropdown" style="float: center; width: 70%;">

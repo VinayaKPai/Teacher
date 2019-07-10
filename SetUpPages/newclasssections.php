@@ -69,35 +69,42 @@
 			</div>
 			<div>
 
-				<div class="col-sm-9" style="padding: 10px;">
+				<div class="col-sm-9 centered" style="padding: 10px;">
 <hr>
 					<form name="newClassForm" action="../AddNew/addnewclass.php" method="post">
-						Class/Std <select name="classNumber" id="classNumber" required>
-						<option id="blankcn"></option>
-						<option id="I">I</option>
-						<option id="II">II</option>
-						<option id="III">III</option>
-						<option id="IV">IV</option>
-						<option id="V">V</option>
-						<option id="VI">VI</option>
-						<option id="VII">VII</option>
-						<option id="VIII">VIII</option>
-						<option id="IX">IX</option>
-						<option id="X">X</option>
-						<option id="XI">XI</option>
-						<option id="XII">XII</option>
-						</select>
-						Section <select name="sectionAlpha" id="sectionAlpha" required>
-						<option id="blanksa"></option>
-						<option id="A">A</option>
-						<option id="B">B</option>
-						<option id="C">C</option>
-						<option id="D">D</option>
-						<option id="E">E</option>
-						<option id="F">F</option>
-						</select>
-						<input type="button" id="chkRec" value="CHECK" onclick="ajaxChkClassFunction()"/>
+						<div class="col-sm-4">
+							<label for="classNumber">Class/Std </label>
+							<select name="classNumber" id="classNumber" required>
+								<option id="blankcn"></option>
+								<option id="I">I</option>
+								<option id="II">II</option>
+								<option id="III">III</option>
+								<option id="IV">IV</option>
+								<option id="V">V</option>
+								<option id="VI">VI</option>
+								<option id="VII">VII</option>
+								<option id="VIII">VIII</option>
+								<option id="IX">IX</option>
+								<option id="X">X</option>
+								<option id="XI">XI</option>
+								<option id="XII">XII</option>
+							</select>
+						</div>
+						<div class="col-sm-4">
+							<label for="sectionAlpha">Section </label>
+							<select name="sectionAlpha" id="sectionAlpha" required>
+								<option id="blanksa"></option>
+								<option id="A">A</option>
+								<option id="B">B</option>
+								<option id="C">C</option>
+								<option id="D">D</option>
+								<option id="E">E</option>
+								<option id="F">F</option>
+							</select>
+						</div>
+						<!-- <input type="button" id="chkRec" value="CHECK" onclick="ajaxChkClassFunction()"/>-->
 						<button name="Submit" id="submit" type="submit">SUBMIT</button>
+
 					</form>
 					<hr>
 					<div  class="row">

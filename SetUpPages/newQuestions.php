@@ -19,6 +19,7 @@
 		<link type="text" href="./Modals/modaltest.html"/link>
 	<link rel="stylesheet" type="text/css" href="/stylesheet.css"  />
 		<script src="../../Scripts/js/ajaxCallQuestions.js"></script>
+		<script src="../../Scripts/js/filterRecords.js"></script>
 		<script>
 			function testalert(dropDownId) {
 				var selector = document.getElementById(dropDownId);
@@ -27,6 +28,7 @@
 				//document.getElementById('display').innerHTML = value;
 				console.log(value);
 			}
+
 		</script>
 	</head>
 	<body class="body">
@@ -115,28 +117,30 @@
           <div style="margin-top: 3px;">
 						<p class="panel-title" style="background-color: #C5B2B3;">Select the below options to display questions</p>
 					</div>
-					<form action="../AddNew/filteredquestions.php" method="POST">
+					<form action="../AddNew/existingquestions.php" method="POST">
 						<p>(Dynamically generated selects)</p>
-							Class/STD: <select id="clNameDG" name="clNameDG" onchange="testalert('clNameDG')">
+							Class/STD: <select id="classNumberDG" name="classNumberDG">
 								<option id="" value=""></option>
 								<?php include "../Components/classNumberDropDown.php" ; ?>
 							</select>
-							Subject: <select id="subNameDG" name="subNameDG" onchange="testalert('subNameDG')">
+							Subject: <select id="subjectNameDG" name="subjectNameDG">
 									<option id="" value=""></option>
 								 <?php include "../Components/subjectDropDown.php" ; ?>
 							</select>
-							Topic: <select id= "toNameDG" name="toNameDG" onchange="testalert('toNameDG')">
+							Topic: <select id= "topicNameDG" name="topicNameDG">
 										<option id=""></option>
 										<?php include "../Components/topicDropDown.php" ; ?>
 							</select>
-							Q Type: <select id="tyNameDG" name="tyNameDG"onchange="testalert('tyNameDG')">
+							Q Type: <select id="typeNameDG" name="typeNameDG">
 										<option id=""></option>
 										<?php include "../Components/typeDropDown.php" ; ?>
 							</select>
-							<button class="btn btn-default" type="submit">Submit</button>
+							<input type="button" class="btn btn-primary btn-xs" onclick="filterQuestions()" value="Filter" />
+							<input type="button" class="btn btn-primary btn-xs" onclick="getAll()" value="All" />
+							<!-- <button class="btn btn-default btn-xs" type="submit">Submit</button>-->
 						</form>
 							<hr>
-							<p>(Adi's code)</p>
+							<!-- <p>(Adi's code)</p>
 							<form action="../AddNew/filteredquestions.php" method="POST">
 							Class/STD: <select id="clName" name="clName" onchange="testalert('clName')">
 							<option id="" value=""></option>
@@ -164,7 +168,7 @@
 
 						</select>
 						<button class="btn btn-default" type="submit">Submit</button>
-					</form>
+					</form> -->
 						<hr>
 						<style>
 						table tr:nth-child(even){background-color: #b69092; color: #fff}
@@ -172,10 +176,11 @@
 						table td {text-align: center;}
 						</style>
 						<table id="existTable" style="width: 100%; padding: 5px; border-spacing: 2px; border-collapse: separate; align: 'center';">
+							<?php echo $_GET['cn']; ?>
 							<?php include "../AddNew/existingquestions.php"; ?>
 						</table>
 				</div>
-					<div id="status">STATUS<?php include "../AddNew/filteredquestions.php"; ?>
+					<div id="status">STATUS
 
 				</div>
 

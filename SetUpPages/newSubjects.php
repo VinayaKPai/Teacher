@@ -98,7 +98,7 @@
 				</div>
 
 				<div class="col-sm-3 centered" style="border-left: 1px solid Grey;">
-					<?php include "../AddNew/existingsubjects.php"; ?>
+					<?php include "../AddNew/Existing/subjects.php"; ?>
 
 
 					<div id="status">Statuc</div>

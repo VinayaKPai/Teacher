@@ -23,7 +23,7 @@
 		  <div class="row">
 			  <div class="col-sm-6 centered" style="border: 1px solid Grey;">
 				  <form name="newClassForm" action="../../AddNew/addnewclass.php"  onsubmit="return chkblanks()" method="post" target="_parent">
-						  Class/Std: &emsp; 
+						  Class/Std: &emsp;
 						  <select name="classNumber" id="classNumber">
 							  <option id="blank" placeholder="Select Class"></option>
 							  <option id="std1">I</option>
@@ -39,8 +39,8 @@
 							  <option id="std11">XI</option>
 							  <option id="std12">XII</option>
 						  </select>
-						  
-						  Section: &nbsp; 
+
+						  Section: &nbsp;
 						  <select name="sectionAlpha" id="sectionAlpha">
 							  <option id="A">A</option>
 							  <option id="B">B</option>
@@ -49,14 +49,14 @@
 							  <option id="E">E</option>
 							  <option id="F">F</option>
 						  </select>
-					  
-					  <button name="Submit" id="submit" type="submit">SUBMIT</button> 
-					  
+
+					  <button name="Submit" id="submit" type="submit">SUBMIT</button>
+
 				  </form>
 			  </div>
-		 
+
 		  <div id="chk" class="col-sm-6" style="border: 1px solid Grey;">
-			<?php include "./AddNew/existingclasssections.php"; ?>
+			<?php include "./AddNew/Existing/classsections.php"; ?>
 		  </div>
 		</div>
       <div class="modal-footer">
@@ -67,4 +67,3 @@
   </div>
 </div>
 <!-- Reports Modal End-->
-

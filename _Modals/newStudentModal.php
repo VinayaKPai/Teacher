@@ -30,9 +30,9 @@
 							echo "Currently ".$rowcount." students<br />";
 						  ?>
 				  </div>
-				  <?php include "./AddNew/existingstudents.php"; ?>
+				  <?php include "./AddNew/Existing/students.php"; ?>
 			  </div>
-		  </div> 
+		  </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

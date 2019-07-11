@@ -125,7 +125,7 @@
 				</div>
 
 				<div class="col-sm-3 centered" style="border-left: 1px solid Grey;">
-					<?php include "../AddNew/existingclasssections.php"; ?>
+					<?php include "../AddNew/Existing/classsections.php"; ?>
 
 
 					<div id="status">Statuc</div>

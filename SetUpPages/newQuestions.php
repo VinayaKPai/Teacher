@@ -117,7 +117,7 @@
           <div style="margin-top: 3px;">
 						<p class="panel-title" style="background-color: #C5B2B3;">Select the below options to display questions</p>
 					</div>
-					<form action="../AddNew/existingquestions.php" method="POST">
+					<form action="../AddNew/Existing/questions.php" method="POST">
 						<p>(Dynamically generated selects)</p>
 							Class/STD: <select id="classNumberDG" name="classNumberDG">
 								<option id="" value=""></option>
@@ -180,7 +180,7 @@
 							<?php
 								if ($_GET){ $cln = $_GET['cn'];}
 								else { $cln = "all";}
-								include "../AddNew/existingquestions.php";
+								include "../AddNew/Existing/questions.php";
 								?>
 
 						</table>

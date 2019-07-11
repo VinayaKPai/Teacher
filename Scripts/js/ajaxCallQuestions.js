@@ -46,7 +46,7 @@
 
 			if (classNumberDG && subjectNameDG && topicNameDG && typeNameDG) {
         console.log(classNumberDG + subjectNameDG + topicNameDG + typeNameDG);
-            var queryString = "/AddNew/existingquestions.php?classNumberDG=" + classNumberDG + "&&subjectNameDG=" + subjectNameDG + "&&topicNameDG=" + topicNameDG + "&&typeNameDG=" + typeNameDG;
+            var queryString = "/AddNew/Existing/questions.php?classNumberDG=" + classNumberDG + "&&subjectNameDG=" + subjectNameDG + "&&topicNameDG=" + topicNameDG + "&&typeNameDG=" + typeNameDG;
             ajaxRequest.open("GET", queryString, true);
             ajaxRequest.send();
 			}

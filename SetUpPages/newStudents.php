@@ -160,7 +160,7 @@
 				</div>
 
 				<div class="col-sm-3 centered" style="border-left: 1px solid Grey;">
-					<?php include "../AddNew/existingstudents.php"; ?>
+					<?php include "../AddNew/Existing/students.php"; ?>
 
 
 					<div id="status"></div>

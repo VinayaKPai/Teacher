@@ -23,7 +23,7 @@
     echo "<h5 class='centered'>Questions for ".$txt."</h5>";  //comes from the choice made on index.php Questions button drop down
 
     $rowcount=mysqli_num_rows($query); //number of results returned by the query - 0 (if not present)
-      if ($rowcount == 0) {echo "<h6 style='color: Red;'>You do not have any questions for ".$msg."</h6>";}
+      if ($rowcount == 0) {echo "<h6 style='color: Red;'>You do not have any questions for ".$msg."</h6><a href='/index.php'>Back</a>";}
 
     while ($row=mysqli_fetch_assoc($query)) {
     //fetch all columns of the query results

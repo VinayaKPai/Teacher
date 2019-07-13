@@ -32,22 +32,37 @@
             ajaxRequest.onreadystatechange = function() {
 	//------------collect values (from 2 drop down select elements to be sent to ajax---------------------
 				    var classNumberDG = document.getElementById("classNumberDG").value;
+            var sa = document.getElementById("subjectNameDG");
+
+            var sac = sa.children.length;
+    console.log(sac + " C. This is the empty option only");
+if (sac > 1) {
+  sa.innerHTML = "";
+  var crEmpOpt = document.createElement("option");
+  crEmpOpt.id = "";
+  crEmpOpt.innerText = "";
+  sa.appendChild(crEmpOpt);
+}
+
 
 				   if(ajaxRequest.readyState == 4) {
-             console.log(typeof(ajaxRequest.responseText));   //STRING
+             // console.log(typeof(ajaxRequest.responseText));   //STRING
 					  var ajaxReturn = JSON.parse(ajaxRequest.responseText);
-            console.log(typeof(ajaxReturn));                  //OBJECT
-            console.log("Ajax Return = " + ajaxReturn);
-            var sa = document.getElementById("subjectNameDG");
+            //console.log(typeof(ajaxReturn));                  //OBJECT
+            //console.log("Ajax Return = " + ajaxReturn);
             var aRetLength = ajaxReturn.length;
-            console.log(aRetLength);
+            console.log(aRetLength + " = A Ret Length");
+
+
+
             for (i=0;i<aRetLength;i++) {
               var crOpt = document.createElement("option");
               crOpt.id = ajaxReturn[i];
               crOpt.innerText = ajaxReturn[i];
-              crOpt.onchange = "ajaxGetTypforTop()";
               sa.appendChild(crOpt);
             }
+            var sacd = document.getElementById("subjectNameDG").children.length;
+            console.log(sacd + " d should be empty ele plus pre ex eles plus newly added");
 
                }
 

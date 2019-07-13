@@ -125,17 +125,17 @@
 								<option id="" value=""></option>
 								<?php include "../Components/classNumberDropDown.php" ; ?>
 							</select>
-							Subject: <select id="subjectNameDG" name="subjectNameDG">
+							Subject: <select id="subjectNameDG" name="subjectNameDG" style="width:80px;" onchange="ajaxGetTopForSub()">
 									<option id="" value=""></option>
-								 <?php include "../Components/subjectDropDown.php" ; ?>
+								 <?php //include "../Components/subjectDropDown.php" ; ?>
 							</select>
-							Topic: <select id= "topicNameDG" name="topicNameDG">
+							Topic: <select id= "topicNameDG" name="topicNameDG" style="width:80px;" onchange="ajaxGetTopForTyp()">
 										<option id=""></option>
-										<?php include "../Components/topicDropDown.php" ; ?>
+										<?php //include "../Components/topicDropDown.php" ; ?>
 							</select>
-							Q Type: <select id="typeNameDG" name="typeNameDG">
+							Q Type: <select id="typeNameDG" name="typeNameDG" style="width:80px;">
 										<option id=""></option>
-										<?php include "../Components/typeDropDown.php" ; ?>
+										<?php //include "../Components/typeDropDown.php" ; ?>
 							</select>
 							<input type="button" class="btn btn-primary btn-xs" onclick="filterQuestions()" value="Filter" />
 							<input type="button" class="btn btn-primary btn-xs" onclick="getAll()" value="All" />

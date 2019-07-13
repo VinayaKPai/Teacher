@@ -13,19 +13,11 @@ $rowSubjectArray = array();
 $rowTopicArray = array();
 
 //queries the db/table for a row matching the parameter from the url
-$query = $mysqli->query("SELECT * FROM classsections WHERE classNumber = '$classNumberDG'");
-
-	$rowcount=mysqli_num_rows($query); //number of results returned by the query - either 0 (if not present) or 1 or many (if present)
-// 	while ($row=mysqli_fetch_assoc($query)){	//fetch all columns of the query results
-//
-// 		$cls = $row['classNumber'];
-// 		array_push($rowSectionArray,array("cls" => $cls));	//Id of the returned row
-//
-// }
 
 $query = $mysqli->query("SELECT DISTINCT subjectName FROM subjects WHERE classNumber = '$classNumberDG'");
 
 	$rowcount=mysqli_num_rows($query); //number of results returned by the query - either 0 (if not present) or 1 or many (if present)
+	
 	while ($row=mysqli_fetch_assoc($query)){	//fetch all columns of the query results
 
 		$sub = $row['subjectName'];

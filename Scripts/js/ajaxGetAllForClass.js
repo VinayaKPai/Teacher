@@ -35,14 +35,14 @@
             var sa = document.getElementById("subjectNameDG");
 
             var sac = sa.children.length;
-    console.log(sac + " C. This is the empty option only");
-if (sac > 1) {
-  sa.innerHTML = "";
-  var crEmpOpt = document.createElement("option");
-  crEmpOpt.id = "";
-  crEmpOpt.innerText = "";
-  sa.appendChild(crEmpOpt);
-}
+            console.log(sac + " C. This is the empty option only");
+              if (sac > 1) {
+                sa.innerHTML = "";
+                var crEmpOpt = document.createElement("option");
+                crEmpOpt.id = "";
+                crEmpOpt.innerText = "";
+                sa.appendChild(crEmpOpt);
+              }
 
 
 				   if(ajaxRequest.readyState == 4) {
@@ -58,6 +58,7 @@ if (sac > 1) {
             for (i=0;i<aRetLength;i++) {
               var crOpt = document.createElement("option");
               crOpt.id = ajaxReturn[i];
+              crOpt.setAttribute("name",ajaxReturn[i]);
               crOpt.innerText = ajaxReturn[i];
               sa.appendChild(crOpt);
             }
@@ -79,7 +80,7 @@ if (sac > 1) {
             ajaxRequest.setRequestHeader("content-type", "application/json");
             ajaxRequest.send(null);
 			}
-ajaxGetTopForSub();
+ // ajaxGetTopForSub();
          }
          //-->
          //-->
@@ -107,43 +108,58 @@ function ajaxGetTopForSub() {
              }
           }
 
-          // Create a function that will receive data
-          // sent from the server and will update
-          // div section in the same page.
+          ajaxRequest.onreadystatechange = function() {
+              //------------collect values (from 2 drop down select elements to be sent to ajax---------------------
+            var subjectNameDG = document.getElementById("subjectNameDG").value;
+          	var ta = document.getElementById("topicNameDG");
 
-              ajaxRequest.onreadystatechange = function() {
-    //------------collect values (from 2 drop down select elements to be sent to ajax---------------------
-              var subjectNameDG = document.getElementById("subjectNameDG").value;
+          	var tac = ta.children.length;
+          	console.log(tac + "  This is the empty option only");
+          	if (tac > 1) {
+          	ta.innerHTML = "";
+          	var crEmpOpt = document.createElement("option");
+          	crEmpOpt.id = "";
+            crOpt.setAttribute("name",ajaxReturn[i]);
+          	crEmpOpt.innerText = "";
+          	ta.appendChild(crEmpOpt);
+          }
 
-             if(ajaxRequest.readyState == 4) {
 
-              var ajaxReturn = ajaxRequest.responseText;
+          if(ajaxRequest.readyState == 4) {
 
-              console.log("Ajax Return = " + ajaxReturn);
-              var ta = document.getElementById("topicNameDG");
-              var ops = ta.children.length;
-              console.log(ops);//WORKS!!!!
+                        var ajaxReturn = JSON.parse(ajaxRequest.responseText);
 
-              // loop through all children
-              for (i=0;i<ops;i++) {
-                var opt = ta[i].innerText;
-                console.log(opt);
+                        console.log("Ajax Return = " + ajaxReturn);
+          	var aRetLength = ajaxReturn.length;
+                      console.log(aRetLength + " = A Ret Length");
 
-                    }
-                 }
 
-              }
 
-              // Now get the value from user and pass it to
-              // server script.
-        var subjectNameDG = document.getElementById('subjectNameDG').value;
+          	for (i=0;i<aRetLength;i++) {
+                         var crOpt = document.createElement("option");
+                          crOpt.id = ajaxReturn[i];
+                          crOpt.innerText = ajaxReturn[i];
+                          ta.appendChild(crOpt);
+                              }
+          	var tacd = document.getElementById("topicNameDG").children.length;
+                      console.log(tacd + " d should be empty ele plus pre ex eles plus newly added");
 
-        if (subjectNameDG) {
-              var queryString = "/AddNew/getTopForSub.php?subjectNameDG=" + subjectNameDG + "&&classNumberDG=" + classNumberDG;
-              console.log (queryString);
-              ajaxRequest.open("GET", queryString, true);
-              ajaxRequest.setRequestHeader("content-type", "application/json");
-              ajaxRequest.send(null);
-        }
+                           }
 
-           }
+                        }
+
+                        // Now get the value from user and pass it to
+                        // server script.
+                  var subjectNameDG = document.getElementById('subjectNameDG').value;
+                  var classNumberDG = document.getElementById('classNumberDG').value;
+          console.log(subjectNameDG);
+
+                  if (subjectNameDG) {
+                        var queryString = "/AddNew/getTopForSub.php?subjectNameDG=" + subjectNameDG + "&&classNumberDG=" + classNumberDG;
+                        console.log (queryString);
+                        ajaxRequest.open("GET", queryString, true);
+                        ajaxRequest.setRequestHeader("content-type", "application/json");
+                        ajaxRequest.send(null);
+                  }
+
+    }

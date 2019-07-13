@@ -19,6 +19,7 @@
 		<link type="text" href="./Modals/modaltest.html"/link>
 	<link rel="stylesheet" type="text/css" href="/stylesheet.css"  />
 		<script src="../../Scripts/js/ajaxCallQuestions.js"></script>
+		<script src="../../Scripts/js/ajaxGetAllForClass.js"></script>
 		<script src="../../Scripts/js/filterRecords.js"></script>
 		<script>
 			function testalert(dropDownId) {
@@ -117,9 +118,10 @@
           <div style="margin-top: 3px;">
 						<p class="panel-title" style="background-color: #C5B2B3;">Select the below options to display questions</p>
 					</div>
+					<div id="ajaxReturnTest">TEST RETURN</div>
 					<form action="../AddNew/Existing/questions.php" method="POST">
 						<p>(Dynamically generated selects)</p>
-							Class/STD: <select id="classNumberDG" name="classNumberDG">
+							Class/STD: <select id="classNumberDG" name="classNumberDG" onchange="ajaxGetSubForClass()">
 								<option id="" value=""></option>
 								<?php include "../Components/classNumberDropDown.php" ; ?>
 							</select>

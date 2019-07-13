@@ -116,6 +116,9 @@ table td {text-align: center;}
 .left {
   border-right: 1px	solid #2E1114;
 }
+.left-align {
+  text-align: left;
+}
 .right {
   border-left: 1px solid #2E1114;
 }

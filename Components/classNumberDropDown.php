@@ -1,7 +1,7 @@
 <?php
   	include "../basecode-create_connection.php";
     // echo $datetime1;
-    $slno = 0;
+  
   	$query = $mysqli->query("SELECT DISTINCT classNumber FROM classsections");
 
     //catch errors

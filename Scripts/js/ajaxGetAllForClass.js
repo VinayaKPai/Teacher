@@ -35,7 +35,7 @@
             var sa = document.getElementById("subjectNameDG");
 
             var sac = sa.children.length;
-            console.log(sac + " C. This is the empty option only");
+            // console.log(sac + " C. This is the empty option only");
               if (sac > 1) {
                 sa.innerHTML = "";
                 var crEmpOpt = document.createElement("option");
@@ -51,7 +51,7 @@
             //console.log(typeof(ajaxReturn));                  //OBJECT
             //console.log("Ajax Return = " + ajaxReturn);
             var aRetLength = ajaxReturn.length;
-            console.log(aRetLength + " = A Ret Length");
+            // console.log(aRetLength + " = A Ret Length");
 
 
 
@@ -63,7 +63,7 @@
               sa.appendChild(crOpt);
             }
             var sacd = document.getElementById("subjectNameDG").children.length;
-            console.log(sacd + " d should be empty ele plus pre ex eles plus newly added");
+            // console.log(sacd + " d should be empty ele plus pre ex eles plus newly added");
 
                }
 
@@ -110,11 +110,12 @@ function ajaxGetTopForSub() {
 
           ajaxRequest.onreadystatechange = function() {
               //------------collect values (from 2 drop down select elements to be sent to ajax---------------------
+            var classNumberDG = document.getElementById("classNumberDG").value;
             var subjectNameDG = document.getElementById("subjectNameDG").value;
           	var ta = document.getElementById("topicNameDG");
 
           	var tac = ta.children.length;
-          	console.log(tac + "  This is the empty option only");
+          	// console.log(tac + "  This is the empty option only");
           	if (tac > 1) {
           	ta.innerHTML = "";
           	var crEmpOpt = document.createElement("option");
@@ -129,10 +130,12 @@ function ajaxGetTopForSub() {
 
                         var ajaxReturn = JSON.parse(ajaxRequest.responseText);
 
-                        console.log("Ajax Return = " + ajaxReturn);
+                        // console.log("Ajax Return = " + ajaxReturn);
           	var aRetLength = ajaxReturn.length;
-                      console.log(aRetLength + " = A Ret Length");
-
+                      // console.log(aRetLength + " = A Ret Length");
+                      if (aRetLength == 0) {
+                        alert ("U-O!");
+                      }
 
 
           	for (i=0;i<aRetLength;i++) {
@@ -142,7 +145,7 @@ function ajaxGetTopForSub() {
                           ta.appendChild(crOpt);
                               }
           	var tacd = document.getElementById("topicNameDG").children.length;
-                      console.log(tacd + " d should be empty ele plus pre ex eles plus newly added");
+                      // console.log(tacd + " d should be empty ele plus pre ex eles plus newly added");
 
                            }
 
@@ -152,11 +155,11 @@ function ajaxGetTopForSub() {
                         // server script.
                   var subjectNameDG = document.getElementById('subjectNameDG').value;
                   var classNumberDG = document.getElementById('classNumberDG').value;
-          console.log(subjectNameDG);
+          // console.log(subjectNameDG);
 
                   if (subjectNameDG) {
                         var queryString = "/AddNew/getTopForSub.php?subjectNameDG=" + subjectNameDG + "&&classNumberDG=" + classNumberDG;
-                        console.log (queryString);
+                        // console.log (queryString);
                         ajaxRequest.open("GET", queryString, true);
                         ajaxRequest.setRequestHeader("content-type", "application/json");
                         ajaxRequest.send(null);

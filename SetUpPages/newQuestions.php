@@ -74,27 +74,27 @@
 					<hr>
 					<form name="newQuestionForm" action="../AddNew/addnewstudent.php" method="post">
 						<div class="form-group">
-							<label for="classNumber">Class / Std
+							<label for="classNumberFrm">Class / Std
                 <span class="glyphicon glyphicon-asterisk" style="color: Red"></span>
               </label>
-              <input id="classNumber" name="classNumber" class="form-control" required />
-							<label for="subjectName">Subject
+              <input id="classNumberFrm" name="classNumberFrm" class="form-control" required />
+							<label for="subjectNameFrm">Subject
                 <span class="glyphicon glyphicon-asterisk" style="color: Red"></span>
               </label>
-              <input id="subjectName" name="subjectName" class="form-control" required />
-							<label for="topic">Topic
+              <input id="subjectNameFrm" name="subjectNameFrm" class="form-control" required />
+							<label for="topicFrm">Topic
                 <span class="glyphicon glyphicon-asterisk" style="color: Red"></span>
               </label>
-              <select name="topic" id="topic" class="form-control" required>
+              <select name="topicFrm" id="topicFrm" class="form-control" required>
 								<option id="blanktp"></option>
 								<option id="I">I</option>
 								<option id="II">II</option>
 								<option id="III">III</option>
 						  </select>
-							<label for="type">Question Type
+							<label for="typeFrm">Question Type
                 <span class="glyphicon glyphicon-asterisk" style="color: Red"></span>
               </label>
-              <select name="type" id="type" class="form-control" required>
+              <select name="typeFrm" id="typeFrm" class="form-control" required>
 									<option id="blanksa"></option>
 									<option id="lat">LAT</option>
 									<option id="sat">SAT</option>
@@ -121,23 +121,24 @@
 					<div id="ajaxReturnTest">TEST RETURN</div>
 				<!--	<form action="../AddNew/Existing/questions.php" method="POST"> -->
 						<p>(Dynamically generated selects)</p>
-							Class/STD: <select id="classNumberDG" name="classNumberDG" onchange="ajaxGetSubForClass()">
+							Class/STD: <select id="classNumber" name="classNumber" onchange="ajaxGetSubForClass()">
 								<option id="" value=""></option>
 								<?php include "../Components/classNumberDropDown.php" ; ?>
 							</select>
-							Subject: <select id="subjectNameDG" name="subjectNameDG" style="width:80px;" onchange="ajaxGetTopForSub()">
+							Subject: <select id="subjectName" name="subjectName" style="width:80px;" onchange="ajaxGetTopForSub()">
 									<option id="" value=""></option>
 								 <?php //include "../Components/subjectDropDown.php" ; ?>
 							</select>
-							Topic: <select id= "topicNameDG" name="topicNameDG" style="width:80px;">
+							Topic: <select id= "topicName" name="topicName" style="width:80px;">
 										<option id=""></option>
 										<?php //include "../Components/topicDropDown.php" ; ?>
 							</select>
-							Q Type: <select id="typeNameDG" name="typeNameDG" style="width:80px;">
+							Q Type: <select id="typeName" name="typeName" style="width:80px;">
 										<option id=""></option>
 										<?php include "../Components/typeDropDown.php" ; ?>
 							</select>
-							<input type="button" class="btn btn-primary btn-xs" onclick="filterQuestions()" value="Filter" />
+							<input type="button" class="btn btn-primary btn-xs" onclick="filterQuestions()" value="Filter With JS" />
+							<input type="button" class="btn btn-primary btn-xs" onclick="ajaxChkQuestionsFunction()" value="Filter With PHP" />
 							<input type="button" class="btn btn-primary btn-xs" onclick="getAll()" value="All" />
 							<!-- <button class="btn btn-default btn-xs" type="submit">Submit</button>-->
 					<!--	</form>-->

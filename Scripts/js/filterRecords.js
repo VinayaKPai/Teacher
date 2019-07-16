@@ -31,18 +31,22 @@ function filterQuestions() {
       if (!inputArray[p] == "") {  //if the item has value, we want to use it for searching
         exists.push([inputArray[p],cellNameVar]);
         criteria += (cellNameVar + "===" + inputArray[p]);
+        console.log(criteria + " = criteria inside if not");
       }
     }
-    console.log(criteria);
-    console.log(exists);
+    console.log(criteria + " = criteria");
+
+    console.log(exists + " = exists");
+
+
     var len = exists.length;
     var searchString = "";
 
     for (z=0;z<len-1;z++) {
-      searchString += (exists[z][1] + " === \"" + exists[z][0] + "\" && ");
+      searchString += (exists[z][1] + " == \"" + exists[z][0] + "\" && ");
     }
-    searchString += exists[len-1][1] + " === \"" + exists[len-1][0] + "\"";
-    console.log(searchString);
+    searchString += exists[len-1][1] + " == \"" + exists[len-1][0] + "\"";
+    console.log(searchString + " = searchString");
     //exists now holds all the search criteria
     //eg [classNumberDG,0] and [typeNameDG,3]
 
@@ -58,16 +62,15 @@ function filterQuestions() {
     // alert (targetSubject);
 
       //if (targetClass === classNumberDG && targetSubject === subjectNameDG && targetTopic === topicNameDG && targetType === typeNameDG) {
-      if (criteria) {
+      if (searchString) {
       targetTrs[i].style.display = "block";
+      }
+      else {
+        targetTrs[i].style.display = "none";
+      }
 
     }
-    else {
-      targetTrs[i].style.display = "none";
-    }
-
-  }
-
+console.log (  "if ( " + searchString + ")" );
 }
 
 function getAll() {

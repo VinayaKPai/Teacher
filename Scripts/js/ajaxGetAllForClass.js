@@ -31,8 +31,8 @@
 
             ajaxRequest.onreadystatechange = function() {
 	//------------collect values (from 2 drop down select elements to be sent to ajax---------------------
-				    var classNumberDG = document.getElementById("classNumberDG").value;
-            var sa = document.getElementById("subjectNameDG");
+				    var classNumber = document.getElementById("classNumber").value;
+            var sa = document.getElementById("subjectName");
 
             var sac = sa.children.length;
             // console.log(sac + " C. This is the empty option only");
@@ -62,7 +62,7 @@
               crOpt.innerText = ajaxReturn[i];
               sa.appendChild(crOpt);
             }
-            var sacd = document.getElementById("subjectNameDG").children.length;
+            var sacd = document.getElementById("subjectName").children.length;
             // console.log(sacd + " d should be empty ele plus pre ex eles plus newly added");
 
                }
@@ -71,10 +71,10 @@
 
             // Now get the value from user and pass it to
             // server script.
-      var classNumberDG = document.getElementById('classNumberDG').value;
+      var classNumber = document.getElementById('classNumber').value;
 
-			if (classNumberDG) {
-            var queryString = "/AddNew/getSubForClass.php?classNumberDG=" + classNumberDG ;
+			if (classNumber) {
+            var queryString = "/AddNew/getSubForClass.php?classNumber=" + classNumber ;
             console.log (queryString);
             ajaxRequest.open("GET", queryString, true);
             ajaxRequest.setRequestHeader("content-type", "application/json");
@@ -110,9 +110,9 @@ function ajaxGetTopForSub() {
 
           ajaxRequest.onreadystatechange = function() {
               //------------collect values (from 2 drop down select elements to be sent to ajax---------------------
-            var classNumberDG = document.getElementById("classNumberDG").value;
-            var subjectNameDG = document.getElementById("subjectNameDG").value;
-          	var ta = document.getElementById("topicNameDG");
+            var classNumber = document.getElementById("classNumber").value;
+            var subjectName = document.getElementById("subjectName").value;
+          	var ta = document.getElementById("topicName");
 
           	var tac = ta.children.length;
           	// console.log(tac + "  This is the empty option only");
@@ -144,7 +144,7 @@ function ajaxGetTopForSub() {
                           crOpt.innerText = ajaxReturn[i];
                           ta.appendChild(crOpt);
                               }
-          	var tacd = document.getElementById("topicNameDG").children.length;
+          	var tacd = document.getElementById("topicName").children.length;
                       // console.log(tacd + " d should be empty ele plus pre ex eles plus newly added");
 
                            }
@@ -153,12 +153,12 @@ function ajaxGetTopForSub() {
 
                         // Now get the value from user and pass it to
                         // server script.
-                  var subjectNameDG = document.getElementById('subjectNameDG').value;
-                  var classNumberDG = document.getElementById('classNumberDG').value;
-          // console.log(subjectNameDG);
+                  var subjectName = document.getElementById('subjectName').value;
+                  var classNumber = document.getElementById('classNumber').value;
+          // console.log(subjectName);
 
-                  if (subjectNameDG) {
-                        var queryString = "/AddNew/getTopForSub.php?subjectNameDG=" + subjectNameDG + "&&classNumberDG=" + classNumberDG;
+                  if (subjectName) {
+                        var queryString = "/AddNew/getTopForSub.php?subjectName=" + subjectName + "&&classNumber=" + classNumber;
                         // console.log (queryString);
                         ajaxRequest.open("GET", queryString, true);
                         ajaxRequest.setRequestHeader("content-type", "application/json");

@@ -7,6 +7,13 @@
 
 <?php
 //Script to display existing classes and sections in the class section table
+$array = $_GET;
+echo "GET";
+print_r($array);
+if ($_GET) {
+$a = $_GET['classNumber'];
+echo $a;}
+else {echo "No get";}
     include "../basecode-create_connection.php";
      if ($cln == "all") {
        $query = $mysqli->query("SELECT * FROM questionbank");

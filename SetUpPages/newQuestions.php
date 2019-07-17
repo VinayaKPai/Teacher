@@ -10,13 +10,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>Teachers Tools LH - Manage Students</title>
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<link type="text" href="./Modals/modaltest.html"/link>
+		<link type="text" href="./Modals/modaltest.html"/>
 	<link rel="stylesheet" type="text/css" href="/stylesheet.css"  />
 		<script src="../../Scripts/js/ajaxCallQuestions.js"></script>
 		<script src="../../Scripts/js/ajaxGetAllForClass.js"></script>
@@ -119,8 +119,9 @@
 						<p class="panel-title" style="background-color: #C5B2B3;">Select the below options to display questions</p>
 					</div>
 					<div id="ajaxReturnTest">TEST RETURN</div>
-				<!--	<form action="../AddNew/Existing/questions.php" method="POST"> -->
+
 						<p>(Dynamically generated selects)</p>
+						<form acion="../AddNew/Existing/questions.php" method="POST">
 							Class/STD: <select id="classNumber" name="classNumber" onchange="ajaxGetSubForClass()">
 								<option id="" value=""></option>
 								<?php include "../Components/classNumberDropDown.php" ; ?>
@@ -137,11 +138,13 @@
 										<option id=""></option>
 										<?php include "../Components/typeDropDown.php" ; ?>
 							</select>
+							<button type="Submit">Submit</button>
+						</form>
 							<input type="button" class="btn btn-primary btn-xs" onclick="filterQuestions()" value="Filter With JS" />
 							<input type="button" class="btn btn-primary btn-xs" onclick="ajaxChkQuestionsFunction()" value="Filter With PHP" />
 							<input type="button" class="btn btn-primary btn-xs" onclick="getAll()" value="All" />
-							<!-- <button class="btn btn-default btn-xs" type="submit">Submit</button>-->
-					<!--	</form>-->
+							
+					<div id="ajret" class="centered" >Raw ajax return here</div>
 <div>
 							<!-- <p>(Adi's code)</p>
 							<form action="../AddNew/filteredquestions.php" method="POST">
@@ -181,7 +184,7 @@
 						</style>
 						<table id="existTable" style="width: 100%; padding: 5px; border-spacing: 2px; border-collapse: separate; align: 'center';">
 							<?php
-								if ($_GET){ $cln = $_GET['cn'];}
+								if ($_GET){ $cln = $_GET['classNumber']; echo $cln;}
 								else { $cln = "all";}
 								include "../AddNew/Existing/questions.php";
 								?>

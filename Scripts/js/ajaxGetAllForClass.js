@@ -30,40 +30,39 @@
         // div section in the same page.
 
             ajaxRequest.onreadystatechange = function() {
-	//------------collect values (from 2 drop down select elements to be sent to ajax---------------------
-				    var classNumber = document.getElementById("classNumber").value;
-            var sa = document.getElementById("subjectName");
+	//------------collect values (from 1 drop down select elements to be sent to ajax---------------------
+				    // var classNumber = document.getElementById("classNumber").value; //will be sent to ajax
+            var subjectName = document.getElementById("subjectName"); //to prepare the subjectName element to reveive the response
 
-            var sac = sa.children.length;
-            // console.log(sac + " C. This is the empty option only");
-              if (sac > 1) {
-                sa.innerHTML = "";
+            var subjectNamec = subjectName.children.length;
+            // console.log(subjectNamec + " C. This is the empty option only");
+              if (subjectNamec > 1) {
+                //we need to remove any pre-existing options from the dropdown
+                subjectName.innerHTML = "";
+                //we need an empty option so as to avoid default values in the select elements - no id, or innerText
                 var crEmpOpt = document.createElement("option");
                 crEmpOpt.id = "";
                 crEmpOpt.innerText = "";
-                sa.appendChild(crEmpOpt);
+                subjectName.appendChild(crEmpOpt);
               }
 
 
 				   if(ajaxRequest.readyState == 4) {
-             // console.log(typeof(ajaxRequest.responseText));   //STRING
+             // console.log(typeof(ajaxRequest.responseText));   //returns STRING
 					  var ajaxReturn = JSON.parse(ajaxRequest.responseText);
-            //console.log(typeof(ajaxReturn));                  //OBJECT
-            //console.log("Ajax Return = " + ajaxReturn);
+            //console.log(typeof(ajaxReturn));                  //returns OBJECT after being parsed
+
             var aRetLength = ajaxReturn.length;
-            // console.log(aRetLength + " = A Ret Length");
 
 
 
-            for (i=0;i<aRetLength;i++) {
+            for (i=0;i<aRetLength;i++) {  //loop through the objects in the parsed response text and create option element for each
               var crOpt = document.createElement("option");
               crOpt.id = ajaxReturn[i];
               crOpt.setAttribute("name",ajaxReturn[i]);
               crOpt.innerText = ajaxReturn[i];
-              sa.appendChild(crOpt);
+              subjectName.appendChild(crOpt);
             }
-            var sacd = document.getElementById("subjectName").children.length;
-            // console.log(sacd + " d should be empty ele plus pre ex eles plus newly added");
 
                }
 
@@ -80,9 +79,9 @@
             ajaxRequest.setRequestHeader("content-type", "application/json");
             ajaxRequest.send(null);
 			}
- // ajaxGetTopForSub();
-         }
-         //-->
+
+ }
+
          //-->
 function ajaxGetTopForSub() {
 

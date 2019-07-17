@@ -29,15 +29,16 @@
         // sent from the server and will update
         // div section in the same page.
 
-          // ajaxRequest.onreadystatechange = function() {
-          //
-      		//    if(ajaxRequest.readyState == 4) {
-          //      var ajaxReturn = JSON.parse(ajaxRequest.responseText);
-          //      var et = document.getElementById("existTable");
-          //      et.inerHTML = ajaxReturn;
-          //        }
-          //
-          //     }
+          ajaxRequest.onreadystatechange = function() {
+      		   if(ajaxRequest.readyState == 4) {
+               var ajret = document.getElementById("ajret");
+               ajret.inerHTML = ajaxRequest.responseText;
+               // var ajaxReturn = JSON.parse(ajaxRequest.responseText);
+               // var et = document.getElementById("existTable");
+               // et.inerHTML = ajaxReturn;
+                 }
+
+              }
               //------------collect values (from 4 drop down select elements to be sent to ajax---------------------
                 var classNumber = document.getElementById("classNumber").value;
                 var subjectName = document.getElementById("subjectName").value;
@@ -77,8 +78,9 @@
 
           if (searchString) {
                 var queryString = "/AddNew/Existing/questions.php?";
+                console.log (queryString);
                  queryString += searchString;
-                ajaxRequest.open("GET", queryString, true);
+                ajaxRequest.open("POST", queryString, true);
                 ajaxRequest.send();
                 console.log (queryString);
         	}

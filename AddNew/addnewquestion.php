@@ -13,24 +13,24 @@
 				}
 				echo "</select>";
 			}
-			
+
 		//echo "</form></div>";
 /*SAMPLE FOR ADDING MULTIPLE RECORDS IN ONE GO
-$sql = "INSERT INTO mytable (first_name, last_name, age)  
-           VALUES('raj', 'sharma', '15'), 
-    ('kapil', 'verma', '42'), 
-    ('monty', 'singh', '29'), 
-    ('arjun', 'patel', '32') "; 
-    if ($mysqli->query($sql) == = true) 
-{ 
-    echo "Records inserted successfully."; 
-} 
+$sql = "INSERT INTO mytable (first_name, last_name, age)
+           VALUES('raj', 'sharma', '15'),
+    ('kapil', 'verma', '42'),
+    ('monty', 'singh', '29'),
+    ('arjun', 'patel', '32') ";
+    if ($mysqli->query($sql) == = true)
+{
+    echo "Records inserted successfully.";
+}
 else
-{ 
+{
     echo "ERROR: Could not able to execute $sql. "
-        .$mysqli->error; 
-} 
-  
-$mysqli->close(); 
+        .$mysqli->error;
+}
+
 */		
+$mysqli->close();
 ?>

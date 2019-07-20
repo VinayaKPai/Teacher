@@ -8,4 +8,5 @@
 				}
 				echo "</select>";
 			}
+			mysqli_close($mysqli);
 ?>

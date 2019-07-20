@@ -1,7 +1,7 @@
 <?php
   	include "../basecode-create_connection.php";
     // echo $datetime1;
-  
+
   	$query = $mysqli->query("SELECT DISTINCT classNumber FROM classsections");
 
     //catch errors
@@ -22,5 +22,5 @@
         }
       }
 
-
+mysqli_close($mysqli);
 ?>

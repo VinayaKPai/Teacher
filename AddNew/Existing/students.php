@@ -13,7 +13,7 @@
 
 	$slno = 0;
 	$query = $mysqli->query("SELECT * FROM studentdetails");
- 
+
 				if ($query) {
 					$rowcount=mysqli_num_rows($query);
           if ($rowcount > 0) {
@@ -55,6 +55,6 @@
 				}
 
 	echo "</div>";
-	// mysqli_close($mysqli);
+	mysqli_close($mysqli);
 ?>
 </table>

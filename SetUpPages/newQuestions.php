@@ -143,7 +143,7 @@
 							<input type="button" class="btn btn-primary btn-xs" onclick="filterQuestions()" value="Filter With JS" />
 							<input type="button" class="btn btn-primary btn-xs" onclick="ajaxChkQuestionsFunction()" value="Filter With PHP" />
 							<input type="button" class="btn btn-primary btn-xs" onclick="getAll()" value="All" />
-							
+
 					<div id="ajret" class="centered" >Raw ajax return here</div>
 <div>
 							<!-- <p>(Adi's code)</p>

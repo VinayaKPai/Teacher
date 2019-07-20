@@ -58,6 +58,6 @@ else {echo "No post";}
 
 
   // {header('Location: ../SetUpPages/newQuestions.php');}
-	// mysqli_close($mysqli);
+	mysqli_close($mysqli);
 ?>
 </table>

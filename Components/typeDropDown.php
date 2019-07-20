@@ -21,6 +21,6 @@
       }
     }
 
-
+mysqli_close($mysqli);
 
 ?>

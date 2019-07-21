@@ -121,12 +121,9 @@
 					<div id="ajaxReturnTest">TEST RETURN</div>
 
 						<p>(Dynamically generated selects)</p>
-<<<<<<< HEAD
+
 						<form acion="../AddNew/Existing/questions.php" method="POST">
 							Class/STD: <select id="classNumber" name="classNumber" onchange="ajaxGetSubForClass()">
-=======
-							Class/STD: <select id="classNumber" name="classNumber" onchange="filterQuestions()">
->>>>>>> caab492c4e87e433829178e5710a99197e367fdd
 								<option id="" value=""></option>
 								<?php include "../Components/classNumberDropDown.php" ; ?>
 							</select>

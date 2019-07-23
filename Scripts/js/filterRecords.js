@@ -17,6 +17,7 @@ function filterQuestions() {
     var criteria = []; //to build search string
     var cellNameVar;
     var td;
+    var searchString;
 
     var inputArray = [classNumber, subjectName, topicName, typeName]; //an array with all the incoming data
     //check if any of the inputs are null and push into exists if not null
@@ -36,7 +37,7 @@ function filterQuestions() {
 
     var inputObject = {classNumber: classNumber, subjectName: subjectName, topicName: topicName, typeName: typeName};
 
-
+    var len = exists.length;
     for (z=0;z<len-1;z++) {
       searchString += (exists[z][1] + " === \"" + exists[z][0] + "\" && ");
     }
@@ -44,7 +45,7 @@ function filterQuestions() {
     console.log(searchString + " = searchString");
     //exists now holds all the search criteria
     //eg [classNumberDG,0] and [typeNameDG,3]
-
+    var trCount = targetTrs.length;
     for (i=0;i<trCount;i++){
       var targetCells = targetTrs[i].getElementsByTagName("td");  //find all the cells in the row
       var tdCount = targetCells.length;
@@ -64,9 +65,9 @@ function filterQuestions() {
     }
 
 console.log (  "if (" + searchString + ")");
-=======
-    ajaxGetSubForClass();
 
+    ajaxGetSubForClass();
+  }
 
 }
 

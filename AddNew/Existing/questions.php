@@ -41,7 +41,7 @@ else {echo "No post<br>";}
 include "../basecode-create_connection.php";
 // this is coming from newQuestions.php
 if ($cln == "all") {
- $query = $mysqli->query("SELECT * FROM questionbank");
+ // $query = $mysqli->query("SELECT * FROM questionbank");
  $txt = "ALL classes.";
  $msg = "any class";
 }
@@ -61,29 +61,31 @@ $colNames = mysqli_fetch_fields($query);
 for ($r=0;$r<count($colNames);$r++) { //for each item in the array of column names returned from the table
   $colName = $colNames[$r]->name;
 
-  $colName = $colNames[$r];
-
   //fetch all columns of the query results
   if (in_array($colName,$key)){  //check if the current column name in the table-column-names returned array is also present in $key array
+    echo $colName." is present in $ key<br>";
         while ($row=mysqli_fetch_assoc($query)) { //as long as the $query loop is going on
                   // if ($row['typeName']==$tyn){ //this was the original working code where it displayed all rows where the type name was the sme as was sent via POST
+                  echo $row[$colName]." - ";
                           if (in_array($row[$colName],$val)){
-                            $rowId = $row['Id'];	//Id of the returned row
-                            echo "<tr id=$rowId>";
-                            $rowClassNumber = $row['classNumber']	;
-                            echo "<td class='col-sm-1'>".$rowClassNumber."</td>";
-                            $rowSubject = $row['subjectName'];
-                            echo "<td class='col-sm-3'>".$rowSubject."</td>";
-                            $rowTopic = $row['topicName'];
-                            echo "<td class='col-sm-2'>".$rowTopic."</td>";
-                            $rowType = $row['typeName'];
-                            echo "<td class='col-sm-2'>".$rowType."</td>";
-                            $rowQuestion = $row['question'];
-                            echo "<td class='col-sm-4'>".$rowQuestion."</td>";
+                            echo $row['subjectName']."<br>";
+                            // $rowId = $row['Id'];	//Id of the returned row
+                            // echo "<tr id=$rowId>";
+                            // $rowClassNumber = $row['classNumber']	;
+                            // echo "<td class='col-sm-1'>".$rowClassNumber."</td>";
+                            // $rowSubject = $row['subjectName'];
+                            // echo "<td class='col-sm-3'>".$rowSubject."</td>";
+                            // $rowTopic = $row['topicName'];
+                            // echo "<td class='col-sm-2'>".$rowTopic."</td>";
+                            // $rowType = $row['typeName'];
+                            // echo "<td class='col-sm-2'>".$rowType."</td>";
+                            // $rowQuestion = $row['question'];
+                            // echo "<td class='col-sm-4'>".$rowQuestion."</td>";
                             echo "</tr>";
                             }
                   }
             }
+            else {echo $colName." is not there in $ key<br>";}
 
     }
 
@@ -100,26 +102,26 @@ if ($rowcount == 0) {echo "<h6 style='color: Red;'>You do not have any questions
     echo "<caption><h5 class='centered'>Questions for ".$txt."</h5></caption>";  //comes from the choice made on index.php Questions button drop down
 //#################################DB QUERY RESULT DISPLAY############################################//
 
-    while ($row=mysqli_fetch_assoc($query)) {
-    //fetch all columns of the query results
-        if (in_array("typeName",$key)){
-          if ($row['typeName']==$tyn){
-              $rowId = $row['Id'];	//Id of the returned row
-              echo "<tr id=$rowId>";
-              $rowClassNumber = $row['classNumber']	;
-              echo "<td class='col-sm-1'>".$rowClassNumber."</td>";
-              $rowSubject = $row['subjectName'];
-              echo "<td class='col-sm-3'>".$rowSubject."</td>";
-              $rowTopic = $row['topicName'];
-              echo "<td class='col-sm-2'>".$rowTopic."</td>";
-              $rowType = $row['typeName'];
-              echo "<td class='col-sm-2'>".$rowType."</td>";
-              $rowQuestion = $row['question'];
-              echo "<td class='col-sm-4'>".$rowQuestion."</td>";
-              echo "</tr>";
-          }
-        }
-    }
+    // while ($row=mysqli_fetch_assoc($query)) {
+    // //fetch all columns of the query results
+    //     if (in_array("typeName",$key)){
+    //       if ($row['typeName']==$tyn){
+    //           $rowId = $row['Id'];	//Id of the returned row
+    //           echo "<tr id=$rowId>";
+    //           $rowClassNumber = $row['classNumber']	;
+    //           echo "<td class='col-sm-1'>".$rowClassNumber."</td>";
+    //           $rowSubject = $row['subjectName'];
+    //           echo "<td class='col-sm-3'>".$rowSubject."</td>";
+    //           $rowTopic = $row['topicName'];
+    //           echo "<td class='col-sm-2'>".$rowTopic."</td>";
+    //           $rowType = $row['typeName'];
+    //           echo "<td class='col-sm-2'>".$rowType."</td>";
+    //           $rowQuestion = $row['question'];
+    //           echo "<td class='col-sm-4'>".$rowQuestion."</td>";
+    //           echo "</tr>";
+    //       }
+    //     }
+    // }
     //#################################DB QUERY RESULT DISPLAY############################################//
 
 

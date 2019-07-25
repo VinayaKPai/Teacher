@@ -6,123 +6,82 @@
 
 
 <?php
-
-// $strconcat = "";
-
+include "../basecode-create_connection.php";
+// this is coming from newQuestions.php
+if ($cln == "all") {
+  // $query = $mysqli->query("SELECT * FROM questionbank");
+  $txt = "ALL classes.";
+  $msg = "any class";
+}
+else {
+  $txt = "Class ".$cln;
+  $msg = "Class ".$cln;
+}
+$f = 0;
 $arrayPOST = $_POST;
-// $strconcatlen = strlen($strconcat);
-// echo $strconcatlen;
-//Script to display existing classes and sections in the class section table
-
+$queryArray;
+$yes = 0;
 if ($arrayPOST) {
       $cn = $_POST['classNumber'];
       $sn = $_POST['subjectName'];
       $tn = $_POST['topicName'];
       $tyn = $_POST['typeName'];
 
-      $chkArray = ['classNumber' => $cn, 'subjectName' => $sn, 'topicName' => $tn, 'typeName' => $tyn];
-      $queryArray = array_filter($chkArray, 'strlen');   //will contain all items from chkArray that are not blank
-
-      $key = array_keys($queryArray); //an array of all the keys in $key
-      $val = array_values($queryArray); //an array of all the values in $val
-
-
-      $keycount =count($key);  //$ key and $ val have same count
-
-      echo "<div>";
-
-      // for ($k=0;$k<$keycount;$k++) { //TEST TO SEE IF MAPPING HAPPENS CORRECTLY
-      //   echo $key[$k]."-".$val[$k]."<br>";
-      // }
-
+      $queryArray = array_filter($arrayPOST, 'strlen');   //will contain all items from $arrayPOST that are not blank
+      $queryArrayCount = count($queryArray);
+      echo "<br>";
 }
 else {echo "No post<br>";}
 
-include "../basecode-create_connection.php";
-// this is coming from newQuestions.php
-if ($cln == "all") {
- // $query = $mysqli->query("SELECT * FROM questionbank");
- $txt = "ALL classes.";
- $msg = "any class";
-}
-
-else {
-      $txt = "Class ".$cln;
-      $msg = "Class ".$cln;
-    }
-
-//#################################CODE############################################//
-
+echo "<div>";
+echo "query array = "; print_r($queryArray); //PERFECT
 
 $query = $mysqli->query("SELECT * FROM `questionbank`");  //WORKS
-$colNames = mysqli_fetch_fields($query);
 
-
-for ($r=0;$r<count($colNames);$r++) { //for each item in the array of column names returned from the table
-  $colName = $colNames[$r]->name;
-
-  //fetch all columns of the query results
-  if (in_array($colName,$key)){  //check if the current column name in the table-column-names returned array is also present in $key array
-    echo $colName." is present in $ key<br>";
-        while ($row=mysqli_fetch_assoc($query)) { //as long as the $query loop is going on
-                  // if ($row['typeName']==$tyn){ //this was the original working code where it displayed all rows where the type name was the sme as was sent via POST
-                  echo $row[$colName]." - ";
-                          if (in_array($row[$colName],$val)){
-                            echo $row['subjectName']."<br>";
-                            // $rowId = $row['Id'];	//Id of the returned row
-                            // echo "<tr id=$rowId>";
-                            // $rowClassNumber = $row['classNumber']	;
-                            // echo "<td class='col-sm-1'>".$rowClassNumber."</td>";
-                            // $rowSubject = $row['subjectName'];
-                            // echo "<td class='col-sm-3'>".$rowSubject."</td>";
-                            // $rowTopic = $row['topicName'];
-                            // echo "<td class='col-sm-2'>".$rowTopic."</td>";
-                            // $rowType = $row['typeName'];
-                            // echo "<td class='col-sm-2'>".$rowType."</td>";
-                            // $rowQuestion = $row['question'];
-                            // echo "<td class='col-sm-4'>".$rowQuestion."</td>";
-                            echo "</tr>";
-                            }
-                  }
-            }
-            else {echo $colName." is not there in $ key<br>";}
-
-    }
-
-  echo "</div>";
-
-
-
+$rowcount = mysqli_num_rows($query);      //number of rows returned from the table - WORKS
 if ($rowcount == 0) {echo "<h6 style='color: Red;'>You do not have any questions for ".$msg."</h6><a href='/index.php'>Back</a>";}
-// $row=mysqli_fetch_assoc($query);
+else {echo "<h6 style='color: Red;'>Here you are!".$msg."</h6>";}
 
-// echo "There are ".$rowcount." questions for class ".$val[0]." for ".$sn." for ".$tn." of type ".$tyn;
+echo "<caption><h5 class='centered'>Questions for ".$txt."</h5></caption>";  //comes from the choice made on index.php Questions button drop down
 
-//#################################CODE############################################//
-    echo "<caption><h5 class='centered'>Questions for ".$txt."</h5></caption>";  //comes from the choice made on index.php Questions button drop down
-//#################################DB QUERY RESULT DISPLAY############################################//
+echo "</div>";
 
-    // while ($row=mysqli_fetch_assoc($query)) {
-    // //fetch all columns of the query results
-    //     if (in_array("typeName",$key)){
-    //       if ($row['typeName']==$tyn){
-    //           $rowId = $row['Id'];	//Id of the returned row
-    //           echo "<tr id=$rowId>";
-    //           $rowClassNumber = $row['classNumber']	;
-    //           echo "<td class='col-sm-1'>".$rowClassNumber."</td>";
-    //           $rowSubject = $row['subjectName'];
-    //           echo "<td class='col-sm-3'>".$rowSubject."</td>";
-    //           $rowTopic = $row['topicName'];
-    //           echo "<td class='col-sm-2'>".$rowTopic."</td>";
-    //           $rowType = $row['typeName'];
-    //           echo "<td class='col-sm-2'>".$rowType."</td>";
-    //           $rowQuestion = $row['question'];
-    //           echo "<td class='col-sm-4'>".$rowQuestion."</td>";
-    //           echo "</tr>";
-    //       }
-    //     }
-    // }
-    //#################################DB QUERY RESULT DISPLAY############################################//
+  while ($row=mysqli_fetch_assoc($query)) { //as long as the $query loop is going on
+    echo " enter for loop<br>";
+    print_r($queryArray);
+    echo "<br>";
+    for ($q=0;$q<count($queryArray);$q++) {//query array is key value pairs from $ post count = no of dropdowns selected
+      $thisKey = (array_keys($queryArray)[$q]); //pick out the key part of the current item in the for loop
+      $thisValue = array_values($queryArray)[$q];
+      if ($row[$thisKey]==$thisValue) {
+        echo "$ thisKey = ".$thisKey." and yes = ".$yes;
+
+        }
+        $yes = $yes + 1;
+        echo "<br>exit if".$yes." <br>";
+
+              }echo "<br>Exit for".$yes." <br>";
+              echo "<br>$ queryArrayCount".$queryArrayCount."<br>";
+              if ($yes===$queryArrayCount){
+                // $rowId = $row['Id'];	//Id of the returned row
+                echo "<tr>";
+                $rowClassNumber = $row['classNumber']	;
+                echo "<td class='col-sm-1'>".$rowClassNumber."</td>";
+                $rowSubject = $row['subjectName'];
+                echo "<td class='col-sm-3'>".$rowSubject."</td>";
+                $rowTopic = $row['topicName'];
+                echo "<td class='col-sm-2'>".$rowTopic."</td>";
+                $rowType = $row['typeName'];
+                echo "<td class='col-sm-2'>".$rowType."</td>";
+                $rowQuestion = $row['question'];
+                echo "<td class='col-sm-4'>".$rowQuestion."</td>";
+                echo "</tr>";
+              }
+              $yes = 0;
+              $f = $f + 1;
+              echo $f." before exit while";
+  }
+  echo "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^<br>".$f;
 
 
   // {header('Location: ../SetUpPages/newQuestions.php');}

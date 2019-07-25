@@ -35,7 +35,7 @@
 	<body class="body">
 		<div class="container">
 			<hr>
-			<h3 class="centered"><?php include "../Components/top.php"; ?>(Master)</h3>
+			<h3 class="centered"><?php include "../Components/top.php"; ?>(Categorized Vertical Temp)</h3>
 			<hr>
 		  <div>
 		    <div>

@@ -17,7 +17,7 @@ else {
   $txt = "Class ".$cln;
   $msg = "Class ".$cln;
 }
-$f = 0;
+
 $arrayPOST = $_POST;
 $queryArray;
 $yes = 0;
@@ -39,54 +39,38 @@ echo "query array = "; print_r($queryArray); //PERFECT
 $query = $mysqli->query("SELECT * FROM `questionbank`");  //WORKS
 
 $rowcount = mysqli_num_rows($query);      //number of rows returned from the table - WORKS
-if ($rowcount == 0) {echo "<h6 style='color: Red;'>You do not have any questions for ".$msg."</h6><a href='/index.php'>Back</a>";}
-else {echo "<h6 style='color: Red;'>Here you are!".$msg."</h6>";}
+if ($rowcount == 0) {
+  echo "<h6 style='color: Red;'>You do not have any questions for ".$msg."</h6><a href='/index.php'>Back</a>";
+}
+else {
+  echo "<h6 style='color: Red;'>Here you are!".$msg."</h6>";
+}
 
 echo "<caption><h5 class='centered'>Questions for ".$txt."</h5></caption>";  //comes from the choice made on index.php Questions button drop down
 
 echo "</div>";
-
+$f=0;
   while ($row=mysqli_fetch_assoc($query)) { //as long as the $query loop is going on
-    echo " entered WHILE loop<br>Printing queryArray ";
-    print_r($queryArray);
-    echo "<br>";
-    for ($q=0;$q<count($queryArray);$q++) {//query array is key value pairs from $ post count = no of dropdowns selected
-      echo " entered FOR loop<br>";
-      $thisKey = (array_keys($queryArray)[$q]); //pick out the key part of the current item in the for loop
-      $thisValue = array_values($queryArray)[$q];
-      echo $thisKey."-".$thisValue;
-      if ($row[$thisKey]==$thisValue) {
-        echo "iInside IF <br>$ thisKey = ".$thisKey." and yes = ".$yes;
 
-        }
-        $yes = $yes + 1;
-        echo "<br>exit if at yes = ".$yes." <br>";
-      }echo "<br>Exit for".$yes." <br>";
-
-              echo "<br>$ queryArrayCount = ".$queryArrayCount." and yes = ".$yes."<br>======<br>";
-              if ($yes=$queryArrayCount){
-                // $rowId = $row['Id'];	//Id of the returned row
-                echo "Entered yes = queryArrayCount IF<br>";
-                echo $thisKey.$thisValue.$row['question']."<br>";
-                echo "<tr>";
-                $rowClassNumber = $row['classNumber']	;
-                echo "<td class='col-sm-1'>".$rowClassNumber."</td>";
-                $rowSubject = $row['subjectName'];
-                echo "<td class='col-sm-3'>".$rowSubject."</td>";
-                $rowTopic = $row['topicName'];
-                echo "<td class='col-sm-2'>".$rowTopic."</td>";
-                $rowType = $row['typeName'];
-                echo "<td class='col-sm-2'>".$rowType."</td>";
-                $rowQuestion = $row['question'];
-                echo "<td class='col-sm-4'>".$rowQuestion."</td>";
-                echo "</tr>";
-                echo "Exiting  yes = queryArrayCount IF<br>";
+    if ($queryArray['classNumber']) {
+          $cns = $queryArray['classNumber'];
+          if ($row['classNumber']==$cns) {
+              if ($queryArray['typeName']) {
+                $typs = $queryArray['typeName'];
+                    if ($row['typeName']==$typs) {
+                      echo "Yes<br>";
+                      $f=$f+1;
+                      echo ($f)."<br>";
+                      echo $cns." - ".$row['typeName']." - ".$row['question']."<br><br>";
+                      mysqli_error($mysqli);
+                }
               }
-              $yes = 0;
-              $f = $f + 1;
-              echo $f." before exit while";
+          }
+    }
+    else {echo $queryArray['classNumber']." does not exist in table";}
+
   }
-  echo "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^<br>".$f;
+  echo "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^<br>";
 
 
   // {header('Location: ../SetUpPages/newQuestions.php');}

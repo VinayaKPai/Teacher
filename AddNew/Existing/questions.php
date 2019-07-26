@@ -8,15 +8,19 @@
 <?php
 include "../basecode-create_connection.php";
 // this is coming from newQuestions.php
-if ($cln == "all") {
-  // $query = $mysqli->query("SELECT * FROM questionbank");
-  $txt = "ALL classes.";
-  $msg = "any class";
-}
-else {
-  $txt = "Class ".$cln;
-  $msg = "Class ".$cln;
-}
+
+// if ($cln == "all") {
+//   $txt = "ALL classes.";
+//   $msg = "any class";
+// }
+// elseif (strlen($cln)==0) {
+//   $msg = "";
+//   $txt = "";
+// }
+// else {
+//   $txt = "Class ".$cln;
+//   $msg = "Class ".$cln;
+// }
 
 $arrayPOST = $_POST;
 $queryArray;
@@ -34,44 +38,42 @@ if ($arrayPOST) {
 else {echo "No post<br>";}
 
 echo "<div>";
-echo "query array = "; print_r($queryArray); //PERFECT
-
 $query = $mysqli->query("SELECT * FROM `questionbank`");  //WORKS
 
 $rowcount = mysqli_num_rows($query);      //number of rows returned from the table - WORKS
 if ($rowcount == 0) {
   echo "<h6 style='color: Red;'>You do not have any questions for ".$msg."</h6><a href='/index.php'>Back</a>";
 }
-else {
-  echo "<h6 style='color: Red;'>Here you are!".$msg."</h6>";
-}
 
-echo "<caption><h5 class='centered'>Questions for ".$txt."</h5></caption>";  //comes from the choice made on index.php Questions button drop down
+// echo "<caption><h5 class='centered'>".$noq."Questions</h5></caption>";  //comes from the choice made on index.php Questions button drop down
 
 echo "</div>";
 $f=0;
+echo "<tr>";
+  echo "<th class='centered'>S No</th>";
+  echo "<th class='centered'>Id</th>";
+  echo "<th class='centered'>Topic</th>";
+  echo "<th class='centered'>Type</th>";
+  echo "<th class='centered'>Question</th>";
+echo "</tr>";
   while ($row=mysqli_fetch_assoc($query)) { //as long as the $query loop is going on
-
-    if ($queryArray['classNumber']) {
-          $cns = $queryArray['classNumber'];
-          if ($row['classNumber']==$cns) {
-              if ($queryArray['typeName']) {
-                $typs = $queryArray['typeName'];
-                    if ($row['typeName']==$typs) {
-                      echo "Yes<br>";
-                      $f=$f+1;
-                      echo ($f)."<br>";
-                      echo $cns." - ".$row['typeName']." - ".$row['question']."<br><br>";
-                      mysqli_error($mysqli);
-                }
-              }
+    $counter = 0;
+      foreach ($queryArray as $key => $val) {
+          if ($row[$key]==$val) {
+            $counter = $counter + 1;
           }
-    }
-    else {echo $queryArray['classNumber']." does not exist in table";}
-
+      }
+       if ($counter==count($queryArray)) {
+         $f = $f + 1;
+         echo "<tr>";
+            echo "<td class='col-sm-1'>".$f."</td>";
+            echo "<td class='col-sm-1'>".$row['Id']."</td>";
+            echo "<td class='col-sm-2'>".$row['topicName']."</td>";
+            echo "<td class='col-sm-2'>".$row['typeName']."</td>";
+            echo "<td class='col-sm-6'>".$row['question']."</td>";
+         echo "</tr>";
+       }
   }
-  echo "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^<br>";
-
 
   // {header('Location: ../SetUpPages/newQuestions.php');}
 	mysqli_close($mysqli);

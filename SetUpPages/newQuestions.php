@@ -35,7 +35,7 @@
 	<body class="body">
 		<div class="container">
 			<hr>
-			<h3 class="centered"><?php include "../Components/top.php"; ?>(Categorized Vertical Temp)</h3>
+			<h3 class="centered"><?php include "../Components/top.php"; ?></h3>
 			<hr>
 		  <div>
 		    <div>
@@ -118,9 +118,7 @@
           <div style="margin-top: 3px;">
 						<p class="panel-title" style="background-color: #C5B2B3;">Select the below options to display questions</p>
 					</div>
-					<div id="ajaxReturnTest">TEST RETURN</div>
-
-						<p>(Dynamically generated selects)</p>
+					<div id="ajaxReturnTest"></div>
 
 						<form acion="../AddNew/Existing/questions.php" method="POST">
 							Class/STD: <select id="classNumber" name="classNumber" onchange="ajaxGetSubForClass()">
@@ -129,11 +127,11 @@
 							</select>
 							Subject: <select id="subjectName" name="subjectName" style="width:80px;" onchange="ajaxGetTopForSub()">
 									<option id="" value=""></option>
-								 <?php include "../Components/subjectDropDown.php" ; ?>
+								 <?php /*include "../Components/subjectDropDown.php" ;*/ ?>
 							</select>
 							Topic: <select id= "topicName" name="topicName" style="width:80px;">
 										<option id=""></option>
-										<?php //include "../Components/topicDropDown.php" ; ?>
+										<?php /*include "../Components/topicDropDown.php" ; */?>
 							</select>
 							Q Type: <select id="typeName" name="typeName" style="width:80px;">
 										<option id=""></option>
@@ -141,11 +139,8 @@
 							</select>
 							<button type="Submit">Submit</button>
 						</form>
-							<input type="button" class="btn btn-primary btn-xs" onclick="filterQuestions()" value="Filter With JS" />
-							<input type="button" class="btn btn-primary btn-xs" onclick="ajaxChkQuestionsFunction()" value="Filter With PHP" />
-							<input type="button" class="btn btn-primary btn-xs" onclick="getAll()" value="All" />
 
-					<div id="ajret" class="centered" >Raw ajax return here</div>
+					<div id="ajret" class="centered" ></div>
 <div>
 							<!-- <p>(Adi's code)</p>
 							<form action="../AddNew/filteredquestions.php" method="POST">
@@ -178,6 +173,7 @@
 					</form> -->
 </div>
 						<hr>
+						
 						<style>
 						table tr:nth-child(even){background-color: #b69092; color: #fff}
 						table tr:nth-child(odd){background-color: #684654; color: #fff}
@@ -185,8 +181,8 @@
 						</style>
 						<table id="existTable" style="width: 100%; padding: 5px; border-spacing: 2px; border-collapse: separate; align: 'center';">
 							<?php
-								if ($_GET){ $cln = $_GET['classNumber']; echo $cln;}
-								else { $cln = "all";}
+								// if ($_GET){ $cln = $_GET['classNumber']; echo $cln;}
+								// else { $cln = "all";}
 								include "../AddNew/Existing/questions.php";
 								?>
 

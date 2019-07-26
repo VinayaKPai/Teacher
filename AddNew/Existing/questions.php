@@ -47,23 +47,27 @@ echo "<caption><h5 class='centered'>Questions for ".$txt."</h5></caption>";  //c
 echo "</div>";
 
   while ($row=mysqli_fetch_assoc($query)) { //as long as the $query loop is going on
-    echo " enter for loop<br>";
+    echo " entered WHILE loop<br>Printing queryArray ";
     print_r($queryArray);
     echo "<br>";
     for ($q=0;$q<count($queryArray);$q++) {//query array is key value pairs from $ post count = no of dropdowns selected
+      echo " entered FOR loop<br>";
       $thisKey = (array_keys($queryArray)[$q]); //pick out the key part of the current item in the for loop
       $thisValue = array_values($queryArray)[$q];
+      echo $thisKey."-".$thisValue;
       if ($row[$thisKey]==$thisValue) {
-        echo "$ thisKey = ".$thisKey." and yes = ".$yes;
+        echo "iInside IF <br>$ thisKey = ".$thisKey." and yes = ".$yes;
 
         }
         $yes = $yes + 1;
-        echo "<br>exit if".$yes." <br>";
+        echo "<br>exit if at yes = ".$yes." <br>";
+      }echo "<br>Exit for".$yes." <br>";
 
-              }echo "<br>Exit for".$yes." <br>";
-              echo "<br>$ queryArrayCount".$queryArrayCount."<br>";
-              if ($yes===$queryArrayCount){
+              echo "<br>$ queryArrayCount = ".$queryArrayCount." and yes = ".$yes."<br>======<br>";
+              if ($yes=$queryArrayCount){
                 // $rowId = $row['Id'];	//Id of the returned row
+                echo "Entered yes = queryArrayCount IF<br>";
+                echo $thisKey.$thisValue.$row['question']."<br>";
                 echo "<tr>";
                 $rowClassNumber = $row['classNumber']	;
                 echo "<td class='col-sm-1'>".$rowClassNumber."</td>";
@@ -76,6 +80,7 @@ echo "</div>";
                 $rowQuestion = $row['question'];
                 echo "<td class='col-sm-4'>".$rowQuestion."</td>";
                 echo "</tr>";
+                echo "Exiting  yes = queryArrayCount IF<br>";
               }
               $yes = 0;
               $f = $f + 1;

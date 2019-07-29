@@ -122,3 +122,19 @@ table td {text-align: center;}
 .right {
   border-left: 1px solid #2E1114;
 }
+
+.filterButton {
+  display: inline-block;
+  color: #212121;
+  line-height: 1.4;
+  font-size: 12px;
+  background-color: #e0e0e0;
+  box-shadow: 0 2px 4px 0 hsla(0,0%,100%,.5);
+  border-radius: 3px;
+  margin: 2px 4px;
+  overflow: hidden;
+  transition: background-color .1s;
+  max-width: 200px;
+  padding: 8px;
+
+}

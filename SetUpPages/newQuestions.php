@@ -121,17 +121,21 @@
 					<div id="ajaxReturnTest"></div>
 
 						<form acion="../AddNew/Existing/questions.php" method="POST">
-							Class/STD: <select id="classNumber" name="classNumber" onchange="ajaxGetSubForClass()">
-								<option id="" value=""></option>
+			<!-- <select id="classNumber" name="classNumber" onclick="updateSubForClass()">
+								<option id="" value=""></option>-->
+								<!--</select>-->
+							<div id="classSelectBoxes" class="input-group">
+								<div>Class/STD:</div>
 								<?php include "../Components/classNumberDropDown.php" ; ?>
-							</select>
-							Subject: <select id="subjectName" name="subjectName" style="width:80px;" onchange="ajaxGetTopForSub()">
-									<option id="" value=""></option>
-								 <?php /*include "../Components/subjectDropDown.php" ;*/ ?>
-							</select>
+							</div>
+							<div class="input-group">
+								<div>Subject:</div>
+								<?php include "../Components/subjectDropDown.php" ; ?>
+							</div>
+							Topic: <input type="text" class="form-control" aria-label=""/>
 							Topic: <select id= "topicName" name="topicName" style="width:80px;">
 										<option id=""></option>
-										<?php /*include "../Components/topicDropDown.php" ; */?>
+										<?php include "../Components/topicDropDown.php" ; ?>
 							</select>
 							Q Type: <select id="typeName" name="typeName" style="width:80px;">
 										<option id=""></option>
@@ -140,6 +144,8 @@
 							<button type="Submit">Submit</button>
 						</form>
 
+
+</div>
 					<div id="ajret" class="centered" ></div>
 <div>
 							<!-- <p>(Adi's code)</p>
@@ -173,7 +179,17 @@
 					</form> -->
 </div>
 						<hr>
-						
+						<div id="filtersInUse">
+							<div id="fileredClasses">
+
+							</div>
+							<div id="fileredSubjects">
+
+							</div>
+							<div id="fileredTopics">
+
+							</div>
+						</div>
 						<style>
 						table tr:nth-child(even){background-color: #b69092; color: #fff}
 						table tr:nth-child(odd){background-color: #684654; color: #fff}

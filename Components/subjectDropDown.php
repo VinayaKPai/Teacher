@@ -14,14 +14,12 @@
     else {echo "KUCHHH TO GADBAD HAI!";};
 
 
-echo $rowcount;
 
       while ($row = $query->fetch_assoc())  {
         {
           $sn = strip_tags($row['subjectName']);
-          echo "<option id='$sn' name='$sn' onchange='ajaxGetTopForSub()'>$sn</option>";
-        }
+          echo "<input id='$sn' type='checkbox' name='$sn' aria-label='$sn' style='margin: 3px;'><label for='$sn'>$sn</label><br>";        }
       }
 
-
+mysqli_close($mysqli);
 ?>

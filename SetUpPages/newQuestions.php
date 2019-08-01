@@ -121,18 +121,24 @@
 					<div id="ajaxReturnTest"></div>
 
 						<form acion="../AddNew/Existing/questions.php" method="POST">
-			<!-- <select id="classNumber" name="classNumber" onclick="updateSubForClass()">
-								<option id="" value=""></option>-->
-								<!--</select>-->
-							<div id="classSelectBoxes" class="input-group">
-								<div>Class/STD:</div>
-								<?php include "../Components/classNumberDropDown.php" ; ?>
+								<div class="panel panel-header col-sm-12" style="padding:10px;">
+										<div class="col-sm-3 left-align">Class/STD:</div>
+										<div id="classSelectBoxes" class="input-group col-sm-9 left-align">
+											<?php include "../Components/classNumberDropDown.php" ; ?>
+										</div>
 							</div>
-							<div class="input-group">
-								<div>Subject:</div>
-								<?php include "../Components/subjectDropDown.php" ; ?>
+							<div class="panel panel-header  col-sm-12 left-align" style="padding:10px;">
+										<div class="col-sm-3">Subject:</div>
+										<div id="subjectSelectBoxes" class="input-group col-sm-9 left-align">
+											<?php include "../Components/subjectDropDown.php" ; ?>
+										</div>
+							</div>
+							<div id="filtersInUse"  class="left-align" style="padding:10px;">
+								<div id="fileredClasses"  style="padding: :10px;"></div>
+								<div id="fileredSubjects"  style="padding: :10px;"></div>
 							</div>
 							Topic: <input type="text" class="form-control" aria-label=""/>
+							<div id="fileredTopics"  style="padding:10px;"></div>
 							Topic: <select id= "topicName" name="topicName" style="width:80px;">
 										<option id=""></option>
 										<?php include "../Components/topicDropDown.php" ; ?>
@@ -179,17 +185,7 @@
 					</form> -->
 </div>
 						<hr>
-						<div id="filtersInUse">
-							<div id="fileredClasses">
 
-							</div>
-							<div id="fileredSubjects">
-
-							</div>
-							<div id="fileredTopics">
-
-							</div>
-						</div>
 						<style>
 						table tr:nth-child(even){background-color: #b69092; color: #fff}
 						table tr:nth-child(odd){background-color: #684654; color: #fff}

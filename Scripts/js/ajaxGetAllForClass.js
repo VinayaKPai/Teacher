@@ -37,12 +37,7 @@
             //we need to remove any pre-existing options from the dropdown
             subjectName.innerHTML = "<option></option>";     //this will fire the ajaxGetTopForSub - LOOKOUT!
             topicName.innerHTML = "<option></option>";      //no ajax call on this drop down
-            //we need an empty option so as to avoid default values in the select elements - no id, or innerText
-                // var crEmpOpt = document.createElement("option");
-                // crEmpOpt.id = "";
-                // crEmpOpt.innerText = "";
-                // subjectName.appendChild(crEmpOpt);
-                // topicName.appendChild(crEmpOpt);
+
 
           if(ajaxRequest.readyState == 4) {
              // console.log(typeof(ajaxRequest.responseText));   //returns STRING

@@ -75,45 +75,45 @@ function getAll() {
   location.reload();
 }
 
+
+
+
 var classFilter = [], subjectFilter = [], topicFilter = [];
 // This function will add/remove Classes from the filtersInUse
-function updateClassFilters() {
-  document.getElementById("fileredClasses").innerHTML = "";
+function updateClassFilters(sourceCheckBoxId, destinationFilterId) {
+  document.getElementById(destinationFilterId).innerHTML = "";
   // filtersInUse
-  var checkBoxClassList = document.getElementById("classSelectBoxes").getElementsByTagName("input");
-  console.log(checkBoxClassList);
-  for (i=0;i<checkBoxClassList.length;i++) {
+  var checkBoxList = document.getElementById(sourceCheckBoxId).getElementsByTagName("input");
+  console.log(checkBoxList);
+  for (i=0;i<checkBoxList.length;i++) {
     console.log(i);
-    console.log(checkBoxClassList[i].checked);
-    console.log(checkBoxClassList[i].value);
+    console.log(checkBoxList[i].checked);
+    console.log(checkBoxList[i].value);
 
-    if (checkBoxClassList[i].checked)
+    if (checkBoxList[i].checked)
     {
-      classFilter.push(checkBoxClassList[i].id);
+      classFilter.push(checkBoxList[i].id);
       // //create a button
-      var checkBoxClassValue = checkBoxClassList[i].value;
-
-      var addButton = document.createElement("button");
-      addButton.setAttribute("id", checkBoxClassValue + "filter");
-      addButton.setAttribute("type", "button");
-      addButton.setAttribute("class", "btn btn-info");
-      addButton.setAttribute("aria-label", "Close");
-
-      var addSpan = document.createElement("span"); //create a button
-      addSpan.setAttribute("id", checkBoxClassValue + "span");
-      addSpan.setAttribute("aria-hidden", "true");
-      addSpan.innerHTML = checkBoxClassValue + "&times;";
-
-      addButton.appendChild(addSpan);
-
-      document.getElementById("fileredClasses").appendChild(addButton);
-      //
-      //
-      //append the element to ajax response div
-      //document.getElementById("ajaxRes").appendChild(addDiv);
-      // ajaxResponse.appendChild(addDiv);
+      addButton(destinationFilterId, checkBoxList[i].value);
     }
   }
   // console.log(classFilter);
+}
 
+function addButton(destinationFilterId, filterValue) {
+
+  var addButton = document.createElement("button");
+  addButton.setAttribute("id", filterValue + "filter");
+  addButton.setAttribute("type", "button");
+  addButton.setAttribute("class", "btn btn-info  btn-sm");
+  addButton.setAttribute("aria-label", "Close");
+
+  var addSpan = document.createElement("span"); //create a button
+  addSpan.setAttribute("id", filterValue + "span");
+  addSpan.setAttribute("aria-hidden", "true");
+  addSpan.innerHTML = filterValue + "&times;";
+
+  addButton.appendChild(addSpan);
+
+  document.getElementById(destinationFilterId).appendChild(addButton);
 }

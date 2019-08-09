@@ -17,7 +17,7 @@
       while ($row = $query->fetch_assoc())  {
         {
           $cn = strip_tags($row['classNumber']);
-          echo "<label for='$cn'><input id='$cn' type='checkbox' name='classNumber[$cn]' aria-label='$cn' style='margin: 10px;' onclick='updateClassFilters(\"classSelectBoxes\",\"fileredClasses\");' value='$cn'>$cn</label>";
+          echo "<label for='$cn'><input id='$cn' type='checkbox' name='classNumber[$cn]' aria-label='$cn' style='margin: 10px;' onclick='updateFilters(\"classSelectBoxes\",\"filteredClasses\");' value='$cn'>$cn</label>";
 
           // echo "<option id='$cn' name='$cn'>$cn</option>";
 

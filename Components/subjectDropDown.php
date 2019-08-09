@@ -18,7 +18,7 @@
       while ($row = $query->fetch_assoc())  {
         {
           $sn = strip_tags($row['subjectName']);
-          echo "<label for='$sn'><input id='$sn' type='checkbox' name='subjectName[$sn]' aria-label='$sn' style='margin: 10px;' onclick='updateClassFilters(\"subjectSelectBoxes\",\"fileredSubjects\");' value='$sn'>$sn</label>";        }
+          echo "<label for='$sn'><input id='$sn' type='checkbox' name='subjectName[$sn]' aria-label='$sn' style='margin: 10px;' onclick='updateFilters(\"subjectSelectBoxes\",\"filteredSubjects\");' value='$sn'>$sn</label>";        }
       }
 
 mysqli_close($mysqli);

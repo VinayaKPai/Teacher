@@ -9,20 +9,25 @@
 include "../basecode-create_connection.php";
 // this is coming from newQuestions.php
 
-// if ($cln == "all") {
-//   $txt = "ALL classes.";
-//   $msg = "any class";
-// }
-// elseif (strlen($cln)==0) {
-//   $msg = "";
-//   $txt = "";
-// }
-// else {
-//   $txt = "Class ".$cln;
-//   $msg = "Class ".$cln;
-// }
+if ($cln){
+  if (strlen($cln)==0) {
+      $txt = "ALL classes.";
+      $msg = "any class";
+    }
+    elseif ($cln == "all") {
+      $msg = "";
+      $txt = "";
+    }
+    else {
+      $txt = "Class ".$cln;
+      $msg = "Class ".$cln;
+    }
+  }
+// $arrayGET = $_POST;
 
-// $arrayPOST = array_values($_POST);
+//BUILD A QUERY STRING USING THE CLASSNUMBERS AND SUBJECTNAMES COMING FROM THE FORM WITH SUBMIT BUTTON ON NEWQUESTIONS PAGE
+//THIS WILL DISPLAY ALL THE QUESTIONS IN THE DB FOR THAT COMBO OF CLASSNUMBERS AND/OR SUBJECTNAMES
+//FURTHER FILTERING OF THE QUESTIONS IS HANDLES IN THE filterRecords.js file
 $arrayPOST = $_POST;
 
 $queryArray=[];
@@ -31,76 +36,61 @@ $cn = [];
 $sn = [];
 $i; $j;
 $yes = 0;
-// if ($arrayPOST) {
-//       if (count($arrayPOST['classNumber'])>0) { //since this is going to be an array, we push into the query array
-//
-//         array_push($queryArray,array_values($arrayPOST['classNumber']));
-//         // [0] => Array ( [0] => I [1] => II ) example
-//       }
-//       if (!count($arrayPOST['subjectName'])==0) {
-//
-//         array_push($queryArray,array_values($arrayPOST['subjectName']));
-//         // [1] => Array ( [0] => Hindi [1] => Maths ) example
-//       }
-//       if (!strlen($arrayPOST['topicName'])==0) {
-//         array_push($queryString,array_values($arrayPOST['subjectName']));
-//       }
-//       if (!strlen($arrayPOST['typeName'])==0) {
-//         array_push($queryString,array_values($arrayPOST['subjectName']));
-//       }
-//       // $queryArray = array_filter($arrayPOST, 'strlen');   //will contain all items from $arrayPOST that are not blank
-//       $queryArrayCount = count($queryArray);
-// //       echo "<br>QUERY ARRAY POST<br>";
-// //       print_r ($queryArray); echo "<br>"; print_r($queryArrayCount);
-// // echo "@#$#<br>";
-// }
-// else {echo "No post<br>";}
-// SELECT * FROM `questionbank` WHERE (`subjectName`= 'SocialStudies' OR `subjectName`= 'Science') AND (`classNumber`= 'II' OR `classNumber`= 'IX')
+
 $queryString = "SELECT * FROM `questionbank` WHERE ";
 
 if ($arrayPOST) {
-  if (!count($arrayPOST['subjectName'])==0) {
+  if (count($arrayPOST['subjectName'])>0) {
+    // echo "count( $ arrayPOST [subjectName ] ) IS ".count($arrayPOST['subjectName'])."<br>";
     array_push($queryArray,array_values($arrayPOST['subjectName']));
     // [1] => Array ( [0] => Hindi [1] => Maths ) example
   }
   if (count($arrayPOST['classNumber'])>0) { //since this is going to be an array, we push into the query array
+    // echo "count( $ arrayPOST [classNumber ] ) IS ".count($arrayPOST['classNumber'])."<br>";
     array_push($queryArray,array_values($arrayPOST['classNumber']));
     // [0] => Array ( [0] => I [1] => II ) example
   }
 
-  print_r ($queryArray);
-  for ($x = 0; $x < count($queryArray[0]); $x++) {
-    // echo "The number is: $x <br>";
-    if($x == 0) {
-      $queryString = $queryString."(`subjectName`=  '".$queryArray[0][$x]."' ";
-    } else {
-      $queryString = $queryString."OR `subjectName`= '".$queryArray[0][$x]."' ";
-    }
-  }
-  $queryString = $queryString.") ";
-  if(count($queryArray[0])>0) {
-    $queryString = $queryString."AND ";
-  }
-  for ($x = 0; $x < count($queryArray[1]); $x++) {
 
-    // echo "The number is: $x <br>";
-    if($x == 0) {
-        $queryString = $queryString."(`classNumber`= '".$queryArray[1][$x]."' ";
-    } else {
-      $queryString = $queryString."OR `classNumber`= '".$queryArray[1][$x]."' ";
-    }
-  }
-  $queryString = $queryString.") ";
-  echo $queryString;
-} else {
+          for ($x = 0; $x < count($queryArray[0]); $x++) {  //$queryArray[0] is array of subjects in $arrayPOST
+                if($x == 0) {
+                    $queryString = $queryString."(`subjectName`=  '".$queryArray[0][$x]."' "; //first subject in array can be appended to querySTRING directly
+                } else {
+                    $queryString = $queryString."OR `subjectName`= '".$queryArray[0][$x]."' ";  //every subsequent subject needs to be appended with an "OR" to the query string
+                }
+          }
+          if ($arrayPOST['topicName']) {
+            $tn = $arrayPOST['topicName'];
+            $queryString = $queryString."AND `topicName` = '".$tn."' ";
+          }
+          if ($arrayPOST['typeName']) {
+            $tyn = $arrayPOST['typeName'];
+            $queryString = $queryString."AND `typeName` = '".$tyn."' ";
+          }
+        $queryString = $queryString.") ";
 
-}
+        if(count($queryArray[0])>0) { // If the arrayPOST( same as in $queryArray )has classNumbers too, then we need an "AND in the query string"
+          $queryString = $queryString."AND ";
+        }
+
+
+        for ($x = 0; $x < count($queryArray[1]); $x++) {  //$queryArray[1] is array of classes in $arrayPOST
+
+            if($x == 0) {
+                $queryString = $queryString."(`classNumber`= '".$queryArray[1][$x]."' ";  //first class in array can be appended to querySTRING directly
+            } else {
+              $queryString = $queryString."OR `classNumber`= '".$queryArray[1][$x]."' ";  //every subsequent class needs to be appended with an "OR" to the query string
+            }
+          }
+
+  $queryString = $queryString.") "; //close the queryString
+
 
 
 
 echo "<div>";
 // $query = $mysqli->query("SELECT * FROM `questionbank`");  //WORKS
-$query = $mysqli->query($queryString);
+$query = $mysqli->query($queryString);  //use the queryString built above
 $rowcount = mysqli_num_rows($query);      //number of rows returned from the table - WORKS
 if ($rowcount == 0) {
   echo "<h6 style='color: Red;'>You do not have any questions for ".$msg."</h6><a href='/index.php'>Back</a>";
@@ -147,6 +137,9 @@ echo "</tr>";
        }
   }
 
+} else {
+
+}
   // {header('Location: ../SetUpPages/newQuestions.php');}
 	mysqli_close($mysqli);
 ?>

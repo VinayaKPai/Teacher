@@ -1,14 +1,12 @@
 <?php
-	
-	include "../basecode-create_connection.php";
+
+	include "basecode-create_connection.php";
 echo "<div>";
 $rwcnt = 0;
 
 
-
-
 $query = $mysqli->query("SELECT * FROM topics");
-	
+
 			if ($query) {
 				$rowcount=mysqli_num_rows($query);
 			}
@@ -42,10 +40,10 @@ $query = $mysqli->query("SELECT * FROM topics");
 				}
 				echo "</table>";
 			}
-			
+
 			if(!$query) {
 				echo "Looks like your set up has not been started. Please add the classes and sections you are teaching to the database, so that you can get the benefit of all the features of the App";
-			} 
+			}
 echo "$rwclr $rwcnt </div>";
 mysqli_close($mysqli);
 ?>

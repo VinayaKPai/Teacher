@@ -18,6 +18,7 @@
 	  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<link type="text" href="./Modals/modaltest.html"/>
 	<link rel="stylesheet" type="text/css" href="/stylesheet.css"  />
+		<script src="../../Scripts/js/ajaxCalls.js"></script>
 		<script src="../../Scripts/js/ajaxCallQuestions.js"></script>
 		<script src="../../Scripts/js/ajaxGetAllForClass.js"></script>
 		<script src="../../Scripts/js/filterRecords.js"></script>
@@ -126,30 +127,40 @@
 										<div id="classSelectBoxes" class="input-group col-sm-9 left-align">
 											<?php include "../Components/classNumberDropDown.php" ; ?>
 										</div>
-							</div>
-							<div class="panel panel-header  col-sm-12 left-align" style="padding:10px;">
-										<div class="col-sm-3">Subject:</div>
+										<div class="col-sm-3 left-align">Subject:</div>
 										<div id="subjectSelectBoxes" class="input-group col-sm-9 left-align">
 											<?php include "../Components/subjectDropDown.php" ; ?>
 										</div>
-							</div>
-							<div id="filtersInUse"  class="left-align" style="padding:10px;">
-								<div id="fileredClasses"  style="padding: :10px;"></div>
-								<div id="fileredSubjects"  style="padding: :10px;"></div>
-							</div>
-							Topic: <input type="text" class="form-control" aria-label=""/>
-							<div id="fileredTopics"  style="padding:10px;"></div>
-							Topic: <select id= "topicName" name="topicName" style="width:80px;">
+										<div id="filtersInUse"  class="left-align" style="padding:10px;">
+											<div id="filteredClasses"  class="col-sm-4" style="padding: :10px;"></div>
+											<div id="filteredSubjects"  class="col-sm-4" style="padding: :10px;"></div>
+											<div class="col-sm-4" >
+												<button type="button"  onclick="ajaxCallGetTopics()"> Bring Topics</button>
+											</div>
+										</div>
+								</div>
+								<div class="panel panel-header  col-sm-12" style="padding:10px;">
+									<div class="col-sm-4">
+										Topic: <select id= "topicName" name="topicName" style="width:80px;">
 										<option id=""></option>
-										<?php include "../Components/topicDropDown.php" ; ?>
-							</select>
-							Q Type: <select id="typeName" name="typeName" style="width:80px;">
-										<option id=""></option>
-										<?php include "../Components/typeDropDown.php" ; ?>
-							</select>
+										<?php include "../Components/topicDropDown.php?" ; ?>
+										</select>
+									</div>
+									<div class="col-sm-4">
+										Q Type: <select id="typeName" name="typeName" style="width:80px;">
+													<option id=""></option>
+													<?php include "../Components/typeDropDown.php" ; ?>
+										</select>
+									</div>
+									<div class="col-sm-4">
 							<button type="Submit">Submit</button>
+						</div>
+								</div>
 						</form>
-
+						<div>
+							Free Text Search: <input type="text" class="form-control" aria-label=""/>
+							<div id="fileredTopics"  style="padding:10px;"></div>
+						</div>
 
 </div>
 					<div id="ajret" class="centered" ></div>
@@ -193,8 +204,8 @@
 						</style>
 						<table id="existTable" style="width: 100%; padding: 5px; border-spacing: 2px; border-collapse: separate; align: 'center';">
 							<?php
-								// if ($_GET){ $cln = $_GET['classNumber']; echo $cln;}
-								// else { $cln = "all";}
+								if ($_GET){ $cln = $_GET['classNumber']; echo $cln;}
+								else { $cln = "all";}
 								include "../AddNew/Existing/questions.php";
 								?>
 

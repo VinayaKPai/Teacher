@@ -1,7 +1,7 @@
 //--------------------------------------------AJAX STARTS----------------------------------------------------------------------
          <!--
 //--------------------------------------Browser Support Code-------------------------------------------------------------------
-		 function ajaxChkClassFunction() {
+		 function ajaxChkClassFunction() { //NO LONGE BEING USED FOR POPULATING ANY DROPDOWN
 
             var ajaxRequest;  // The variable that makes Ajax possible!
 
@@ -31,8 +31,8 @@
 
             ajaxRequest.onreadystatechange = function() {
 	//------------collect values (from 2 drop down select elements to be sent to ajax---------------------
-				var classNumber = document.getElementById("classNumber").value;
-				var sectionAlpha = document.getElementById("sectionAlpha").value;
+    				var classNumber = document.getElementById("classNumber").value;
+    				var sectionAlpha = document.getElementById("sectionAlpha").value;
 
 
 				   if(ajaxRequest.readyState == 4) {
@@ -174,4 +174,78 @@
                   console.log ("RESPONSE FROM PHP INTO AJAX\n" + res);                  //do what you want here...
                     }
         });
+    }
+
+    function ajaxCallGetTopics () {
+      alert ("HI");
+      var ajaxRequest;  // The variable that makes Ajax possible!
+
+      try {
+         // Opera 8.0+, Firefox, Safari
+         ajaxRequest = new XMLHttpRequest();
+      } catch (e) {
+
+         // Internet Explorer Browsers
+         try {
+            ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
+         } catch (e) {
+
+            try {
+               ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+            } catch (e) {
+               // Something went wrong
+               alert("Your browser broke!");
+               return false;
+            }
+         }
+      }
+
+      // Create a function that will receive data
+      // sent from the server and will update
+      // div section in the same page.
+      var queryString = "/AddNew/getTopForSub.php?";
+      var c = document.getElementById("filteredClasses");
+
+      var z = c.children.length;
+      alert ("z = " + z);
+      var addClassNumbersToQueryString;
+      if (z>0) {
+          var selectedClassNumber = [];
+           for (i=0;i<z;i++) {
+             var idc = c.children[i].id;
+             idc = idc.replace("filter","");
+             // idc = "'" + idc + "'";
+             selectedClassNumber.push(idc);
+             addClassNumbersToQueryString = "classNumber=" + selectedClassNumber;
+            }
+            queryString = queryString + addClassNumbersToQueryString;
+        } else {queryString = queryString;}
+        var s = document.getElementById("filteredSubjects");
+
+        var y = s.children.length;
+        var addSubjectNamesToQueryString;
+        if (y>0) {
+          if (z>0) {queryString = queryString + "&&";}
+            var selectedSubjectName = [];
+             for (j=0;j<y;j++) {
+               var ids = s.children[j].id;
+               ids = ids.replace("filter","");
+               // ids = "'" + ids + "'";
+               selectedSubjectName.push(ids);
+               addSubjectNamesToQueryString = "subjectName=" + selectedSubjectName;
+              }
+              queryString = queryString + addSubjectNamesToQueryString;
+          }
+      ajaxRequest.onreadystatechange = function() {
+        if(ajaxRequest.readyState == 4) {
+          var ajaxReturn = ajaxRequest.responseText;
+         // var ajaxReturn = JSON.parse(ajaxRequest.responseText);
+         document.getElementById("topicName").innerHTML = ajaxReturn;
+         // console.log(ajaxReturn);
+       }
+
+      }
+
+      ajaxRequest.open("GET", queryString, true);
+      ajaxRequest.send(null);
     }

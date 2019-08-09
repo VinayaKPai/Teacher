@@ -80,19 +80,31 @@ function getAll() {
 
 var classFilter = [], subjectFilter = [], topicFilter = [];
 // This function will add/remove Classes from the filtersInUse
-function updateClassFilters(sourceCheckBoxId, destinationFilterId) {
+function updateFilters(sourceCheckBoxId, destinationFilterId) {
   document.getElementById(destinationFilterId).innerHTML = "";
   // filtersInUse
   var checkBoxList = document.getElementById(sourceCheckBoxId).getElementsByTagName("input");
-  console.log(checkBoxList);
+  // console.log(checkBoxList);
+  classFilter = [];
+  subjectFilter = [];
   for (i=0;i<checkBoxList.length;i++) {
-    console.log(i);
-    console.log(checkBoxList[i].checked);
-    console.log(checkBoxList[i].value);
+
 
     if (checkBoxList[i].checked)
     {
-      classFilter.push(checkBoxList[i].id);
+      //if checkBoxList is classSelectBoxes
+      if (sourceCheckBoxId=="classSelectBoxes"){
+        classFilter.push(checkBoxList[i].id);
+        console.log(sourceCheckBoxId);
+        console.log(classFilter.length);
+        console.log(classFilter);
+      }
+      if (sourceCheckBoxId=="subjectSelectBoxes") {
+        subjectFilter.push(checkBoxList[i].id);
+        console.log(sourceCheckBoxId);
+        console.log(subjectFilter.length);
+        console.log(subjectFilter);
+      }
       // //create a button
       addButton(destinationFilterId, checkBoxList[i].value);
     }

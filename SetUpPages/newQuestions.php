@@ -73,7 +73,8 @@
 
 				<div class="col-sm-4" style="padding: 10px;">
 					<hr>
-					<form name="newQuestionForm" action="../AddNew/addnewstudent.php" method="post">
+					<p class="panel-title" style="background-color: #C5B2B3;">Add a Question to the Database</p>
+					<form name="newQuestionForm" action="../AddNew/addnewquestion.php" method="post">
 						<div class="form-group">
 							<label for="classNumberFrm">Class / Std
                 <span class="glyphicon glyphicon-asterisk" style="color: Red"></span>
@@ -114,14 +115,13 @@
 
 				</div>
 
-				<div class="col-sm-8 centered" style="border-left: 1px solid Grey; height: 400px; padding: 1%; overflow: scroll;">
+				<div class="col-sm-8 centered" style="border-left: 1px solid Grey; height: 400px; padding: 1%; ">
 					<hr>
           <div style="margin-top: 3px;">
 						<p class="panel-title" style="background-color: #C5B2B3;">Select the below options to display questions</p>
 					</div>
 					<div id="ajaxReturnTest"></div>
-
-						<form acion="../AddNew/Existing/questions.php" method="POST">
+						<form action="../AddNew/Existing/questions.php" method="POST">
 								<div class="panel panel-header col-sm-12" style="padding:10px;">
 										<div class="col-sm-3 left-align">Class/STD:</div>
 										<div id="classSelectBoxes" class="input-group col-sm-9 left-align">
@@ -134,22 +134,22 @@
 										<div id="filtersInUse"  class="left-align" style="padding:10px;">
 											<div id="filteredClasses"  class="col-sm-4" style="padding: :10px;"></div>
 											<div id="filteredSubjects"  class="col-sm-4" style="padding: :10px;"></div>
-											<div class="col-sm-4" >
-												<button type="button"  onclick="ajaxCallGetTopics()"> Bring Topics</button>
-											</div>
+											<!--	<div class="col-sm-4" >
+											<button type="button"  onclick="ajaxCallGetTopics()"> Bring Topics</button>
+											</div>-->
 										</div>
 								</div>
 								<div class="panel panel-header  col-sm-12" style="padding:10px;">
 									<div class="col-sm-4">
 										Topic: <select id= "topicName" name="topicName" style="width:80px;">
 										<option id=""></option>
-										<?php include "../Components/topicDropDown.php?" ; ?>
+										<?php include $_SERVER['DOCUMENT_ROOT']."/Components/topicDropDown.php?" ; ?>
 										</select>
 									</div>
 									<div class="col-sm-4">
 										Q Type: <select id="typeName" name="typeName" style="width:80px;">
 													<option id=""></option>
-													<?php include "../Components/typeDropDown.php" ; ?>
+													<?php include $_SERVER['DOCUMENT_ROOT']."/Components/typeDropDown.php" ; ?>
 										</select>
 									</div>
 									<div class="col-sm-4">
@@ -157,44 +157,10 @@
 						</div>
 								</div>
 						</form>
-						<div>
-							Free Text Search: <input type="text" class="form-control" aria-label=""/>
-							<div id="fileredTopics"  style="padding:10px;"></div>
-						</div>
 
 </div>
 					<div id="ajret" class="centered" ></div>
-<div>
-							<!-- <p>(Adi's code)</p>
-							<form action="../AddNew/filteredquestions.php" method="POST">
-							Class/STD: <select id="clName" name="clName" onchange="testalert('clName')">
-							<option id="" value=""></option>
-							<option id="A" value="IX" name="IX">IX</option>
-							<option id="B" value="B">B</option>
-							<option id="C" value="C">C</option>
-						</select>
-						Subject: <select id="subName" name="subName"onchange="testalert('subName')">
-									<option id="" value=""></option>
-									<option id="SocialStudies" value="SocialStudies" name="SocialStudies">Social Studies</option>
-									<option id="E" value="E">E</option>
-									<option id="F" value="F">F</option>
 
-						</select>
-						Topic: <select id= "toName" name= "toName" onchange="testalert('toName')">
-									<option id=""></option>
-									<option id="FrRev" name="FrRev" value="FrRev">FrRev</option>
-									<option id="H">H</option>
-
-						</select>
-						Q Type: <select id="tyName" name="tyName"onchange="testalert('tyName')">
-									<option id=""></option>
-									<option id="MCQ" name="MCQ" value="MCQ">MCQ</option>
-									<option id="J">J</option>
-
-						</select>
-						<button class="btn btn-default" type="submit">Submit</button>
-					</form> -->
-</div>
 						<hr>
 
 						<style>
@@ -202,14 +168,10 @@
 						table tr:nth-child(odd){background-color: #684654; color: #fff}
 						table td {text-align: center;}
 						</style>
-						<table id="existTable" style="width: 100%; padding: 5px; border-spacing: 2px; border-collapse: separate; align: 'center';">
-							<?php
-								if ($_GET){ $cln = $_GET['classNumber']; echo $cln;}
-								else { $cln = "all";}
+						<?php
+								$displayType = "checkbox";
 								include "../AddNew/Existing/questions.php";
-								?>
-
-						</table>
+							?>
 				</div>
 				<div id="status" class="centered" ><?php echo $datetime1;?></div>
 

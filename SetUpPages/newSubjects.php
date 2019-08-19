@@ -58,18 +58,34 @@
 			<div>
 
 				<div class="col-sm-9" style="padding: 10px;">
-<hr>
+					<h4 style="color: Green; background-color: LightGrey;">To Add: Select Class Section and Subject from the dropdowns below and click submit.</h4>
+					<hr>
+					<hr>
 					<form name="newSubjectForm" action="../AddNew/addnewsubject.php" method="post">
-						Class/STD: <select id="classNumberDG" name="classNumberDG" onchange="testalert('classNumberDG')">
-							<option id="" value=""></option>
-							<?php include "../Components/classNumberDropDown.php" ; ?>
+						<label for="classNumberDG">Class/Std </label>
+						<select id="classNumberDG" name="classNumberDG" required>
+							<option id="blankcn"></option>
+							<option id="I">I</option>
+							<option id="II">II</option>
+							<option id="III">III</option>
+							<option id="IV">IV</option>
+							<option id="V">V</option>
+							<option id="VI">VI</option>
+							<option id="VII">VII</option>
+							<option id="VIII">VIII</option>
+							<option id="IX">IX</option>
+							<option id="X">X</option>
+							<option id="XI">XI</option>
+							<option id="XII">XII</option>
 						</select>
-						Section: <select id="sectionAlphaDG" name="sectionAlphaDG" onchange="testalert('sectionAlphaDG')">
+						<label for="classNumberDG">Section: </label>
+						<select id="sectionAlphaDG" name="sectionAlphaDG" onchange="testalert('sectionAlphaDG')">
 							<option id="" value=""></option>
 						<?php include "../Components/sectionAlphaDropDown.php";?>
 					</select>
 
-						Subject <select name="subjectName" id="subjectName" required>
+						<label for="classNumberDG">Subject </label>
+						<select name="subjectName" id="subjectName" required>
 						<option id="blanksa"></option>
 						<option id="English">English</option>
 						<option id="Hindi">Hindi</option>

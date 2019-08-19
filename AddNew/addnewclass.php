@@ -14,8 +14,8 @@ if (isset($_POST["classNumber"]) && !empty($_POST["classNumber"]) && isset($_POS
 
 	// // prepare and bind
 	$newId = $classNumberSafe.$sectionAlphaSafe;
-	$stmt = $mysqli->prepare("INSERT INTO classsections (Id, classNumber, sectionAlpha) VALUES (?, ?, ?)");
-	$stmt->bind_param("sss", $newId, $classNumberSafe, $sectionAlphaSafe);
+	$stmt = $mysqli->prepare("INSERT INTO classsections (classNumber, sectionAlpha) VALUES (?, ?)");
+	$stmt->bind_param("ss", $classNumberSafe, $sectionAlphaSafe);
 
 	$stmt->execute();
 }

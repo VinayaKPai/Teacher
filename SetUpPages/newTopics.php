@@ -2,8 +2,7 @@
 	//include "basecode-create_connection.php";
 	include "../basecode-create_connection.php";
 
-
-	$pageHeading = "Set Up your Classes and Sections";
+	$pageHeading = "Set Up your Subjects";
 
 ?>
 
@@ -21,17 +20,6 @@
 		<link type="text" href="./Modals/modaltest.html"/link>
 	<link rel="stylesheet" type="text/css" href="/stylesheet.css"  />
 		<script src="../../Scripts/js/ajaxCalls.js"></script>
-
-		<script type="text/javascript">
-			var addMultiple = [];
-			function addNewClasses() {	//for ADD ALL button
-			 //document.getElementById("status").innerHTML = "Add New Classes triggered";
-
-
-			 $('#status').html(addMultiple);
-			}
-
-		</script>
 	</head>
 	<body class="body">
 		<div class="container">
@@ -67,55 +55,56 @@
 					</div>
 				</div>
 			</div>
-			<div>
-
-				<div class="col-sm-9 centered" style="padding: 10px;">
-					<h4 style="color: Green; background-color: LightGrey;">To Add: Select Class and Section from the dropdowns below and click submit.</h4>
+			<div class="row">
+				<div class="col-sm-6" style="padding: 10px;">
 					<hr>
+					<p class="panel-title" style="background-color: #C5B2B3;">Add a Topic to the Database</p>
 					<form name="newClassForm" action="../AddNew/addnewclass.php" method="post">
-						<div class="col-sm-4">
+						<div style="padding: 10px;">
+							<div class="col-sm-6">
 							<?php
 									$displayType = "dropdown";
 									include $_SERVER['DOCUMENT_ROOT']."/Components/classNumberDropDown.php";
 							?>
-						</div>
-						<div class="col-sm-4">
-							<?php
-									$displayType = "dropdown";
-									include $_SERVER['DOCUMENT_ROOT']."/Components/sectionAlphaDropDown.php";
-							?>
-						</div>
+							</div>
+							<div class="col-sm-6">
+								<?php
+										$displayType = "dropdown";
+										include $_SERVER['DOCUMENT_ROOT']."/Components/subjectDropDown.php";
+								?>
+							</div>
+
+							<div class="col-sm-12">
+								<label for="topics">New Topic </label>
+								<input id="topics" />
+							</div>
+
+							<div class="col-sm-12">
+									<button name="Submit" id="submit" type="submit">SUBMIT</button>
+							</div>
+
 						<!-- <input type="button" id="chkRec" value="CHECK" onclick="ajaxChkClassFunction()"/>-->
-						<button name="Submit" id="submit" type="submit">SUBMIT</button>
-
+						</div>
 					</form>
+				</div>
+				<div class="col-sm-6 centered" style="border-left: 1px solid Grey;">
+						<style>
+						table tr:nth-child(even){background-color: #b69092; color: #fff}
+						table tr:nth-child(odd){background-color: #684654; color: #fff}
+						table td {text-align: center;}
+						</style>
+						<table id="existTable" style="width: 100%; padding: 5px; border-spacing: 2px; border-collapse: separate; align: 'center';">
+							<?php
+								if ($_GET){ $cln = $_GET['classNumber']; echo $cln;}
+								else { $cln = "all";}
+								include "../AddNew/Existing/topics.php";
+								?>
+
+						</table>
+					</div>
 					<hr>
-					<div  class="row">
-						<div id="ajaxRes" class="col-sm-2">
-
-						</div>
-						<div id="remBtn" class="col-sm-5">
-
-						</div>
-						<div class="col-sm-5">
-							<div id="recsInQ" style="color: blue; font-weight: bold;">
-							</div>
-							<div class="centered">
-								<button id="addAll" class="btn-primary"  onclick="ajaxAddAll(addMultiple)" style="display: none;"></button>
-							</div>
-						</div>
-				</div>
-				</div>
-
-				<div class="col-sm-3 centered" style="border-left: 1px solid Grey;">
-					<?php include $_SERVER['DOCUMENT_ROOT']."/AddNew/Existing/classsections.php"; ?>
-
-
-					<div id="status">Statuc</div>
-				</div>
-<hr>
-		</div>
-		<div id="bottom"><?php include "../Components/bottom.php"; ?></div>
+			</div>
+			<div id="bottom"><?php include "../Components/bottom.php"; ?></div>
 		</div>
 	</body>
 </html>

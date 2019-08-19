@@ -35,7 +35,7 @@
             var subjectName = document.getElementById("subjectName"); //to prepare the subjectName element to reveive the response
             var topicName = document.getElementById("topicName"); //to prepare the subjectName element to reveive the response
             //we need to remove any pre-existing options from the dropdown
-            subjectName.innerHTML = "<option></option>";     //this will fire the ajaxGetTopForSub - LOOKOUT!
+            subjectName.innerHTML = "<option></option>";     //this will fire the ajaxgetTopics - LOOKOUT!
             topicName.innerHTML = "<option></option>";      //no ajax call on this drop down
 
 
@@ -69,7 +69,7 @@
 
  }
 //-->
-    function ajaxGetTopForSub() {
+    function ajaxgetTopics() {
 
     var ajaxRequest;  // The variable that makes Ajax possible!
 //state can change if classnumner changes or subjectname changes
@@ -117,7 +117,7 @@
        var classNumber = document.getElementById('classNumber').value;
 
        if (subjectName) {
-             var queryString = "/AddNew/getTopForSub.php?subjectName=" + subjectName + "&&classNumber=" + classNumber;
+             var queryString = "/AddNew/getTopics.php?subjectName=" + subjectName + "&&classNumber=" + classNumber;
              // console.log (queryString);
          ajaxRequest.open("GET", queryString, true);
          ajaxRequest.setRequestHeader("content-type", "application/json");

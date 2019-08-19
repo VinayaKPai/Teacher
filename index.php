@@ -44,13 +44,15 @@
 			<hr style="border-top: 1px solid maroon;"/>
 			<div class="centered">
 					<h4>Run Reports</h4>
-					<h5>Quizzes</h5>
-						<ul  class="left-align" style="list-style-type: none;">
-							<li><a href="#">By Class</a></li>
-							<li><a href="#">By Class and Section</a></li>
-							<li><a href="#">By Class and Subject</a></li>
-							<li><a href="#">By Subject and Topic</a></li>
-						</ul>
+					<h5 data-toggle="collapse" data-target="#quizzes">Quizzes</h5>
+					<div  id="quizzes" class="panel-collapse">
+								<ul  class="left-align" style="list-style-type: none;">
+									<li><a href="#">By Class</a></li>
+									<li><a href="#">By Class and Section</a></li>
+									<li><a href="#">By Class and Subject</a></li>
+									<li><a href="#">By Subject and Topic</a></li>
+								</ul>
+					</div>
 					<h5>Assignments</h5>
 					<ul  class="left-align" style="list-style-type: none;">
 						<li><a href="#">By Class</a></li>
@@ -100,55 +102,67 @@
 		</div>
 		<div class="col-sm-4 right">
 			<h4>Setup</h4>
-			<div class="btn roundsqbtn centered dropdown" style="float: center; width: 70%;">
-				<div>Classes Sections</div>
-				<div class="dropdown-content centered">
-					<a href="../../SetUpPages/newclasssections.php">Manage </a>
-				</div>
-			</div>
-			<div class="btn roundsqbtn centered dropdown" style="float: center; width: 70%;">
-				<div>Subjects</div>
-				<div class="dropdown-content centered">
-					<a href="../../SetUpPages/newSubjects.php">Manage </a>
-				</div>
-			</div>
-			<div class="btn roundsqbtn centered dropdown" style="float: center; width: 70%;">
-				<div>Units</div>
-				<div class="dropdown-content centered">
-					<a href="../../SetUpPages/newUnits.php">Manage </a>
-				</div>
-			</div>
-			<div class="btn roundsqbtn centered dropdown" style="float: center; width: 70%;">
-				<div>Topics</div>
-				<div class="dropdown-content centered">
-					<a href="../../SetUpPages/newTopics.php">Manage </a>
-				</div>
-			</div>
-			<div class="btn roundsqbtn centered dropdown" style="float: center; width: 70%;">
-				<div>Question Bank</div>
-				<div class="dropdown-content">
-					<ul style="list-style-type: none;">
-						<li><a href="../../SetUpPages/newQuestions.php">Manage </a></li>
-						<?php include "basecode-create_connection.php";
-						$query = $mysqli->query("SELECT DISTINCT classNumber FROM classsections");
-						while ($row = $query->fetch_assoc())  {
-			        {
-			          $cn = strip_tags($row['classNumber']);
-			          echo "<a href='../../SetUpPages/newQuestions.php?cn=$cn'><li id='$cn' class='centered' name='$cn'>$cn</li></a>";
+			<a href="../../SetUpPages/newclasssections.php">
+					<div class="btn roundsqbtn centered dropdown" style="float: center; width: 70%;">
+						<div>Classes Sections</div>
+						<!-- <div class="dropdown-content centered">
+							<a href="../../SetUpPages/newclasssections.php">Manage </a>
+						</div> -->
+					</div>
+				</a>
+			<a href="../../SetUpPages/newSubjects.php">
+					<div class="btn roundsqbtn centered dropdown" style="float: center; width: 70%;">
+						<div>Subjects</div>
+						<!-- <div class="dropdown-content centered">
+							<a href="../../SetUpPages/newSubjects.php">Manage </a>
+						</div> -->
+					</div>
+				</a>
+			<a href="../../SetUpPages/newUnits.php">
+					<div class="btn roundsqbtn centered dropdown" style="float: center; width: 70%;">
+						<div>Units</div>
+						<!-- <div class="dropdown-content centered">
+							<a href="../../SetUpPages/newUnits.php">Manage </a>
+						</div> -->
+					</div>
+				</a>
+			<a href="../../SetUpPages/newTopics.php">
+				<div class="btn roundsqbtn centered dropdown" style="float: center; width: 70%;">
+						<div>Topics</div>
+						<!-- <div class="dropdown-content centered">
+							<a href="../../SetUpPages/newTopics.php">Manage </a>
+						</div> -->
+					</div>
+			</a>
+			<a href="../../SetUpPages/newQuestions.php">
+					<div class="btn roundsqbtn centered dropdown" style="float: center; width: 70%;">
+						<div>Question Bank</div>
+						<!-- <div class="dropdown-content">
+							<ul style="list-style-type: none;">
+								<li><a href="../../SetUpPages/newQuestions.php">Manage </a></li>
+								<?php include "basecode-create_connection.php";
+										$query = $mysqli->query("SELECT DISTINCT classNumber FROM classsections");
+										while ($row = $query->fetch_assoc())  {
+							        {
+							          $cn = strip_tags($row['classNumber']);
+							          echo "<a href='../../SetUpPages/newQuestions.php?cn=$cn'><li id='$cn' class='centered' name='$cn'>$cn</li></a>";
 
-			        }
-			      }
-						?>
-					</ul>
+							        }
+							      }
+								?>
+							</ul>
 
-				</div>
-			</div>
-			<div class="btn roundsqbtn centered dropdown" style="float: center; width: 70%;">
-				<div>Students</div>
-				<div class="dropdown-content centered">
-					<a href="../../SetUpPages/newStudents.php">Manage </a>
-				</div>
-			</div>
+						</div> -->
+					</div>
+			</a>
+			<a href="../../SetUpPages/newStudents.php">
+					<div class="btn roundsqbtn centered dropdown" style="float: center; width: 70%;">
+						<div>Students</div>
+						<!-- <div class="dropdown-content centered">
+							<a href="../../SetUpPages/newStudents.php">Manage </a>
+						</div> -->
+					</div>
+				</a>
 		</div>
 		</div>
 

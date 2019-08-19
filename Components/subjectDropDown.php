@@ -1,7 +1,7 @@
 <?php
   	include "../basecode-create_connection.php";
 
-  	$query = $mysqli->query("SELECT DISTINCT subjectName FROM subjects");
+  	$query = $mysqli->query("SELECT DISTINCT Subject FROM subjects");
 
     //catch errors
     if ($mysqli->connect_errno) {
@@ -17,7 +17,7 @@
 
       while ($row = $query->fetch_assoc())  {
         {
-          $sn = strip_tags($row['subjectName']);
+          $sn = strip_tags($row['Subject']);
           echo "<label for='$sn'><input id='$sn' type='checkbox' name='subjectName[$sn]' aria-label='$sn' style='margin: 10px;' onclick='updateFilters(\"subjectSelectBoxes\",\"filteredSubjects\");' value='$sn'>$sn</label>";        }
       }
 

@@ -177,7 +177,7 @@
     }
 
     function ajaxCallGetTopics () {
-      alert ("HI");
+      // alert("Ajax started");
       var ajaxRequest;  // The variable that makes Ajax possible!
 
       try {
@@ -203,49 +203,61 @@
       // Create a function that will receive data
       // sent from the server and will update
       // div section in the same page.
-      var queryString = "/AddNew/getTopForSub.php?";
+      var queryString = "/AddNew/getTopics.php?";
       var c = document.getElementById("filteredClasses");
+      var s = document.getElementById("filteredSubjects");
 
       var z = c.children.length;
-      alert ("z = " + z);
-      var addClassNumbersToQueryString;
-      if (z>0) {
-          var selectedClassNumber = [];
-           for (i=0;i<z;i++) {
-             var idc = c.children[i].id;
-             idc = idc.replace("filter","");
-             // idc = "'" + idc + "'";
-             selectedClassNumber.push(idc);
-             addClassNumbersToQueryString = "classNumber=" + selectedClassNumber;
-            }
-            queryString = queryString + addClassNumbersToQueryString;
-        } else {queryString = queryString;}
-        var s = document.getElementById("filteredSubjects");
+      var y = s.children.length;
 
-        var y = s.children.length;
-        var addSubjectNamesToQueryString;
-        if (y>0) {
-          if (z>0) {queryString = queryString + "&&";}
-            var selectedSubjectName = [];
-             for (j=0;j<y;j++) {
-               var ids = s.children[j].id;
-               ids = ids.replace("filter","");
-               // ids = "'" + ids + "'";
-               selectedSubjectName.push(ids);
-               addSubjectNamesToQueryString = "subjectName=" + selectedSubjectName;
-              }
-              queryString = queryString + addSubjectNamesToQueryString;
-          }
+      var addClassNumbersToJsQuery;
+      var addSubjectNamesToJsQuery;
+
+      var selectedClassNumbers = []; //an array to be sent with index classNumber in the URL
+      var selectedSubjectNames = []; //an array to be sent with index subjectName in the URL
+
+      if (z>0) { //already queryString = queryString + "classNumber=";
+           for (i=0;i<z;i++) {
+             selectedClassNumbers[i] = c.children[i].id;
+            }
+            addClassNumbersToJsQuery = "classNumber=" + selectedClassNumbers;
+        }
+      if (y>0) {
+           for (j=0;j<y;j++) {
+             selectedSubjectNames[j] = s.children[j].id;
+            }
+          addSubjectNamesToJsQuery = "subjectName=" + selectedSubjectNames;
+        }
+
+
+console.log(addClassNumbersToJsQuery);
+console.log(addSubjectNamesToJsQuery);
+
+if (z>0 && y==0) {//ONLY classNumber
+  queryString = queryString + addClassNumbersToJsQuery;
+}
+
+if (z==0 && y>0) {//ONLY subjectName
+  queryString = queryString + addSubjectNamesToJsQuery;
+}
+
+if (z>0 && y>0) {//BOTH classNumber and subjectName
+  queryString = queryString + addClassNumbersToJsQuery + "&&" + addSubjectNamesToJsQuery;
+}
+
+console.log(queryString);
       ajaxRequest.onreadystatechange = function() {
         if(ajaxRequest.readyState == 4) {
           var ajaxReturn = ajaxRequest.responseText;
          // var ajaxReturn = JSON.parse(ajaxRequest.responseText);
          document.getElementById("topicName").innerHTML = ajaxReturn;
+         // document.getElementById("topicName").appendChild(ajaxReturn);
+
          // console.log(ajaxReturn);
        }
 
       }
-
+console.log(queryString);
       ajaxRequest.open("GET", queryString, true);
       ajaxRequest.send(null);
     }

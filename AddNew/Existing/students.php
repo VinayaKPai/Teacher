@@ -24,7 +24,7 @@
 				echo "<h4 class='topbanner'>Currently $rowcount Students in your setup</h4>" ;
 
 				if ($rowcount > 0) {
-
+          echo "<tr><th>SNo</th><th>Name</th><th>Email</th><th>Phone</th><th>Action</th></tr>";
 					while ($row = $query->fetch_assoc())  {
 						{
               $rescn = strip_tags($row['firstName']);
@@ -37,10 +37,9 @@
               $url = "../../RemoveRecords/RemoveStudent.php?fn=".$fn."&ln=".$ln."&pm=".$pm;
 						  echo "<tr>
                       <td>".$slno."</td>
-                      <td>".($row['firstName'])."</td>
-                      <td>".($row['lastName'])."</td>
-											<td>".$fn."</td>
-                      <td>".$ln."</td>
+											<td>".$fn." ".$ln."</td>
+                      <td>".$row['systemEmail']."</td>
+                      <td>".$row['phoneMobile']."</td>
                       <td>
                         <a id=$remIdDB name=$remIdDB  href='$url'><span class='glyphicon glyphicon-trash' style='background-color: Red; color: White; padding: 4px;'></span></a>
                       </td>

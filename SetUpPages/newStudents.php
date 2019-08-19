@@ -28,19 +28,14 @@
 			var addMultiple = [];
 			var cntr = 0;
 			var satr = 0;
-			function addNewStudentss() {	//for ADD ALL button
-			 //document.getElementById("status").innerHTML = "Add New Classes triggered";
 
-
-			 $('#status').html(addMultiple);
-			}
 
 		</script>
 	</head>
 	<body class="body">
 		<div class="container">
 			<hr>
-			<h3 class="centered"><?php include "../Components/top.php"; ?>(Categorized Vertical Temp)</h3>
+			<h3 class="centered"><?php include "../Components/top.php"; ?></h3>
 			<hr>
 		  <div>
 		    <div>
@@ -73,9 +68,9 @@
 					</div>
 				</div>
 			</div>
-			<div>
+			<div class="row">
 
-				<div class="col-sm-9" style="padding: 10px;">
+				<div class="col-sm-7" style="padding: 10px;">
 					<hr>
 					<form name="newStudentForm" action="../AddNew/addnewstudent.php" method="post">
 						<div class="form-group">
@@ -159,7 +154,7 @@
 					</div>
 				</div>
 
-				<div class="col-sm-3 centered" style="border-left: 1px solid Grey;">
+				<div class="col-sm-5 centered" style="border-left: 1px solid Grey;">
 					<?php include "../AddNew/Existing/students.php"; ?>
 
 

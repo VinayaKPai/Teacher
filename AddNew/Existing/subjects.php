@@ -12,7 +12,7 @@
 	echo "<div>";
 
 	$slno = 0;
-	$query = $mysqli->query("SELECT * FROM subjects");
+	$query = $mysqli->query("SELECT * FROM classes_taught_by_teacher");
 
 				if ($query) {
 					$rowcount=mysqli_num_rows($query);
@@ -27,21 +27,21 @@
 
 					while ($row = $query->fetch_assoc())  {
 						{
-              $rescn = strip_tags($row['classNumber']);
+              $rescn = strip_tags($row['Class_Number']);
 						  $slno++;
-              $cn = $row['classNumber'];
-              $sa = $row['sectionAlpha'];
-							$sb = $row['subjectName'];
+              $cn = $row['Class_Number'];
+              $sa = $row['Section'];
+							$sb = $row['Subject'];
 
 						  $remIdDB = $sb.$cn.$sa;
 
               $url = "../../RemoveRecords/RemoveSubject.php?cn=".$cn."&sa=".$sa."&sb=".$sb;
 						  echo "<tr>
                       <td>".$slno."</td>
-                      <td>".($row['classNumber'])."</td>
-                      <td>".($row['sectionAlpha'])."</td>
+                      <td>".($row['Class_Number'])."</td>
+                      <td>".($row['Section'])."</td>
 											<td>$sb</td>
-                      <td>
+                      <td title='Delete $cn $sa $sb from Database'>
                         <a id=$remIdDB name=$remIdDB  href='$url'><span class='glyphicon glyphicon-trash' style='background-color: Red; color: White; padding: 4px;'></span></a>
                       </td>
                     </tr>";

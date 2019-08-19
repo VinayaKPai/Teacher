@@ -80,7 +80,11 @@ function getAll() {
 
 var classFilter = [], subjectFilter = [], topicFilter = [];
 // This function will add/remove Classes from the filtersInUse
+
+
+
 function updateFilters(sourceCheckBoxId, destinationFilterId) {
+  // alert("Start");
   document.getElementById(destinationFilterId).innerHTML = "";
   // filtersInUse
   var checkBoxList = document.getElementById(sourceCheckBoxId).getElementsByTagName("input");
@@ -110,12 +114,15 @@ function updateFilters(sourceCheckBoxId, destinationFilterId) {
     }
   }
   // console.log(classFilter);
+  // alert("Hi before");
+  ajaxCallGetTopics();
+  // alert("Hi After");
 }
 
 function addButton(destinationFilterId, filterValue) {
 
   var addButton = document.createElement("button");
-  addButton.setAttribute("id", filterValue + "filter");
+  addButton.setAttribute("id", filterValue);
   addButton.setAttribute("type", "button");
   addButton.setAttribute("class", "btn btn-info  btn-sm");
   addButton.setAttribute("aria-label", "Close");

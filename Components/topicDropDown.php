@@ -1,7 +1,7 @@
 <?php
   	include "../basecode-create_connection.php";
 
-  	$query = $mysqli->query("SELECT DISTINCT topicName FROM topics");
+  	$query = $mysqli->query("SELECT * FROM topics");
 
     //catch errors
     if ($mysqli->connect_errno) {
@@ -16,7 +16,8 @@
       while ($row = $query->fetch_assoc())  {
         {
         $tn = strip_tags($row['topicName']);
-          echo "<option id='$tn' name='$tn'>$tn</option>";
+        $tnid = $row['Id'];
+          echo "<option id='$tnid' name='$tn'>$tn</option>";
         }
       }
 

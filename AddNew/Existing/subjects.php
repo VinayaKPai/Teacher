@@ -27,19 +27,19 @@
 
 					while ($row = $query->fetch_assoc())  {
 						{
-              $rescn = strip_tags($row['Class_Number']);
+              $rescn = strip_tags($row['classId']);
 						  $slno++;
-              $cn = $row['Class_Number'];
-              $sa = $row['Section'];
-							$sb = $row['Subject'];
+              $cn = $row['classId'];
+              $sa = $row['sectionId'];
+							$sb = $row['subjectId'];
 
 						  $remIdDB = $sb.$cn.$sa;
 
               $url = "../../RemoveRecords/RemoveSubject.php?cn=".$cn."&sa=".$sa."&sb=".$sb;
 						  echo "<tr>
                       <td>".$slno."</td>
-                      <td>".($row['Class_Number'])."</td>
-                      <td>".($row['Section'])."</td>
+                      <td>".($row['classId'])."</td>
+                      <td>".($row['sectionId'])."</td>
 											<td>$sb</td>
                       <td title='Delete $cn $sa $sb from Database'>
                         <a id=$remIdDB name=$remIdDB  href='$url'><span class='glyphicon glyphicon-trash' style='background-color: Red; color: White; padding: 4px;'></span></a>

@@ -32,9 +32,9 @@ $query = $mysqli->query("SELECT * FROM topics");
 					// 	}
 					echo "<tr id=$rwcnt title=$rwcnt>
 							<td style='width: 10%; margin: 5%;'>".$rwcnt."</td>
-							<td style='width: 10%; margin: 5%;'>".$row['Subject_Name']."</td>
-							<td style='width: 10%; margin: 5%;'>".$row['Class_Number']."</td>
-							<td style='width: 25%; margin: 5%;'>".$row['Topic_Name']."</td>
+							<td style='width: 10%; margin: 5%;'>".$row['subjectId']."</td>
+							<td style='width: 10%; margin: 5%;'>".$row['classId']."</td>
+							<td style='width: 25%; margin: 5%;'>".$row['topicName']."</td>
 							<td title='Delete this topic from Database'>
 							<span class='glyphicon glyphicon-trash' style='background-color: Red; color: White; padding: 4px;'></span></td>
 						</tr>";

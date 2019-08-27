@@ -86,4 +86,54 @@
         	}
 
 }
-         //-->
+         -->
+
+function ajaxCallGetQuestions () {
+ alert("Ajax started");
+
+ var ajaxRequest;  // The variable that makes Ajax possible!
+
+ try {
+    // Opera 8.0+, Firefox, Safari
+    ajaxRequest = new XMLHttpRequest();
+ } catch (e) {
+
+    // Internet Explorer Browsers
+    try {
+       ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
+    } catch (e) {
+
+       try {
+          ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+       } catch (e) {
+          // Something went wrong
+          alert("Your browser broke!");
+          return false;
+       }
+    }
+ }
+
+ // Create a function that will receive data
+ // sent from the server and will update
+ // div section in the same page.
+ var c = document.getElementById("Class_Number").value;
+
+ var s = document.getElementById("subjectName").value;
+
+ var queryString = "/AddNew/Existing/questions.php?classNumber=" + c + "&&subjectName=" + s;
+ console.log(queryString);
+
+ ajaxRequest.onreadystatechange = function() {
+   if(ajaxRequest.readyState == 4) {
+     var ajaxReturn = ajaxRequest.responseText;
+    // var ajaxReturn = JSON.parse(ajaxRequest.responseText);
+    document.getElementById("existingQuestions").innerHTML = ajaxReturn;
+    // document.getElementById("topicName").appendChild(ajaxReturn);
+
+    // console.log(ajaxReturn);
+  }
+
+ }
+ ajaxRequest.open("GET", queryString, true);
+ ajaxRequest.send(null);
+}

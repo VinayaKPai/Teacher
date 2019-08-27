@@ -16,7 +16,8 @@
     while ($row = $query->fetch_assoc())  {
       {
         $tyn = strip_tags($row['typeName']);
-        echo "<option id='$tyn' name='$tyn'>$tyn</option>";
+        $tynid = $row['Id'];
+        echo "<option id='$tynid' name='$tyn'>$tyn</option>";
 
       }
     }

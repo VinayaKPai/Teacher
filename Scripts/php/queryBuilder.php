@@ -27,6 +27,7 @@ function addSubjectNamesToQueryString( $queryString, $classNumberExists, $select
     $queryString = $queryString."subjects.Subject = '".$selectedSubjectNames[$x]."' ";  //Adding of the class number is common to all statements, and so this will always get executed.
   }
   $queryString = $queryString.") ";
+  // echo $queryString;
   return $queryString;
 }
 
@@ -51,5 +52,4 @@ function addTypeNameToQueryString( $queryString, $classNumberExists, $subjectNam
   }
   return $queryString;
 }
-
 ?>

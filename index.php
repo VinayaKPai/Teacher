@@ -81,24 +81,25 @@
 		</div>
 		<div class="col-sm-4">
 			<h4>Activity</h4>
-			<div class="btn roundsqbtn centered dropdown" style="width: 70%;">
-				<div>Quizzes</div>
-				<div class="dropdown-content centered" style="float: center;">
-					<a href="../../SetUpPages/newQuizzes.php">Manage </a>
+			</a>
+			<a href="../../Activity/addnewassignment.php">
+				<div class="btn roundsqbtn centered dropdown" style="width: 70%;">
+					<div>Assignments</div>
+					<div class="dropdown-content centered" style="float: center;">
+					</div>
 				</div>
-			</div>
-			<div class="btn roundsqbtn centered dropdown" style="width: 70%;">
-				<div>Assignments</div>
-				<div class="dropdown-content centered" style="float: center;">
-					<a href="../../SetUpPages/newAssignments.php">Manage </a>
-				</div>
-			</div>
+			</a>
+			<a href="../../Activity/addnewtest.php">
 			<div class="btn roundsqbtn centered dropdown" style="width: 70%;">
 				<div>Tests</div>
-				<div class="dropdown-content centered" style="float: center;">
-					<a href="../../SetUpPages/newTests.php">Manage </a>
-				</div>
 			</div>
+			</a>
+			<a href="../../Activity/addnewquiz.php">
+				<div class="btn roundsqbtn centered dropdown" style="width: 70%;">
+					<div>Quizzes</div>
+					<div class="dropdown-content centered" style="float: center;">
+					</div>
+				</div>
 		</div>
 		<div class="col-sm-4 right">
 			<h4>Setup</h4>

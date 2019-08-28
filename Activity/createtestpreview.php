@@ -45,7 +45,7 @@ if ($_GET){
         <div class='col-sm-4' id='$classId' name='classId'>".$class."</div>
         <div class='col-sm-3' id='$subjectId' name='subjectId'>".$subject."</div>
         </h5>";
-        
+
 
       echo "<table>";
 
@@ -63,6 +63,24 @@ if ($_GET){
           echo "</td>";
           echo "<td name='$id'>";
             echo $row['question'];
+            if ($row['Option_1']) {
+  						echo "<li>A)".$row['Option_1']."</li>";
+  					}
+  					if ($row['Option_2']) {
+  						echo "<li>B)".$row['Option_2']."</li>";
+  					}
+  					if ($row['Option_3']) {
+  						echo "<li>C)".$row['Option_3']."</li>";
+  					}
+  					if ($row['Option_4']) {
+  						echo "<li>D)".$row['Option_4']."</li>";
+  					}
+  					if ($row['Option_5']) {
+  						echo "<li>E)".$row['Option_5']."</li>";
+  					}
+  					if ($row['Option_6']) {
+  						echo "<li>F)".$row['Option_6']."</li>";
+  					}
           echo "</td>";
           echo "<td>";
             echo $typeName;

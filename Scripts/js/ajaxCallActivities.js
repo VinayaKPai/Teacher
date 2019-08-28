@@ -92,7 +92,7 @@ function ajaxSaveTest() {
         sendTest.push(aa[i].id);
       }
     }
-
+    var inpTitle = document.getElementById("Class_Number").innerText;
     var c = document.getElementById("Class_Number").value; //remember that the db table does not hold actual class number, but the id of the class from the classes table
     var cc = document.getElementById("Class_Number").selectedIndex;
     var ccn = document.getElementById("Class_Number").options[cc].id;
@@ -106,7 +106,7 @@ function ajaxSaveTest() {
     var ssn = document.getElementById("subjectName").options[ss].id;
     var ssText = document.getElementById("subjectName").options[ss].innerHTML;
     // alert (ssn);
-var queryString = "/AddNew/addnewtest.php?saveTest=" + sendTest + "&&classId=" + ccn + "&&subjectId=" + ssn;
+var queryString = "/AddNew/addnewtest.php?saveTest=" + sendTest + "&&classId=" + ccn + "&&subjectId=" + ssn + "&&inpTitle=" + inpTitle;
 console.log(queryString);
 
 ajaxRequest.onreadystatechange = function() {

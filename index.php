@@ -89,7 +89,7 @@
 					</div>
 				</div>
 			</a>
-			<a href="../../Activity/addnewtest.php">
+			<a href="../../Activity/testModule.php">
 			<div class="btn roundsqbtn centered dropdown" style="width: 70%;">
 				<div>Tests</div>
 			</div>
@@ -97,9 +97,13 @@
 			<a href="../../Activity/addnewquiz.php">
 				<div class="btn roundsqbtn centered dropdown" style="width: 70%;">
 					<div>Quizzes</div>
-					<div class="dropdown-content centered" style="float: center;">
-					</div>
 				</div>
+			</a>
+			<a href="">
+				<div class="btn roundsqbtn centered dropdown" style="width: 70%;">
+					<div>CBSE Practice</div>
+				</div>
+			</a>
 		</div>
 		<div class="col-sm-4 right">
 			<h4>Setup</h4>

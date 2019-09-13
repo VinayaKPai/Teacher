@@ -174,5 +174,6 @@
 	</div>
 	<?php include "Components/bottom.php"; ?>
 </div>
+
   </body>
 </html>

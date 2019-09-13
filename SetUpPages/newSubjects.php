@@ -55,6 +55,8 @@
 					</div>
 				</div>
 			</div>
+
+
 			<div>
 
 				<div class="col-sm-9" style="padding: 10px;">
@@ -62,37 +64,10 @@
 					<hr>
 					<hr>
 					<form name="newSubjectForm" action="../AddNew/addnewsubject.php" method="post">
-						<label for="classNumberDG">Class/Std </label>
-						<select id="classNumberDG" name="classNumberDG" required>
-							<option id="blankcn"></option>
-							<option id="I">I</option>
-							<option id="II">II</option>
-							<option id="III">III</option>
-							<option id="IV">IV</option>
-							<option id="V">V</option>
-							<option id="VI">VI</option>
-							<option id="VII">VII</option>
-							<option id="VIII">VIII</option>
-							<option id="IX">IX</option>
-							<option id="X">X</option>
-							<option id="XI">XI</option>
-							<option id="XII">XII</option>
-						</select>
-						<label for="classNumberDG">Section: </label>
-						<select id="sectionAlphaDG" name="sectionAlphaDG" onchange="testalert('sectionAlphaDG')">
-							<option id="" value=""></option>
+						<?php $displayType = "dropdown";
+							include "../Components/classNumberDropDown.php";?>
 						<?php include "../Components/sectionAlphaDropDown.php";?>
-					</select>
-
-						<label for="classNumberDG">Subject </label>
-						<select name="subjectName" id="subjectName" required>
-						<option id="blanksa"></option>
-						<option id="English">English</option>
-						<option id="Hindi">Hindi</option>
-						<option id="Maths">Maths</option>
-						<option id="Science">Science</option>
-						<option id="SocialStudies">Social Studies</option>
-						</select>
+						<?php include "../Components/subjectDropDown.php";?>
 						<button name="Submit" id="submit" type="submit">SUBMIT</button>
 					</form>
 					<hr>

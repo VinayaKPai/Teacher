@@ -12,7 +12,7 @@
 	echo "<div>";
 
 	$slno = 0;
-	$query = $mysqli->query("SELECT * FROM classes_taught_by_teacher");
+	$query = $mysqli->query("SELECT * FROM classes_taught_by_teacher ORDER BY `classId`");
 
 				if ($query) {
 					$rowcount=mysqli_num_rows($query);
@@ -24,23 +24,35 @@
 				echo "<h4 style='color: Green; background-color: LightGrey;'>Currently <span style=$cls>$rowcount</span> Subjects </h4>" ;
 
 				if ($rowcount > 0) {
-
+          echo "<tr><th>S. No</th><th>Class</th><th>Section</th><th>Subject</th><th>Action</th></tr>";
 					while ($row = $query->fetch_assoc())  {
 						{
               $rescn = strip_tags($row['classId']);
 						  $slno++;
-              $cn = $row['classId'];
-              $sa = $row['sectionId'];
-							$sb = $row['subjectId'];
+
+              $classNum = $row['classId'];
+              $clnum = $mysqli->query("SELECT `classNumber` FROM classes WHERE `Id` = $classNum LIMIT 1");
+              $clrow = $clnum->fetch_assoc();
+              $cn = $clrow['classNumber'];
+
+              $sectionAplha = $row['sectionId'];
+              $secAlph = $mysqli->query("SELECT `Sections` FROM sections WHERE `Id` = $sectionAplha LIMIT 1");
+              $sarow = $secAlph->fetch_assoc();
+              $sa = $sarow['Sections'];
+
+              $subjectName = $row['subjectId'];
+              $subn = $mysqli->query("SELECT `Subject` FROM subjects WHERE `Id` = $subjectName LIMIT 1");
+              $srow = $subn->fetch_assoc();
+							$sb = $srow['Subject'];
 
 						  $remIdDB = $sb.$cn.$sa;
 
               $url = "../../RemoveRecords/RemoveSubject.php?cn=".$cn."&sa=".$sa."&sb=".$sb;
 						  echo "<tr>
                       <td>".$slno."</td>
-                      <td>".($row['classId'])."</td>
-                      <td>".($row['sectionId'])."</td>
-											<td>$sb</td>
+                      <td>".$cn."</td>
+                      <td>".$sa."</td>
+											<td><a href='#' style='color: #fff;'>$sb</a></td>
                       <td title='Delete $cn $sa $sb from Database'>
                         <a id=$remIdDB name=$remIdDB  href='$url'><span class='glyphicon glyphicon-trash' style='background-color: Red; color: White; padding: 4px;'></span></a>
                       </td>

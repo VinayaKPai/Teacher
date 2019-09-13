@@ -13,25 +13,23 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Teachers Tools LH - Manage Students</title>
-	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<link type="text" href="./Modals/modaltest.html"/link>
-	<link rel="stylesheet" type="text/css" href="/stylesheet.css"  />
-		<script src="../../Scripts/js/ajaxCallStudents.js"></script>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Teachers Tools LH - Manage Students</title>
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+			<link type="text" href="./Modals/modaltest.html"/link>
+		<link rel="stylesheet" type="text/css" href="/stylesheet.css"  />
+			<script src="../../Scripts/js/ajaxCallStudents.js"></script>
 
-		<script type="text/javascript">
-			var addMultiple = [];
-			var cntr = 0;
-			var satr = 0;
-
-
-		</script>
-	</head>
+			<script type="text/javascript">
+				var addMultiple = [];
+				var cntr = 0;
+				var satr = 0;
+			</script>
+		</head>
 	<body class="body">
 		<div class="container">
 			<hr>
@@ -70,13 +68,19 @@
 			</div>
 			<div class="row">
 
-				<div class="col-sm-7" style="padding: 10px;">
+				<div class="col-sm-5" style="padding: 10px;">
 					<hr>
 					<form name="newStudentForm" action="../AddNew/addnewstudent.php" method="post">
 						<div class="form-group">
 							<label for="firstName">First Name<span class="glyphicon glyphicon-asterisk" style="color: Red"></span></label> <input id="firstName" name="firstName" class="form-control" required />
 							<label for="lastName">Last Name<span class="glyphicon glyphicon-asterisk" style="color: Red"></span></label> <input id="lastName" name="lastName" class="form-control" required />
-							<label for="phoneMobile">Mobile<span class="glyphicon glyphicon-asterisk" style="color: Red"></span></label> <input id="phoneMobile" name="phoneMobile" class="form-control" />
+							<label for="phoneMobile">Mobile<span class="glyphicon glyphicon-asterisk" style="color: Red"></span></label> <input id="phoneMobile" name="phoneMobile" class="form-control" onkeyup="setTempPW(this)"/>
+							<script>
+								function setTempPW(e) {
+									var ei = e.value;
+									document.getElementById("tpw").value = ei;
+								}
+							</script>
 							<input type="button" id="chkRec" value="CHECK" onclick="ajaxChkStudentFunction()"/>
 						</div>
 						<div class="form-group">
@@ -127,34 +131,17 @@
 								<option id="2020">2020</option>
 								<option id="2021">2021</option>
 								<option id="2022">2022</option>
-							</select>
-							<label for="tpw">Assign Temp PW </label><input id="tpw" name="tpw" />
+							</select><br>
+							<label for="tpw">Assigned Temp PW </label><input id="tpw" name="tpw" disabled/>
 						</div>
 
 						<button name="Submit" id="submit" type="submit">SUBMIT</button>
 					</form>
 					<hr>
-					<div  class="row">
-						<div id="ajaxRes" class="col-sm-2">
 
-						</div>
-						<div id="remBtn" class="col-sm-5">
-
-						</div>
-						<div class="col-sm-5">
-							<div id="recsInQ" style="color: blue; font-weight: bold;">
-							</div>
-							<div class="centered">
-								<form action="../Scripts/php/addNewStudents.php" method="POST" id="addMultiplefrm">
-
-									<button id="addAll" class="btn-primary"  type="submit" style="display: none;"></button>
-								</form>
-							</div>
-						</div>
-					</div>
 				</div>
 
-				<div class="col-sm-5 centered" style="border-left: 1px solid Grey;">
+				<div class="col-sm-7 centered" style="border-left: 1px solid Grey;">
 					<?php include "../AddNew/Existing/students.php"; ?>
 
 

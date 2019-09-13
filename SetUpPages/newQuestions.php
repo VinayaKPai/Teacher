@@ -134,9 +134,6 @@
 										<div id="filtersInUse"  class="left-align" style="padding:10px;">
 											<div id="filteredClasses"  class="col-sm-4" style="padding: :10px;"></div>
 											<div id="filteredSubjects"  class="col-sm-4" style="padding: :10px;"></div>
-											<!--	<div class="col-sm-4" >
-											<button type="button"  onclick="ajaxCallGetTopics()"> Bring Topics</button>
-											</div>-->
 										</div>
 								</div>
 								<div class="panel panel-header  col-sm-12" style="padding:10px;">

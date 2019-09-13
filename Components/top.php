@@ -27,5 +27,6 @@
 			</script>
 		</a>
 		<span style="float: right;">Search</span>
+		
 	</div>
 </div>

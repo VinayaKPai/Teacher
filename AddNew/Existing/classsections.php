@@ -39,8 +39,8 @@
               $url = "../../RemoveRecords/RemoveClass.php?cn=".$cn."&sa=".$sa;
 						  echo "<tr>
                       <td>".$slno."</td>
-                      <td>".($row['classNumber'])."</td>
-                      <td>".($row['sectionAlpha'])."</td>
+                      <td><a href='#' style='color: #fff;'>".($row['classNumber'])."</a></td>
+                      <td><a href='#' style='color: #fff;'>".($row['sectionAlpha'])."</a></td>
                       <td title='Delete $cn $sa from Database'>
                         <a id=$remIdDB name=$remIdDB  href='$url'><span class='glyphicon glyphicon-trash' style='background-color: Red; color: White; padding: 4px;'></span></a>
                       </td>

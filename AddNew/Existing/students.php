@@ -9,11 +9,10 @@
 	//Script to display existing classes and sections in the class section table
 	include "../basecode-create_connection.php";
 
-	echo "<div>";
+	// echo "<div>";
 
 	$slno = 0;
 	$query = $mysqli->query("SELECT * FROM studentdetails");
-
 				if ($query) {
 					$rowcount=mysqli_num_rows($query);
           if ($rowcount > 0) {
@@ -24,20 +23,25 @@
 				echo "<h4 class='topbanner'>Currently $rowcount Students in your setup</h4>" ;
 
 				if ($rowcount > 0) {
-          echo "<tr><th>SNo</th><th>Name</th><th>Email</th><th>Phone</th><th>Action</th></tr>";
+          echo "<tr><th>SNo</th><th>Name</th><th>Class/STD</th><th>Email</th><th>Phone</th><th>Action</th></tr>";
 					while ($row = $query->fetch_assoc())  {
 						{
               $rescn = strip_tags($row['firstName']);
 						  $slno++;
               $fn = $row['firstName'];
               $ln = $row['lastName'];
+              $classNum = $row['classNumber'];
+              $clnum = $mysqli->query("SELECT `classNumber` FROM classes WHERE `Id` = $classNum LIMIT 1");
+              $clrow = $clnum->fetch_assoc();
+              $cn = $clrow['classNumber'];
               $pm = $row['phoneMobile'];
 						  $remIdDB = $row['firstName']."-".$row['lastName'].$row['phoneMobile'];
 
               $url = "../../RemoveRecords/RemoveStudent.php?fn=".$fn."&ln=".$ln."&pm=".$pm;
 						  echo "<tr>
                       <td>".$slno."</td>
-											<td>".$fn." ".$ln."</td>
+											<td><a href='#' style='color: #fff;'>".$fn." ".$ln."</a></td>
+                      <td>".$cn."</td>
                       <td>".$row['systemEmail']."</td>
                       <td>".$row['phoneMobile']."</td>
                       <td>
@@ -53,7 +57,7 @@
 					echo "Looks like your set up has not been started. Please add student details to the database, so that you can get the benefit of all the features of the App";
 				}
 
-	echo "</div>";
+	// echo "</div>";
 	mysqli_close($mysqli);
 ?>
 </table>

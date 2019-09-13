@@ -23,9 +23,9 @@
 				}
 			}
 			echo "</div>";
-			echo "<div class='col-sm-3'>";
-			echo "Start Date <input name=$testId type='date' />";
-			echo "<button id=$testId onclick='deploy(this)'>Deploy</button></h5>";
+			echo "<div class='col-sm-3 small'>";
+			echo "Start Date <input class='small' name=$testId type='date' />";
+			echo "<button class='small' id=$testId onclick='deploy(this)'>Deploy</button></h5>";
 			echo "</div>";
 			echo "</div>";
 					$qs = explode(",",$row['questions']);
@@ -35,7 +35,7 @@
 					}
 					$qss = $qss."`Id` = ".$qs[count($qs)-1];
 					$qquery = $mysqli->query("SELECT `question`,`Option_1`,`Option_2`,`Option_3`,`Option_4`,`Option_5`,`Option_6` FROM questionbank WHERE  $qss");
-			echo "<div class='jumbotron'>";
+			echo "<div class='jumbotron small'>";
 			$qno = 0;
 				while ($qrow=$qquery->fetch_assoc()) {
 					$qno = $qno + 1;

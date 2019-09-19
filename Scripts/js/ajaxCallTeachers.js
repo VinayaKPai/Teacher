@@ -1,7 +1,7 @@
 //--------------------------------------------AJAX STARTS----------------------------------------------------------------------
          <!--
 //--------------------------------------Browser Support Code-------------------------------------------------------------------
-		 function ajaxCallStudents(t,p) {
+		 function ajaxCallTeachers(t,p) {
        // alert (t+p);
             var ajaxRequest;  // The variable that makes Ajax possible!
 
@@ -41,7 +41,7 @@
 
             }
 
-            var queryString = "/Scripts/php/singleStudentDetails.php?studentId=" + t;
+            var queryString = "/Scripts/php/singleTeacherClasses.php?teacherId=" + t;
 console.log(queryString);
             ajaxRequest.open("GET", queryString, true);
             ajaxRequest.send(null);
@@ -50,7 +50,7 @@ console.log(queryString);
          }
          //-->
 
-     function ajaxCallExploreStudent(i) {
+     function ajaxCallExploreItem(i) {
        // var item = document.getElementById(i.id);
         // alert (i);
         var arr = i.split(" ");
@@ -104,7 +104,7 @@ console.log(queryString);
 
             }
 
-            var queryString = "/Scripts/php/exploreStudent.php?studentId=" + tc;
+            var queryString = "/Scripts/php/exploreTeacher.php?teacherId=" + tc + "&&classNumber=" + cl + "&&sectionAlpha=" + se ;
   console.log(queryString);
             ajaxRequest.open("GET", queryString, true);
             ajaxRequest.send(null);

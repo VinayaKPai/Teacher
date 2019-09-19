@@ -3,7 +3,7 @@
 	include "../basecode-create_connection.php";
 
 	$pageHeading = "Set Up your Subjects";
-
+	$pageCode = "setup";
 ?>
 
 
@@ -92,7 +92,7 @@
 					<?php include "../AddNew/Existing/subjects.php"; ?>
 
 
-					<div id="status">Statuc</div>
+					<div id="status"></div>
 				</div>
 <hr>
 		</div>

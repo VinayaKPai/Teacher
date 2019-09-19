@@ -36,7 +36,7 @@ if (!isset($displayType)) {
         echo "<label for='subjectName'>Subject <select name='subjectName' id='subjectName'><option></option>";
         while ($row = $query->fetch_assoc())  {
           $sn = strip_tags($row['Subject']);
-          $snid = $row['Id'];
+          $snid = $row['subjectId'];
             echo "<option id='$snid' value='$snid'>".$sn."</option>";
         }
         echo "</select></label>";

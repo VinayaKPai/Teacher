@@ -1,5 +1,6 @@
 <?php include "basecode-create_connection.php";
 	$pageHeading = "Teachers Tool logged in as <span class='loggedin'>Guest</span>" ;
+	$pageCode = "index";
 ?>
 
 
@@ -38,9 +39,11 @@
 	<div class="row grid-container centered" style="flex-wrap: wrap; padding: 5px;">
 		<div class="col-sm-4" style="border-right: 1px solid #64485C;">
 			<h4>Reports</h4>
-			<div class="btn roundsqbtn centered dropdown" style="width: 70%;">
-				<div>Reports</div>
-			</div>
+			<a href="/SetUpPages/newReports.php">
+				<div class="btn roundsqbtn centered dropdown" style="width: 70%;">
+					<div>Reports</div>
+				</div>
+			</a>
 			<hr style="border-top: 1px solid maroon;"/>
 			<div class="centered">
 					<h4>Run Reports</h4>
@@ -99,7 +102,7 @@
 					<div>Quizzes</div>
 				</div>
 			</a>
-			<a href="">
+			<a href="../../Activity/cbsepractice.php">
 				<div class="btn roundsqbtn centered dropdown" style="width: 70%;">
 					<div>CBSE Practice</div>
 				</div>
@@ -107,65 +110,39 @@
 		</div>
 		<div class="col-sm-4 right">
 			<h4>Setup</h4>
-			<a href="../../SetUpPages/newclasssections.php">
+			<a href="../../SetUpPages/newTeachers.php">
+					<div class="btn roundsqbtn centered dropdown" style="float: center; width: 70%;">
+						<div>Teachers</div>
+					</div>
+				</a>
+			<a href="../../SetUpPages/newclasses_taught_by_teachers.php">
 					<div class="btn roundsqbtn centered dropdown" style="float: center; width: 70%;">
 						<div>Classes Sections</div>
-						<!-- <div class="dropdown-content centered">
-							<a href="../../SetUpPages/newclasssections.php">Manage </a>
-						</div> -->
 					</div>
 				</a>
 			<a href="../../SetUpPages/newSubjects.php">
 					<div class="btn roundsqbtn centered dropdown" style="float: center; width: 70%;">
 						<div>Subjects</div>
-						<!-- <div class="dropdown-content centered">
-							<a href="../../SetUpPages/newSubjects.php">Manage </a>
-						</div> -->
 					</div>
 				</a>
 			<a href="../../SetUpPages/newUnits.php">
 					<div class="btn roundsqbtn centered dropdown" style="float: center; width: 70%;">
 						<div>Units</div>
-						<!-- <div class="dropdown-content centered">
-							<a href="../../SetUpPages/newUnits.php">Manage </a>
-						</div> -->
 					</div>
 				</a>
 			<a href="../../SetUpPages/newTopics.php">
 				<div class="btn roundsqbtn centered dropdown" style="float: center; width: 70%;">
 						<div>Topics</div>
-						<!-- <div class="dropdown-content centered">
-							<a href="../../SetUpPages/newTopics.php">Manage </a>
-						</div> -->
-					</div>
+				</div>
 			</a>
 			<a href="../../SetUpPages/newQuestions.php">
 					<div class="btn roundsqbtn centered dropdown" style="float: center; width: 70%;">
 						<div>Question Bank</div>
-						<!-- <div class="dropdown-content">
-							<ul style="list-style-type: none;">
-								<li><a href="../../SetUpPages/newQuestions.php">Manage </a></li>
-								<?php include "basecode-create_connection.php";
-										$query = $mysqli->query("SELECT DISTINCT classNumber FROM classsections");
-										while ($row = $query->fetch_assoc())  {
-							        {
-							          $cn = strip_tags($row['classNumber']);
-							          echo "<a href='../../SetUpPages/newQuestions.php?cn=$cn'><li id='$cn' class='centered' name='$cn'>$cn</li></a>";
-
-							        }
-							      }
-								?>
-							</ul>
-
-						</div> -->
 					</div>
 			</a>
 			<a href="../../SetUpPages/newStudents.php">
 					<div class="btn roundsqbtn centered dropdown" style="float: center; width: 70%;">
 						<div>Students</div>
-						<!-- <div class="dropdown-content centered">
-							<a href="../../SetUpPages/newStudents.php">Manage </a>
-						</div> -->
 					</div>
 				</a>
 		</div>

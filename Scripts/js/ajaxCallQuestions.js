@@ -116,7 +116,7 @@ function ajaxCallGetQuestions () {
  // Create a function that will receive data
  // sent from the server and will update
  // div section in the same page.
- var c = document.getElementById("Class_Number").value;
+ var c = document.getElementById("classNumber").value;
 
  var s = document.getElementById("subjectName").value;
 

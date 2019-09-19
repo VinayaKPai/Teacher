@@ -8,7 +8,7 @@ if (!isset($displayType)) {
 }
 
 
-  	$query = $mysqli->query("SELECT * FROM classes ORDER BY `Id` ASC");
+  	$query = $mysqli->query("SELECT * FROM classes ORDER BY `classId` ASC");
 
     //catch errors
     if ($mysqli->connect_errno) {
@@ -27,16 +27,16 @@ if (!isset($displayType)) {
         while ($row = $query->fetch_assoc())  {
           {
             $cn = strip_tags($row['classNumber']);
-            $cn = strip_tags($row['Id']);
+            $cn = strip_tags($row['classId']);
             echo "<label for='$cn'><input id='$cn' type='checkbox' name='classNumber[$cn]' aria-label='$cn' style='margin: 10px;' onclick='updateFilters(\"classSelectBoxes\",\"filteredClasses\");' value='$cn'>$cn</label>";
           }
         }
       }
       if ($displayType=="dropdown"){
-        echo "<label for='Class_Number'>Class/STD   <select name='Class_Number' id='Class_Number'><option></option>";
+        echo "<label for='classNumber'>Class/STD   <select name='classNumber' id='classNumber'><option></option>";
         while ($row = $query->fetch_assoc())  {
           $cn = strip_tags($row['classNumber']);
-          $cnid = $row['Id'];
+          $cnid = $row['classId'];
             echo "<option id='$cnid' value='$cnid'>".$cn."</option>";
         }
         echo "</select></label>";

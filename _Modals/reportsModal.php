@@ -22,7 +22,7 @@
 				  <div id="ClassSectionReport" style="display: none;">
 					  <?php 
 					  	echo "PHP REPORT FOR CLASS SECTION"; 
-					  	$query = $mysqli->query("SELECT * FROM classsections");
+					  	$query = $mysqli->query("SELECT * FROM classes_taught_by_teachers");
 						  if ($query) {
 								echo "<h6>CLASS SECTION Table found</h6>";
 								$rowcount=mysqli_num_rows($query);
@@ -31,7 +31,7 @@
 					  ?>
 					  <?php
 							echo "<p>The following classes and sections are already set up in the database</p>";
-							$query = $mysqli->query("SELECT * FROM classsections");
+							$query = $mysqli->query("SELECT * FROM classes_taught_by_teachers");
 
 									if ($query) {
 										while ($row = $query->fetch_assoc())  {

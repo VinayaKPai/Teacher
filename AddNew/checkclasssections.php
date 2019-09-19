@@ -13,7 +13,7 @@ $sectionAlpha = $_GET['sectionAlpha'];
 $sectionAlpha = $mysqli->real_escape_string($sectionAlpha);
 
 //queries the db/table for a row matching the parameters from the url
-$query = $mysqli->query("SELECT * FROM classsections WHERE classNumber = '$classNumber' AND sectionAlpha = '$sectionAlpha'");
+$query = $mysqli->query("SELECT * FROM classes_taught_by_teachers WHERE classNumber = '$classNumber' AND sectionAlpha = '$sectionAlpha'");
 
 	$rowcount=mysqli_num_rows($query); //number of results returned by the query - either 0 (if not present) or 1 (if present)
 	$row=mysqli_fetch_assoc($query);	//fetch all columns of the query results

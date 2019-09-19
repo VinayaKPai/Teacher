@@ -9,7 +9,7 @@ function addClassNumbersToQueryString( $queryString, $selectedClassNumbers ) {
           if($x > 0) {
             $queryString = $queryString."OR ";  //The OR needs to be added to the statement only if there are more than 1 selected entries
           }
-          $queryString = $queryString."classes.Class_Number = '".$selectedClassNumbers[$x]."' ";  //Adding of the class number is common to all statements, and so this will always get executed.
+          $queryString = $queryString."classes.classNumber = '".$selectedClassNumbers[$x]."' ";  //Adding of the class number is common to all statements, and so this will always get executed.
   }
   $queryString = $queryString.") ";
   return $queryString;

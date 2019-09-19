@@ -56,7 +56,7 @@
 			  </div>
 
 		  <div id="chk" class="col-sm-6" style="border: 1px solid Grey;">
-			<?php include "./AddNew/Existing/classsections.php"; ?>
+			<?php include "./AddNew/Existing/classes_taught_by_teachers.php"; ?>
 		  </div>
 		</div>
       <div class="modal-footer">

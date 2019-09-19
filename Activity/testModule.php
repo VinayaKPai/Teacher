@@ -35,8 +35,6 @@
 				  <li><a data-toggle="tab" href="#savedTests">All Saved Tests</a></li>
 				  <li><a data-toggle="tab" href="#previousTests">Previously Administered Tests</a></li>
 				</ul>
-
-
 				<div class="tab-content">
 					<div id="createNewTests" class="tab-pane fade in active">
 						<hr>

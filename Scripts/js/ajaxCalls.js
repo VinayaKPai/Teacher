@@ -38,7 +38,7 @@
 				   if(ajaxRequest.readyState == 4) {
 
 					  var ajaxReturn = JSON.parse(ajaxRequest.responseText);	//ajaxRequest.responseText contains the result of the query send by this function (LOOK FOR IT at the bottom of this function where "queryString" is present.
-            //relevant code that sends the response is in checkclasssections.php
+            //relevant code that sends the response is in checkclasses_taught_by_teachers.php
             //should hold 1 key value pair if exists
 //alert (ajaxReturn); //a test to check the response that is coming from the response text - the drop downs still hold the selections that were captured as className and sectionAlpha
 					  var ajaxResponse = document.getElementById('ajaxRes');	//div that will display the response to user
@@ -97,7 +97,7 @@
 								//add the selections to an array for further processing
 								var newRowData = {classNumber , sectionAlpha };	//create an object of 2 key value pairs
 
-                //addMultipleis defined in the calling file ie newClasssections.php
+                //addMultipleis defined in the calling file ie newclasses_taught_by_teachers.php
 								addMultiple.push(newRowData);										//push the object into the array that holds records q'd for insertion to db
 
 								var arrayPopulation = (addMultiple.length);
@@ -146,7 +146,7 @@
       var classNumber = document.getElementById('classNumber').value;
 			var sectionAlpha = document.getElementById('sectionAlpha').value;
 			if (classNumber && sectionAlpha) {
-            var queryString = "/AddNew/checkclasssections.php?classNumber=" + classNumber + "&&sectionAlpha=" + sectionAlpha ;
+            var queryString = "/AddNew/checkclasses_taught_by_teachers.php?classNumber=" + classNumber + "&&sectionAlpha=" + sectionAlpha ;
 
             ajaxRequest.open("GET", queryString, true);
             ajaxRequest.send(null);

@@ -27,10 +27,10 @@ function ajaxCallGetQuestionsForTest () {
  // Create a function that will receive data
  // sent from the server and will update
  // div section in the same page.
- var c = document.getElementById("Class_Number").value; //remember that the db table does not hold actual class number, but the id of the class from the classes table
- var cc = document.getElementById("Class_Number").selectedIndex;
- var ccn = document.getElementById("Class_Number").options[cc].id;
- var ccText = document.getElementById("Class_Number").options[cc].innerHTML;
+ var c = document.getElementById("classNumber").value; //remember that the db table does not hold actual class number, but the id of the class from the classes table
+ var cc = document.getElementById("classNumber").selectedIndex;
+ var ccn = document.getElementById("classNumber").options[cc].id;
+ var ccText = document.getElementById("classNumber").options[cc].innerHTML;
  alert (ccn);
 
 
@@ -92,11 +92,11 @@ function ajaxSaveTest() {
         sendTest.push(aa[i].id);
       }
     }
-    var inpTitle = document.getElementById("Class_Number").innerText;
-    var c = document.getElementById("Class_Number").value; //remember that the db table does not hold actual class number, but the id of the class from the classes table
-    var cc = document.getElementById("Class_Number").selectedIndex;
-    var ccn = document.getElementById("Class_Number").options[cc].id;
-    var ccText = document.getElementById("Class_Number").options[cc].innerHTML;
+    var inpTitle = document.getElementById("classNumber").innerText;
+    var c = document.getElementById("classNumber").value; //remember that the db table does not hold actual class number, but the id of the class from the classes table
+    var cc = document.getElementById("classNumber").selectedIndex;
+    var ccn = document.getElementById("classNumber").options[cc].id;
+    var ccText = document.getElementById("classNumber").options[cc].innerHTML;
     // alert (ccn);
 
 
@@ -124,3 +124,54 @@ ajaxRequest.open("POST", queryString, true);
 ajaxRequest.send(null);
 
 }
+
+
+
+  function deploy(e) {
+    var ajaxRequest;  // The variable that makes Ajax possible!
+
+    try {
+       // Opera 8.0+, Firefox, Safari
+       ajaxRequest = new XMLHttpRequest();
+    } catch (e) {
+
+       // Internet Explorer Browsers
+       try {
+          ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
+       } catch (e) {
+
+          try {
+             ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+          } catch (e) {
+             // Something went wrong
+             alert("Your browser broke!");
+             return false;
+          }
+       }
+    }
+
+    var dt = document.getElementsByName(e.id)[0].value;
+    var msg;
+    alert (e.id + dt);
+    if (!dt) {
+      dt = "Date less";
+      msg = (" cannot be deployed " + dt);
+    }
+    else { msg = " to be deployed on "+dt;}
+    alert ("Test Papar " + e.id + msg);
+
+
+    var queryString = "/Activity/deploytest.php?depTest=" + e.id + "&&dateToDeploy=" + dt;
+    console.log(queryString);
+
+    ajaxRequest.onreadystatechange = function() {
+      if(ajaxRequest.readyState == 4) {
+        var ajaxReturn = ajaxRequest.responseText;
+       alert (ajaxReturn);
+       
+     }
+
+    }
+    ajaxRequest.open("GET", queryString, true);
+    ajaxRequest.send(null);
+  }

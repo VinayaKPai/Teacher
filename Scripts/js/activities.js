@@ -28,12 +28,3 @@ function addToPreview(e) {
 
     }
   }
-
-  function deploy(e) {
-    var dt = document.getElementsByName(e.id)[0].value;
-    if (dt=="" || dt==NULL) {
-      dt = "Date less";
-    }
-
-    alert ("Test Papar " + e.id + " to be deployed on "+dt);
-  }

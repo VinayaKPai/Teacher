@@ -4,7 +4,7 @@
 
 
 	$pageHeading = "Set Up your Classes and Sections";
-
+	$pageCode = "setup";
 ?>
 
 
@@ -108,10 +108,10 @@
 				</div>
 
 				<div class="col-sm-3 centered" style="border-left: 1px solid Grey;">
-					<?php include $_SERVER['DOCUMENT_ROOT']."/AddNew/Existing/classsections.php"; ?>
+					<?php include $_SERVER['DOCUMENT_ROOT']."/AddNew/Existing/classes_taught_by_teachers.php"; ?>
 
 
-					<div id="status">Statuc</div>
+					<div id="status"></div>
 				</div>
 <hr>
 		</div>

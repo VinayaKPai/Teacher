@@ -1,21 +1,31 @@
 <?php include "../basecode-create_connection.php";
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 session_start();
 print_r($_POST);
 //Adding a single record
-if (isset($_POST["classNumber"]) && !empty($_POST["classNumber"]) && isset($_POST["sectionAlpha"]) && !empty($_POST["sectionAlpha"])) {
+if (isset($_POST["classNumber"]) && !empty($_POST["classNumber"]) && isset($_POST["sectionAlpha"]) && !empty($_POST["sectionAlpha"]) && isset($_POST["subjectName"]) && !empty($_POST["subjectName"]) && isset($_POST["teacherId"]) && !empty($_POST["teacherId"])) {
 	$classNumber = $_POST["classNumber"];
 	$classNumberSafe = $mysqli->real_escape_string($classNumber);
+
 
 	$sectionAlpha = $_POST["sectionAlpha"];
 	$sectionAlphaSafe = $mysqli->real_escape_string($sectionAlpha);
 
-	$query = $mysqli->query("SELECT * FROM classes_taught_by_teachers");
+
+	$subjectName = $_POST["subjectName"];
+	$subjectNameSafe = $mysqli->real_escape_string($subjectName);
 
 
-	// // prepare and bind
-	$newId = $classNumberSafe.$sectionAlphaSafe;
-	$stmt = $mysqli->prepare("INSERT INTO classes_taught_by_teachers (classNumber, sectionAlpha) VALUES (?, ?)");
-	$stmt->bind_param("ss", $classNumberSafe, $sectionAlphaSafe);
+	$teacherId = $_POST["teacherId"];
+	$teacherIdSafe = $mysqli->real_escape_string($teacherId);
+
+
+	// $query = $mysqli->query("SELECT * FROM classes_taught_by_teachers");
+
+
+	$stmt = $mysqli->prepare("INSERT INTO `classes_taught_by_teacher` (`ctt_teacherId`, `ctt_classId`, `ctt_sectionId`, `ctt_subjectId`) VALUES (?, ?, ?, ?)");
+	$stmt->bind_param("iiii", $teacherIdSafe, $classNumberSafe, $sectionAlphaSafe, $subjectNameSafe);
 
 	$stmt->execute();
 }
@@ -38,5 +48,5 @@ $mysqli->close();
 //Adding multiple records
 // if (isset($_POST["classNumber"]) && !empty($_POST["classNumber"]) && isset($_POST["sectionAlpha"]) && !empty($_POST["sectionAlpha"])) {}
 
-	{header('Location: ../SetUpPages/newclasses_taught_by_teachers.php');}
+	{header('Location: ../SetUpPages/newteachers.php');}
 ?>

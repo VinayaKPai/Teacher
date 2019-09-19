@@ -81,20 +81,20 @@ INSERT INTO `classes_taught_by_teacher` (`Id`, `teacherId`, `classId`, `sectionI
 -- --------------------------------------------------------
 
 --
--- Table structure for table `classsections`
+-- Table structure for table `classes_taught_by_teachers`
 --
 
-CREATE TABLE `classsections` (
+CREATE TABLE `classes_taught_by_teachers` (
   `Id` int(11) NOT NULL,
   `classNumber` varchar(4) NOT NULL,
   `sectionAlpha` varchar(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `classsections`
+-- Dumping data for table `classes_taught_by_teachers`
 --
 
-INSERT INTO `classsections` (`Id`, `classNumber`, `sectionAlpha`) VALUES
+INSERT INTO `classes_taught_by_teachers` (`Id`, `classNumber`, `sectionAlpha`) VALUES
 (1, 'I', 'A'),
 (2, 'I', 'B'),
 (3, 'I', 'C'),
@@ -807,26 +807,27 @@ INSERT INTO `subjects` (`Id`, `Subject`) VALUES
 --
 
 CREATE TABLE `teachers` (
-  `id` int(11) NOT NULL,
-  `First Name` varchar(25) NOT NULL,
-  `Middle Name` varchar(25) DEFAULT NULL,
-  `Last Name` varchar(25) NOT NULL,
-  `Email` varchar(50) NOT NULL,
-  `Phone Number` varchar(50) NOT NULL
+  `tid` int(11) NOT NULL,
+  `tc_firstName` varchar(25) NOT NULL,
+  `tc_middleName` varchar(25) DEFAULT NULL,
+  `tc_lastName` varchar(25) NOT NULL,
+  `tc_email` varchar(50) NOT NULL,
+  `tc_systemEmail` varchar(50) NOT NULL,
+  `tc_phoneMobile` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `teachers`
 --
 
-INSERT INTO `teachers` (`id`, `First Name`, `Middle Name`, `Last Name`, `Email`, `Phone Number`) VALUES
-(1, 'Haradi Keshav', NULL, 'Pai', 'hkeshavpai@gmail.com', '+919611907001'),
-(2, 'Haradi Aditya', NULL, 'Pai', 'adityapai@y7mail.com', '+917619118922/+46735147171'),
-(3, 'Haradi Abhijit', NULL, 'Pai', 'apai1993@gmail.com', '+919663304791'),
-(4, 'Vinaya Keshav', NULL, 'Pai', 'vinayakeshavpai@gmail.com', '+919663304792'),
-(5, 'Kavya Pai', NULL, 'T', 'kavyapai28@gmail.com', '+916366856667'),
-(6, 'Vasanta', 'Sudhakar', 'Rao', 'vinayapai@hotmail.com', '+919611907001mamama'),
-(7, 'Anita', 'Sudhakar', 'Rao', 'vkaapai@yahoo.com', '+919611907001pachi');
+INSERT INTO `teachers` (`tid`, `tc_firstName`, `tc_middleName`, `tc_lastName`, `tc_email`, `tc_systemEmail`, `tc_phoneMobile`) VALUES
+(1, 'Haradi', 'Keshav', 'Pai', 'hkeshavpai@gmail.com', 'HaradiKeshavPai@mydomain.com','+919611907001'),
+(2, 'Haradi', 'Aditya', 'Pai', 'adityapai@y7mail.com', 'HaradiAdityaPai@mydomain.com', '+917619118922/+46735147171'),
+(3, 'Haradi', 'Abhijit', 'Pai', 'apai1993@gmail.com', 'HaradiAbhijitPai@mydomain.com','+919663304791'),
+(4, 'Vinaya', 'Keshav', 'Pai', 'vinayakeshavpai@gmail.com', 'VinayaKeshavPai@mydomain.com','+919663304792'),
+(5, 'Kavya', 'Pai', 'T', 'kavyapai28@gmail.com', 'KavyaPaiT@mydomain.com','+916366856667'),
+(6, 'Vasanta', 'Sudhakar', 'Rao', 'vinayapai@hotmail.com', 'VasantaSudhakarRao@mydomain.com','+919611907001mamama'),
+(7, 'Anita', 'Sudhakar', 'Rao', 'vkaapai@yahoo.com', 'AnitaSudhakarRao@mydomain.com','+919611907001pachi');
 
 -- --------------------------------------------------------
 
@@ -902,9 +903,9 @@ ALTER TABLE `classes_taught_by_teacher`
   ADD KEY `Subject` (`subjectId`);
 
 --
--- Indexes for table `classsections`
+-- Indexes for table `classes_taught_by_teachers`
 --
-ALTER TABLE `classsections`
+ALTER TABLE `classes_taught_by_teachers`
   ADD PRIMARY KEY (`Id`),
   ADD UNIQUE KEY `classNumber` (`classNumber`,`sectionAlpha`);
 
@@ -980,9 +981,9 @@ ALTER TABLE `classes_taught_by_teacher`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `classsections`
+-- AUTO_INCREMENT for table `classes_taught_by_teachers`
 --
-ALTER TABLE `classsections`
+ALTER TABLE `classes_taught_by_teachers`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --

@@ -2,7 +2,7 @@
 	include "../basecode-create_connection.php";
 
 	$pageHeading = "Set Up your Question Bank";
-
+	$pageCode = "setup";
 ?>
 
 

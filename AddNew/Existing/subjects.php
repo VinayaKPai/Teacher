@@ -12,7 +12,7 @@
 	echo "<div>";
 
 	$slno = 0;
-	$query = $mysqli->query("SELECT * FROM classes_taught_by_teacher ORDER BY `classId`");
+	$query = $mysqli->query("SELECT * FROM classes_taught_by_teacher ORDER BY `ctt_classId`");
 
 				if ($query) {
 					$rowcount=mysqli_num_rows($query);
@@ -27,21 +27,21 @@
           echo "<tr><th>S. No</th><th>Class</th><th>Section</th><th>Subject</th><th>Action</th></tr>";
 					while ($row = $query->fetch_assoc())  {
 						{
-              $rescn = strip_tags($row['classId']);
+              $rescn = strip_tags($row['ctt_classId']);
 						  $slno++;
 
-              $classNum = $row['classId'];
-              $clnum = $mysqli->query("SELECT `classNumber` FROM classes WHERE `Id` = $classNum LIMIT 1");
+              $classNum = $row['ctt_classId'];
+              $clnum = $mysqli->query("SELECT `classNumber` FROM classes WHERE `classId` = $classNum LIMIT 1");
               $clrow = $clnum->fetch_assoc();
               $cn = $clrow['classNumber'];
 
-              $sectionAplha = $row['sectionId'];
-              $secAlph = $mysqli->query("SELECT `Sections` FROM sections WHERE `Id` = $sectionAplha LIMIT 1");
+              $sectionAplha = $row['ctt_sectionId'];
+              $secAlph = $mysqli->query("SELECT `Sections` FROM sections WHERE `sectionId` = $sectionAplha LIMIT 1");
               $sarow = $secAlph->fetch_assoc();
               $sa = $sarow['Sections'];
 
-              $subjectName = $row['subjectId'];
-              $subn = $mysqli->query("SELECT `Subject` FROM subjects WHERE `Id` = $subjectName LIMIT 1");
+              $subjectName = $row['ctt_subjectId'];
+              $subn = $mysqli->query("SELECT `Subject` FROM subjects WHERE `subjectId` = $subjectName LIMIT 1");
               $srow = $subn->fetch_assoc();
 							$sb = $srow['Subject'];
 

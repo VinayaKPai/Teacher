@@ -5,7 +5,7 @@
 $remId = $_GET['cn'].$_GET['sa'];
 
 
-$query = ("DELETE FROM classsections WHERE Id = '$remId'");
+$query = ("DELETE FROM classes_taught_by_teachers WHERE Id = '$remId'");
 $mysqli->query($query);
 $effRows = mysqli_affected_rows($mysqli);
 
@@ -22,5 +22,5 @@ else {
 
 // $stmt->close();
 $mysqli->close();
-	{header('Location: ../SetUpPages/newClasssections.php');}
+	{header('Location: ../SetUpPages/newclasses_taught_by_teachers.php');}
 ?>

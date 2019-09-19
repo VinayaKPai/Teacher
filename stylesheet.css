@@ -27,6 +27,9 @@ table td {text-align: center;}
 .grid-container {
 	background-color: #F5F5F5;
 }
+.modal-dialog  {
+  width: 75%;
+}
 .headingcolor {
 	background: #DEB887;
 }

@@ -23,12 +23,12 @@ if ($_GET){
       $subjectId =  $_GET['subjectName'];
 
 
-      $classQuery = $mysqli->query("SELECT * FROM `classes` WHERE `id` = $classId");
+      $classQuery = $mysqli->query("SELECT * FROM `classes` WHERE `classId` = $classId");
       $classRow = $classQuery->fetch_assoc();
       $class =  $classRow['classNumber'];
 
 
-      $subjectQuery = $mysqli->query("SELECT * FROM `subjects` WHERE `id` = $subjectId");
+      $subjectQuery = $mysqli->query("SELECT * FROM `subjects` WHERE `subjectId` = $subjectId");
       $subjectRow = $subjectQuery->fetch_assoc();
       $subject = $subjectRow['Subject'];
 
@@ -36,7 +36,7 @@ if ($_GET){
       $typeQuery = $mysqli->query("SELECT * FROM `questiontype`");
       $typeRow = $typeQuery->fetch_assoc();
 
-      $queryString = $mysqli->query("SELECT `Id`, `topicId`, `typeId`, `question`, `Option_1`, `Option_2`, `Option_3`, `Option_4`, `Option_5`, `Option_6` FROM `questionbank` WHERE `classId` = $classId AND `subjectId` = $subjectId");
+      $queryString = $mysqli->query("SELECT `qId`, `qb_topicId`, `qb_typeId`, `question`, `Option_1`, `Option_2`, `Option_3`, `Option_4`, `Option_5`, `Option_6` FROM `questionbank` WHERE `qb_classId` = $classId AND `qb_subjectId` = $subjectId");
 
 
       echo "<hr>
@@ -50,10 +50,10 @@ if ($_GET){
       echo "<table>";
 
       while ($row=$queryString->fetch_assoc()) {
-            $id = $row['Id'];
+            $id = $row['qId'];
             $typeName = '';
             for ($i=0;$i<mysqli_num_rows($typeQuery);$i++) {
-              if ($typeRow['Id']==$row['typeId']) {
+              if ($typeRow['qtId']==$row['typeId']) {
                 $typeName = $typeRow['typeName'];
               }
         }

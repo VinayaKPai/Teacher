@@ -1,8 +1,11 @@
 <?php
 	//include "basecode-create_connection.php";
 	include "../basecode-create_connection.php";
-
-	$pageHeading = "Set Up New Students";
+	//include "../RemoveRecords/RemoveClass.php";
+	//include "../Scripts/php/addNewClasses.php";
+//	include "../RemoveRecords/RemoveClass.php";
+	// include "../_Modals/teacherModal.php";
+	$pageHeading = "Set Up New Teachers";
 	$pageCode = "setup";
 ?>
 
@@ -12,7 +15,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Teachers Tools LH - Manage Students</title>
+		<title>Teachers Tools LH - Manage Teachers</title>
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -28,25 +31,25 @@
 				var satr = 0;
 				function modalclick(e) {
 					// alert ("Id is "+e.id);
-					document.getElementById("studentName").innerText = e.innerText;
+					document.getElementById("teacherName").innerText = e.innerText;
 					document.getElementById("modalSpan").innerText = e.innerText;
 
-					document.getElementById("studentId").value = e.id;
+					document.getElementById("teacherId").value = e.id;
 					document.getElementById("classNumber").value = "";
 					document.getElementById("sectionAlpha").value = "";
-					// document.getElementById("subjectName").value = "";
+					document.getElementById("subjectName").value = "";
 
-					ajaxCallStudents(e.id,e.innerText);
+					ajaxCallTeachers(e.id,e.innerText);
 				}
 				function clickalert(c) {
 					alert (c.id);
 				}
 				function exploreclick(b) {
-					$('#studentModal').modal('hide');
+					$('#teacherModal').modal('hide');
 					// alert (b.innerText);
 					document.getElementById("exploreItem").innerText = b.innerText;
 					document.getElementById("exploreSpan").innerText = b.innerText;
-					ajaxCallExploreStudent(b.id);
+					ajaxCallExploreItem(b.id);
 				}
 			</script>
 		</head>
@@ -89,7 +92,7 @@
 			<div class="row">
 				<div class="col-sm-3" style="padding: 10px;">
 					<hr>
-					<form name="newStudentForm" action="../AddNew/addnewstudent.php" method="post">
+					<form name="newTeacherForm" action="../AddNew/addnewteacher.php" method="post">
 						<div class="form-group">
 							<label for="firstName">First Name<span class="glyphicon glyphicon-asterisk" style="color: Red"></span></label> <input id="firstName" name="firstName" class="form-control" required />
 							<label for="middleName">Middle Name</span></label> <input id="middleName" name="middleName" class="form-control" />
@@ -134,8 +137,8 @@
 				</div>
 
 				<div class="col-sm-9 centered" style="border-left: 1px solid Grey;">
-					<h5>Click on the student's name to see details</h5>
-					<?php include "../AddNew/Existing/students.php"; ?>
+					<h5>Click on the teacher's name to see details of classes taught or add new classes</h5>
+					<?php include "../AddNew/Existing/teachers.php"; ?>
 
 
 					<div id="status"></div>
@@ -180,27 +183,27 @@
 								</div>
 
 
-		<div id="studentModal" class="modal modal-xl fade" role="dialog" style="width: 100%;">
+		<div id="teacherModal" class="modal modal-xl fade" role="dialog" style="width: 100%;">
 		  <div class="modal-dialog">
 
 		    <!-- Modal content-->
 				    <div class="modal-content">
 				      <div class="modal-header">
 				        <button type="button" class="close" data-dismiss="modal">&times;</button>
-				        <h4 class="modal-title">ADD More Student Details </h4>
+				        <h4 class="modal-title">ADD More Teacher Details </h4>
 				      </div>
 				      <div class="modal-body">
 						  <div class="row">
 							  <div class="col-sm-6" style="border: 1px solid black; height: 100%;">
-								  <h4>Add Class, Section, Subject for <span  id="studentName"></span></h4>
+								  <h4>Add Class, Section, Subject for <span  id="teacherName"></span></h4>
 								  <hr />
-								  <form action="/AddNew/addnewstudent.php" method="post" id="add_det_form">
+								  <form action="/AddNew/addnewclasses_taught_by_teachers.php" method="post" id="add_det_form">
 										<?php $displayType = "dropdown";
 										include $_SERVER['DOCUMENT_ROOT']."/Components/classNumberDropDown.php";
 										include $_SERVER['DOCUMENT_ROOT']."/Components/sectionAlphaDropDown.php";
 										include $_SERVER['DOCUMENT_ROOT']."/Components/subjectDropDown.php";
 										?>
-										<input id="studentId" name="studentId" hidden> </input>
+										<input id="teacherId" name="teacherId" hidden> </input>
 									  <button name="Submit" id="submit" type="submit">SUBMIT</button>
 								  </form>
 							  </div>
@@ -209,7 +212,7 @@
 								  <hr />
 									<div id="ajaxRes">
 										<?php
-											include "../Scripts/php/singleStudentDetails.php";
+											include "../Scripts/php/singleTeacherClasses.php";
 										?>
 										Ajax Res
 								  </div>

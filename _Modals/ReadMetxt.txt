@@ -6,3 +6,4 @@ This folder will hold all Modals.
 		d.	Subjects
 		e.	Questions
 		f.	Tests
+		g. Teachers

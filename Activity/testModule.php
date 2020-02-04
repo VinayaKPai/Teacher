@@ -4,7 +4,6 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Teachers Tools LH</title>
-	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -15,10 +14,7 @@
 	<?php
 	$pageHeading = "Create a New Test";
 	include $_SERVER['DOCUMENT_ROOT']."/basecode-create_connection.php";
-	include $_SERVER['DOCUMENT_ROOT']."../Datafiles/subjects-php-array.php";
-	// $subjectsRow and $subjectsOutput can be accessed from subjects-php-array.php
-	include $_SERVER['DOCUMENT_ROOT']."../Datafiles/classes-php-array.php";
-	// $classesRow and $classesOutput can be accessed from class-php-array.php
+
 	?>
 	</head>
 	<body class="body">
@@ -28,22 +24,28 @@
 			</div>
 				<?php include $_SERVER['DOCUMENT_ROOT']."/Components/top.php";
 				?>
-
+<div>
 <hr>
 				<ul class="nav nav-tabs">
-				  <li class="active"><a data-toggle="tab" href="#createNewTests">Create New Test</a></li>
-				  <li><a data-toggle="tab" href="#savedTests">All Saved Tests</a></li>
-				  <li><a data-toggle="tab" href="#previousTests">Previously Administered Tests</a></li>
+				  <li class="active">
+						<a data-toggle="tab" href="#createNewTests">Create New Test</a>
+					</li>
+				  <li>
+						<a data-toggle="tab" href="#savedTests">All Saved Tests</a>
+					</li>
+				  <li>
+						<a data-toggle="tab" href="#previousTests">Previously Administered Tests</a>
+					</li>
 				</ul>
 				<div class="tab-content">
 					<div id="createNewTests" class="tab-pane fade in active">
 						<hr>
-						<div class="panel-title">
-							<h4>Add New Test</h4>
+						<div class="panel-title" style="text-align: center;">
+							<h4>Create A New Test</h4>
 						</div>
 						<div class='col-sm-7'>
+							<p>Select the class and subject to view. Available questions will appear once you click on Fetch Questions</p>
 							<div class="panel panel-header">
-									<form action='createtestpreview.php' method="post">
 										<?php
 												$displayType = "dropdown";
 												include $_SERVER['DOCUMENT_ROOT']."/Components/classNumberDropDown.php";
@@ -53,16 +55,14 @@
 												include $_SERVER['DOCUMENT_ROOT']."/Components/subjectDropDown.php";
 										?>
 										<button type='button' onclick="ajaxCallGetQuestionsForTest()">Fetch Questions</button>
-									</form>
 								</div>
 								<div id="existingQuestions"></div>
-								<p>Available questions will appear here once you click on Fetch Questions</p>
 								 <?php include $_SERVER['DOCUMENT_ROOT']."../Activity/createtestpreview.php";  ?>
 						</div>
 						<div class='col-sm-5 centered'>
 							<div class="panel panel-header">
 									<h4>New Test Preview</h4>
-									<div><p>Selected questions will appear here</p></div>
+									<!-- <div><p>Selected questions will appear here</p></div> -->
 									<div id="for" class="col-sm-4">
 
 									</div>
@@ -85,6 +85,15 @@
 						<div class="panel-title">
 							<h4>Saved Test</h4>
 							<p>These are tests you have created and saved previously</p><hr>
+							<div class="panel panel-header">
+
+								<?php include
+								$_SERVER['DOCUMENT_ROOT']."../Components/classNumberDropDown.php";
+								include $_SERVER['DOCUMENT_ROOT']."../Components/sectionAlphaDropDown.php";
+								include $_SERVER['DOCUMENT_ROOT']."../Components/subjectDropDown.php"; ?>
+
+								<button type="button" class="btn btn-small" onclick="filterTests()">Filter Tests</button>
+						</div>
 							<?php include $_SERVER['DOCUMENT_ROOT']."../Activity/savedTests.php";  ?>
 						</div>
 					</div>
@@ -93,12 +102,14 @@
 						<div class="panel-title">
 							<h4>Previous Test</h4>
 							<p>These are tests previously given at least once</p>
+							<!-- <?php include $_SERVER['DOCUMENT_ROOT']."../Activity/administeredTests.php";  ?> -->
 						</div>
 					</div>
+
 				</div>
 	</div>
 </body>
-	<script src="../../Scripts/js/ajaxCallQuestions.js"></script>
+	<!-- <script src="../../Scripts/js/ajaxCallQuestions.js"></script> -->
 
 
 

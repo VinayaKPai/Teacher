@@ -13,7 +13,6 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Teachers Tools LH</title>
-	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -21,7 +20,7 @@
 	<link rel="stylesheet" type="text/css" href="/stylesheet.css"  />
 		<script src="../../Scripts/js/ajaxCalls.js"></script>
 	</head>
-	<body class="body">
+	<body class="body" style="background: var(--BodyGradient);">
 		<div class="container">
 			<hr>
 			<h3 class="centered"><?php include "../Components/top.php"; ?></h3>
@@ -96,7 +95,7 @@
 				</div>
 <hr>
 		</div>
-		<div id="bottom"><?php include "../Components/bottom.php"; ?></div>
 		</div>
+		<div class="container" id="bottom"><?php include "../Components/bottom.php"; ?></div>
 	</body>
 </html>

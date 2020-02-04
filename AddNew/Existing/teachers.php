@@ -1,11 +1,6 @@
-<style>
- table tr:nth-child(even){background-color: #b69092; color: #fff}
- table tr:nth-child(odd){background-color: #684654; color: #fff}
- table td {text-align: left;}
- table th {text-align: center;}
-</style>
+
 <hr>
-<table id="existTable" style="width: 100%; padding: 5px; border-spacing: 2px; border-collapse: separate;">
+<table id="existTable">
 	<?php
 	//Script to display existing classes and sections in the class section table
 	include "../basecode-create_connection.php";

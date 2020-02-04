@@ -6,7 +6,7 @@ echo "<div>";
 $rwcnt = 0;
 
 
-$query = $mysqli->query("SELECT * FROM topics, classes, subjects WHERE topics.topic_classId = classes.classId AND topics.topic_subjectId = Subjects.subjectId ORDER BY `topic_classId`");
+$query = $mysqli->query("SELECT * FROM topics ORDER BY `topic_classId`");
 
 			if ($query) {
 				$rowcount=mysqli_num_rows($query);
@@ -14,26 +14,30 @@ $query = $mysqli->query("SELECT * FROM topics, classes, subjects WHERE topics.to
 			if ($rowcount > 0) {
 				echo "<h4 style='color: Green; background-color: LightGrey;'>Click on a topic to see questions</h4>" ;
 				// echo "<table style='width: 60%;border: 1px solid Grey'>
-						echo "<thead><tr>
+						echo "<tr>
 							<th style='width: 10%; margin: 5%;'>S. No</th>
 							<th style='width: 10%; margin: 5%;'>Class</th>
 							<th style='width: 10%; margin: 5%;'>Subject</th>
 							<th style='width: 25%; margin: 5%;'>Topic</th>
 							<th style='width: 15%; margin: 5%;'>Action</th>
-						</tr></thead>";
+						</tr>";
 				while ($row = $query->fetch_assoc())  {
 					$rwcnt = $rwcnt+1;
 
 					$classNum = $row['topic_classId'];
-					$cn = $row['classNumber'];
+					$clnum = $mysqli->query("SELECT `classNumber` FROM classes WHERE `classId` = $classNum LIMIT 1");
+					$clrow = $clnum->fetch_assoc();
+					$cn = $clrow['classNumber'];
 
 					$subjectName = $row['topic_subjectId'];
-					$sb = $row['Subject'];
+					$subn = $mysqli->query("SELECT `Subject` FROM subjects WHERE `subjectId` = $subjectName LIMIT 1");
+					$srow = $subn->fetch_assoc();
+					$sb = $srow['Subject'];
 					echo "<tr id=$rwcnt title=$rwcnt>
 							<td style='width: 10%; margin: 5%;'>".$rwcnt."</td>
 							<td style='width: 10%; margin: 5%;'>".$cn."</td>
 							<td style='width: 10%; margin: 5%;'>".$sb."</td>
-							<td style='width: 25%; margin: 5%;'><a id='".$row['topicId']."' data-toggle='modal' data-target='#topicQuestionsModal' style='color:white; cursor: pointer;'  onclick='ajaxCallTopicQuestions(this.id)'>".$row['topicName']."</a></td>
+							<td style='width: 25%; margin: 5%;'>".$row['topicName']."</td>
 							<td title='Delete this topic from Database'>
 							<span class='glyphicon glyphicon-trash' style='background-color: Red; color: White; padding: 4px;'></span></td>
 						</tr>";

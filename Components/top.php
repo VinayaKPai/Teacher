@@ -1,12 +1,12 @@
 <div id="top" class="row" style="padding: 1px;">
-	<div class="col-sm-4 topbanner left">
+	<div class="col-sm-4 topbanner left"  style="background: var(--BodGradtop);">
 		<span style="float: left;">
 			<a href="/index.php"><i class="glyphicon glyphicon-home" style="color: White;"></i></a>
 		</span><span style="float: right;">
     <img class="svg" src="../Images/logo-purple.png" alt="LOGO" width="7%">
   Logo</span>
 	</div>
-	<div class="col-sm-4 topbanner dropdown">
+	<div class="col-sm-4 topbanner dropdown" style="background: var(--BodGradtop);">
 		<?php echo $pageHeading; ?>
 		<small><span class="glyphicon glyphicon-chevron-down" style="color: #fff;"></span></small>
 		<div id="setup" class="dropdown-content centered h6" style="float: center;">
@@ -24,7 +24,7 @@
 			<a href="../../Activity/cbsepractice.php">CBSE Practice </a>
 		</div> -->
 	</div>
-	<div class="col-sm-4 topbanner right">
+	<div class="col-sm-4 topbanner right"  style="background: var(--BodGradtop);">
 		<a href="">
 			<span style="float: left; color: White;" onclick="loginalert()">Login</span>
 			<script>

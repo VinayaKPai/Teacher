@@ -28,7 +28,8 @@ if (!isset($displayType)) {
  while ($row = $query->fetch_assoc())  {
         {
           $sn = strip_tags($row['Subject']);
-          echo "<label for='$sn'><input id='$sn' type='checkbox' name='subjectName[$sn]' aria-label='$sn' style='margin: 10px;' onclick='updateFilters(\"subjectSelectBoxes\",\"filteredSubjects\");' value='$sn'>$sn</label>";        }
+          $si = strip_tags($row['subjectId']);
+          echo "<label for='$sn'><input id='$sn' type='checkbox' name='subjectName[$si]' aria-label='$sn' style='margin: 10px;' onclick='updateFilters(\"subjectSelectBoxes\",\"filteredSubjects\");' value='$sn'>$sn</label>";        }
       }
         }
 

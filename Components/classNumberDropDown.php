@@ -12,8 +12,8 @@ if (!isset($displayType)) {
 
     //catch errors
     if ($mysqli->connect_errno) {
-    printf("Connect failed: %s\n", $mysqli->connect_error);
-    exit();
+      printf("Connect failed: %s\n", $mysqli->connect_error);
+      exit();
     }
 
     if ($query) {
@@ -24,9 +24,10 @@ if (!isset($displayType)) {
 
 
       if ($displayType=="checkbox"){
+        
         while ($row = $query->fetch_assoc())  {
           {
-            $cn = strip_tags($row['classNumber']);
+            // $cn = strip_tags($row['classNumber']);
             $cn = strip_tags($row['classId']);
             echo "<label for='$cn'><input id='$cn' type='checkbox' name='classNumber[$cn]' aria-label='$cn' style='margin: 10px;' onclick='updateFilters(\"classSelectBoxes\",\"filteredClasses\");' value='$cn'>$cn</label>";
           }

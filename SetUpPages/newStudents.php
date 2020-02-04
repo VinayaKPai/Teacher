@@ -13,7 +13,6 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Teachers Tools LH - Manage Students</title>
-		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 		  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -23,30 +22,44 @@
 			<script src="../../Scripts/js/ajaxCallTeachers.js"></script>
 
 			<script type="text/javascript">
-				var addMultiple = [];
-				var cntr = 0;
-				var satr = 0;
+				// var addMultiple = [];
+				// var cntr = 0;
+				// var satr = 0;
 				function modalclick(e) {
-					// alert ("Id is "+e.id);
+
 					document.getElementById("studentName").innerText = e.innerText;
 					document.getElementById("modalSpan").innerText = e.innerText;
 
 					document.getElementById("studentId").value = e.id;
-					document.getElementById("classNumber").value = "";
-					document.getElementById("sectionAlpha").value = "";
-					// document.getElementById("subjectName").value = "";
-
+					// document.getElementById("classNumber").value = "";
+					// document.getElementById("sectionAlpha").value = "";
 					ajaxCallStudents(e.id,e.innerText);
 				}
 				function clickalert(c) {
 					alert (c.id);
 				}
-				function exploreclick(b) {
-					$('#studentModal').modal('hide');
-					// alert (b.innerText);
-					document.getElementById("exploreItem").innerText = b.innerText;
-					document.getElementById("exploreSpan").innerText = b.innerText;
-					ajaxCallExploreStudent(b.id);
+
+				function filterstudents (s) {
+					alert (this.name);
+				}
+				function explore() {
+					document.getElementById("moreDetails").style.display = "block";
+				}
+
+				function resetModal() {
+					$('body').on('hidden.bs.modal', '.modal', function () {
+				 	$(this).removeData('bs.modal');
+			 			});
+				}
+// for modal
+				function editStudent() {
+					document.getElementById("editDiv").style.display = "none";
+					document.getElementById("confirmDiv").style.display = "block";
+				}
+				function saveChanges(e) {
+					alert (e.id);
+					document.getElementById("confirmDiv").style.display = "none";
+					document.getElementById("editDiv").style.display = "block";
 				}
 			</script>
 		</head>
@@ -142,89 +155,42 @@
 				</div>
 				<hr>
 		</div>
-		<div id="bottom"><?php include "../Components/bottom.php"; ?></div>
 		</div>
 
-
-		<div id="exploreModal" class="modal modal-xl fade" role="dialog" style="width: 100%;">
-									<div class="modal-dialog">
-
-										<!-- Modal content-->
-										<div class="modal-content">
-											<div class="modal-header">
-												<button type="button" class="close" data-dismiss="modal">&times;</button>
-												<h4 class="modal-title">
-											</div>
-											<div class="modal-body">
-												<div class="row">
-													<div class="col-sm-6" style="border: 1px solid black; height: 100%;">
-														<h4>Details for <span  id="exploreItem"></span></h4>
-														<hr />
-														<p> Explore Modal body</p>
-													</div>
-													<div class="col-sm-6" style="border: 1px solid black;">
-														<h4 class="centered">More Details for <span id="exploreSpan"></span></h4>
-														<hr />
-														<div id="exploreajaxRes">
-															Ajax Res
-														</div>
-
-													</div>
-												</div>
-											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-											</div>
-										</div>
-									</div>
-								</div>
 
 
 		<div id="studentModal" class="modal modal-xl fade" role="dialog" style="width: 100%;">
 		  <div class="modal-dialog">
-
 		    <!-- Modal content-->
-				    <div class="modal-content">
+				    <div class="modal-content" style="background: var(--BodGradtop)">
 				      <div class="modal-header">
-				        <button type="button" class="close" data-dismiss="modal">&times;</button>
-				        <h4 class="modal-title">ADD More Student Details </h4>
+				        <button type="button" class="close" data-dismiss="modal" onclick="resetModal()">&times;</button>
+								<!-- need to use reset() but how? -->
+				        <h4 class="modal-title centered">ADD or Change Student Details <span  id="studentName"></span></h4>
 				      </div>
 				      <div class="modal-body">
 						  <div class="row">
-							  <div class="col-sm-6" style="border: 1px solid black; height: 100%;">
-								  <h4>Add Class, Section, Subject for <span  id="studentName"></span></h4>
-								  <hr />
-								  <form action="/AddNew/addnewstudent.php" method="post" id="add_det_form">
-										<?php $displayType = "dropdown";
-										include $_SERVER['DOCUMENT_ROOT']."/Components/classNumberDropDown.php";
-										include $_SERVER['DOCUMENT_ROOT']."/Components/sectionAlphaDropDown.php";
-										include $_SERVER['DOCUMENT_ROOT']."/Components/subjectDropDown.php";
-										?>
-										<input id="studentId" name="studentId" hidden> </input>
-									  <button name="Submit" id="submit" type="submit">SUBMIT</button>
-								  </form>
-							  </div>
-							  <div class="col-sm-6" style="border: 1px solid black;">
-								  <h4 class="centered">Existing Details for <span id="modalSpan"></span></h4>
-								  <hr />
+								<div class="col-sm-12" style="border: 1px solid black;">
 									<div id="ajaxRes">
+								  <hr />
 										<?php
 											include "../Scripts/php/singleStudentDetails.php";
 										?>
-										Ajax Res
+										<input id="studentId" name="studentId" hidden> </input>
 								  </div>
 
 							  </div>
+
 						  </div>
 				      </div>
 				      <div class="modal-footer">
 				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								<!-- need to use reset function - but how? -->
 				      </div>
 				    </div>
 					</div>
 		  </div>
 
-
-
+		<div id="bottom"><?php include "../Components/bottom.php"; ?></div>
 	</body>
 </html>

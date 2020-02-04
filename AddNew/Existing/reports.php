@@ -18,19 +18,25 @@
       $report = "Subject By Topic Name";
     }
 
-    $getTeacherName = $mysqli->query("SELECT `firstName`, `middleName`, `lastName` FROM teachers WHERE `Id` = $teacherId");
+    // Full texts
+    // teacherId
+    // tc_firstName
+    // tc_middleName
+    // tc_lastName
+    $getTeacherName = $mysqli->query("SELECT `tc_firstName`, `tc_middleName`, `tc_lastName` FROM teachers WHERE `teacherId` = $teacherId");
     $names = $getTeacherName->fetch_assoc();
-    $fn = $names['firstName'];
-    $mn = $names['middleName'];
-    $ln = $names['lastName'];
-        $querystring = ("SELECT * FROM teachers, classes_taught_by_teacher, subjects, classes WHERE teachers.Id = $teacherId AND classes_taught_by_teacher.teacherId = $teacherId AND subjects.Id = classes_taught_by_teacher.subjectId  AND classes.Id = classes_taught_by_teacher.classId ORDER BY classes.Id ASC");
+    $fn = $names['tc_firstName'];
+    $mn = $names['tc_middleName'];
+    $ln = $names['tc_lastName'];
+        // $querystring = ("SELECT * FROM teachers, classes_taught_by_teacher, subjects, classes WHERE teachers.teacherId = $teacherId AND classes_taught_by_teacher.ctt_teacherId = $teacherId AND classes_taught_by_teacher.ctt_subjectId = subjects.subjectId  AND classes_taught_by_teacher.ctt_classId = classes.classId ORDER BY classes.classId ASC");
+
+        $querystring = ("SELECT * FROM teachers, classes_taught_by_teacher, subjects, classes, topics WHERE teachers.teacherId = $teacherId AND classes_taught_by_teacher.ctt_teacherId = $teacherId AND classes_taught_by_teacher.ctt_subjectId = subjects.subjectId  AND classes_taught_by_teacher.ctt_classId = classes.classId AND topics.topic_classId = classes.classId AND topics.topic_subjectId = subjects.subjectId  ORDER BY classes.classId ASC");
 
         $qstring = $mysqli->query($querystring);
-        echo "<h5>".$fn." ".$mn." ".$ln." has ".mysqli_num_rows($qstring)." ".$report.".</h5>";
-
 
         echo "<table style='width:90%; margin-left:5%;'>";
         while ($qrow = $qstring->fetch_assoc()) {
+          // array array_unique($array , $sort_flags)
           echo "<tr>";
             if ($report == "Classes") {
                 echo "<td style='text-align:left; padding: 5px;'>".$qrow['classNumber']."</td>";
@@ -39,14 +45,11 @@
                 echo "<td style='text-align:left;  padding: 5px;'>".$qrow['classNumber']." </td><td style='text-align:left;'>".$qrow['Subject']."</td>";
             }
             if ($report == "Subject By Topic Name") {
-                echo "<td style='text-align:left;  padding: 5px;'>".$qrow['classNumber']." </td><td style='text-align:left;'>".$qrow['Subject']."</td>";
-                $sid = $qrow['subjectId'];
-                $topics = $mysqli->query("SELECT `topicName` FROM topics WHERE `subjectId` = $sid ");
-                echo "<td style='text-align:left;'><ul>";
-                while ($srow = $topics->fetch_assoc()) {
-                  echo "<li>".$srow['topicName']."</li>";
-                }
-                echo "</ul></td>";
+                echo "<td style='text-align:left;  padding: 5px;'>".$qrow['classNumber']." </td>
+                      <td style='text-align:left;'>".$qrow['Subject']."</td>";
+                echo "<td style='text-align:left;'>";
+                  echo "<li>".$qrow['topicName']."</li>";
+                echo "</td>";
             }
             echo "</tr>";
           }

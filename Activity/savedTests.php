@@ -8,6 +8,7 @@
 			$testId = $row['testId'];
 			echo "<div class='row'><div class='col-sm-3'>";
 					echo "<h5>Title:   <span style='color: Navy;'>".$row['testTilte']."</span></h5>";
+
 			echo "</div>";
 			echo "<div class='col-sm-3'>";
 									echo "<h5>Class/Std:   <span style='color: Navy;'>".$row['classNumber']."</span></h5>";
@@ -17,7 +18,16 @@
 			echo "</div>";
 			echo "<div class='col-sm-3 small'>";
 			echo "Start Date <input class='small' name=$testId type='date' />";
-			echo "<button class='small' id=$testId onclick='deploy(this)'>Deploy</button></h5>";
+			echo "<button class='small' id=$testId onclick='deploy(this)'>Deploy</button>";
+      echo "<h6>Deployment schedule: <span style='float:right;'><ul>";
+        $schStart = $mysqli->query("SELECT `schStartDate` FROM deploymentlog WHERE `dep_testId` = $testId");
+        if (mysqli_num_rows($schStart)==0) { echo "This test has not been scheduled for deployment yet";}
+        else {
+          while ($startDate=$schStart->fetch_assoc()) {
+            echo "<li>".$startDate['schStartDate']."</li>";
+          }
+        }
+      echo "</ul></span></h6>";
 			echo "</div>";
 			echo "</div>";
 					$qs = explode(",",$row['test_questions']);

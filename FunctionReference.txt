@@ -1,0 +1,124 @@
+JS Functions: {
+  Function Name: addToPreview
+  File Names:    1. Scripts/js/activities.js
+                 2. Activity/createtestpreview.php
+
+  Function Name:  alertjs
+  File Names:     1. Scripts/js/alert.js
+
+  Function Name:  filterQuestions
+  File Names:     1. Scripts/js/filterRecords.js
+
+  Function Name:  getAll
+  File Names:     1. Scripts/js/filterRecords.js
+
+  Function Name:  updateFilters
+  File Names:     1. Scripts/js/filterRecords.js
+
+  Function Name:  addButton
+  File Names:     1. Scripts/js/filterRecords.js
+
+  Function Name:  removeItem
+  File Names:     1. Scripts/js/removeItem.js
+
+  Function Name: addNewClasses
+  File Names:    1. SetupPages/newclasses_taught_by_teachers.php
+                 2. Activity/createtestpreview.php
+
+  Function Name:  testalert
+  File Names:     1. SetupPages/newQuestions.php
+
+  Function Name:  modalclick
+  File Names:     1. SetupPages/newStudents.php
+                  2. SetupPages/newTeachers.php
+
+  Function Name:  clickalert
+  File Names:     1. SetupPages/newQuestions.php
+                  2. SetupPages/newTeachers.php
+
+  Function Name:  filterstudents
+  File Names:     1. SetupPages/newQuestions.php
+
+  Function Name:  exploreclick
+  File Names:     1. SetupPages/newTeachers.php
+
+  Function Name:  explore
+  File Names:     1. SetupPages/newQuestions.php
+}
+
+AJAX Functions: {
+  Function Name: ajaxCallGetQuestionsForTest
+  File Names:
+
+  Function Name:  ajaxSaveTest
+  File Names:
+
+  Function Name:  deploy
+  File Names:
+
+  Function Name:  filterTests
+  File Names:
+
+  Function Name:  ajaxChkQuestionsFunction
+  File Names:     1. Scripts/js/ajaxCallQuestions.js
+                  2.
+
+  Function Name:  ajaxCallGetQuestions
+  File Names:     1.  Scripts/js/ajaxCallQuestions.js
+
+  Function Name:  ajaxChkClassFunction
+  File Names:     1. Scripts/js/ajaxCalls.js
+
+  Function Name:  ajaxAddAll
+  File Names:     1. Scripts/js/ajaxCalls.js
+
+  Function Name:  ajaxCallGetTopics
+  File Names:     1. Scripts/js/ajaxCalls.js
+
+  Function Name:  addReportToPreview
+  File Names:     1. Scripts/js/ajaxCallsReports.js
+
+  Function Name:  ajaxCallStudents
+  File Names:     1. Scripts/js/ajaxCallStudents.js
+
+  Function Name:  ajaxCallExploreStudent
+  File Names:     1. Scripts/js/ajaxCallStudents.js
+
+  Function Name:  ajaxCallTeachers
+  File Names:     1. Scripts/js/ajaxCallTeachers.js
+
+  Function Name:  ajaxCallExploreItem
+  File Names:     1. Scripts/js/ajaxCallTeachers.js
+
+  Function Name:  ajaxGetSubForClass
+  File Names:     1. Scripts/js/ajaxGetAllForClass.js
+
+  Function Name:  ajaxgetTopics
+  File Names:     1. Scripts/js/ajaxGetAllForClass.js
+}
+
+PHP Functions: {
+  Function Name:  addClassNumbersToQueryString
+  File Names:     1. Scripts/php/queryBuilder.php
+
+  Function Name:  addSubjectNamesToQueryString
+  File Names:     1. Scripts/php/queryBuilder.php
+
+  Function Name:  addTopicNameToQueryString
+  File Names:     1. Scripts/php/queryBuilder.php
+
+  Function Name:  addTypeNameToQueryString
+  File Names:     1. Scripts/php/queryBuilder.php
+
+  Function Name:  table
+  File Names:     1. Scripts/php/sqlQueryResultToHtmlTable.php
+
+  Function Name:  tableHead
+  File Names:     1. Scripts/php/sqlQueryResultToHtmlTable.php
+
+  Function Name:  tableBody
+  File Names:     1. Scripts/php/sqlQueryResultToHtmlTable.php
+
+  Function Name:  selectOption
+  File Names:     1. Scripts/php/sqlQueryResultToOptions.php
+}

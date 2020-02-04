@@ -2,11 +2,11 @@
   include $_SERVER['DOCUMENT_ROOT']."/basecode-create_connection.php";
 
   $studentId = $_GET['studentId'];
-
+echo $studentId."<br>"."Printing... GET";
   print_r($_GET);
-  $query = $mysqli->query("SELECT * FROM studentdetails, classes, sections WHERE studentdetails.sId = $studentId AND classes.classId = studentdetails.st_classId AND sections.sectionId = studentdetails.st_sectionId ");
+  // $query = $mysqli->query("SELECT * FROM studentdetails, classes, sections WHERE studentdetails.sId = $studentId AND studentdetails.st_classId = classes.classId AND studentdetails.st_sectionId = sections.sectionId ");
 
-
+$query = $mysqli->query("SELECT * FROM studentdetails, classes, sections WHERE studentdetails.sId = $studentId AND classes.classId = studentdetails.st_classId AND sections.sectionId = studentdetails.st_sectionId ");
   echo "<table style='width:90%;'><tr><th class='col-sm-2'>Class</th><th class='col-sm-2'>Section</th><th class='col-sm-5'>Student</th></tr>";
   while ($row=$query->fetch_assoc()) {
     $cn = $row['classNumber'];

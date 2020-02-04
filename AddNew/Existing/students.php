@@ -21,7 +21,7 @@
 					}
 					else { $cls = "'color: Red;'";}
 				}
-				echo "<h4 class='topbanner'>Currently $rowcount Students in your setup</h4>" ;
+				echo "<h4 class='topbanner'>Currently $rowcount Students in your setup.</h4>" ;
 
 				if ($rowcount > 0) {
           echo "<tr><th>SNo</th><th>Name</th><th>Class/STD</th><th>Section</th><th>Action</th></tr>";
@@ -35,16 +35,14 @@
               $cn = $row['classNumber'];
               $sa = $row['Sections'];
               $classNum = $row['st_classId'];
-              // $clnum = $mysqli->query("SELECT `classNumber` FROM classes WHERE `classId` = $classNum LIMIT 1");
-              // $clrow = $clnum->fetch_assoc();
-              // $cn = $clrow['classNumber'];
               $pm = $row['st_phoneMobile'];
 						  $remIdDB = $row['st_firstName']."-".$row['st_lastName'].$row['st_phoneMobile'];
 
               $url = "../../RemoveRecords/RemoveStudent.php?fn=".$fn."&ln=".$ln."&pm=".$pm;
+              // <td><a data-toggle='modal' data-target='#studentModal' style='color:white; cursor: pointer;' id='$sid' onclick='modalclick(this)'>".$fn." ".$ln."</a></td>
 						  echo "<tr>
                       <td>".$slno."</td>
-											<td><a data-toggle='modal' data-target='#studentModal' style='color:white; cursor: pointer;' id='$sid' onclick='modalclick(this)'>".$fn." ".$ln."</a></td>
+                      <td><a data-toggle='modal' data-target='#studentModal' style='color:white; cursor: pointer;' id='$sid' onclick='ajaxCallStudents(this.id)'>".$fn." ".$ln."</a></td>
                       <td>".$cn."</td>
                       <td>".$sa."</td>
                       <td>

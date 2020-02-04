@@ -16,7 +16,7 @@
       while ($row = $query->fetch_assoc())  {
         {
         $tn = strip_tags($row['topicName']);
-        $tnid = $row['Id'];
+        $tnid = $row['topicId'];
           echo "<option id='$tnid' name='$tn'>$tn</option>";
         }
       }

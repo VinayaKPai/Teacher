@@ -1,3 +1,43 @@
+:root {
+  /* Scheme 1 variables */
+  --BodyGradient: linear-gradient(110deg, #f0f0f0 30%, #d3d3d3 , #C5B2B3 60%);
+  --BodGradtop: linear-gradient(70deg, #2b2722 , #7f7a74, #b6b3af);
+  --BodGradbanner: linear-gradient(100deg, #494139, #7f7a74, #2b2722);
+  --BodGradbannertext : #ffff99;
+  --BodGradmain: linear-gradient(110deg, #d3d7ad 60%, #e0e3c5 60%);
+  --BodGradcard: linear-gradient(110deg, #394941 60%, #413949 60%);
+  --dropdownButton : var(--BodGradcard);
+  /* Scheme 2 variables */
+  --BodGrad2main: linear-gradient(110deg, #d3d7ad 60%, #e0e3c5 60%);
+  --BodGrad2card: linear-gradient(110deg, #4b0082 60%, #378200 60%);
+  --BodGrad2banner: linear-gradient(110deg, #939B32 30%, #788200 30% 60%, #3c4100 60%);
+  --BodGrad2bannertext : #4b0082;
+  --BodGrad2top: linear-gradient(70deg, #3c4100 30%, #788200 30% 60%, #939B32 60%);
+  --dropdown2Button : var(--BodGrad2card);
+  /* Scheme 3 variables */
+  --BodGrad3main: linear-gradient(110deg, #e8faee 60%, #daf8e3 60%);
+  --BodGrad3: linear-gradient(110deg, #daf8e3 30%, #e8faee 30%  60%, #00c2c7 60%);
+  --BodGrad3card: linear-gradient(110deg, #822d00 60%, #004468 60%);
+  --BodGrad3banner: linear-gradient(110deg, #005582 60%, #0086ad 60%);
+  --BodGrad3bannertext : #ffffcd;
+  --BodGrad3top: linear-gradient(70deg, #0086ad 60%, #005582 60%);
+  --dropdown3Button : var(--BodGrad3card);
+  /* Scheme 4 variables */
+    --BodGrad4main: linear-gradient(110deg, #e8faee 60%, #daf8e3 60%);
+    --BodGrad4: linear-gradient(110deg, #daf8e3 30%, #e8faee 30%  60%, #00c2c7 60%);
+    --BodGrad4card: linear-gradient(110deg, #7c480e 60%, #0e427c 60%);
+    --BodGrad4banner: linear-gradient(110deg, #7c480e 60%, #7c110e 60%);
+    --BodGrad4bannertext : #ffffcd;
+    --BodGrad4top: linear-gradient(70deg, #7c110e 30%, #7c480e 60%);
+    --dropdown4Button : var(--BodGrad4card);
+    --testvar {
+      background: linear-gradient(110deg, #7c480e 60%, #0e427c 60%)
+      padding: 10px 5px 20px auto;
+    }
+}
+body {
+  background:  var(--BodyGradient);
+}
 h4 {
   color: #651a1a;
   background-color: #DDDDDD;
@@ -7,28 +47,55 @@ h5 {
   background-color: #DDDDDD;
   font-weight: bold;
 }
-table tr:nth-child(even){background-color: #9B797B;}
-table tr:nth-child(odd){background-color: #C5B2B3;}
+ul a {
+  color: #f0f0f0;
+}
+table {width: 80%; padding: 5px; border-spacing: 2px; border-collapse: separate; align: 'center';}
+table th {background-color: #0a0a0a;}
+table th {background-color: #684654; color: #fff}
+table th, td {text-align: center;}
+/* table tr:nth-child(even){background-color: #9B797B;}
+table tr:nth-child(odd){background-color: #C5B2B3;} */
+table tr:nth-child(even){background-color: #C5B2B3; color: #000}
+table tr:nth-child(odd){background-color: #b69092; color: #000}
 table td {text-align: center;}
-.body {
-    margin:10;
-	padding:10;
-	background: #DDDDDD;
-	height: 100%;
+table p {background-color: #684654; color: #fff}
+ul .nav .fade li {
+  color: grey;
 }
 .bottom {
 	background-color: #684654;
 	color: White;
 	min-height: 100px;
+  position: fixed;
+   left: 0;
+   bottom: 0;
 }
+
+.cards {
+    width: 20%;
+    z-index: 10;
+    padding: 2px 10px 2px 10px;
+    margin: 1% 2% 1% 5%;
+    border-right: 1px solid #64485C;
+    border-radius: 5px;
+    margin: 2%;
+    box-shadow: inset -4px -4px 19px 8px black;
+  }
 .centered {
 	text-align: center;
+  align-items: stretch;
+  padding: 2% 2% 2% 2%;
 }
 .grid-container {
 	background-color: #F5F5F5;
 }
 .modal-dialog  {
   width: 75%;
+  background: var(--BodGradTop);
+}
+.modal-content {
+  background: var(--BodGradTop);
 }
 .headingcolor {
 	background: #DEB887;
@@ -40,18 +107,25 @@ table td {text-align: center;}
   	font-size: 10px;
   	text-align: center;
 }
+.rndbtn {
+  width:50%;
+  height: 40px;
+  margin: auto;
+  border-radius: 25px;
+  border-bottom: 2px solid #4B0082;
+}
 .roundsqbtn {
 	display: flex inline;
    	align-items: center;
    	justify-content: center;
 	border-radius: 25px;
- 	background: #6f42c1;
+ 	background: radial-gradient(#ADADAD 30%, #83677B 50%, #64485C 70%, #401B1D 90%, #2E1114);
   	font-size: 10px;
   	text-align: center;
 	vertical-align: middle;
 	margin: 3px;
 	color: White;
-	background-image: radial-gradient(#ADADAD, #83677B, #64485C, #401B1D, #2E1114);
+	/* background-image: radial-gradient(#ADADAD, #83677B, #64485C, #401B1D, #2E1114); */
 }
 .datadisplay {
 	background-color: #F5F5F5;

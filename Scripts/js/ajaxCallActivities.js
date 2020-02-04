@@ -1,6 +1,6 @@
 
 
-function ajaxCallGetQuestionsForTest () {
+function ajaxCallGetQuestionsForTest () { //FROM ACTIVITY > TESTMODULE PHP
 
  var ajaxRequest;  // The variable that makes Ajax possible!
 
@@ -24,14 +24,12 @@ function ajaxCallGetQuestionsForTest () {
     }
  }
 
- // Create a function that will receive data
- // sent from the server and will update
- // div section in the same page.
+ // Create a function that will receive data sent from the server and will update div section in the same page.
  var c = document.getElementById("classNumber").value; //remember that the db table does not hold actual class number, but the id of the class from the classes table
  var cc = document.getElementById("classNumber").selectedIndex;
  var ccn = document.getElementById("classNumber").options[cc].id;
  var ccText = document.getElementById("classNumber").options[cc].innerHTML;
- alert (ccn);
+ // alert (ccn);
 
 
  var s = document.getElementById("subjectName").value; //remember that the db table does not hold actual subject name, but the id of the class from the subjects table
@@ -39,7 +37,7 @@ function ajaxCallGetQuestionsForTest () {
  var ss = document.getElementById("subjectName").selectedIndex;
  var ssn = document.getElementById("subjectName").options[ss].id;
  var ssText = document.getElementById("subjectName").options[ss].innerHTML;
- alert (ssn);
+ // alert (ssn);
 
  document.getElementById("subjectId").innerHTML = ssText;
  document.getElementById("for").innerHTML = "For";
@@ -50,15 +48,16 @@ function ajaxCallGetQuestionsForTest () {
  ajaxRequest.onreadystatechange = function() {
    if(ajaxRequest.readyState == 4) {
      var ajaxReturn = ajaxRequest.responseText;
-    // var ajaxReturn = JSON.parse(ajaxRequest.responseText);
-    document.getElementById("existingQuestions").innerHTML = ajaxReturn;
-    // document.getElementById("topicName").appendChild(ajaxReturn);
 
-    // console.log(ajaxReturn);
+    document.getElementById("existingQuestions").innerHTML = ajaxReturn;
+
   }
  }
  ajaxRequest.open("POST", queryString, true);
  ajaxRequest.send(null);
+ queryString = "";
+ c.selectedIndex = 0;
+ s.selectedIndex = 0;
 }
 
 
@@ -127,7 +126,7 @@ ajaxRequest.send(null);
 
 
 
-  function deploy(e) {
+function deploy(e) {
     var ajaxRequest;  // The variable that makes Ajax possible!
 
     try {
@@ -168,10 +167,56 @@ ajaxRequest.send(null);
       if(ajaxRequest.readyState == 4) {
         var ajaxReturn = ajaxRequest.responseText;
        alert (ajaxReturn);
-       
+       // console.log(ajaxReturn);
      }
 
     }
     ajaxRequest.open("GET", queryString, true);
     ajaxRequest.send(null);
   }
+
+function filterTests() {
+  alert ("Filter Clicked");
+}
+
+function ajaxCallCreateActivity (arr,act) {
+    alert (arr + act);
+    var ajaxRequest;  // The variable that makes Ajax possible!
+
+    try {
+       // Opera 8.0+, Firefox, Safari
+       ajaxRequest = new XMLHttpRequest();
+    } catch (e) {
+
+       // Internet Explorer Browsers
+       try {
+          ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
+       } catch (e) {
+
+          try {
+             ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+          } catch (e) {
+             // Something went wrong
+             alert("Your browser broke!");
+             return false;
+          }
+       }
+    }
+
+    var filename = "addnew" + act + ".php";
+    alert (filename);
+
+    var queryString = "/AddNew/"+ filename +"?qarray=" + arr;
+    console.log(queryString);
+
+    // ajaxRequest.onreadystatechange = function() {
+    //   if(ajaxRequest.readyState == 4) {
+    //     var ajaxReturn = ajaxRequest.responseText;
+    //    document.getElementById("ajaxResult").innerHTML = ajaxReturn;
+    //  }
+    //
+    // }
+    // ajaxRequest.open("POST", queryString, true);
+    // ajaxRequest.send(null);
+
+}

@@ -8,12 +8,13 @@
 					<?php echo $datetime1; ?>
 				</div>
 	<hr>
-<?php
-	$pageHeading = "Create a New ASSIGNMENT";
-	include $_SERVER['DOCUMENT_ROOT']."/basecode-create_connection.php";
-	include $_SERVER['DOCUMENT_ROOT']."/Components/header.php";
-	include $_SERVER['DOCUMENT_ROOT']."/Components/top.php";
-?>
+		<?php
+			$pageHeading = "Create a New ASSIGNMENT";
+			include $_SERVER['DOCUMENT_ROOT']."/basecode-create_connection.php";
+			include $_SERVER['DOCUMENT_ROOT']."/Components/header.php";
+			include $_SERVER['DOCUMENT_ROOT']."/Components/top.php";
+			echo $_GET;
+		?>
 	 <h4>Add New Assignment</h4>
 
 	<div class="centered" style="width: 100%;">

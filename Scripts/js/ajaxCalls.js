@@ -250,7 +250,7 @@ console.log(queryString);
         if(ajaxRequest.readyState == 4) {
           var ajaxReturn = ajaxRequest.responseText;
          // var ajaxReturn = JSON.parse(ajaxRequest.responseText);
-         document.getElementById("topicName").innerHTML = ajaxReturn;
+         // document.getElementById("topicName").innerHTML = ajaxReturn;
          // document.getElementById("topicName").appendChild(ajaxReturn);
 
          // console.log(ajaxReturn);

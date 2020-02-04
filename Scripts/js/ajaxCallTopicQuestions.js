@@ -2,11 +2,9 @@
          <!--
 //--------------------------------------Browser Support Code-------------------------------------------------------------------
 		 // function ajaxCallStudents(t,p) {
-    function ajaxCallStudents(stud) {
-      // var s = stud;
-      // var fn = fn;
-      // var ln = ln;
-      // alert (s+fn+ln);
+    function ajaxCallTopicQuestions(tops) {
+       // alert (t+p);
+       alert (tops);
             var ajaxRequest;  // The variable that makes Ajax possible!
 
             try {
@@ -34,15 +32,19 @@
             // div section in the same page.
 
             ajaxRequest.onreadystatechange = function() {
-      				   if(ajaxRequest.readyState == 4) {
+				          // var tcId = t;
+                  // var tcId = stud;
 
-      					  var ajaxReturn = ajaxRequest.responseText;
-      					  var ajaxResponse = document.getElementById('ajaxRes');
-                  ajaxResponse.innerHTML = ajaxReturn;
-      					   }
+				   if(ajaxRequest.readyState == 4) {
+
+					  var ajaxReturn = ajaxRequest.responseText;
+					  var ajaxResponse = document.getElementById('ajaxRes');
+            ajaxResponse.innerHTML = ajaxReturn;
+					   }
+
             }
             // var queryString = "/Scripts/php/singleStudentDetails.php?studentId=" + t;
-            var queryString = "/Scripts/php/singleStudentDetails.php?studentId=" + stud ;
+            var queryString = "/Scripts/php/singleTopicDetails.php?topicId=" + tops;
 console.log(queryString);
             ajaxRequest.open("GET", queryString, true);
             ajaxRequest.send(null);

@@ -45,9 +45,11 @@
 				}
 				function exploreclick(b) {
 					$('#teacherModal').modal('hide');
-					// alert (b.innerText);
-					document.getElementById("exploreItem").innerText = b.innerText;
-					document.getElementById("exploreSpan").innerText = b.innerText;
+					// alert (b.id);
+
+					document.getElementById("exploreItem").innerText = document.getElementById("modalSpan").innerText;
+					document.getElementById("expClass").innerText = b.parentNode.parentNode.children[0].innerText+" - ";
+					document.getElementById("expSection").innerText = b.parentNode.parentNode.children[1].innerText+ " - "+ b.parentNode.parentNode.children[2].innerText;
 					ajaxCallExploreItem(b.id);
 				}
 			</script>
@@ -152,20 +154,20 @@
 									<div class="modal-dialog">
 
 										<!-- Modal content-->
-										<div class="modal-content" style="background: var(--BodGradTop);">
+										<div class="modal-content">
 											<div class="modal-header">
 												<button type="button" class="close" data-dismiss="modal">&times;</button>
-												<h4 class="modal-title">
+												<h4 class="modal-title"><span  id="exploreItem"></span></span></h4>
 											</div>
 											<div class="modal-body">
 												<div class="row">
 													<div class="col-sm-6" style="border: 1px solid black; height: 100%;">
-														<h4>Details for <span  id="exploreItem"></span></h4>
+														<h4>Time Table</h4>
 														<hr />
 														<p> Explore Modal body</p>
 													</div>
 													<div class="col-sm-6" style="border: 1px solid black;">
-														<h4 class="centered">More Details for <span id="exploreSpan"></span></h4>
+														<h4 class="centered"><span  id="expClass"></span><span  id="expSection"> - <span  id="expSubject"></span><span id="exploreSpan"></span></h4>
 														<hr />
 														<div id="exploreajaxRes">
 															Ajax Res
@@ -189,25 +191,28 @@
 				    <div class="modal-content">
 				      <div class="modal-header">
 				        <button type="button" class="close" data-dismiss="modal">&times;</button>
-				        <h4 class="modal-title">ADD More Teacher Details </h4>
+				        <h4 class="modal-title" style="text-align: center;"><span  id="teacherName"></h4>
 				      </div>
 				      <div class="modal-body">
 						  <div class="row">
 							  <div class="col-sm-6" style="border: 1px solid black; height: 100%;">
-								  <h4>Add Class, Section, Subject for <span  id="teacherName"></span></h4>
+								  <h4 style="text-align: center;">Add Class, Section, Subject</span></h4>
 								  <hr />
 								  <form action="/AddNew/addnewclasses_taught_by_teachers.php" method="post" id="add_det_form">
-										<?php $displayType = "dropdown";
-										include $_SERVER['DOCUMENT_ROOT']."/Components/classNumberDropDown.php";
-										include $_SERVER['DOCUMENT_ROOT']."/Components/sectionAlphaDropDown.php";
-										include $_SERVER['DOCUMENT_ROOT']."/Components/subjectDropDown.php";
-										?>
-										<input id="teacherId" name="teacherId" hidden> </input>
-									  <button name="Submit" id="submit" type="submit">SUBMIT</button>
+											<?php $displayType = "dropdown";
+												include $_SERVER['DOCUMENT_ROOT']."/Components/classNumberDropDown.php";
+												echo "<br>";
+												include $_SERVER['DOCUMENT_ROOT']."/Components/sectionAlphaDropDown.php";
+												echo "<br>";
+												include $_SERVER['DOCUMENT_ROOT']."/Components/subjectDropDown.php";
+											?>
+											<br>
+											<input id="teacherId" name="teacherId" hidden> </input>
+										  <button class="btn btn-default" name="Submit" id="submit" type="submit" style="margin: auto;">SUBMIT</button>
 								  </form>
 							  </div>
 							  <div class="col-sm-6" style="border: 1px solid black;">
-								  <h4 class="centered">Existing Details for <span id="modalSpan"></span></h4>
+								  <h4 class="centered"><span id="modalSpan"></span> teaches:</h4>
 								  <hr />
 									<div id="ajaxRes">
 										<?php

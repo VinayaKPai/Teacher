@@ -42,7 +42,7 @@ function filterQuestions() {
       searchString += (exists[z][1] + " === \"" + exists[z][0] + "\" && ");
     }
     searchString += exists[len-1][1] + " === \"" + exists[len-1][0] + "\"";
-    console.log(searchString + " = searchString");
+    // console.log(searchString + " = searchString");
     //exists now holds all the search criteria
     //eg [classNumberDG,0] and [typeNameDG,3]
     var trCount = targetTrs.length;
@@ -64,7 +64,7 @@ function filterQuestions() {
 
     }
 
-console.log (  "if (" + searchString + ")");
+// console.log (  "if (" + searchString + ")");
 
     ajaxGetSubForClass();
   }
@@ -99,15 +99,15 @@ function updateFilters(sourceCheckBoxId, destinationFilterId) {
       //if checkBoxList is classSelectBoxes
       if (sourceCheckBoxId=="classSelectBoxes"){
         classFilter.push(checkBoxList[i].id);
-        console.log(sourceCheckBoxId);
-        console.log(classFilter.length);
-        console.log(classFilter);
+        // console.log(sourceCheckBoxId);
+        // console.log(classFilter.length);
+        // console.log(classFilter);
       }
       if (sourceCheckBoxId=="subjectSelectBoxes") {
         subjectFilter.push(checkBoxList[i].id);
-        console.log(sourceCheckBoxId);
-        console.log(subjectFilter.length);
-        console.log(subjectFilter);
+        // console.log(sourceCheckBoxId);
+        // console.log(subjectFilter.length);
+        // console.log(subjectFilter);
       }
       // //create a button
       addButton(destinationFilterId, checkBoxList[i].value);

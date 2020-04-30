@@ -1,4 +1,4 @@
-<div class="col-sm-12" style="background: var(--BodGradcard); color: #f0f0f0;">
+<div class="col-sm-12" style="background: var(--BodGradcard); color: #f0f0f0; padding-top: 5px;">
   <h4>To Do List</h4>
   <div class='row'>
               <div class='col-6'>

@@ -8,11 +8,7 @@
     }
 
   	$query = $mysqli->query("SELECT * FROM teachers");
-    //
-    // teacherId
-    // tc_firstName
-    // tc_middleName
-    // tc_lastName
+  
         echo "<label for='teacherName'>Teacher   <select name='teacherName' id='teacherName'><option></option>";
         while ($row = $query->fetch_assoc())  {
           $tfn = strip_tags($row['tc_firstName']);

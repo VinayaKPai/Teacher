@@ -10,8 +10,6 @@
 	//Script to display existing classes and sections in the class section table
 	include "../basecode-create_connection.php";
 
-	// echo "<div>";
-
 	$slno = 0;
 	$query = $mysqli->query("SELECT * FROM studentdetails, classes, sections WHERE classes.classId = studentdetails.st_classId AND sections.sectionId = studentdetails.st_sectionId ORDER BY classes.classId, sections.sectionId");
 				if ($query) {
@@ -39,10 +37,10 @@
 						  $remIdDB = $row['st_firstName']."-".$row['st_lastName'].$row['st_phoneMobile'];
 
               $url = "../../RemoveRecords/RemoveStudent.php?fn=".$fn."&ln=".$ln."&pm=".$pm;
-              // <td><a data-toggle='modal' data-target='#studentModal' style='color:white; cursor: pointer;' id='$sid' onclick='modalclick(this)'>".$fn." ".$ln."</a></td>
+
 						  echo "<tr>
                       <td>".$slno."</td>
-                      <td><a data-toggle='modal' data-target='#studentModal' style='color:white; cursor: pointer;' id='$sid' onclick='ajaxCallStudents(this.id)'>".$fn." ".$ln."</a></td>
+                      <td><a data-toggle='modal' data-target='#studentModal' style='color:white; cursor: pointer;' id='$sid'>".$fn." ".$ln."</a></td>
                       <td>".$cn."</td>
                       <td>".$sa."</td>
                       <td>

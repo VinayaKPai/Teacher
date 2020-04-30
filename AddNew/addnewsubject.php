@@ -1,17 +1,10 @@
 <?php
 	include "../basecode-create_connection.php";
 
-		// $classNumber = $_POST["classNumberDG"];
-		// $classNumberSafe = $mysqli->real_escape_string($classNumber);
-		//
-		// $sectionAlpha = $_POST["sectionAlphaDG"];
-		// $sectionAlphaSafe = $mysqli->real_escape_string($sectionAlpha);
-
 		$subjectName = $_POST["subjectName"];
 		$strippedsubjectName = str_replace(' ', '', $subjectName);
 		$subjectNameSafe = $mysqli->real_escape_string($subjectName);
 
-		// $newId = $strippedsubjectName.$classNumberSafe.$sectionAlphaSafe;
 
 		$query = $mysqli->query("SELECT * FROM classes_taught_by_teacher");
 

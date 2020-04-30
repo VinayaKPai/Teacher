@@ -13,8 +13,7 @@ $query = $mysqli->query("SELECT * FROM topics, classes, subjects WHERE topics.to
 			}
 			if ($rowcount > 0) {
 				echo "<h4 style='color: Green; background-color: LightGrey;'>Click on a topic to see questions</h4>" ;
-				// echo "<table style='width: 60%;border: 1px solid Grey'>
-						echo "<thead><tr>
+					echo "<thead><tr>
 							<th style='width: 10%; margin: 5%;'>S. No</th>
 							<th style='width: 10%; margin: 5%;'>Class</th>
 							<th style='width: 10%; margin: 5%;'>Subject</th>
@@ -39,7 +38,7 @@ $query = $mysqli->query("SELECT * FROM topics, classes, subjects WHERE topics.to
 						</tr>";
 
 				}
-				// echo "</table>";
+			
 			}
 
 			if(!$query) {

@@ -1,4 +1,4 @@
-<?php include "../basecode-create_connection.php"; 
+<?php include "../basecode-create_connection.php";
 	echo $datetime1;
 
 ?>

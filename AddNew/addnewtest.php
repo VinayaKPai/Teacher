@@ -10,7 +10,7 @@
     // echo "<br>".$classId;
     // echo "<br>".$subjectId;
 
-    $stmt = $mysqli->prepare("INSERT INTO tests (testTilte, classId, subjectId, questions) VALUES (?, ?, ?, ?)");
+    $stmt = $mysqli->prepare("INSERT INTO tests (testTitle, test_classId, test_subjectId, test_questions) VALUES (?, ?, ?, ?)");
     $stmt->bind_param("ssss", $inpTitle, $classId, $subjectId,$questions);
 
     $stmt->execute();

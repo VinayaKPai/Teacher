@@ -1,5 +1,6 @@
 <?php
 	include "../basecode-create_connection.php";
+// include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/saveActivities.php";
 
 	$pageHeading = "Set Up your Question Bank";
 	$pageCode = "setup";
@@ -23,24 +24,92 @@
 				<script src="../../Scripts/js/ajaxGetAllForClass.js"></script>
 				<script src="../../Scripts/js/filterRecords.js"></script>
 				<script>
-					function testalert(dropDownId) {
+				var chkdarr = [];
+				var slno = 0;
+				function selectedQuestionDisplay(e) {
+					if (e.checked) {
+					// get the entire row
+					chkdarr.push(e.id);
+					slno = slno + 1;
+							var row = e.parentNode.parentNode;
+							//access all the td in the row
+							var rowchild = row.children;
+							var newqdiv = document.createElement("div");
+							newqdiv.id = "n" + e.id;
+							newqdiv.className="container";
+							//display the question
+							var newq = document.createElement("p");	//for the main question
+							newq.innerText = slno + ". " +rowchild[3].innerText + " : ";
+							newqdiv.appendChild(newq);
+							// now add options if they exist
+							if (rowchild[4].innerText!="")	{
+								//---------------
+								var au = document.createElement("ul");
+								// au.class = "list-inline";
+								//---------------
+									for (i=4;i<rowchild.length;i++) {
+										var ap = document.createElement("li");
+										if (rowchild[i].innerText!=""){
+											ap.innerText = rowchild[i].innerText;
+											ap.style.margin = "10px";
+											ap.style.display = "inline";
+											au.appendChild(ap);
+										}
+									}
+								newqdiv.appendChild(au);
+
+								}
+								document.getElementById("ajaxResult").appendChild(newqdiv);
+
+							}
+							else {	//ie if checkbox is unchecked
+								var nid = "n" + e.id;
+								var n = document.getElementById(nid);
+								n.remove();
+								var rem = chkdarr.indexOf(e.id);
+								chkdarr.splice(rem,1);
+							}
+							if (document.getElementById("ajaxResult").children.length!=1){
+								document.getElementById("axc").style.display = "block";
+								document.getElementById("ajaxButtons").style.display = "block";
+							}
+							else {
+								document.getElementById("axc").style.display = "none";
+								document.getElementById("ajaxButtons").style.display = "none";
+							}
+//to add all the relevant data to the quesry string, we need
+// TO: 1. stringify the arrar
+// TO : 2 get the class classNumber
+// TO : 3 get the subjectName
+							var choose = JSON.stringify(chkdarr);
+							var csb = document.getElementById("classSelectBoxes").children;
+							var csbi = 0;
+							for (j=0;j<csb.length;j++) {
+								if (csb[j].children[0].checked) {
+									csbi = csb[j].children[0].id;
+								}
+							}
+							var ssb = document.getElementById("subjectSelectBoxes").children;
+							var ssbi = "a";	//simply initializing it to "a" as it is giving an error
+							for (k=0;k<ssb.length;k++) {
+								if (ssb[k].children[0].checked) {
+									ssbi = ssb[k].children[0].id;
+								}
+							}
+							// alert (csbi + ssbi)
+							var clk = "ajaxCallSaveNewActivity(" + choose +"," + csbi+ ",\"" + ssbi + "\",this.id)";
+console.log(clk);
+							var savebuttons = document.getElementsByName("saveButton");
+							for (l=0;l<savebuttons.length;l++){
+								savebuttons[l].setAttribute("onclick", clk);
+							}
+				}
+
+				function testalert(dropDownId) {
 						var selector = document.getElementById(dropDownId);
 						var value = selector[selector.selectedIndex].value;
-						// The line below can be used to update a certain section of your visualisation, so that the page doesnt reload
-						//document.getElementById('display').innerHTML = value;
+
 						console.log(value);
-					}
-					function selectActivity(e) {
-						var eid = e.id;
-					    var chkbxs = document.getElementsByTagName('input');
-							var chkd = [];
-							for (i=0;i<chkbxs.length;i++) {
-									if (chkbxs[i].name=="qid" && chkbxs[i].checked) {
-									 chkd.push(chkbxs[i].id);
-								 }
-							}
-							alert (chkd + eid);
-							ajaxCallCreateActivity(chkd,eid);
 					}
 				</script>
 	</head>
@@ -49,40 +118,9 @@
 			<hr>
 			<h3 class="centered"><?php include "../Components/top.php"; ?></h3>
 			<hr>
-			<!-- Instructions -->
-		  <div>
-		    <div>
-						<h5  class="panel-title" style="background-color: #C5B2B3;">
-	        		<a data-toggle="collapse" href="#collapse1">Instructions
-								<span class="glyphicon glyphicon-plus-sign" style="float: right; color: Red"></span>
-							</a>
-						</h5>
-				</div>
-				<div id="collapse1" class="panel-collapse collapse">
-					<div class="col-sm-6" style="font-size: x-small;">
-						<h7 style="font-weight: bold;">Add a Single record</h7>
-						<div style="margin-top: 5px;">
-							<li>Select from drop down Class/Std</li>
-							<li>Select from drop down Section</li>
-							<li>Click on CHECK</li>
-							<li>If there is no popup message, click Submit</li>
-						</div>
-					</div>
-					<div class="col-sm-6" style="font-size: x-small;">
-						<h7 style="font-weight: bold;">Add Multiple records at once</h7>
-						<div style="margin-top: 5px;">
-							<li>Select from drop down Class/Std</li>
-							<li>Select from drop down Section</li>
-							<li>Click on CHECK</li>
-							<li>Repeat above steps until you have several you records in the queue</li>
-							<li>If any record has been added by mistake, click on Remove from Q to remove it from the queued records</li>
-							<li>Click on ADD ALL to complete the process of inserting these records</li>
-						</div>
-					</div>
-				</div>
-			</div>
+			<?php include "../Components/instructions.html"; ?>
+
 			<div>
-				<!--  -->
 				<div class="col-sm-4" style="padding: 10px;">
 					<hr>
 					<p class="panel-title" style="background-color: #C5B2B3;">Add a Question to the Database</p>
@@ -127,13 +165,12 @@
 
 				</div>
 
-				<div class="col-sm-8 centered" style="border-left: 1px solid Grey; height: 400px; padding: 1%; ">
+				<div class="col-sm-8 centered" style="border-left: 1px solid Grey; height: 400px; padding: 1px; ">
 					<hr>
           <div style="margin-top: 3px;">
 						<p class="panel-title" style="background-color: #C5B2B3; color: Red;">Select at least one class and one subject to view questions</p>
 					</div>
-					<div id="ajaxReturnTest"></div>
-						<!-- <form action="../AddNew/Existing/questions.php" method="post"> -->
+					<div id="ajaxReturn"></div>
 								<div class="panel panel-header col-sm-12" style="padding:10px;">
 										<div class="col-sm-3 left-align">Class/STD:<span class='glyphicon glyphicon-asterisk small' style='color: Red'></span></div>
 										<div id="classSelectBoxes" class="input-group col-sm-9 left-align">
@@ -144,38 +181,51 @@
 											<?php include "../Components/subjectDropDown.php" ; ?>
 										</div>
 										<div id="filtersInUse"  class="left-align" style="padding:10px;">
-											<div id="filteredClasses"  class="col-sm-4" style="padding: :10px;"></div>
-											<div id="filteredSubjects"  class="col-sm-4" style="padding: :10px;"></div>
+											<div id="filteredClasses"  class="col-sm-6" style="padding: :10px;"></div>
+											<div id="filteredSubjects"  class="col-sm-6" style="padding: :10px; border-left: 1px solid LightGrey"></div>
 										</div>
 								</div>
 								<div class="panel panel-header  col-sm-12" style="padding:10px;">
-									<!-- <div class="col-sm-4">
-										Topic: <select id= "topicName" name="topicName" style="width:80px;">
-										<option id=""></option>
-										<?php include $_SERVER['DOCUMENT_ROOT']."/Components/topicDropDown.php?" ; ?>
-										</select>
-									</div> -->
-									<!-- <div class="col-sm-4">
-										Q Type: <select id="typeName" name="typeName" style="width:80px;">
-													<option id=""></option>
-													<?php include $_SERVER['DOCUMENT_ROOT']."/Components/typeDropDown.php" ; ?>
-										</select>
-									</div> -->
-									<div class="col-sm-4">
-										<!-- <button type="Submit">Submit</button> -->
-										<button onclick="ajaxCallGetQuestionsFilter()">Submit</button>
+
+									<div style="align-content: center;">
+
+										<button onclick="ajaxCallGetQuestionsFilter()">View Questions</button>
 									</div>
 								</div>
-						<!-- </form> -->
-
 				</div>
-				</div>
+			</div>
+			<hr>
 				<div class-"container">
 					<hr>
-					<div id="status" class="centered" ><?php echo $datetime1;?></div>
-					<div id="ajret" class="centered" >
+					<div id="status" class="centered" >
+						<?php echo $datetime1;?>
+					</div>
+					<div class="row" style="margin-top: 10px; background: #C5B2B3; padding: 10px;">
+						<div id="ajaxResult" class="container col-lg-8">
 
-						<hr>
+							<h5 id="axc" style="text-align: center; display: none;">
+								Create a New Activity - Give it a name:
+								<input id="inpTitle" />
+								<br><small>Note: this will be displayed as the title when you deploy the activity!</small>
+							</h5>
+
+
+						</div>
+						<div id="ajaxButtons" class="container col-lg-4" style="display:none;" >
+							<!-- <div class='col-sm-3' style='padding-top: auto;'> -->
+							<h5>Save New </h5>
+					      <button name="saveButton" id="assignment" class="btn btn-block" style="color: Green;" onclick="ajaxCallSaveNewAssignment()">Assignment</button>
+								<button name="saveButton" id="quiz" class="btn btn-block" style="color: Green;" onclick="ajaxCallSaveNewAssignment()">Quiz</button>
+								<button name="saveButton" id="test" class="btn btn-block" style="color: Green;" onclick="ajaxCallSaveNewAssignment()">Test</button>
+					      <button class='btn btn-block' style='color: Red'>Cancel</button>
+								<div class="h5">Note: If you want to remove any question here, uncheck the corresponding checkbox below</div>
+				      <!-- </div> -->
+						</div>
+					</div>
+					</div>
+					<div id="ajret" class="centered">
+
+
 						<?php
 								$displayType = "checkbox";
 								include "../AddNew/Existing/questions.php";
@@ -183,8 +233,6 @@
 					</div>
 				</div>
 
-
 			<div id="bottom"><?php include "../Components/bottom.php"; ?></div>
-		</div>
 	</body>
 </html>

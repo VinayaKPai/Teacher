@@ -44,6 +44,9 @@ JS Functions: {
 
   Function Name:  explore
   File Names:     1. SetupPages/newQuestions.php
+
+  Function Name:  selectActivity
+  File Names:     1. SetupPages/newQuestions.php
 }
 
 AJAX Functions: {
@@ -54,7 +57,8 @@ AJAX Functions: {
   File Names:
 
   Function Name:  deploy
-  File Names:
+  File Names:     1. Activity\savedTests.php
+                  2. Scripts\js\ajaxCallActivities.js
 
   Function Name:  filterTests
   File Names:

@@ -1,5 +1,5 @@
 <?php include "basecode-create_connection.php";
-	$pageHeading = "Teachers Tool logged in as <span class='loggedin'>Guest</span>" ;
+	$pageHeading = "<span class='loggedin'>Guest</span>" ;
 	$pageCode = "index";
 ?>
 
@@ -13,8 +13,6 @@
 					<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 					<!-- Bootstrap CSS -->
 					    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-					<!-- <script src="modal.js"></script> -->
 					  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 					  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 						<script src="./Scripts/js/codilytest.js"></script>
@@ -25,8 +23,11 @@
 		<body class="body" style="background: var(--BodyGradient);">
 			<div class="container">
 				<?php echo $datetime1; ?>
-
+				
 				<h3 class="centered" style="background: var(--BodyGradient);"><?php include "Components/top.php"; ?></h3>
+				<div id="login" class="panel-collapse collapse">
+					<?php include $_SERVER['DOCUMENT_ROOT']."/Components/login.php" ;?>
+				</div>
 				<hr>
 
 				<div class="container" style="background: var(--BodyGradient);">
@@ -77,7 +78,7 @@
 									<a href="../../Activity/addnewassignment.php">Assignments</a>
 								</li>
 								<li>
-									<a href="../../Activity/testModule.php">Tests</a>
+									<a href="../../Activity/addnewtest.php">Tests</a>
 								</li>
 								<li>
 									<a href="../../Activity/addnewquiz.php">Quizzes</a>
@@ -114,23 +115,9 @@
 				<div>
 					<?php include $_SERVER['DOCUMENT_ROOT']."/Components/todolist.php"; ?>
 				</div>
-
-
-			<!-- ----------------------------------------------- -->
-					<!-- <button onclick="binnum(2100400641)">Binary Gap</button>
-					<button onclick="MissingInteger()">Missing Integer</button>
-					<button onclick="MaxProductOfThree()">Max Product Of Three</button>
-					<button onclick="factors([253264])">Factors single</button>
-					<button onclick="factorsM([12,150,181,192,253,264])">Factors Many</button>
-					<button onclick="minPerimeterRectangle(162)">Min Perimeter Rectangle</button>
-					<button onclick="OddOccurrencesInArray([9, 3, 9, 3, 9, 7, 9])">Odd Occurrences In Array</button>
-					<button onclick="CyclicRotation([4,2,7,9,6,4,3,-3],14)">CyclicRotation</button>
-					<button onclick="frogJmp(2,201,14)">Frog Jump</button>
-					<button onclick="permMissingElem([32,34,31,35,30,36])">Perm Missing Number</button>
-					<button onclick="permCheck([4,1,5,3,2])">Permutation Check</button>
-					<button onclick="countDiv(10, 156, 7)">CountDiv</button> -->
 				</div>
 				<?php include "Components/bottom.php"; ?>
 			</div>
+
   </body>
 </html>

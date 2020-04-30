@@ -1,14 +1,12 @@
 <?php
     include $_SERVER['DOCUMENT_ROOT']."/basecode-create_connection.php";
-    $depTest = $_GET['depTest'];  //the id of the deployment
+    $depTest = $_GET['depTest'];
     $depType = $_GET['depType'];
     $dateToDeploy = $_GET['dateToDeploy'];
-    $classId = $_GET['classId'];
-    $subjectId = $_GET['subjectId'];
 
     if ($_GET){
-    	$stmt = $mysqli->prepare("INSERT INTO `deploymentlog` (`depType`,`dep_IdInActivityTable`, `schStartDate`, `dep_classId`, `dep_subjectId`) VALUES (?,?,?,?,?)");
-    	$stmt->bind_param("sisss", $depType, $depTest, $dateToDeploy, $classId, $subjectId );
+    	$stmt = $mysqli->prepare("INSERT INTO `deploymentlog` (`depType`,`dep_testId`, `schStartDate`) VALUES (?, ?)");
+    	$stmt->bind_param("sss", $depTest, $dateToDeploy );
 
     	$stmt->execute();
     }
@@ -27,6 +25,5 @@
 
     $stmt->close();
     $mysqli->close();
-    // echo $depTest." ".$dateToDeploy." from php";
-    // {header('Location: ../Activity/administeredTests.php');}
+    echo $depTest." ".$dateToDeploy." from php";
 ?>

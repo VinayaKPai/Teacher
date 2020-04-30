@@ -54,7 +54,7 @@ console.log(queryString);
        // var item = document.getElementById(i.id);
         // alert (i);
         var arr = i.split(" ");
-        alert (arr);
+        // alert (arr);
         var tc = arr[0];
         var cl = arr[1];
         var se = arr[2];
@@ -62,8 +62,6 @@ console.log(queryString);
         if (arr[4]) {
           su = su + arr[4];
         }
-        // alert (i.data-section);
-        // alert (i.data-subject);
 
             var ajaxRequest;  // The variable that makes Ajax possible!
 

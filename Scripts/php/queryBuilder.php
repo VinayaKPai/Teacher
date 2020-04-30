@@ -54,4 +54,21 @@ function addSubjectNamesToQueryString( $queryString, $classNumberExists, $select
 //   }
 //   return $queryString;
 // }
+function addQuestionIdsToQueryString( $queryString, $selectedQuestionIds ) {
+  // if ($classNumberExists) {
+    // $queryString = $queryString." AND "; // REMOVING THIS LINE AFTER BACKING UP THE QUESTIONS . PHP SHOULD BE RESTORED IF ORIGINAL FILE IS USED
+  // }
+  $queryString = $queryString."(";
+  for ($x = 0; $x < count($selectedQuestionIds); $x++) {
+          if($x > 0) {
+            $queryString = $queryString."OR ";  //The OR needs to be added to the statement only if there are more than 1 selected entries
+          }
+          $queryString = $queryString."qId = '".$selectedQuestionIds[$x]."' ";
+  }
+  $queryString = $queryString.") ";
+  return $queryString;
+}
+
+
+
 ?>

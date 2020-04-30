@@ -5,10 +5,8 @@
 	//Script to display existing classes and sections in the class section table
 	include "../basecode-create_connection.php";
 
-	// echo "<div>";
-
 	$slno = 0;
-	$query = $mysqli->query("SELECT * FROM teachers");
+	$query = $mysqli->query("SELECT * FROM teachers WHERE `tc_visibility` = 'Y'");
 				if ($query) {
 					$rowcount=mysqli_num_rows($query);
           if ($rowcount > 0) {
@@ -52,7 +50,7 @@
 					echo "Looks like your set up has not been started. Please add student details to the database, so that you can get the benefit of all the features of the App";
 				}
 
-	// echo "</div>";
+	
 	mysqli_close($mysqli);
 ?>
 </table>

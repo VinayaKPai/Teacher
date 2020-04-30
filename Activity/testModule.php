@@ -102,7 +102,7 @@
 						<div class="panel-title">
 							<h4>Previous Test</h4>
 							<p>These are tests previously given at least once</p>
-							<!-- <?php include $_SERVER['DOCUMENT_ROOT']."../Activity/administeredTests.php";  ?> -->
+							<?php include $_SERVER['DOCUMENT_ROOT']."./Activity/administeredTests.php";  ?>
 						</div>
 					</div>
 

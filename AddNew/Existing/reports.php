@@ -18,17 +18,11 @@
       $report = "Subject By Topic Name";
     }
 
-    // Full texts
-    // teacherId
-    // tc_firstName
-    // tc_middleName
-    // tc_lastName
     $getTeacherName = $mysqli->query("SELECT `tc_firstName`, `tc_middleName`, `tc_lastName` FROM teachers WHERE `teacherId` = $teacherId");
     $names = $getTeacherName->fetch_assoc();
     $fn = $names['tc_firstName'];
     $mn = $names['tc_middleName'];
     $ln = $names['tc_lastName'];
-        // $querystring = ("SELECT * FROM teachers, classes_taught_by_teacher, subjects, classes WHERE teachers.teacherId = $teacherId AND classes_taught_by_teacher.ctt_teacherId = $teacherId AND classes_taught_by_teacher.ctt_subjectId = subjects.subjectId  AND classes_taught_by_teacher.ctt_classId = classes.classId ORDER BY classes.classId ASC");
 
         $querystring = ("SELECT * FROM teachers, classes_taught_by_teacher, subjects, classes, topics WHERE teachers.teacherId = $teacherId AND classes_taught_by_teacher.ctt_teacherId = $teacherId AND classes_taught_by_teacher.ctt_subjectId = subjects.subjectId  AND classes_taught_by_teacher.ctt_classId = classes.classId AND topics.topic_classId = classes.classId AND topics.topic_subjectId = subjects.subjectId  ORDER BY classes.classId ASC");
 

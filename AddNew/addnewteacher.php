@@ -1,6 +1,5 @@
 <?php
 	include "../basecode-create_connection.php";
-	print_r($_POST);
 
 		$firstName = $_POST["firstName"];
 		$firstNameSafe = $mysqli->real_escape_string($firstName);
@@ -17,19 +16,25 @@
 		$phoneMobile = $_POST["phoneMobile"];
 		$phoneMobileSafe = $mysqli->real_escape_string($phoneMobile);
 
+		$joinYear = $_POST["joinYear"];
+		$joinYearSafe = $mysqli->real_escape_string($joinYear);
+
+		$endYear = $_POST["endYear"];
+		$endYearSafe = $mysqli->real_escape_string($endYear);
+
 		$systemEmail = $firstNameSafe.$middleNameSafe.$lastNameSafe."@mydomain.com" ;
 
-		$newId = $firstNameSafe.$middleNameSafe.$lastNameSafe.$phoneMobileSafe;
-		$query = $mysqli->query("SELECT * FROM teachers");
+			$query = $mysqli->query("SELECT * FROM teachers");
 
 			if ($query) {
 				$rowcount=mysqli_num_rows($query);
-				//echo "Currently ".$rowcount." students<br />";
+			
 			}
 		// prepare and bind
 
-			$stmt = $mysqli->prepare("INSERT INTO teachers (teacherId, tc_firstName, tc_middleName, tc_lastName, tc_email, tc_systemEmail, tc_phoneMobile) VALUES (?,?, ?, ?, ?, ?, ?)");
-			$stmt->bind_param("sssssss", $newId, $firstNameSafe, $middleNameSafe, $lastNameSafe $emailSafe, $systemEmail, $phoneMobileSafe);
+			$stmt = $mysqli->prepare("INSERT INTO teachers (tc_firstName, tc_middleName, tc_lastName, tc_Email, tc_systemEmail, tc_phoneNumber, tc_joinYear, 	tc_leftYear, tc_visibility) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+			$stmt->bind_param("sssssssss", $firstNameSafe, $middleNameSafe, $lastNameSafe, $emailSafe, $systemEmail, $phoneMobileSafe, $joinYearSafe, $endYearSafe, 'Y');
 
 			//$stmt->execute();
 			if (!$stmt->execute()) {

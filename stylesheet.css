@@ -1,6 +1,6 @@
 :root {
   /* Scheme 1 variables */
-  --BodyGradient: linear-gradient(110deg, #f0f0f0 30%, #d3d3d3 , #C5B2B3 60%);
+  --BodyGradient: linear-gradient(110deg, #f0f0f0 10%, #d3d3d3 20%, #C5B2B3 60%);
   --BodGradtop: linear-gradient(70deg, #2b2722 , #7f7a74, #b6b3af);
   --BodGradbanner: linear-gradient(100deg, #494139, #7f7a74, #2b2722);
   --BodGradbannertext : #ffff99;
@@ -38,7 +38,7 @@
 body {
   background:  var(--BodyGradient);
 }
-h4 {
+h4, h6 {
   color: #651a1a;
   background-color: #DDDDDD;
 }
@@ -50,18 +50,17 @@ h5 {
 ul a {
   color: #f0f0f0;
 }
-table {width: 80%; padding: 5px; border-spacing: 2px; border-collapse: separate; align: 'center';}
+table {width: 80%; padding: 5px; border-spacing: 2px; border-collapse: separate;}
 table th {background-color: #0a0a0a;}
-table th {background-color: #684654; color: #fff}
+table th {background-color: #684654; color: #fff; font-size: 12px;}
 table th, td {text-align: center;}
-/* table tr:nth-child(even){background-color: #9B797B;}
-table tr:nth-child(odd){background-color: #C5B2B3;} */
 table tr:nth-child(even){background-color: #C5B2B3; color: #000}
 table tr:nth-child(odd){background-color: #b69092; color: #000}
 table td {text-align: center;}
 table p {background-color: #684654; color: #fff}
 ul .nav .fade li {
-  color: grey;
+  color: Grey;
+  background-color: #684654;
 }
 .bottom {
 	background-color: #684654;
@@ -80,7 +79,7 @@ ul .nav .fade li {
     border-right: 1px solid #64485C;
     border-radius: 5px;
     margin: 2%;
-    box-shadow: inset -4px -4px 19px 8px black;
+    box-shadow: inset -4px -4px 19px 8px #00000f;
   }
 .centered {
 	text-align: center;
@@ -92,10 +91,10 @@ ul .nav .fade li {
 }
 .modal-dialog  {
   width: 75%;
-  background: var(--BodGradTop);
+  background: var(--BodGradtop);
 }
 .modal-content {
-  background: var(--BodGradTop);
+  background: #b6b3af;
 }
 .headingcolor {
 	background: #DEB887;
@@ -187,7 +186,7 @@ ul .nav .fade li {
   background-color: #9B797B;
   font-size: 18px;
   color: White;
-  padding: 10px;
+  padding: 1px;
 }
 .bannerxs {background-color: #9B797B; font-size: 12px;}
 .left {
@@ -214,4 +213,7 @@ ul .nav .fade li {
   max-width: 200px;
   padding: 8px;
 
+}
+.white {
+  color: White;
 }

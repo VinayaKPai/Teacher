@@ -1,6 +1,6 @@
 <?php
 	include "../basecode-create_connection.php";
-	print_r($_POST);
+
 
 		$firstName = $_POST["firstName"];
 		$firstNameSafe = $mysqli->real_escape_string($firstName);

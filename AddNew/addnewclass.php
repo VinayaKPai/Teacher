@@ -35,8 +35,6 @@ if (isset($_POST["classNumber"]) && !empty($_POST["classNumber"]) && isset($_POS
 $stmt->close();
 $mysqli->close();
 
-//Adding multiple records
-// if (isset($_POST["classNumber"]) && !empty($_POST["classNumber"]) && isset($_POST["sectionAlpha"]) && !empty($_POST["sectionAlpha"])) {}
 
 	{header('Location: ../SetUpPages/newclasses_taught_by_teachers.php');}
 ?>

@@ -230,8 +230,8 @@
         }
 
 
-console.log(addClassNumbersToJsQuery);
-console.log(addSubjectNamesToJsQuery);
+// console.log(addClassNumbersToJsQuery);
+// console.log(addSubjectNamesToJsQuery);
 
 if (z>0 && y==0) {//ONLY classNumber
   queryString = queryString + addClassNumbersToJsQuery;
@@ -245,7 +245,7 @@ if (z>0 && y>0) {//BOTH classNumber and subjectName
   queryString = queryString + addClassNumbersToJsQuery + "&&" + addSubjectNamesToJsQuery;
 }
 
-console.log(queryString);
+// console.log(queryString);
       ajaxRequest.onreadystatechange = function() {
         if(ajaxRequest.readyState == 4) {
           var ajaxReturn = ajaxRequest.responseText;

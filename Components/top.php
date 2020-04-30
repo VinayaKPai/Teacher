@@ -1,38 +1,29 @@
 <div id="top" class="row" style="padding: 1px;">
-	<div class="col-sm-4 topbanner left"  style="background: var(--BodGradtop);">
-		<span style="float: left;">
+	<div class="col-sm-4 topbanner left"  style="background: var(--BodGradtop); padding: 5px;">
+		<span class="col-sm-3" style="float: left;">
 			<a href="/index.php"><i class="glyphicon glyphicon-home" style="color: White;"></i></a>
-		</span><span style="float: right;">
-    <img class="svg" src="../Images/logo-purple.png" alt="LOGO" width="7%">
-  Logo</span>
+		</span>
+		<span class="col-sm-5" style="float: center;"> Teachers Tool </span>
+		<span class="col-sm-4" style="float: right;">
+    	<img class="svg" src="../Images/logo-purple.png" alt="LOGO" width="25%" />
+  	</span>
 	</div>
-	<div class="col-sm-4 topbanner dropdown" style="background: var(--BodGradtop);">
+	<div class="col-sm-3 topbanner dropdown" style="background: var(--BodGradtop);  padding: 5px;">
 		<?php echo $pageHeading; ?>
-		<small><span class="glyphicon glyphicon-chevron-down" style="color: #fff;"></span></small>
-		<div id="setup" class="dropdown-content centered h6" style="float: center;">
-			<a href="../../SetUpPages/newReports.php">Reports </a><br>
-			<a href="../../SetUpPages/newclasses_taught_by_teachers.php">Class-Sections </a><br>
-			<a href="../../SetUpPages/newSubjects.php">Subjects </a><br>
-			<a href="../../SetUpPages/newTopics.php">Topics </a><br>
-			<a href="../../SetUpPages/newQuestions.php">Questions </a><br>
-			<a href="../../SetUpPages/newStudents.php">Students </a>
-		</div>
-		<!-- <div id="activity" class="dropdown-content centered h6" style="float: right;">
-			<a href="../../Activity/addnewassignemnt.php">Assignments </a><br>
-			<a href="../../Activity/testModule.php">Tests </a><br>
-			<a href="../../Activity/newaddnewquiz.php">Quizzes </a><br>
-			<a href="../../Activity/cbsepractice.php">CBSE Practice </a>
-		</div> -->
+	
 	</div>
-	<div class="col-sm-4 topbanner right"  style="background: var(--BodGradtop);">
-		<a href="">
-			<span style="float: left; color: White;" onclick="loginalert()">Login</span>
-			<script>
-			function loginalert () {
-				alert ('login not enabled yet');}
-			</script>
+	<div class="col-sm-5 topbanner right"  style="background: var(--BodGradtop);">
+		<a data-toggle="collapse" href="#login">Login
 		</a>
-		<span style="float: right;">Search</span>
+
+		<span style="float: right; padding: 0px;">
+			<form class="form-inline">
+		    <small>
+					<input class="form-control" type="search" placeholder="Search" aria-label="Search">
+					<button class="btn btn-outline-success" type="submit">Search</button>
+				</small>
+		  </form>
+		</span>
 
 	</div>
 </div>

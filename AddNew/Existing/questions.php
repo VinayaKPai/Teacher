@@ -5,26 +5,21 @@
 include $_SERVER['DOCUMENT_ROOT']."/basecode-create_connection.php";
 include $_SERVER['DOCUMENT_ROOT'].'../Scripts/php/queryBuilder.php';
 include $_SERVER['DOCUMENT_ROOT']."../Scripts/php/sqlQueryResultToHtmlTable.php";
-// phpinfo();
+
 // this is coming from newQuestions.php
 $queryString;
-// print_r($_POST);
 $arrayPOST = $_POST;
 $arrayGET = $_GET;
   if ($arrayGET)  {
       $getSubjectName = explode (",", $_GET['subjectName']);
       $getClassNUMber = explode (",", $_GET['classNumber']);
     }
-// print_r ($_GET);
-// echo ("done get");
 $selectedClassNumbers = [];
 if (isset($arrayPOST['classNumber'])) {$selectedClassNumbers = array_values($arrayPOST['classNumber']);}
 if (isset($arrayGET['classNumber'])) {
-  // echo count($selectedClassNumbers);
   $selectedClassNumbers = $getClassNUMber;
 }
 $selectedSubjectNames = [];
-// if (isset($arrayPOST['subjectName'])) {$selectedSubjectNames = array_values($arrayPOST['subjectName']);}
 if (isset($arrayPOST['subjectName'])) {$selectedSubjectNames = array_keys($arrayPOST['subjectName']);}
 if (isset($arrayGET['subjectName'])) {$selectedSubjectNames = $getSubjectName;}
 
@@ -71,15 +66,15 @@ $queryString = $queryString." AND classes.classId = questionbank.qb_classId AND 
         $queryResult = $mysqli->query($queryString);  //use the queryString built above
         // if ($_POST){print_r($queryResult);}
         // table(false, $queryResult);
-        echo "<div>
-                <span style='float: left'> There are ".mysqli_num_rows($queryResult)." question in the QB</span>
-                <span class='col-6 dropdown' style='float: right;'>With selected questions create a
-                  <button id='assignment' class='btn btn-info' onclick='selectActivity(this)'>Assignment </button>
-                	<button id='test' class='btn btn-info' onclick='selectActivity(this)'>Test </button>
-                	<button id='quiz' class='btn btn-info' onclick='selectActivity(this)'>Quiz </button>
-                  <button id='CBSEpractice' class='btn btn-info' onclick='selectActivity(this)'>CBSE Practice </button>
-                </span>
-              </div>";
+        // echo "<div>
+        //         <span style='float: left'> There are ".mysqli_num_rows($queryResult)." question in the QB</span>
+        //         <span class='col-6 dropdown' style='float: right;'>With selected questions create a
+        //           <button id='assignment' class='btn btn-info' onclick='selectActivity(this)'>Assignment </button>
+        //         	<button id='test' class='btn btn-info' onclick='selectActivity(this)'>Test </button>
+        //         	<button id='quiz' class='btn btn-info' onclick='selectActivity(this)'>Quiz </button>
+        //           <button id='CBSEpractice' class='btn btn-info' onclick='selectActivity(this)'>CBSE Practice </button>
+        //         </span>
+        //       </div>";
         $row=$queryResult->fetch_assoc();
         // header row
 
@@ -113,7 +108,7 @@ $queryString = $queryString." AND classes.classId = questionbank.qb_classId AND 
                     <td>".$row['Option_4']."</td>
                     <td>".$row['Option_5']."</td>
                     <td>".$row['Option_6']."</td>
-                    <td><input type='checkbox' id='$qid' name='qid'/></td>
+                    <td><input type='checkbox' id='$qid' name='qid' onclick='selectedQuestionDisplay(this)'/></td>
                   </tr>";
         }
         echo "</table>";

@@ -1,8 +1,6 @@
 <?php
   	include $_SERVER['DOCUMENT_ROOT']."/basecode-create_connection.php";
-    // echo $datetime1;
-    // $displayType = $_GET['displayType'];
-    // $displayType = "dropdown";
+    
 if (!isset($displayType)) {
   $displayType = "checkbox";
 }

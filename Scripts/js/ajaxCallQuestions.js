@@ -33,9 +33,7 @@
       		   if(ajaxRequest.readyState == 4) {
                var ajret = document.getElementById("ajret");
                ajret.inerHTML = ajaxRequest.responseText;
-               // var ajaxReturn = JSON.parse(ajaxRequest.responseText);
-               // var et = document.getElementById("existTable");
-               // et.inerHTML = ajaxReturn;
+
                  }
 
               }
@@ -126,11 +124,9 @@ function ajaxCallGetQuestions () {
  ajaxRequest.onreadystatechange = function() {
    if(ajaxRequest.readyState == 4) {
      var ajaxReturn = ajaxRequest.responseText;
-    // var ajaxReturn = JSON.parse(ajaxRequest.responseText);
-    document.getElementById("existingQuestions").innerHTML = ajaxReturn;
-    // document.getElementById("topicName").appendChild(ajaxReturn);
 
-    // console.log(ajaxReturn);
+    document.getElementById("existingQuestions").innerHTML = ajaxReturn;
+
   }
 
  }
@@ -191,18 +187,13 @@ function ajaxCallGetQuestionsFilter () {  //ARRAYS OF CLASSES AND SUBJECTS COMIN
        alert ("Select at least one class and subject");
      }
      else {
-           alert ("classes = " + classNumbers + typeof(classNumbers) + " Subjects =  " + subjectNames);
          var queryString = "/AddNew/Existing/questions.php?classNumber=" + classNumbers + "&&subjectName=" + subjectNames;
-         console.log(queryString);
+         
     }
  ajaxRequest.onreadystatechange = function() {
    if(ajaxRequest.readyState == 4) {
      var ajaxReturn = ajaxRequest.responseText;
-    // var ajaxReturn = JSON.parse(ajaxRequest.responseText);
     document.getElementById("ajret").innerHTML = ajaxReturn;
-    // document.getElementById("topicName").appendChild(ajaxReturn);
-
-    // console.log(ajaxReturn);
   }
 
  }

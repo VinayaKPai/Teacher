@@ -62,7 +62,7 @@
         <div class="panel-body" style="height: 300px; overflow: scroll;">
           <table style='width: 100%;'>
             <?php
-            include $_SERVER['DOCUMENT_ROOT']."/"."Activity"."/future".$pageHeading.".php";
+            include $_SERVER['DOCUMENT_ROOT']."/"."Activity"."/undeployed".$pageHeading.".php";
             ?>
           </table>
           <p class="centered">**********  Future or undeployed <?php echo $pageHeading;?>  **********</p>

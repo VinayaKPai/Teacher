@@ -4,7 +4,7 @@
 	include "../basecode-create_connection.php";
 	$slno = 0;
 	$curdate = date("Y-m-d");
-	$query = $mysqli->query("SELECT * FROM deploymentlog, assessments WHERE deploymentlog.depType = 'T' AND deploymentlog.schEndDate < $curdate AND deploymentlog.deploySuccess = 1 AND assessments.assessment_Id = deploymentlog.dep_assessmentId");
+	$query = $mysqli->query("SELECT * FROM deploymentlog, assessments WHERE deploymentlog.depType = 'T' AND deploymentlog.schEndDate < '$curdate' AND deploymentlog.deploySuccess = 1 AND assessments.assessment_Id = deploymentlog.dep_assessmentId ");
 	$rowcount=mysqli_num_rows($query);
   if ($rowcount>1) {
     $counts = $pageHeading." have";

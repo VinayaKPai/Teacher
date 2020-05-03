@@ -8,12 +8,12 @@
     	<img class="svg" src="../Images/logo-purple.png" alt="LOGO" width="25%" />
   	</span>
 	</div>
-	<div class="col-sm-3 topbanner dropdown" style="background: var(--BodGradtop);  padding: 5px;">
+	<div class="col-sm-3 topbanner dropdown" style="background: var(--BodGradtop);  padding: 5px; text-align: center;">
 		<?php echo $pageHeading; ?>
-	
+
 	</div>
 	<div class="col-sm-5 topbanner right"  style="background: var(--BodGradtop);">
-		<a data-toggle="collapse" href="#login">Login
+		<a data-toggle="collapse" href="#login" style="text-align: center">Login
 		</a>
 
 		<span style="float: right; padding: 0px;">

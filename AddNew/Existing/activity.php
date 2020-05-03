@@ -1,18 +1,11 @@
 <?php
-	//Script to display completed assessments in the deploymentlog table ie
-	//End date is over and deployment success flag is 1
+	//Script to display existing assessments in the assessments table
 	include "../basecode-create_connection.php";
-	$slno = 0;
 	$curdate = date("Y-m-d");
-	$query = $mysqli->query("SELECT * FROM deploymentlog, assessments WHERE deploymentlog.depType = 'T' AND deploymentlog.schEndDate < $curdate AND deploymentlog.deploySuccess = 1 AND assessments.assessment_Id = deploymentlog.dep_assessmentId");
+	$slno = 0;
+	$query = $mysqli->query("SELECT * FROM assessments");
 	$rowcount=mysqli_num_rows($query);
-  if ($rowcount>1) {
-    $counts = $pageHeading." have";
-  }
-  else {
-    $counts = $pageHeadSingular." has";
-  }
-	    echo "<h6 class='topbanner'>Currently $rowcount $counts been administered. </h6>" ;
+	    echo "<h6 class='topbanner'>Currently $rowcount Saved Assessments. <small class='whitebg' style='float: right; color: red;'>Remember that these may not all have been deployed yet</small></h6>" ;
 
 			if ($rowcount > 0) {
 				//table tag is in the parent page already
@@ -40,9 +33,8 @@
 //check if the assessmentId exists in the deployment table
 //if msg is yes, then we will need to get the deployment dates, otherwise not
 							$aid = $row['assessment_Id'];
-							$requery = $mysqli->query("SELECT * FROM deploymentlog WHERE `dep_assessmentId`= $aid ");
+							$requery = $mysqli->query("SELECT * FROM deploymentlog WHERE `dep_assessmentId`= $aid AND `depType` = 'T' ");
 							$msg = "";
-
 
 						  echo "<tr>
 											<td>".$sid."<hr></td>
@@ -93,38 +85,41 @@
 															<option value='4'>D</option>
 															<option value='5'>E</option>
 															<option value='6'>F</option>
-													</select><br>
-													<label for='".$dates."'>Select Date to deploy:</label>
-													<input type='date' id='".$dates."' name=".$names."><br>
+													</select>
+													<br>
 												  <label for='as".$composite."'>Type:</label>
 												    <select id='as".$composite."' name=".$names.">
 												      <option name='A' value='A'>Assignment</option>
 												      <option name='Q' value='Q'>Quiz</option>
-												      <option name='T' value='T'>$pageHeading</option>
-														</select><br>
-													  <button id=".$aid." onclick='deploy(".$aid.",".$classId.")'>Deploy</button>
-													</div><hr>
+												      <option name='T' value='T'>Test</option>
+														</select>
+														<br>
+														<label for='".$dates."'>Select Date to deploy:</label>
+														<input type='date' id='".$dates."' name=".$names."><br>
+													  <button id=".$aid." onclick='deploy(".$classId.",".$aid.")'>Deploy</button>
+													</div>
+													<hr>
 													<h5>Previously deployed?";
 //sending 2 parameters with deploy - assessment Id and classId
-// echo "<button class='small' id=$depId onclick='deploy(this,\"".$depType."\",\"".$subjectId."\",\"".$classId."\")'>Deploy</button>";
-																						if (mysqli_num_rows($requery)>0) {
-														 echo " <span class='green'>YES</span> </h5><div>";
+													if (mysqli_num_rows($requery)>0) { //$requery querries the deployment log for the presence of assessmentId in the dep_assessmentId column
 														//get the deployment dates
+														echo " <span class='green'>YES</span> </h5><div>";
+														echo "<p>This assessment has been set ".mysqli_num_rows($requery)." times as ".$pageHeadSingular;
+														$cnt = 0;
 														while ($rerow = $requery->fetch_assoc()) {
-															$type = $pageHeading;
-															// if ($rerow['depType']=="A") {
-															// 	$type = "Assignment";
-															// }
-															// if ($rerow['depType']=="Q") {
-															// 	$type = "Quiz";
-															// }
-															// if ($rerow['depType']=="T") {
-															// 	$type = ;
-															// }
-															echo "<ol style='list-style-type: none'>
-																			<li>To Sec ".$rerow['dep_sectionId']." on ".$rerow['schStartDate']." as  ".$type."</li>";
+															if ($rerow['schEndDate']<$curdate) {
+																$cnt = $cnt + 1;
+																	echo "<ol style='list-style-type: none'>
+																					<li>To Sec ".$rerow['dep_sectionId'].": ".$rerow['schStartDate']." - " .$rerow['schEndDate']." as  ".$pageHeadSingular."</li>";
 
-															echo "</ol>";
+																	echo "</ol>";
+															}
+														}
+														if ($cnt>0) {
+															echo "<p> This ".$pageHeadSingular." has been completed $cnt times.</p>";
+														}
+														else {
+															echo "<p> This ".$pageHeadSingular." is still open.</p>";
 														}
 													}
 													else {echo " <span class='red'>No Deployments yet</span></h5><div>";}

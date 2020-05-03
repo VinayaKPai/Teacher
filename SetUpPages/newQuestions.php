@@ -213,10 +213,8 @@ console.log(clk);
 						</div>
 						<div id="ajaxButtons" class="container col-lg-4" style="display:none;" >
 							<!-- <div class='col-sm-3' style='padding-top: auto;'> -->
-							<h5>Save New </h5>
-					      <button name="saveButton" id="assignment" class="btn btn-block" style="color: Green;" onclick="ajaxCallSaveNewAssignment()">Assignment</button>
-								<button name="saveButton" id="quiz" class="btn btn-block" style="color: Green;" onclick="ajaxCallSaveNewAssignment()">Quiz</button>
-								<button name="saveButton" id="test" class="btn btn-block" style="color: Green;" onclick="ajaxCallSaveNewAssignment()">Test</button>
+							<h5>Save A New Activity</h5>
+					      <button name="saveButton" id="assignment" class="btn btn-block" style="color: Green;" onclick="ajaxCallSaveNewAssignment()">Save Activity</button>
 					      <button class='btn btn-block' style='color: Red'>Cancel</button>
 								<div class="h5">Note: If you want to remove any question here, uncheck the corresponding checkbox below</div>
 				      <!-- </div> -->

@@ -1,14 +1,14 @@
 <?php
     include $_SERVER['DOCUMENT_ROOT']."/basecode-create_connection.php";
-    $depTest = $_GET['depTest'];  //the id of the deployment
+    $depActivity = $_GET['depActivity'];  //the id of the assessment
     $depType = $_GET['depType'];
     $dateToDeploy = $_GET['dateToDeploy'];
     $classId = $_GET['classId'];
-    $subjectId = $_GET['subjectId'];
+    $sectionId = $_GET['sectionId'];
 
     if ($_GET){
-    	$stmt = $mysqli->prepare("INSERT INTO `deploymentlog` (`depType`,`dep_IdInActivityTable`, `schStartDate`, `dep_classId`, `dep_subjectId`) VALUES (?,?,?,?,?)");
-    	$stmt->bind_param("sisss", $depType, $depTest, $dateToDeploy, $classId, $subjectId );
+    	$stmt = $mysqli->prepare("INSERT INTO `deploymentlog` (`depType`,`dep_assessmentId`, `schStartDate`, `dep_classId`, `dep_sectionId`) VALUES (?,?,?,?,?)");
+    	$stmt->bind_param("sisii", $depType, $depActivity, $dateToDeploy, $classId, $sectionId );
 
     	$stmt->execute();
     }
@@ -18,10 +18,10 @@
 
     	if (!$stmt->execute()) {
     		$errno = $stmt->errno;
-    		$message = "Could not add $depTest - If the error reoccurs, please contact admin with $errno";
+    		$message = "Could not add $depActivity - If the error reoccurs, please contact admin with $errno";
     	}
     	else {
-    		$message = $depTest." has been added to the database";
+    		$message = $depActivity." has been added to the database";
     	}
 
 

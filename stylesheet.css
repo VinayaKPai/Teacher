@@ -198,6 +198,9 @@ ul .nav .fade li {
 .right {
   border-left: 1px solid #2E1114;
 }
+.right-align {
+  text-align: right;
+}
 
 .filterButton {
   display: inline-block;
@@ -216,4 +219,19 @@ ul .nav .fade li {
 }
 .white {
   color: White;
+}
+.whitebg {
+  background-color: White;
+}
+.green {
+  color: Green;
+}
+.greenbg {
+  background-color: Green;
+
+.red {
+  color: Red;
+}
+.redbg {
+  background-color: Red;
 }

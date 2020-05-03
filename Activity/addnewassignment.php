@@ -1,78 +1,29 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Teachers Tools LH</title>
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<!-- Bootstrap CSS -->
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<head>
+	<?php include $_SERVER['DOCUMENT_ROOT']."/Components/header.php" ;?>
 
-<!-- <script src="modal.js"></script> -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="/stylesheet.css"  />
 </head>
 <body class="body">
 	<div class="container">
-
-
-				<div style="text-align: right">
+		<div class="right-align">
 					<?php include $_SERVER['DOCUMENT_ROOT']."/basecode-create_connection.php";
 						echo $datetime1; ?>
 				</div>
 	<hr>
 		<?php
 			$pageHeading = "Assignments";
-
-			include $_SERVER['DOCUMENT_ROOT']."/Components/header.php";
+			$pageHeadSingular = "Assignment";
 			include $_SERVER['DOCUMENT_ROOT']."/Components/top.php";
 			if ($_GET){echo $_GET;}
 		?>
 	 <a href="../../SetUpPages/newQuestions.php">
-		 <h4 class="btn btn-block topbanner">Add New Assignment
+		 <h4 class="btn btn-block topbanner">Add A New Assignment
 			 <small style="padding: 10px; color: White;">This will take you to the question bank</small>
 		 </h4>
 	 </a>
 
-	 <a data-toggle="collapse" href="#administered">
-		 <h4 class="btn btn-block topbanner">Administered Assignments</h4>
-	 </a>
-	 <a  data-toggle="collapse" href="#open">
-		 <h4 class="btn btn-block topbanner">Open Assignments</h4>
-	 </a>
-	 <a  data-toggle="collapse" href="#future">
-		 <h4 class="btn btn-block topbanner">Future Assignment</h4>
-	 </a>
-	 <a  data-toggle="collapse" href="#all">
-		 <h4 class="btn btn-block topbanner">All Assignment</h4>
-	 </a>
-
-	 <div id="administered" class="panel-collapse collapse centered" style="width: 100%;">
-		 <?php
-	 	 		include $_SERVER['DOCUMENT_ROOT']."/Activity/administeredAssignments.php";
-	 	 ?>
-	 </div>
-
-	 <div id="open" class="panel-collapse collapse centered" style="width: 100%;">
- 	 <?php
-	 	echo "<h4>Open</h4>";
- 	 		include $_SERVER['DOCUMENT_ROOT']."/AddNew/Existing/assignments.php";
- 	 ?>
- 	</div>
-
-	<div id="future" class="panel-collapse collapse centered" style="width: 100%;">
-	 <?php
-	 		echo "<h4>future</h4>";
-			include $_SERVER['DOCUMENT_ROOT']."/AddNew/Existing/assignments.php";
-	 ?>
-	</div>
-
-	<div id="all" class="panel-collapse collapse centered" style="width: 100%;">
-	 <?php
-	 		echo "<h4>All</h4>";
-			include $_SERVER['DOCUMENT_ROOT']."/AddNew/Existing/assignments.php";
-	 ?>
-	</div>
+			<?php include $_SERVER['DOCUMENT_ROOT']."/Components/AQTpanels.php"; ?>
 </div>
 </body>
 </html>

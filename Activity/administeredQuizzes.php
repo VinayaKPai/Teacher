@@ -1,105 +1,144 @@
 <?php
-    $pageHeading = "Quizzes";
-    if ($_GET){echo $_GET;}
+	//Script to display completed assessments in the deploymentlog table
+	//S	//End date is over and deployment success flag is 1
+	include "../basecode-create_connection.php";
+	$slno = 0;
+	$query = $mysqli->query("SELECT * FROM deploymentlog, assessments WHERE deploymentlog.depType = 'Q' AND deploymentlog.schEndDate < CURDATE() AND deploymentlog.deploySuccess = 1 AND assessments.assessment_Id = deploymentlog.dep_assessmentId");
+	$rowcount=mysqli_num_rows($query);
+  if ($rowcount>1) {
+    $counts = $pageHeading." have";
+  }
+  else {
+    $counts = $pageHeadSingular." has";
+  }
+	    echo "<h6 class='topbanner'>Currently $rowcount $counts been administered. </h6>" ;
+
+			if ($rowcount > 0) {
+				//table tag is in the parent page already
+          echo "<tr>
+									<th>Title<hr>Class/Std</th>
+									<th style='width: 50%;'>Questions</th>
+									<th style='width: 30%;'>Action</th>
+								</tr>";
+
+					while ($row = $query->fetch_assoc())  {
+						// {
+              $slno++;
+              $sid = $row['assessment_Title'];
+
+              $cn = $row['assessment_questions'];
+//get the actual questions from questionbank by exploding the coma separated string into a php array
+							$qs = explode(",",$row['assessment_questions']);
+							$qss = '';
+							for ($r=0;$r<count($qs)-1;$r++) {
+								$qss = $qss. "`qId` = ".$qs[$r]." OR ";
+							}
+							$qss = $qss."`qId` = ".$qs[count($qs)-1];
+							$qquery = $mysqli->query("SELECT * FROM questionbank WHERE  $qss");
+
+//check if the assessmentId exists in the deployment table
+//if msg is yes, then we will need to get the deployment dates, otherwise not
+							$aid = $row['assessment_Id'];
+							$requery = $mysqli->query("SELECT * FROM deploymentlog WHERE `dep_assessmentId`= $aid ");
+							$msg = "";
+
+
+						  echo "<tr>
+											<td>".$sid."<hr></td>
+											<td style='text-align: left;'>";
+                					echo "<div style='min-height: 300px; overflow: scroll; margin bottom: 0px;'>";
+                    			  $qno = 0;
+                    				while ($qrow=$qquery->fetch_assoc()) {
+															$classId = $qrow['qb_classId'];
+                    					$qno = $qno + 1;
+
+                    					echo $qno."     <span>".$qrow['question']."</span>";
+                    					echo "<div class='left' style='padding: 2px;'><ol style='list-style-type: lower-alpha;'>";
+                    					if ($qrow['Option_1']) {
+                    						echo "<li>".$qrow['Option_1']."</li>";
+                    					}
+                    					if ($qrow['Option_2']) {
+                    						echo "<li>".$qrow['Option_2']."</li>";
+                    					}
+                    					if ($qrow['Option_3']) {
+                    						echo "<li>".$qrow['Option_3']."</li>";
+                    					}
+                    					if ($qrow['Option_4']) {
+                    						echo "<li>".$qrow['Option_4']."</li>";
+                    					}
+                    					if ($qrow['Option_5']) {
+                    						echo "<li>".$qrow['Option_5']."</li>";
+                    					}
+                    					if ($qrow['Option_6']) {
+                    						echo "<li>".$qrow['Option_6']."</li>";
+                    					}
+                    					echo "</ol></div>";
+                    				}
+														$composite = $classId.$aid;
+														$dates = "date".$composite;
+														$names = "name".$composite;
+                				echo "</div>
+                        </td>
+												<td>
+													<div style='tex-align: center; height: 150px; padding: 10px;'>
+
+													<strong>Deploy to Class ".$classId."</strong>
+													<br>
+													<label for='section".$composite."'>Section: </label>
+													<select id='section".$composite."' name=$names>
+															<option value='1'>A</option>
+															<option value='2'>B</option>
+															<option value='3'>C</option>
+															<option value='4'>D</option>
+															<option value='5'>E</option>
+															<option value='6'>F</option>
+													</select><br>
+													<label for='".$dates."'>Select Date to deploy:</label>
+													<input type='date' id='".$dates."' name=".$names."><br>
+												  <label for='as".$composite."'>Type:</label>
+												    <select id='as".$composite."' name=".$names.">
+												      <option name='A' value='A'>Assignment</option>
+												      <option name='Q' value='Q'>Quiz</option>
+												      <option name='T' value='T'>$pageHeading</option>
+														</select><br>
+													  <button id=".$aid." onclick='deploy(".$aid.",".$classId.")'>Deploy</button>
+													</div><hr>
+													<h5>Previously deployed?";
+//sending 2 parameters with deploy - assessment Id and classId
+													if (mysqli_num_rows($requery)>0) {
+														 echo " <span class='green'>YES</span> </h5><div>";
+														//get the deployment dates
+														while ($rerow = $requery->fetch_assoc()) {
+															$type = $pageHeading;
+															// if ($rerow['depType']=="A") {
+															// 	$type = "Assignment";
+															// }
+															// if ($rerow['depType']=="Q") {
+															// 	$type = "Quiz";
+															// }
+															// if ($rerow['depType']=="T") {
+															// 	$type = ;
+															// }
+															echo "<ol style='list-style-type: none'>
+																			<li>To Sec ".$rerow['dep_sectionId']." on ".$rerow['schStartDate']." as  ".$type."</li>";
+
+															echo "</ol>";
+														}
+													}
+													else {echo " <span class='red'>No Deployments yet</span></h5><div>";}
+													echo "</div>
+												</td>
+                    </tr>";
+						// }
+					}
+
+				}
+			else {
+          echo "No assessments";
+        }
+			if(!$query) {
+					echo "Looks like your set up has not been started. Please add student details to the database, so that you can get the benefit of all the features of the App";
+				}
+
+	mysqli_close($mysqli);
 ?>
-	<div class="container">
-
-
-				<div style="text-align: right">
-					<?php include $_SERVER['DOCUMENT_ROOT']."/basecode-create_connection.php";
-						echo $datetime1; ?>
-				</div>
-	<hr>
-      <?php
-          include $_SERVER['DOCUMENT_ROOT']."/basecode-create_connection.php";
-
-      		echo "<h4>Administered Tests</h4>";
-          $query = $mysqli->query(
-            "SELECT *
-                FROM
-                  deploymentlog,
-                  assessments,
-                  classes,
-                  sections,
-                  subjects
-                  WHERE
-                    classes.classId = deploymentlog.dep_classId
-                    AND
-                      subjects.subjectId = deploymentlog.dep_subjectId
-                        AND deploymentlog.deploySuccess = '1'
-                          ORDER BY
-                          deploymentlog.dep_classId ASC,
-                          deploymentlog.dep_subjectId ASC"
-                        );
-
-          if (mysqli_num_rows($query)==0) {echo "No tests deployed so far!";}
-
-          else	{
-            echo "<table style='width:100%;'>";
-              while ($row=$query->fetch_assoc()) {
-          			$assessmentId = $row['assessment_Id'];
-                $assessmentTitle = $row['assessment_Title'];
-                $depId = $row['depId'];
-                $depType = $row['depType'];
-                $deploySuccess = $row['deploySuccess'];
-                $schStart = $row['schStartDate'];
-                $classId = $row['classId'];
-                $subjectId = $row['subjectId'];
-                $assessmentType = $row['assessment_Type'];
-                if ($deploySuccess == 1) {
-                  echo "<tr>";
-                    echo "<td class='white'><div class='col-sm-3'>".$row['classNumber']."</div><div class='col-sm-3'>".$row['Sections']."</div><div class='col-sm-3'>".$row['Subject']."</div></td>";
-              			echo "<td class='white'>".$row['assessment_Title'].$row['assessment_Type']."</td>";
-                  echo "</tr><tr>";
-          					$qs = explode(",",$row['assessment_questions']);
-          					$qss = '';
-          					for ($r=0;$r<count($qs)-1;$r++) {
-          						$qss = $qss. "`qId` = ".$qs[$r]." OR ";
-          					}
-          					$qss = $qss."`qId` = ".$qs[count($qs)-1];
-          					$qquery = $mysqli->query("SELECT * FROM questionbank WHERE  $qss");
-          			    echo "<td class='col-sm-8' style='text-align: left;'>";
-              			  $qno = 0;
-              				while ($qrow=$qquery->fetch_assoc()) {
-              					$qno = $qno + 1;
-              					echo $qno.")     <span>".$qrow['question']."</span>";
-              					echo "<ol style='list-style-type: lower-alpha;'>";
-              					if ($qrow['Option_1']) {
-              						echo "<li>".$qrow['Option_1']."</li>";
-              					}
-              					if ($qrow['Option_2']) {
-              						echo "<li>".$qrow['Option_2']."</li>";
-              					}
-              					if ($qrow['Option_3']) {
-              						echo "<li>".$qrow['Option_3']."</li>";
-              					}
-              					if ($qrow['Option_4']) {
-              						echo "<li>".$qrow['Option_4']."</li>";
-              					}
-              					if ($qrow['Option_5']) {
-              						echo "<li>".$qrow['Option_5']."</li>";
-              					}
-              					if ($qrow['Option_6']) {
-              						echo "<li>".$qrow['Option_6']."</li>";
-              					}
-              					echo "</ol>";
-              				}
-          				    echo "</td>";
-                      echo "<td class='col-sm-4' style='text-align: left;'>";
-                      echo "<hr><div class='instructions'><p>Previously scheduled dates are listed below.</p><p>You can schedule another deployment by selecting the date and clicking on the Deploy button.</p></div><hr>";
-                      echo "Start Date <input class='small' name=$depId type='date' />";
-                      echo "<button class='small' id=$depId onclick='deploy(this,\"".$depType."\",\"".$subjectId."\",\"".$classId."\")'>Deploy</button>";
-                      echo "<h6>Deployment schedule: </h6><div><ul>";
-                        echo "<li>".$row['schStartDate']."<small><button id=$depId onclick='alterDeploy(this)' class='btn btn-xs' style='float: right;'>Change</button></small></li>";
-
-                      echo "</td>";
-                      }
-                      echo "</ul></div>";
-
-                			echo "</td>";
-                  echo "</tr>";
-            		}
-                echo "</table>";
-              }
-          $mysqli->close();
-      ?>

@@ -1,18 +1,10 @@
 <?php
-	//Script to display completed assessments in the deploymentlog table ie
-	//End date is over and deployment success flag is 1
+	//Script to display existing assessments in the assessments table
 	include "../basecode-create_connection.php";
 	$slno = 0;
-	$curdate = date("Y-m-d");
-	$query = $mysqli->query("SELECT * FROM deploymentlog, assessments WHERE deploymentlog.depType = 'T' AND deploymentlog.schEndDate < $curdate AND deploymentlog.deploySuccess = 1 AND assessments.assessment_Id = deploymentlog.dep_assessmentId");
+	$query = $mysqli->query("SELECT * FROM assessments");
 	$rowcount=mysqli_num_rows($query);
-  if ($rowcount>1) {
-    $counts = $pageHeading." have";
-  }
-  else {
-    $counts = $pageHeadSingular." has";
-  }
-	    echo "<h6 class='topbanner'>Currently $rowcount $counts been administered. </h6>" ;
+	    echo "<h6 class='topbanner'>Currently $rowcount Saved $pageHeading<small class='white' style='float: right;'>Remember that these may not all have been deployed yet</small></h6>" ;
 
 			if ($rowcount > 0) {
 				//table tag is in the parent page already
@@ -102,12 +94,12 @@
 												      <option name='Q' value='Q'>Quiz</option>
 												      <option name='T' value='T'>$pageHeading</option>
 														</select><br>
-													  <button id=".$aid." onclick='deploy(".$aid.",".$classId.")'>Deploy</button>
+													  <button class='small' id=$depId onclick='deploy(this,\"".$depType."\",\"".$subjectId."\",\"".$classId."\")'>Deploy</button>
 													</div><hr>
 													<h5>Previously deployed?";
 //sending 2 parameters with deploy - assessment Id and classId
-// echo "<button class='small' id=$depId onclick='deploy(this,\"".$depType."\",\"".$subjectId."\",\"".$classId."\")'>Deploy</button>";
-																						if (mysqli_num_rows($requery)>0) {
+//<button class='small' id=$depId onclick='deploy(this,\"".$depType."\",\"".$subjectId."\",\"".$classId."\")'>Deploy</button>
+													if (mysqli_num_rows($requery)>0) {
 														 echo " <span class='green'>YES</span> </h5><div>";
 														//get the deployment dates
 														while ($rerow = $requery->fetch_assoc()) {

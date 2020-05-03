@@ -1,18 +1,17 @@
 <?php
-	//Script to display completed assessments in the deploymentlog table ie
-	//End date is over and deployment success flag is 1
+	//Script to display completed assessments in the deploymentlog table
+	//S	//End date is over and deployment success flag is 1
 	include "../basecode-create_connection.php";
 	$slno = 0;
-	$curdate = date("Y-m-d");
-	$query = $mysqli->query("SELECT * FROM deploymentlog, assessments WHERE deploymentlog.depType = 'T' AND deploymentlog.schEndDate < $curdate AND deploymentlog.deploySuccess = 1 AND assessments.assessment_Id = deploymentlog.dep_assessmentId");
+	$query = $mysqli->query("SELECT * FROM deploymentlog, assessments WHERE deploymentlog.depType = 'A' AND deploymentlog.schStartDate < CURDATE() AND deploymentlog.schEndDate > CURDATE() AND deploymentlog.deploySuccess = 1 AND assessments.assessment_Id = deploymentlog.dep_assessmentId");
 	$rowcount=mysqli_num_rows($query);
   if ($rowcount>1) {
-    $counts = $pageHeading." have";
+    $counts = $pageHeading." are";
   }
   else {
-    $counts = $pageHeadSingular." has";
+    $counts = $pageHeadSingular." is";
   }
-	    echo "<h6 class='topbanner'>Currently $rowcount $counts been administered. </h6>" ;
+	    echo "<h6 class='topbanner'>Currently $rowcount $counts been open. </h6>" ;
 
 			if ($rowcount > 0) {
 				//table tag is in the parent page already
@@ -40,7 +39,7 @@
 //check if the assessmentId exists in the deployment table
 //if msg is yes, then we will need to get the deployment dates, otherwise not
 							$aid = $row['assessment_Id'];
-							$requery = $mysqli->query("SELECT * FROM deploymentlog WHERE `dep_assessmentId`= $aid ");
+							// $requery = $mysqli->query("SELECT * FROM deploymentlog WHERE `dep_assessmentId`= $aid ");
 							$msg = "";
 
 
@@ -106,28 +105,19 @@
 													</div><hr>
 													<h5>Previously deployed?";
 //sending 2 parameters with deploy - assessment Id and classId
-// echo "<button class='small' id=$depId onclick='deploy(this,\"".$depType."\",\"".$subjectId."\",\"".$classId."\")'>Deploy</button>";
-																						if (mysqli_num_rows($requery)>0) {
+													// if (mysqli_num_rows($requery)>0) {
 														 echo " <span class='green'>YES</span> </h5><div>";
 														//get the deployment dates
-														while ($rerow = $requery->fetch_assoc()) {
+														// while ($rerow = $requery->fetch_assoc()) {
 															$type = $pageHeading;
-															// if ($rerow['depType']=="A") {
-															// 	$type = "Assignment";
-															// }
-															// if ($rerow['depType']=="Q") {
-															// 	$type = "Quiz";
-															// }
-															// if ($rerow['depType']=="T") {
-															// 	$type = ;
-															// }
+
 															echo "<ol style='list-style-type: none'>
 																			<li>To Sec ".$rerow['dep_sectionId']." on ".$rerow['schStartDate']." as  ".$type."</li>";
 
 															echo "</ol>";
-														}
-													}
-													else {echo " <span class='red'>No Deployments yet</span></h5><div>";}
+														// }
+													// }
+													// else {echo " <span class='red'>No Deployments yet</span></h5><div>";}
 													echo "</div>
 												</td>
                     </tr>";

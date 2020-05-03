@@ -124,8 +124,13 @@ ajaxRequest.send(null);
 
 
 
-function deploy(e,f,g,h) {//e=button, f=T(for test)/A(forAssignment)/Q(for quiz), g=subjectId, h=classId
-  alert (e.id + f + g + h);
+function ajaxDeployActivity(e,f,g,h,i) {
+  //e=classId,
+  //f=section id
+  //g=assessment id,
+  //h=date
+  //i=deployment type T(for test)/A(forAssignment)/Q(for quiz),
+  alert (e + f + g + h + i);
     var ajaxRequest;  // The variable that makes Ajax possible!
 
     try {
@@ -148,17 +153,7 @@ function deploy(e,f,g,h) {//e=button, f=T(for test)/A(forAssignment)/Q(for quiz)
        }
     }
 
-    var dt = document.getElementsByName(e.id)[0].value;
-    var msg;
-    // alert (e.id + dt);
-    if (!dt) {
-      dt = "Date less";
-      msg = (" cannot be deployed " + dt);
-    }
-    else { msg = " to be deployed on "+dt;}
-    // alert ("Test Papar " + e.id + msg);
-
-    var queryString = "/Activity/deploytest.php?depTest=" + e.id + "&&dateToDeploy=" + dt + "&&depType=" + f + "&&subjectId=" + g + "&&classId=" + h;
+    var queryString = "/Activity/deploytest.php?depActivity=" + g + "&&dateToDeploy=" + h + "&&depType=" + i + "&&sectionId=" + f + "&&classId=" + e;
     console.log(queryString);
 
     ajaxRequest.onreadystatechange = function() {
@@ -166,7 +161,6 @@ function deploy(e,f,g,h) {//e=button, f=T(for test)/A(forAssignment)/Q(for quiz)
         var ajaxReturn = ajaxRequest.responseText;
 
      }
-
     }
     ajaxRequest.open("GET", queryString, true);
     ajaxRequest.send(null);
@@ -205,10 +199,7 @@ function ajaxCallCreateActivity (arr,act) {
        }
     }
 
-    var filename = "create" + act + ".php";
-    console.log(filename);
-
-    var queryString = "/Activity/"+ filename +"?qarray=" + arr;
+    var queryString = "/Activity/createactivity.php?qarray=" + arr;
     console.log(queryString);
 
     ajaxRequest.onreadystatechange = function() {
@@ -224,11 +215,9 @@ function ajaxCallCreateActivity (arr,act) {
 
 }
 
-function ajaxCallSaveNewActivity (e,c,s,act) {//function will send a request to the createxxx.php file to save the created activity
-  //e is the array of q nos,
-  //c is the classId,
-  //s is the subjectName and
-  //act is the activity assignment/test/quiz
+function ajaxCallSaveNewActivity (arr,act) {//function will send a request to the createactivity.php file to save the created activity
+  //arr is the array of q nos,
+  //act is the title
 
   var ajaxRequest;  // The variable that makes Ajax possible!
 
@@ -252,14 +241,10 @@ function ajaxCallSaveNewActivity (e,c,s,act) {//function will send a request to 
      }
   }
   console.log(act);
-  // var filename = "create" + act + ".php";
-  // console.log(filename);
-  var tit = document.getElementById("inpTitle").value;
-  if (tit!="") {
-      // var queryString = "/Activity/"+ filename +"?qarray=" + e + "&classId=" + c + "&subjectName=" + s + "&inpTitle=" + tit;
-      // The above original query was sending the test/assignment/quiz to different filteredSubjects
-      // Below query is an attempt to send to a single file and there decide on what is the flag for the activity - A or T or Q
-      var queryString = "/Activity/createactivity.php?qarray=" + e + "&classId=" + c + "&subjectName=" + s + "&inpTitle=" + tit + "&&activityType=" + act;
+  
+  var act = document.getElementById("inpTitle").value;
+  if (act!="") {
+      var queryString = "/Activity/createactivity.php?qarray=" + arr + "&inpTitle=" + act;
 
 console.log(queryString);
 
@@ -267,7 +252,7 @@ console.log(queryString);
         if(ajaxRequest.readyState == 4) {
           var ajaxReturn = ajaxRequest.responseText;
          document.getElementById("ajaxResult").innerHTML = ajaxReturn;
-        
+
        }
 
       }

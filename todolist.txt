@@ -1,0 +1,9 @@
+Deployment of activity:
+  Relevant files:
+    a. /Activity/addnewtest.php
+      i. process starts with Deploy button > deploy() on same page to prepare ajax call ajaxDeployActivity()
+    b. /Scripts/js/ajaxCallActivities.js > Creates ajax calls sends to the deploytest.php
+    c. /Activity/deploytest.php > saves deployment.
+Problem: deployment Id is autoincrement. The deploytest.php is saving the record twice in the deploymentlog table. Solution:
+  Step 1: So created a constraint Dedupe that (dep_assessmentId	+ depType	+ schStartDate) have to be unique. Now it saves only once. However, auto increment jumps a number next time something is saved. This means the sql has used up the missing auto increment but not saved the record.
+  Step 2: How to remove this glitch?

@@ -11,7 +11,7 @@
   else {
     $counts = $pageHeadSingular." has";
   }
-	    echo "<h6 class='topbanner'>Currently $rowcount $counts been administered. </h6>" ;
+	    echo "<h6 class='topbanner'>Previously $rowcount $counts been completed. <span class='small' style='float: right; color: White;'> As on $curdate</span></h6>" ;
 
 			if ($rowcount > 0) {
 				//table tag is in the parent page already
@@ -28,7 +28,7 @@
 
               $cn = $row['assessment_questions'];
 //get the actual questions from questionbank by exploding the coma separated string into a php array
-							$qs = explode(",",$row['assessment_questions']);
+							$qs = explode(",",$cn); //("," means that the result will be separated by commas. The second comma separates the two parameters of the explode function
 							$qss = '';
 							for ($r=0;$r<count($qs)-1;$r++) {
 								$qss = $qss. "`qId` = ".$qs[$r]." OR ";
@@ -39,7 +39,6 @@
 //check if the assessmentId exists in the deployment table
 //if msg is yes, then we will need to get the deployment dates, otherwise not
 							$aid = $row['assessment_Id'];
-							$requery = $mysqli->query("SELECT * FROM deploymentlog WHERE `dep_assessmentId`= $aid ");
 							$msg = "";
 
 
@@ -99,43 +98,36 @@
 												    <select id='as".$composite."' name=".$names.">
 												      <option name='A' value='A'>Assignment</option>
 												      <option name='Q' value='Q'>Quiz</option>
-												      <option name='T' value='T'>$pageHeading</option>
+												      <option name='T' value='T'>Test</option>
 														</select><br>
-													  <button id=".$aid." onclick='deploy(".$aid.",".$classId.")'>Deploy</button>
+													  <button id=".$aid." onclick='deploy(".$classId.",".$aid.")'>Deploy</button>
 													</div><hr>
 													<h5>Previously deployed?";
 //sending 2 parameters with deploy - assessment Id and classId
-													if (mysqli_num_rows($requery)>0) {
+
 														 echo " <span class='green'>YES</span> </h5><div>";
 														//get the deployment dates
-														while ($rerow = $requery->fetch_assoc()) {
+														if ($rowcount=1) {
+															$type = $pageHeadSingular;
+														}
+														if ($rowcount>1) {
 															$type = $pageHeading;
-															// if ($rerow['depType']=="A") {
-															// 	$type = "Assignment";
-															// }
-															// if ($rerow['depType']=="Q") {
-															// 	$type = "Quiz";
-															// }
-															// if ($rerow['depType']=="T") {
-															// 	$type = ;
-															// }
+														}
 															echo "<ol style='list-style-type: none'>
-																			<li>To Sec ".$rerow['dep_sectionId']." on ".$rerow['schStartDate']." as  ".$type."</li>";
+																			<li>To Sec ".$row['dep_sectionId']." on ".$row['schStartDate']." as  ".$type."</li>";
 
 															echo "</ol>";
-														}
-													}
-													else {echo " <span class='red'>No Deployments yet</span></h5><div>";}
+
 													echo "</div>
 												</td>
-                    </tr>";
-						// }
+										</tr>";
+
 					}
 
 				}
 			else {
-          echo "No assessments";
-        }
+					echo "No assessments";
+				}
 			if(!$query) {
 					echo "Looks like your set up has not been started. Please add student details to the database, so that you can get the benefit of all the features of the App";
 				}

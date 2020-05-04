@@ -2,7 +2,7 @@
 	//Script to display existing assessments in the assessments table
 	include "../basecode-create_connection.php";
 	$curdate = date("Y-m-d");
-	$slno = 0;
+
 	$query = $mysqli->query("SELECT * FROM assessments");
 	$rowcount=mysqli_num_rows($query);
 	    echo "<h6 class='topbanner'>Currently $rowcount Saved Assessments. <small class='whitebg' style='float: right; color: red;'>Remember that these may not all have been deployed yet</small></h6>" ;
@@ -16,13 +16,12 @@
 								</tr>";
 
 					while ($row = $query->fetch_assoc())  {
-						// {
-              $slno++;
+
               $sid = $row['assessment_Title'];
 
               $cn = $row['assessment_questions'];
 //get the actual questions from questionbank by exploding the coma separated string into a php array
-							$qs = explode(",",$row['assessment_questions']);
+							$qs = explode(",",$cn);
 							$qss = '';
 							for ($r=0;$r<count($qs)-1;$r++) {
 								$qss = $qss. "`qId` = ".$qs[$r]." OR ";
@@ -33,7 +32,7 @@
 //check if the assessmentId exists in the deployment table
 //if msg is yes, then we will need to get the deployment dates, otherwise not
 							$aid = $row['assessment_Id'];
-							$requery = $mysqli->query("SELECT * FROM deploymentlog WHERE `dep_assessmentId`= $aid AND `depType` = 'T' ");
+							$requery = $mysqli->query("SELECT * FROM deploymentlog WHERE `dep_assessmentId`= $aid ");
 							$msg = "";
 
 						  echo "<tr>

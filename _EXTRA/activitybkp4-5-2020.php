@@ -32,7 +32,7 @@
 //check if the assessmentId exists in the deployment table
 //if msg is yes, then we will need to get the deployment dates, otherwise not
 							$aid = $row['assessment_Id'];
-							$requery = $mysqli->query("SELECT * FROM deploymentlog WHERE `dep_assessmentId`= $aid ");
+							$requery = $mysqli->query("SELECT * FROM deploymentlog WHERE `assessmentId`= $aid ");
 							$msg = "";
 
 						  echo "<tr>
@@ -41,7 +41,7 @@
                 					echo "<div style='min-height: 300px; overflow: scroll; margin bottom: 0px;'>";
                     			  $qno = 0;
                     				while ($qrow=$qquery->fetch_assoc()) {
-															$classId = $qrow['qb_classId'];
+															$classId = $qrow['classId'];
                     					$qno = $qno + 1;
 
                     					echo $qno."     <span>".$qrow['question']."</span>";
@@ -100,7 +100,7 @@
 													<hr>
 													<h5>Previously deployed?";
 //sending 2 parameters with deploy - assessment Id and classId
-													if (mysqli_num_rows($requery)>0) { //$requery querries the deployment log for the presence of assessmentId in the dep_assessmentId column
+													if (mysqli_num_rows($requery)>0) { //$requery querries the deployment log for the presence of assessmentId in the assessmentId column
 														//get the deployment dates
 														echo " <span class='green'>YES</span> </h5><div>";
 														echo "<p>This assessment has been set ".mysqli_num_rows($requery)." times as ".$pageHeadSingular;
@@ -109,7 +109,7 @@
 															if ($rerow['schEndDate']<$curdate) {
 																$cnt = $cnt + 1;
 																	echo "<ol style='list-style-type: none'>
-																					<li>To Sec ".$rerow['dep_sectionId'].": ".$rerow['schStartDate']." - " .$rerow['schEndDate']." as  ".$pageHeadSingular."</li>";
+																					<li>To Sec ".$rerow['sectionId'].": ".$rerow['schStartDate']." - " .$rerow['schEndDate']." as  ".$pageHeadSingular."</li>";
 
 																	echo "</ol>";
 															}

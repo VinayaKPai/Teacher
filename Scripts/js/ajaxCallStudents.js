@@ -1,12 +1,5 @@
-//--------------------------------------------AJAX STARTS----------------------------------------------------------------------
-         <!--
-//--------------------------------------Browser Support Code-------------------------------------------------------------------
-		 // function ajaxCallStudents(t,p) {
+
     function ajaxCallStudents(stud) {
-      // var s = stud;
-      // var fn = fn;
-      // var ln = ln;
-      // alert (s+fn+ln);
             var ajaxRequest;  // The variable that makes Ajax possible!
 
             try {
@@ -34,14 +27,14 @@
             // div section in the same page.
 
             ajaxRequest.onreadystatechange = function() {
-      				   if(ajaxRequest.readyState == 4) {
+      			if(ajaxRequest.readyState == 4) {
 
       					  var ajaxReturn = ajaxRequest.responseText;
       					  var ajaxResponse = document.getElementById('ajaxRes');
                   ajaxResponse.innerHTML = ajaxReturn;
       					   }
             }
-            // var queryString = "/Scripts/php/singleStudentDetails.php?studentId=" + t;
+
             var queryString = "/Scripts/php/singleStudentDetails.php?studentId=" + stud ;
 console.log(queryString);
             ajaxRequest.open("GET", queryString, true);

@@ -1,17 +1,21 @@
 <?php
-	//Script to display completed assessments in the deploymentlog table
-	//S	//End date is over and deployment success flag is 1
+	//Script to display completed assessments in the deploymentlog table ie
+	//End date is over and deployment success flag is 1
 	include "../basecode-create_connection.php";
 	$slno = 0;
-	$query = $mysqli->query("SELECT * FROM deploymentlog, assessments WHERE deploymentlog.depType = 'A' AND deploymentlog.schStartDate < CURDATE() AND deploymentlog.schEndDate > CURDATE() AND deploymentlog.deploySuccess = 1 AND assessments.assessment_Id = deploymentlog.dep_assessmentId");
+	$curdate = date("Y-m-d");
+	echo $curdate;
+	$query = $mysqli->query("SELECT * FROM deploymentlog, assessments WHERE deploymentlog.depType = 'A' AND deploymentlog.schStartDate < '$curdate' AND deploymentlog.schEndDate > '$curdate' AND deploymentlog.deploySuccess = 1 AND assessments.assessment_Id = deploymentlog.assessmentId ");
+
+
 	$rowcount=mysqli_num_rows($query);
   if ($rowcount>1) {
-    $counts = $pageHeading." are";
+    $counts = $pageHeading." have";
   }
   else {
-    $counts = $pageHeadSingular." is";
+    $counts = $pageHeadSingular." has";
   }
-	    echo "<h6 class='topbanner'>Currently $rowcount $counts been open. </h6>" ;
+	    echo "<h6 class='topbanner'>Currently $rowcount $counts been completed so far. </h6>" ;
 
 			if ($rowcount > 0) {
 				//table tag is in the parent page already
@@ -48,9 +52,9 @@
                 					echo "<div style='min-height: 300px; overflow: scroll; margin bottom: 0px;'>";
                     			  $qno = 0;
                     				while ($qrow=$qquery->fetch_assoc()) {
-															$classId = $qrow['qb_classId'];
+															$classId = $qrow['classId'];
                     					$qno = $qno + 1;
-
+//display the questions
                     					echo $qno."     <span>".$qrow['question']."</span>";
                     					echo "<div class='left' style='padding: 2px;'><ol style='list-style-type: lower-alpha;'>";
                     					if ($qrow['Option_1']) {
@@ -77,8 +81,9 @@
 														$dates = "date".$composite;
 														$names = "name".$composite;
                 				echo "</div>
-                        </td>
-												<td>
+                        </td>";
+//display deployment details and set more deployments
+												echo "<td>
 													<div style='tex-align: center; height: 150px; padding: 10px;'>
 
 													<strong>Deploy to Class ".$classId."</strong>
@@ -109,10 +114,9 @@
 															$type = $pageHeading;
 
 															echo "<ol style='list-style-type: none'>
-																			<li>To Sec ".$rerow['dep_sectionId']." on ".$rerow['schStartDate']." as  ".$type."</li>";
+																			<li>To Sec ".$rerow['sectionId']." on ".$rerow['schStartDate']." as  ".$type."</li>";
 
 															echo "</ol>";
-
 													echo "</div>
 												</td>
                     </tr>";

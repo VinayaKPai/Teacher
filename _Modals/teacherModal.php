@@ -25,7 +25,7 @@
 				  <h6 class="centered">Existing Students</h6>
 				  <hr />
 				  <div>
-						  <?php $query = $mysqli->query("SELECT * FROM teachers");
+						  <?php $query = $mysqli->query("SELECT * FROM users");
 							$rowcount=mysqli_num_rows($query);
 							echo "Currently ".$rowcount." students<br />";
 						  ?>

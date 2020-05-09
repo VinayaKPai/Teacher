@@ -4,7 +4,7 @@
 	include "../basecode-create_connection.php";
 	$curdate = date("Y-m-d");
 	$slno = 0;
-	$query = $mysqli->query("SELECT * FROM deploymentlog, assessments WHERE deploymentlog.depType = 'Q' AND deploymentlog.schStartDate < curdate() AND deploymentlog.schEndDate > curdate() AND deploymentlog.deploySuccess = 1 AND assessments.assessment_Id = deploymentlog.dep_assessmentId");
+	$query = $mysqli->query("SELECT * FROM deploymentlog, assessments WHERE deploymentlog.depType = 'Q' AND deploymentlog.schStartDate < curdate() AND deploymentlog.schEndDate > curdate() AND deploymentlog.deploySuccess = 1 AND assessments.assessment_Id = deploymentlog.assessmentId");
 
 	$rowcount=mysqli_num_rows($query);
   if ($rowcount>1) {
@@ -48,7 +48,7 @@
                 					echo "<div style='min-height: 300px; overflow: scroll; margin bottom: 0px;'>";
                     			  $qno = 0;
                     				while ($qrow=$qquery->fetch_assoc()) {
-															$classId = $qrow['qb_classId'];
+															$classId = $qrow['classId'];
                     					$qno = $qno + 1;
 
                     					echo $qno."     <span>".$qrow['question']."</span>";
@@ -114,7 +114,7 @@
 															$type = $pageHeading;
 														}
 															echo "<ol style='list-style-type: none'>
-																			<li>To Sec ".$row['dep_sectionId']." on ".$row['schStartDate']." as  ".$type."</li>";
+																			<li>To Sec ".$row['sectionId']." on ".$row['schStartDate']." as  ".$type."</li>";
 
 															echo "</ol>";
 

@@ -24,15 +24,15 @@
 
 		$systemEmail = $firstNameSafe.$middleNameSafe.$lastNameSafe."@mydomain.com" ;
 
-			$query = $mysqli->query("SELECT * FROM teachers");
+			$query = $mysqli->query("SELECT * FROM users");
 
 			if ($query) {
 				$rowcount=mysqli_num_rows($query);
-			
+
 			}
 		// prepare and bind
 
-			$stmt = $mysqli->prepare("INSERT INTO teachers (tc_firstName, tc_middleName, tc_lastName, tc_Email, tc_systemEmail, tc_phoneNumber, tc_joinYear, 	tc_leftYear, tc_visibility) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+			$stmt = $mysqli->prepare("INSERT INTO users (firstName, middleName, lastName, Email, systemEmail, phoneNumber, joinYear, 	leftYear, visibility) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
 			$stmt->bind_param("sssssssss", $firstNameSafe, $middleNameSafe, $lastNameSafe, $emailSafe, $systemEmail, $phoneMobileSafe, $joinYearSafe, $endYearSafe, 'Y');
 

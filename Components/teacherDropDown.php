@@ -7,14 +7,14 @@
       exit();
     }
 
-  	$query = $mysqli->query("SELECT * FROM teachers");
-  
+  	$query = $mysqli->query("SELECT * FROM users");
+
         echo "<label for='teacherName'>Teacher   <select name='teacherName' id='teacherName'><option></option>";
         while ($row = $query->fetch_assoc())  {
-          $tfn = strip_tags($row['tc_firstName']);
-          $tmn = strip_tags($row['tc_middleName']);
-          $tln = strip_tags($row['tc_lastName']);
-          $tnid = $row['teacherId'];
+          $tfn = strip_tags($row['firstName']);
+          $tmn = strip_tags($row['middleName']);
+          $tln = strip_tags($row['lastName']);
+          $tnid = $row['userId'];
             echo "<option id='$tnid' value='$tnid'>".$tfn." ".$tmn." ".$tln."</option>";
         }
         echo "</select></label>";

@@ -21,7 +21,7 @@ if (isset($_POST["classNumber"]) && !empty($_POST["classNumber"]) && isset($_POS
 	$teacherIdSafe = $mysqli->real_escape_string($teacherId);
 
 
-	$stmt = $mysqli->prepare("INSERT INTO `classes_taught_by_teacher` (`ctt_teacherId`, `ctt_classId`, `ctt_sectionId`, `ctt_subjectId`) VALUES (?, ?, ?, ?)");
+	$stmt = $mysqli->prepare("INSERT INTO `classes_taught_by_teacher` (`teacherId`, `classId`, `sectionId`, `subjectId`) VALUES (?, ?, ?, ?)");
 	$stmt->bind_param("iiii", $teacherIdSafe, $classNumberSafe, $sectionAlphaSafe, $subjectNameSafe);
 
 	$stmt->execute();

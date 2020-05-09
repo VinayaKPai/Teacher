@@ -1,7 +1,7 @@
 <?php
     include $_SERVER['DOCUMENT_ROOT']."/basecode-create_connection.php";
 		// Display saved tests from the 'tests' table
-    $query = $mysqli->query("SELECT * FROM tests, classes, subjects WHERE classes.classId = tests.test_classId AND subjects.subjectId = test_subjectId ORDER BY `classId`, `testId` ASC");
+    $query = $mysqli->query("SELECT * FROM tests, classes, subjects WHERE classes.classId = tests.teclassId AND subjects.subjectId = tesubjectId ORDER BY `classId`, `testId` ASC");
 
 
     echo "<div  style='border:solid 1px green;'>";
@@ -22,7 +22,7 @@
 			echo "Start Date <input class='small' name=$testId type='date' />";
 			echo "<button class='small' id=$testId onclick='deploy(this)'>Deploy</button>";
       echo "<div style='background: #d3d3d3; float:right;'><h6>Deployment schedule: </h6>";
-        $schStart = $mysqli->query("SELECT `schStartDate` FROM deploymentlog WHERE `dep_testId` = $testId");
+        $schStart = $mysqli->query("SELECT `schStartDate` FROM deploymentlog WHERE `testId` = $testId");
         if (mysqli_num_rows($schStart)==0) {
           echo "<h6>This test has not been scheduled for deployment yet</h6>";
         }
@@ -35,13 +35,13 @@
       echo "</ul></div>";
 			echo "</div>";
 			echo "</div>";
-					$qs = explode(",",$row['test_questions']);
+					$qs = explode(",",$row['tequestions']);
 					$qss = '';
 					for ($r=0;$r<count($qs)-1;$r++) {
 						$qss = $qss. "`qId` = ".$qs[$r]." OR ";
 					}
 					$qss = $qss."`qId` = ".$qs[count($qs)-1];
-					$qquery = $mysqli->query("SELECT * FROM questionbank WHERE  $qss ORDER BY `qb_classId`");
+					$qquery = $mysqli->query("SELECT * FROM questionbank WHERE  $qss ORDER BY `classId`");
 			echo "<div class='jumbotron small' style='height: 120px; padding-top: 2px; padding-bottom: 1px; overflow: scroll;' id='".$row['testTitle']."'>";
     			  $qno = 0;
     				while ($qrow=$qquery->fetch_assoc()) {

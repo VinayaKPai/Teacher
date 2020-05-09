@@ -1,7 +1,5 @@
-//--------------------------------------------AJAX STARTS----------------------------------------------------------------------
-         <!--
-//--------------------------------------Browser Support Code-------------------------------------------------------------------
-		 function ajaxCallTeachers(t,p) {
+
+	    function ajaxCallTeachers(t) {
        // alert (t+p);
             var ajaxRequest;  // The variable that makes Ajax possible!
 
@@ -30,13 +28,12 @@
             // div section in the same page.
 
             ajaxRequest.onreadystatechange = function() {
-				          var tcId = t;
 
 				   if(ajaxRequest.readyState == 4) {
 
-					  var ajaxReturn = ajaxRequest.responseText;
-					  var ajaxResponse = document.getElementById('ajaxRes');
-            ajaxResponse.innerHTML = ajaxReturn;
+						  var ajaxReturn = ajaxRequest.responseText;
+						  var ajaxResponse = document.getElementById('ajaxRes');
+	            ajaxResponse.innerHTML = ajaxReturn;
 					   }
 
             }
@@ -51,14 +48,19 @@ console.log(queryString);
          //-->
 
      function ajaxCallExploreItem(i) {
-       // var item = document.getElementById(i.id);
-        // alert (i);
+       // i will have 4 space separated values.
+       // if the function is called from newTeacher.php:
+       // first value is the teacher id
+       // second value is the class id
+       // third value is the section Id
+       // and fourth value is the subject NAME (not id)
         var arr = i.split(" ");
         // alert (arr);
-        var tc = arr[0];
-        var cl = arr[1];
-        var se = arr[2];
-        var su = arr[3];
+        var tc = arr[0];  //the teacher id
+        var cl = arr[1];  //the class id
+        var se = arr[2];  //the section id
+        //su and the following if statement don't seem to be in use anywhere
+        var su = arr[3];  //the subject NAME
         if (arr[4]) {
           su = su + arr[4];
         }
@@ -101,8 +103,8 @@ console.log(queryString);
              }
 
             }
-
-            var queryString = "/Scripts/php/exploreTeacher.php?teacherId=" + tc + "&&classNumber=" + cl + "&&sectionAlpha=" + se ;
+//sending the tacher id, the class id, and the section id to explore teacher php which will return the students from the teacher-class-section combo
+            var queryString = "/Scripts/php/exploreTeacher.php?teacherId=" + tc + "&&classId=" + cl + "&&sectionId=" + se ;
   console.log(queryString);
             ajaxRequest.open("GET", queryString, true);
             ajaxRequest.send(null);

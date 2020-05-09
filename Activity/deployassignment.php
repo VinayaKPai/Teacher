@@ -5,7 +5,7 @@
     $dateToDeploy = $_GET['dateToDeploy'];
 
     if ($_GET){
-    	$stmt = $mysqli->prepare("INSERT INTO `deploymentlog` (`depType`,`dep_testId`, `schStartDate`) VALUES (?, ?)");
+    	$stmt = $mysqli->prepare("INSERT INTO `deploymentlog` (`depType`,`testId`, `schStartDate`) VALUES (?, ?)");
     	$stmt->bind_param("sss", $depTest, $dateToDeploy );
 
     	$stmt->execute();

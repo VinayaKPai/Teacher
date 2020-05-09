@@ -6,7 +6,7 @@ echo "<div>";
 $rwcnt = 0;
 
 
-$query = $mysqli->query("SELECT * FROM topics, classes, subjects WHERE topics.topic_classId = classes.classId AND topics.topic_subjectId = Subjects.subjectId ORDER BY `topic_classId`");
+$query = $mysqli->query("SELECT * FROM topics, classes, subjects WHERE topics.classId = classes.classId AND topics.subjectId = Subjects.subjectId ORDER BY `classId`");
 
 			if ($query) {
 				$rowcount=mysqli_num_rows($query);
@@ -23,10 +23,10 @@ $query = $mysqli->query("SELECT * FROM topics, classes, subjects WHERE topics.to
 				while ($row = $query->fetch_assoc())  {
 					$rwcnt = $rwcnt+1;
 
-					$classNum = $row['topic_classId'];
+					$classNum = $row['classId'];
 					$cn = $row['classNumber'];
 
-					$subjectName = $row['topic_subjectId'];
+					$subjectName = $row['subjectId'];
 					$sb = $row['Subject'];
 					echo "<tr id=$rwcnt title=$rwcnt>
 							<td style='width: 10%; margin: 5%;'>".$rwcnt."</td>

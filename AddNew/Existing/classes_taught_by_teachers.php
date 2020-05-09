@@ -12,7 +12,7 @@
 	echo "<div>";
 
 	$slno = 0;
-	$query = $mysqli->query("SELECT * FROM classes_taught_by_teacher, classes, sections WHERE classes.classId = classes_taught_by_teacher.ctt_classId AND sections.sectionId = classes_taught_by_teacher.ctt_sectionId ORDER BY classes.classId");
+	$query = $mysqli->query("SELECT * FROM classes_taught_by_teacher, classes, sections WHERE classes.classId = classes_taught_by_teacher.classId AND sections.sectionId = classes_taught_by_teacher.sectionId ORDER BY classes.classId");
 
 				if ($query) {
 					$rowcount=mysqli_num_rows($query);

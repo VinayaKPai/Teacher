@@ -6,12 +6,12 @@
 
         $rwcnt = 0;
 
-        $query = $mysqli->query("SELECT * FROM questionbank, topics, classes, subjects WHERE questionbank.qb_topicId = $topicId AND topics.topicId = $topicId AND classes.classId = questionbank.qb_classId AND subjects.subjectId = topics.topic_subjectId");
+        $query = $mysqli->query("SELECT * FROM questionbank, topics, classes, subjects WHERE questionbank.topicId = $topicId AND topics.topicId = $topicId AND classes.classId = questionbank.classId AND subjects.subjectId = topics.subjectId");
 
         $cnt = mysqli_num_rows($query);
 
         if ($cnt == 0) {
-          $tquery = $mysqli->query("SELECT * FROM topics, classes, subjects WHERE `topicId` = $topicId AND subjects.subjectId = topics.topic_subjectId AND classes.classId = topics.topic_classId");
+          $tquery = $mysqli->query("SELECT * FROM topics, classes, subjects WHERE `topicId` = $topicId AND subjects.subjectId = topics.subjectId AND classes.classId = topics.classId");
             $trow=$tquery->fetch_assoc();
             echo  "<div class='modal-header centered' style='font-weight: bold; color: #f0f0f0;'>CLASS: ".$trow['classNumber']." &emsp; SUBJECT: ".$trow['Subject']."
                       <button type='button' class='close' data-dismiss='modal' onclick='resetModal()''>&times;</button>

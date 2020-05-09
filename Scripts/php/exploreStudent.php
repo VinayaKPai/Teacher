@@ -4,15 +4,15 @@
   $studentId = $_GET['studentId'];
 echo $studentId."<br>"."Printing... GET";
   print_r($_GET);
-  // $query = $mysqli->query("SELECT * FROM studentdetails, classes, sections WHERE studentdetails.sId = $studentId AND studentdetails.st_classId = classes.classId AND studentdetails.st_sectionId = sections.sectionId ");
+  // $query = $mysqli->query("SELECT * FROM studentdetails, classes, sections WHERE users.userId = $studentId AND studentdetails.classId = classes.classId AND studentdetails.sectionId = sections.sectionId ");
 
-$query = $mysqli->query("SELECT * FROM studentdetails, classes, sections WHERE studentdetails.sId = $studentId AND classes.classId = studentdetails.st_classId AND sections.sectionId = studentdetails.st_sectionId ");
+$query = $mysqli->query("SELECT * FROM users, studentdetails, classes, sections WHERE users.userId = $studentId AND classes.classId = studentdetails.classId AND sections.sectionId = studentdetails.sectionId ");
   echo "<table style='width:90%;'><tr><th class='col-sm-2'>Class</th><th class='col-sm-2'>Section</th><th class='col-sm-5'>Student</th></tr>";
   while ($row=$query->fetch_assoc()) {
     $cn = $row['classNumber'];
     $sa = $row['Sections'];
-    $sf = $row['st_firstName'];
-    $sl = $row['st_lastName'];
+    $sf = $row['firstName'];
+    $sl = $row['lastName'];
     $title = $cn." ".$sa." ".$sl;
     echo "<tr title='$title'>";
     echo "<td style='padding:5px; border-right:solid 1px black;' class='col-sm-2'>".$cn."</td><td style='padding:5px; border-right:solid 1px black;' class='col-sm-2'>".$sa."</td><td class='col-sm-5' style='border-right:solid 1px black;'>".$sf." ".$sl."</td>";

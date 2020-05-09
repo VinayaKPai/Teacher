@@ -4,10 +4,7 @@
 	include "../basecode-create_connection.php";
 	$slno = 0;
 	$curdate = date("Y-m-d");
-	echo $curdate;
-	$query = $mysqli->query("SELECT * FROM deploymentlog, assessments WHERE deploymentlog.depType = 'T' AND deploymentlog.schStartDate < '$curdate' AND deploymentlog.schEndDate > '$curdate' AND deploymentlog.deploySuccess = 1 AND assessments.assessment_Id = deploymentlog.assessmentId ");
-
-
+	$query = $mysqli->query("SELECT * FROM deploymentlog, assessments WHERE deploymentlog.depType = 'T' AND deploymentlog.schEndDate < '$curdate' AND deploymentlog.deploySuccess = 1 AND assessments.assessment_Id = deploymentlog.assessmentId ");
 	$rowcount=mysqli_num_rows($query);
   if ($rowcount>1) {
     $counts = $pageHeading." have";
@@ -15,7 +12,7 @@
   else {
     $counts = $pageHeadSingular." has";
   }
-	    echo "<h6 class='topbanner'>Currently $rowcount $counts been completed so far. </h6>" ;
+	    echo "<h6 class='topbanner'>Previously $rowcount $counts been completed. <span class='small' style='float: right; color: White;'> As on $curdate</span></h6>" ;
 
 			if ($rowcount > 0) {
 				//table tag is in the parent page already
@@ -54,7 +51,7 @@
                     				while ($qrow=$qquery->fetch_assoc()) {
 															$classId = $qrow['classId'];
                     					$qno = $qno + 1;
-//display the questions
+
                     					echo $qno."     <span>".$qrow['question']."</span>";
                     					echo "<div class='left' style='padding: 2px;'><ol style='list-style-type: lower-alpha;'>";
                     					if ($qrow['Option_1']) {
@@ -81,9 +78,8 @@
 														$dates = "date".$composite;
 														$names = "name".$composite;
                 				echo "</div>
-                        </td>";
-//display deployment details and set more deployments
-												echo "<td>
+                        </td>
+												<td>
 													<div style='tex-align: center; height: 150px; padding: 10px;'>
 
 													<strong>Deploy to Class ".$classId."</strong>
@@ -109,18 +105,24 @@
 													</div><hr>
 													<h5>Previously deployed?";
 //sending 2 parameters with deploy - assessment Id and classId
+
 														 echo " <span class='green'>YES</span> </h5><div>";
 														//get the deployment dates
+														if ($rowcount=1) {
+															$type = $pageHeadSingular;
+														}
+														if ($rowcount>1) {
 															$type = $pageHeading;
-
+														}
 															echo "<ol style='list-style-type: none'>
-																			<li>To Sec ".$rerow['sectionId']." on ".$rerow['schStartDate']." as  ".$type."</li>";
+																			<li>To Sec ".$row['sectionId']." on ".$row['schStartDate']." as  ".$type."</li>";
 
 															echo "</ol>";
+
 													echo "</div>
 												</td>
                     </tr>";
-						// }
+
 					}
 
 				}

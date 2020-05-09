@@ -5,5 +5,19 @@ Deployment of activity:
     b. /Scripts/js/ajaxCallActivities.js > Creates ajax calls sends to the deploytest.php
     c. /Activity/deploytest.php > saves deployment.
 Problem: deployment Id is autoincrement. The deploytest.php is saving the record twice in the deploymentlog table. Solution:
-  Step 1: So created a constraint Dedupe that (dep_assessmentId	+ depType	+ schStartDate) have to be unique. Now it saves only once. However, auto increment jumps a number next time something is saved. This means the sql has used up the missing auto increment but not saved the record.
+  Step 1: So created a constraint Dedupe that (assessmentId	+ depType	+ schStartDate) have to be unique. Now it saves only once. However, auto increment jumps a number next time something is saved. This means the sql has used up the missing auto increment but not saved the record.
   Step 2: How to remove this glitch?
+  *****************************
+Teachers: 8 May 2020
+  Relevant files:
+  a. /SetUpPages/newTeachers.php
+    i. function modalclick(this) calls the following
+    ii. ajaxCallTeachers(e.id,e.innerText) which exists in
+  b. /Scripts/js/ajaxCallTeachers.js
+    i. ajaxCallTeachers(t,p) sends ajax request to
+  c. /Scripts/php/singleTeacherClasses.php?teacherId=" with teacher Id which pulls all the classes, sections, and subjects taught by the teacher. Explore button triggers
+    i. function exploreclick(b) calls the following
+    ii. ajaxCallExploreItem(b.id) which exists in
+  d. /Scripts/js/ajaxCallTeachers.js sends a request to
+  e. /Scripts/php/exploreTeacher.php? with teacher id, class id, and section id
+  Problem: Is it over kill? The Explore button only wants to show the students in the relevant class. Why send teacher Id with it?

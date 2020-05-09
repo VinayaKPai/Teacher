@@ -20,7 +20,7 @@
         Start Date <input class='small' name=$testId type='date' />
         <button class='small' id=$testId onclick='deploy(this)'>Deploy</button>
     </div>
-    <h6 id="dep_da">Deployment schedule:
+    <h6 id="da">Deployment schedule:
       <span style='float:right;'>
         <ul>
           <li> $startDate['schStartDate'] </li>
@@ -83,10 +83,10 @@
     Array ( [classNumber] => Array ( [1] => 1 [2] => 2 [3] => 3 [8] => 8 ) [subjectName] => Array ( [English] => English [Hindi] => Hindi ) [topicName] => [typeName] => )
     SELECT questionbank.qId as 'ID', classes.classNumber as `Class`, subjects.Subject as `Subject`, topics.topicName as `Topic`, questiontype.typeName as `Type`, questionbank.question as `Question`, questionbank.Option_1 as `Option 1`, questionbank.Option_2 as `Option 2`, questionbank.Option_3 as `Option 3`, questionbank.Option_4 as `Option 4`, questionbank.Option_5 as `Option 5`, questionbank.Option_6 as `Option 6`
     FROM questionbank, classes, questiontype, subjects, topics
-    WHERE classes.classId = questionbank.qb_classId
-      AND subjects.subjectId = questionbank.qb_subjectId
-      AND topics.topicId = questionbank.qb_topicId
-      AND questiontype.qtId = questionbank.qb_typeId
+    WHERE classes.classId = questionbank.classId
+      AND subjects.subjectId = questionbank.subjectId
+      AND topics.topicId = questionbank.topicId
+      AND questiontype.qtId = questionbank.typeId
       AND (classes.classNumber = '1'
         OR classes.classNumber = '2'
         OR classes.classNumber = '3'

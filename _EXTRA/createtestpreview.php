@@ -9,9 +9,9 @@ if ($_GET){
       $classId =  $_GET['classNumber'];
       $subjectId =  $_GET['subjectName'];
 
-      $queryString = $mysqli->query("SELECT classes.classNumber AS 'Class', subjects.Subject, questiontype.typeName AS 'Type', questionbank.question AS 'Question', questionbank.qId, questionbank.Option_1 AS 'Option 1', questionbank.Option_2 AS 'Option 2', questionbank.Option_3 AS 'Option 3', questionbank.Option_4 AS 'Option 4', questionbank.Option_5 AS 'Option 5', questionbank.Option_6 AS 'Option 6', questiontype.typeName AS 'Type'  FROM questionbank, classes, subjects, questiontype WHERE `qb_classId` = $classId AND `qb_subjectId` = $subjectId AND classes.classId = questionbank.qb_classId AND subjects.subjectId = questionbank.qb_subjectId AND questiontype.qtId = questionbank.qb_typeId");
+      $queryString = $mysqli->query("SELECT classes.classNumber AS 'Class', subjects.Subject, questiontype.typeName AS 'Type', questionbank.question AS 'Question', questionbank.qId, questionbank.Option_1 AS 'Option 1', questionbank.Option_2 AS 'Option 2', questionbank.Option_3 AS 'Option 3', questionbank.Option_4 AS 'Option 4', questionbank.Option_5 AS 'Option 5', questionbank.Option_6 AS 'Option 6', questiontype.typeName AS 'Type'  FROM questionbank, classes, subjects, questiontype WHERE `classId` = $classId AND `subjectId` = $subjectId AND classes.classId = questionbank.classId AND subjects.subjectId = questionbank.subjectId AND questiontype.qtId = questionbank.typeId");
 
-// $queryString = $mysqli->query("SELECT *  FROM questionbank, classes, subjects, questiontype WHERE `qb_classId` = $classId AND `qb_subjectId` = $subjectId AND classes.classId = questionbank.qb_classId AND subjects.subjectId = questionbank.qb_subjectId AND questiontype.qtId = questionbank.qb_typeId");
+// $queryString = $mysqli->query("SELECT *  FROM questionbank, classes, subjects, questiontype WHERE `classId` = $classId AND `subjectId` = $subjectId AND classes.classId = questionbank.classId AND subjects.subjectId = questionbank.subjectId AND questiontype.qtId = questionbank.typeId");
       if (mysqli_num_rows($queryString)>0) {
         echo mysqli_num_rows($queryString)." questions available";
 

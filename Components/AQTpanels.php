@@ -27,7 +27,7 @@
           <h4>Completed <?php echo $pageHeading;?></h4>
           <table style='width: 100%;'>
             <?php
-              include $_SERVER['DOCUMENT_ROOT']."/"."Activity"."/administered".$pageHeading.".php";
+              include $_SERVER['DOCUMENT_ROOT']."/"."Activity"."/completed".$pageHeading.".php";
             ?>
          </table>
          <p class="centered">**********  Completed <?php echo $pageHeading;?>  **********</p>

@@ -7,9 +7,9 @@ $remLn = $_GET['ln']; //last name
 $remPm = $_GET['pm']; //mobile
 
 
-// $query = ("DELETE FROM teachers WHERE tc_firstName = '$remFn' AND tc_lastName = '$remLn' AND tc_phoneNumber = '$remPm'");
+// $query = ("DELETE FROM teachers WHERE firstName = '$remFn' AND lastName = '$remLn' AND phoneNumber = '$remPm'");
 
-$query = "UPDATE `teachers` SET `tc_visibility`='N' WHERE tc_firstName = '$remFn' AND tc_lastName = '$remLn' AND tc_phoneNumber = '$remPm'";
+$query = "UPDATE `users` SET `visibility`='N' WHERE firstName = '$remFn' AND lastName = '$remLn' AND phoneNumber = '$remPm'";
 
 $mysqli->query($query);
 $effRows = mysqli_affected_rows($mysqli);

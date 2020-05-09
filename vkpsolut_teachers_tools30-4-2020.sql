@@ -82,17 +82,17 @@ INSERT INTO `classes` (`classId`, `classNumber`) VALUES
 
 CREATE TABLE `classes_taught_by_teacher` (
   `cttId` int(11) NOT NULL,
-  `ctt_teacherId` int(11) NOT NULL,
-  `ctt_classId` int(11) NOT NULL,
-  `ctt_sectionId` int(11) NOT NULL,
-  `ctt_subjectId` int(11) NOT NULL
+  `teacherId` int(11) NOT NULL,
+  `classId` int(11) NOT NULL,
+  `sectionId` int(11) NOT NULL,
+  `subjectId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `classes_taught_by_teacher`
 --
 
-INSERT INTO `classes_taught_by_teacher` (`cttId`, `ctt_teacherId`, `ctt_classId`, `ctt_sectionId`, `ctt_subjectId`) VALUES
+INSERT INTO `classes_taught_by_teacher` (`cttId`, `teacherId`, `classId`, `sectionId`, `subjectId`) VALUES
 (12, 1, 4, 3, 1),
 (19, 1, 5, 4, 7),
 (4, 1, 6, 1, 3),
@@ -131,8 +131,8 @@ INSERT INTO `classes_taught_by_teacher` (`cttId`, `ctt_teacherId`, `ctt_classId`
 CREATE TABLE `deploymentlog` (
   `depId` int(11) NOT NULL COMMENT 'Auto generated unique id for the deployment',
   `depType` set('A','Q','T') NOT NULL COMMENT 'Specifies whether the dep is a quiz, a test or an assignment',
-  `dep_sectionId` int(11) NOT NULL,
-  `dep_assessmentId` int(11) NOT NULL COMMENT 'This is the id of the deployment in the assessment table',
+  `sectionId` int(11) NOT NULL,
+  `assessmentId` int(11) NOT NULL COMMENT 'This is the id of the deployment in the assessment table',
   `schStartDate` date NOT NULL COMMENT 'This is created at the time of setting up deployment. Need not mean that the deployment happened.',
   `schEndDate` date NOT NULL COMMENT 'This would be the date after which responses would not be accepted.',
   `autoReminderDays` tinyint(3) NOT NULL COMMENT 'To be set to a negative number. Will be used to calculate reminder date',
@@ -147,10 +147,10 @@ CREATE TABLE `deploymentlog` (
 
 CREATE TABLE `questionbank` (
   `qId` int(4) NOT NULL,
-  `qb_classId` varchar(4) NOT NULL,
-  `qb_subjectId` varchar(25) NOT NULL,
-  `qb_topicId` varchar(100) NOT NULL,
-  `qb_typeId` varchar(5) NOT NULL,
+  `classId` varchar(4) NOT NULL,
+  `subjectId` varchar(25) NOT NULL,
+  `topicId` varchar(100) NOT NULL,
+  `typeId` varchar(5) NOT NULL,
   `question` varchar(1000) NOT NULL,
   `Option_1` varchar(50) NOT NULL,
   `Option_2` varchar(50) NOT NULL,
@@ -164,7 +164,7 @@ CREATE TABLE `questionbank` (
 -- Dumping data for table `questionbank`
 --
 
-INSERT INTO `questionbank` (`qId`, `qb_classId`, `qb_subjectId`, `qb_topicId`, `qb_typeId`, `question`, `Option_1`, `Option_2`, `Option_3`, `Option_4`, `Option_5`, `Option_6`) VALUES
+INSERT INTO `questionbank` (`qId`, `classId`, `subjectId`, `topicId`, `typeId`, `question`, `Option_1`, `Option_2`, `Option_3`, `Option_4`, `Option_5`, `Option_6`) VALUES
 (1, '2', '4', '7', '2', '____ helps clean the house. ', 'Doorman ', 'Maid ', 'Valet ', 'Shopkeeper ', 'None of these', ''),
 (2, '9', '5', '6', '2', 'Two Treatises of Government\' was written by:', 'Rousseau', 'John Locke', 'Montesquieu', 'None of these', '', ''),
 (3, '9', '5', '6', '2', 'Passive citizens of France were:', 'Only men above 25 years', 'Only propertied men', 'Men and women who didn\'t vote', 'Only propertied women', '', ''),
@@ -557,7 +557,7 @@ INSERT INTO `questionbank` (`qId`, `qb_classId`, `qb_subjectId`, `qb_topicId`, `
 (392, '9', '5', '8', '5', 'How unemployment has detrimental impact on the overall growth of an economy?', '', '', '', '', '', ''),
 (393, '9', '5', '8', '5', 'Surplus labour in agriculture has moved to which jobs in secondary and tertiary sector?', '', '', '', '', '', ''),
 (394, '9', '5', '8', '5', 'Which capital would you consider the best-land, labours, physical capital or human capital? ?', '', '', '', '', '', '');
-INSERT INTO `questionbank` (`qId`, `qb_classId`, `qb_subjectId`, `qb_topicId`, `qb_typeId`, `question`, `Option_1`, `Option_2`, `Option_3`, `Option_4`, `Option_5`, `Option_6`) VALUES
+INSERT INTO `questionbank` (`qId`, `classId`, `subjectId`, `topicId`, `typeId`, `question`, `Option_1`, `Option_2`, `Option_3`, `Option_4`, `Option_5`, `Option_6`) VALUES
 (395, '9', '5', '8', '5', 'What do you under3nd by \'people as resource\'?', '', '', '', '', '', ''),
 (396, '9', '5', '8', '5', 'How is human resource different from other resources like land and physical capital?', '', '', '', '', '', ''),
 (397, '9', '5', '8', '5', 'What is the role of education in human capital formation?', '', '', '', '', '', ''),
@@ -767,25 +767,25 @@ INSERT INTO `sections` (`sectionId`, `Sections`) VALUES
 
 CREATE TABLE `studentdetails` (
   `sId` varchar(50) NOT NULL,
-  `st_firstName` char(50) NOT NULL,
-  `st_lastName` char(50) NOT NULL,
+  `firstName` char(50) NOT NULL,
+  `lastName` char(50) NOT NULL,
   `rollNumber` int(11) NOT NULL,
-  `st_classId` char(25) DEFAULT NULL,
-  `st_sectionId` char(1) DEFAULT NULL,
-  `st_Email` varchar(25) DEFAULT NULL,
-  `st_systemEmail` varchar(50) NOT NULL COMMENT 'This will be auto generated',
-  `st_pw` varchar(50) NOT NULL,
-  `st_joinYear` varchar(25) DEFAULT NULL,
-  `st_endYear` varchar(25) DEFAULT NULL,
-  `st_phoneMobile` varchar(15) NOT NULL,
-  `st_visibility` set('Y','N') NOT NULL
+  `classId` char(25) DEFAULT NULL,
+  `sectionId` char(1) DEFAULT NULL,
+  `Email` varchar(25) DEFAULT NULL,
+  `systemEmail` varchar(50) NOT NULL COMMENT 'This will be auto generated',
+  `pw` varchar(50) NOT NULL,
+  `joinYear` varchar(25) DEFAULT NULL,
+  `endYear` varchar(25) DEFAULT NULL,
+  `phoneMobile` varchar(15) NOT NULL,
+  `visibility` set('Y','N') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `studentdetails`
 --
 
-INSERT INTO `studentdetails` (`sId`, `st_firstName`, `st_lastName`, `rollNumber`, `st_classId`, `st_sectionId`, `st_Email`, `st_systemEmail`, `st_pw`, `st_joinYear`, `st_endYear`, `st_phoneMobile`, `st_visibility`) VALUES
+INSERT INTO `studentdetails` (`sId`, `firstName`, `lastName`, `rollNumber`, `classId`, `sectionId`, `Email`, `systemEmail`, `pw`, `joinYear`, `endYear`, `phoneMobile`, `visibility`) VALUES
 ('AabhaAcharya7440502336', 'Aabhra', 'Acharya', 15, '10', '5', 'AabhaAcharya@pxp.com', 'AabhaAcharya@mydomain.com', '7440502336', '2017', '', '7440502336', 'Y'),
 ('AabharanAgarwal6467471751', 'Aabharan', 'Agarwal', 16, '4', '1', 'AabharanAgarwal@mzb.com', 'AabharanAgarwal@mydomain.com', '6467471751', '2017', '', '6467471751', 'Y'),
 ('AabhasAgate2103988461', 'Aabhas', 'Agate', 17, '1', '3', 'AabhasAgate@wbu.com', 'AabhasAgate@mydomain.com', '2103988461', '2018', '', '2103988461', 'Y'),
@@ -873,22 +873,22 @@ INSERT INTO `subjects` (`subjectId`, `Subject`) VALUES
 
 CREATE TABLE `teachers` (
   `teacherId` int(11) NOT NULL,
-  `tc_firstName` varchar(25) NOT NULL,
-  `tc_middleName` varchar(25) DEFAULT NULL,
-  `tc_lastName` varchar(25) NOT NULL,
-  `tc_Email` varchar(50) NOT NULL,
-  `tc_systemEmail` varchar(50) NOT NULL,
-  `tc_phoneNumber` varchar(50) NOT NULL,
-  `tc_joinYear` varchar(4) DEFAULT NULL,
-  `tc_leftYear` varchar(4) DEFAULT NULL,
-  `tc_visibility` set('Y','N') NOT NULL
+  `firstName` varchar(25) NOT NULL,
+  `middleName` varchar(25) DEFAULT NULL,
+  `lastName` varchar(25) NOT NULL,
+  `Email` varchar(50) NOT NULL,
+  `systemEmail` varchar(50) NOT NULL,
+  `phoneNumber` varchar(50) NOT NULL,
+  `joinYear` varchar(4) DEFAULT NULL,
+  `leftYear` varchar(4) DEFAULT NULL,
+  `visibility` set('Y','N') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `teachers`
 --
 
-INSERT INTO `teachers` (`teacherId`, `tc_firstName`, `tc_middleName`, `tc_lastName`, `tc_Email`, `tc_systemEmail`, `tc_phoneNumber`, `tc_joinYear`, `tc_leftYear`, `tc_visibility`) VALUES
+INSERT INTO `teachers` (`teacherId`, `firstName`, `middleName`, `lastName`, `Email`, `systemEmail`, `phoneNumber`, `joinYear`, `leftYear`, `visibility`) VALUES
 (1, 'Haradi', 'Keshav', 'Pai', 'hkeshavpai@gmail.com', 'HaradiKeshavPai@mydomain.com', '+919611907001', NULL, NULL, 'Y'),
 (2, 'Haradi', 'Aditya', 'Pai', 'adityapai@y7mail.com', 'HaradiAdityaPai@mydomain.com', '+917619118922 +46735147171', NULL, NULL, 'Y'),
 (3, 'Haradi', 'Abhijit', 'Pai', 'apai1993@gmail.com', 'HaradiAbhijitPai@mydomain.com', '+919663304791', NULL, NULL, 'Y'),
@@ -925,8 +925,8 @@ INSERT INTO `todolist` (`todoId`, `todoText`) VALUES
 
 CREATE TABLE `topics` (
   `topicId` int(11) NOT NULL,
-  `topic_classId` varchar(4) NOT NULL,
-  `topic_subjectId` varchar(50) NOT NULL,
+  `classId` varchar(4) NOT NULL,
+  `subjectId` varchar(50) NOT NULL,
   `topicName` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -934,7 +934,7 @@ CREATE TABLE `topics` (
 -- Dumping data for table `topics`
 --
 
-INSERT INTO `topics` (`topicId`, `topic_classId`, `topic_subjectId`, `topicName`) VALUES
+INSERT INTO `topics` (`topicId`, `classId`, `subjectId`, `topicName`) VALUES
 (1, '9', '6', 'Matter (Nat-n-Beh)'),
 (2, '9', '8', 'Org in Liv Wld'),
 (3, '9', '6', 'Mo\'n F\'ce and Wrk'),
@@ -981,17 +981,17 @@ ALTER TABLE `classes`
 --
 ALTER TABLE `classes_taught_by_teacher`
   ADD PRIMARY KEY (`cttId`),
-  ADD UNIQUE KEY `ctt_teacherId` (`ctt_teacherId`,`ctt_classId`,`ctt_sectionId`,`ctt_subjectId`),
-  ADD KEY `Class Number` (`ctt_classId`),
-  ADD KEY `Section` (`ctt_sectionId`),
-  ADD KEY `Subject` (`ctt_subjectId`);
+  ADD UNIQUE KEY `teacherId` (`teacherId`,`classId`,`sectionId`,`subjectId`),
+  ADD KEY `Class Number` (`classId`),
+  ADD KEY `Section` (`sectionId`),
+  ADD KEY `Subject` (`subjectId`);
 
 --
 -- Indexes for table `deploymentlog`
 --
 ALTER TABLE `deploymentlog`
   ADD PRIMARY KEY (`depId`),
-  ADD UNIQUE KEY `Dedupe` (`dep_assessmentId`,`depType`,`schStartDate`) USING BTREE;
+  ADD UNIQUE KEY `Dedupe` (`assessmentId`,`depType`,`schStartDate`) USING BTREE;
 
 --
 -- Indexes for table `questionbank`
@@ -1019,9 +1019,9 @@ ALTER TABLE `sections`
 --
 ALTER TABLE `studentdetails`
   ADD PRIMARY KEY (`sId`),
-  ADD UNIQUE KEY `firstName` (`st_firstName`,`st_lastName`,`st_Email`,`st_phoneMobile`),
-  ADD KEY `classNumber` (`st_classId`),
-  ADD KEY `sectionAlpha` (`st_sectionId`);
+  ADD UNIQUE KEY `firstName` (`firstName`,`lastName`,`Email`,`phoneMobile`),
+  ADD KEY `classNumber` (`classId`),
+  ADD KEY `sectionAlpha` (`sectionId`);
 
 --
 -- Indexes for table `subjects`
@@ -1127,10 +1127,10 @@ ALTER TABLE `topics`
 -- Constraints for table `classes_taught_by_teacher`
 --
 ALTER TABLE `classes_taught_by_teacher`
-  ADD CONSTRAINT `Class Number` FOREIGN KEY (`ctt_classId`) REFERENCES `classes` (`classId`),
-  ADD CONSTRAINT `Section` FOREIGN KEY (`ctt_sectionId`) REFERENCES `sections` (`sectionId`),
-  ADD CONSTRAINT `Subject` FOREIGN KEY (`ctt_subjectId`) REFERENCES `subjects` (`subjectId`),
-  ADD CONSTRAINT `Teacher` FOREIGN KEY (`ctt_teacherId`) REFERENCES `teachers` (`teacherId`);
+  ADD CONSTRAINT `Class Number` FOREIGN KEY (`classId`) REFERENCES `classes` (`classId`),
+  ADD CONSTRAINT `Section` FOREIGN KEY (`sectionId`) REFERENCES `sections` (`sectionId`),
+  ADD CONSTRAINT `Subject` FOREIGN KEY (`subjectId`) REFERENCES `subjects` (`subjectId`),
+  ADD CONSTRAINT `Teacher` FOREIGN KEY (`teacherId`) REFERENCES `teachers` (`teacherId`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

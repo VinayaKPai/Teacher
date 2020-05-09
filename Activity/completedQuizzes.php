@@ -3,7 +3,9 @@
 	//S	//End date is over and deployment success flag is 1
 	include "../basecode-create_connection.php";
 	$slno = 0;
-	$query = $mysqli->query("SELECT * FROM deploymentlog, assessments WHERE deploymentlog.depType = 'A' AND deploymentlog.schEndDate < CURDATE() AND deploymentlog.deploySuccess = 1 AND assessments.assessment_Id = deploymentlog.dep_assessmentId");
+	$curdate = date("Y-m-d");
+	$query = $mysqli->query("SELECT * FROM deploymentlog, assessments WHERE deploymentlog.depType = 'Q' AND deploymentlog.schEndDate < CURDATE() AND deploymentlog.deploySuccess = 1 AND assessments.assessment_Id = deploymentlog.assessmentId");
+
 	$rowcount=mysqli_num_rows($query);
   if ($rowcount>1) {
     $counts = $pageHeading." have";
@@ -28,7 +30,7 @@
 
               $cn = $row['assessment_questions'];
 //get the actual questions from questionbank by exploding the coma separated string into a php array
-							$qs = explode(",",$cn); //("," means that the result will be separated by commas. The second comma separates the two parameters of the explode function
+							$qs = explode(",",$cn);
 							$qss = '';
 							for ($r=0;$r<count($qs)-1;$r++) {
 								$qss = $qss. "`qId` = ".$qs[$r]." OR ";
@@ -39,16 +41,13 @@
 //check if the assessmentId exists in the deployment table
 //if msg is yes, then we will need to get the deployment dates, otherwise not
 							$aid = $row['assessment_Id'];
-							$msg = "";
-
-
 						  echo "<tr>
 											<td>".$sid."<hr></td>
 											<td style='text-align: left;'>";
                 					echo "<div style='min-height: 300px; overflow: scroll; margin bottom: 0px;'>";
                     			  $qno = 0;
                     				while ($qrow=$qquery->fetch_assoc()) {
-															$classId = $qrow['qb_classId'];
+															$classId = $qrow['classId'];
                     					$qno = $qno + 1;
 
                     					echo $qno."     <span>".$qrow['question']."</span>";
@@ -98,9 +97,9 @@
 												    <select id='as".$composite."' name=".$names.">
 												      <option name='A' value='A'>Assignment</option>
 												      <option name='Q' value='Q'>Quiz</option>
-												      <option name='T' value='T'>Test</option>
+												      <option name='T' value='T'>$pageHeading</option>
 														</select><br>
-													  <button id=".$aid." onclick='deploy(".$classId.",".$aid.")'>Deploy</button>
+													  <button id=".$aid." onclick='deploy(".$aid.",".$classId.")'>Deploy</button>
 													</div><hr>
 													<h5>Previously deployed?";
 //sending 2 parameters with deploy - assessment Id and classId
@@ -114,20 +113,20 @@
 															$type = $pageHeading;
 														}
 															echo "<ol style='list-style-type: none'>
-																			<li>To Sec ".$row['dep_sectionId']." on ".$row['schStartDate']." as  ".$type."</li>";
+																			<li>To Sec ".$row['sectionId']." on ".$row['schStartDate']." as  ".$type."</li>";
 
 															echo "</ol>";
 
 													echo "</div>
 												</td>
-										</tr>";
+                    </tr>";
 
 					}
 
 				}
 			else {
-					echo "No assessments";
-				}
+          echo "No assessments";
+        }
 			if(!$query) {
 					echo "Looks like your set up has not been started. Please add student details to the database, so that you can get the benefit of all the features of the App";
 				}

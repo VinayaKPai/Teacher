@@ -1,6 +1,6 @@
 <?php
 	//include "basecode-create_connection.php";
-	include "../basecode-create_connection.php";
+	include $_SERVER['DOCUMENT_ROOT']."/basecode-create_connection.php";
 	//include "../RemoveRecords/RemoveClass.php";
 	//include "../Scripts/php/addNewClasses.php";
 //	include "../RemoveRecords/RemoveClass.php";
@@ -25,11 +25,8 @@
 			<script src="../../Scripts/js/ajaxCallTeachers.js"></script>
 
 			<script type="text/javascript">
-				var addMultiple = [];
-				var cntr = 0;
-				var satr = 0;
 				function modalclick(e) {
-					// alert ("Id is "+e.id);
+
 					document.getElementById("teacherName").innerText = e.innerText;
 					document.getElementById("modalSpan").innerText = e.innerText;
 
@@ -38,11 +35,10 @@
 					document.getElementById("sectionAlpha").value = "";
 					document.getElementById("subjectName").value = "";
 
-					ajaxCallTeachers(e.id,e.innerText);
+					ajaxCallTeachers(e.id);
+
 				}
-				function clickalert(c) {
-					alert (c.id);
-				}
+
 				function exploreclick(b) {
 					$('#teacherModal').modal('hide');
 					// alert (b.id);
@@ -139,8 +135,9 @@
 
 				<div class="col-sm-9 centered" style="border-left: 1px solid Grey;">
 					<h5>Click on the teacher's name to see details of classes taught or add new classes</h5>
+					<table id="existTable" style="width: 100%; padding: 5px; border-spacing: 2px; border-collapse: separate; align: 'center';">
 					<?php include "../AddNew/Existing/teachers.php"; ?>
-
+				</table>
 
 					<div id="status"></div>
 				</div>
@@ -186,12 +183,13 @@
 
 		<div id="teacherModal" class="modal modal-xl fade" role="dialog" style="width: 100%;">
 		  <div class="modal-dialog">
-
 		    <!-- Modal content-->
 				    <div class="modal-content">
 				      <div class="modal-header">
 				        <button type="button" class="close" data-dismiss="modal">&times;</button>
-				        <h4 class="modal-title" style="text-align: center;"><span  id="teacherName"></h4>
+				        <h4 class="modal-title" style="text-align: center;">
+									<span  id="teacherName"></span>
+								</h4>
 				      </div>
 				      <div class="modal-body">
 						  <div class="row">
@@ -214,13 +212,14 @@
 							  <div class="col-sm-6" style="border: 1px solid black;">
 								  <h4 class="centered"><span id="modalSpan"></span> teaches:</h4>
 								  <hr />
+									<h6 class='centered'>To see students for each class click Explore button</h6>
+									<!-- <table style="width:90%;"><tr><th class="col-sm-2">Class</th><th class="col-sm-2">Section</th><th class="col-sm-5">Subject</th><th class="col-sm-3">Explore</th></tr> -->
 									<div id="ajaxRes">
 										<?php
 											include "../Scripts/php/singleTeacherClasses.php";
 										?>
-										Ajax Res
 								  </div>
-
+<!-- </table> -->
 							  </div>
 						  </div>
 				      </div>

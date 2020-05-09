@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 27, 2019 at 06:59 PM
+-- Generation Time: May 05, 2020 at 08:11 AM
 -- Server version: 10.1.40-MariaDB
 -- PHP Version: 7.3.5
 
@@ -25,11 +25,76 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `assessments`
+--
+
+CREATE TABLE `assessments` (
+  `assessment_Id` int(11) NOT NULL,
+  `assessment_Title` varchar(250) NOT NULL,
+  `assessment_questions` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `assessments`
+--
+
+INSERT INTO `assessments` (`assessment_Id`, `assessment_Title`, `assessment_questions`) VALUES
+(1, 'Trial assignment', '7,8,9'),
+(2, 'asdf', '3,4'),
+(3, 'Combisave 1', '11,13,16'),
+(4, 'combisave 2', '481,482,483,484'),
+(5, 'Trial quiz', '481,482,483'),
+(6, 'VIII Eng act 2', '490,491,494,496,497'),
+(7, 'VIII Eng Act 3', '488,487,480');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `assessment_questions`
+--
+
+CREATE TABLE `assessment_questions` (
+  `assessment_Id` int(11) NOT NULL,
+  `question_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `assessment_questions`
+--
+
+INSERT INTO `assessment_questions` (`assessment_Id`, `question_id`) VALUES
+(1, 7),
+(1, 8),
+(1, 9),
+(2, 3),
+(2, 4),
+(3, 11),
+(3, 13),
+(3, 16),
+(4, 481),
+(4, 482),
+(4, 483),
+(4, 484),
+(5, 481),
+(5, 482),
+(5, 483),
+(6, 490),
+(6, 491),
+(6, 494),
+(6, 496),
+(6, 497),
+(7, 480),
+(7, 487),
+(7, 488);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `classes`
 --
 
 CREATE TABLE `classes` (
-  `Id` int(11) NOT NULL,
+  `classId` int(11) NOT NULL,
   `classNumber` varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -37,7 +102,7 @@ CREATE TABLE `classes` (
 -- Dumping data for table `classes`
 --
 
-INSERT INTO `classes` (`Id`, `classNumber`) VALUES
+INSERT INTO `classes` (`classId`, `classNumber`) VALUES
 (1, 'I'),
 (2, 'II'),
 (3, 'III'),
@@ -58,55 +123,82 @@ INSERT INTO `classes` (`Id`, `classNumber`) VALUES
 --
 
 CREATE TABLE `classes_taught_by_teacher` (
-  `Id` int(11) NOT NULL,
-  `teacherId` int(11) NOT NULL,
-  `classId` int(11) NOT NULL,
-  `sectionId` int(11) NOT NULL,
-  `subjectId` int(11) NOT NULL
+  `cttId` int(11) NOT NULL,
+  `ctt_teacherId` int(11) NOT NULL,
+  `ctt_classId` int(11) NOT NULL,
+  `ctt_sectionId` int(11) NOT NULL,
+  `ctt_subjectId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `classes_taught_by_teacher`
 --
 
-INSERT INTO `classes_taught_by_teacher` (`Id`, `teacherId`, `classId`, `sectionId`, `subjectId`) VALUES
-(1, 2, 8, 3, 9),
-(2, 7, 2, 1, 1),
-(3, 3, 7, 1, 11),
+INSERT INTO `classes_taught_by_teacher` (`cttId`, `ctt_teacherId`, `ctt_classId`, `ctt_sectionId`, `ctt_subjectId`) VALUES
+(12, 1, 4, 3, 1),
+(19, 1, 5, 4, 7),
 (4, 1, 6, 1, 3),
-(5, 5, 10, 2, 4),
+(9, 1, 10, 2, 11),
+(50, 2, 1, 1, 1),
+(10, 2, 4, 3, 1),
+(47, 2, 5, 2, 8),
+(13, 2, 6, 1, 12),
+(20, 2, 7, 3, 8),
+(1, 2, 8, 3, 9),
+(22, 3, 5, 1, 11),
+(45, 3, 5, 2, 11),
+(49, 3, 5, 3, 11),
+(11, 3, 6, 6, 5),
+(3, 3, 7, 1, 11),
+(21, 3, 7, 2, 11),
+(14, 3, 8, 5, 11),
+(52, 4, 9, 2, 9),
 (6, 4, 9, 4, 10),
-(7, 4, 12, 5, 6);
+(15, 4, 10, 6, 13),
+(7, 4, 12, 5, 6),
+(5, 5, 10, 2, 4),
+(16, 5, 12, 2, 5),
+(17, 6, 2, 4, 10),
+(53, 7, 1, 1, 2),
+(2, 7, 2, 1, 1),
+(8, 7, 2, 6, 2),
+(18, 7, 3, 5, 9);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `classes_taught_by_teachers`
+-- Table structure for table `deploymentlog`
 --
 
-CREATE TABLE `classes_taught_by_teachers` (
-  `Id` int(11) NOT NULL,
-  `classNumber` varchar(4) NOT NULL,
-  `sectionAlpha` varchar(4) NOT NULL
+CREATE TABLE `deploymentlog` (
+  `depId` int(11) NOT NULL COMMENT 'Auto generated unique id for the deployment',
+  `depType` set('A','Q','T') NOT NULL COMMENT 'Specifies whether the dep is a quiz, a test or an assignment',
+  `dep_classId` int(3) NOT NULL,
+  `dep_sectionId` int(11) NOT NULL,
+  `dep_assessmentId` int(11) NOT NULL COMMENT 'This is the id of the deployment in the assessment table',
+  `schStartDate` date NOT NULL COMMENT 'This is created at the time of setting up deployment. Need not mean that the deployment happened.',
+  `schEndDate` date NOT NULL COMMENT 'This would be the date after which responses would not be accepted.',
+  `autoReminderDays` tinyint(3) NOT NULL COMMENT 'To be set to a negative number. Will be used to calculate reminder date',
+  `deploySuccess` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'This will be a 0 or 1 depending on whether the deployment is successful or not'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `classes_taught_by_teachers`
+-- Dumping data for table `deploymentlog`
 --
 
-INSERT INTO `classes_taught_by_teachers` (`Id`, `classNumber`, `sectionAlpha`) VALUES
-(1, 'I', 'A'),
-(2, 'I', 'B'),
-(3, 'I', 'C'),
-(4, 'II', 'A'),
-(5, 'II', 'B'),
-(6, 'II', 'F'),
-(7, 'III', 'A'),
-(8, 'III', 'B'),
-(9, 'IV', 'A'),
-(10, 'IX', 'A'),
-(11, 'IX', 'E'),
-(12, 'X', 'A');
+INSERT INTO `deploymentlog` (`depId`, `depType`, `dep_classId`, `dep_sectionId`, `dep_assessmentId`, `schStartDate`, `schEndDate`, `autoReminderDays`, `deploySuccess`) VALUES
+(1, 'A', 2, 1, 1, '2020-04-01', '2020-04-15', 0, 1),
+(3, 'A', 2, 6, 1, '2020-05-01', '2020-05-06', 0, 1),
+(5, 'A', 9, 2, 2, '2020-05-06', '2020-05-23', 0, 0),
+(7, 'A', 8, 4, 4, '2020-03-04', '2020-03-11', 0, 0),
+(8, 'T', 8, 1, 7, '2020-04-08', '2020-04-23', 0, 1),
+(10, 'T', 8, 2, 6, '2020-05-01', '2020-05-06', 0, 1),
+(12, 'T', 8, 4, 4, '2020-05-12', '2020-05-13', 0, 0),
+(14, 'T', 8, 3, 7, '2020-05-02', '2020-05-05', 0, 0),
+(16, 'Q', 2, 1, 3, '2020-04-01', '2020-05-01', 0, 1),
+(18, 'Q', 2, 2, 3, '2020-04-03', '2020-05-15', 0, 1),
+(20, 'Q', 2, 4, 3, '2020-05-13', '2020-05-15', 0, 0),
+(22, 'Q', 2, 6, 3, '2020-04-16', '2020-05-01', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -115,11 +207,11 @@ INSERT INTO `classes_taught_by_teachers` (`Id`, `classNumber`, `sectionAlpha`) V
 --
 
 CREATE TABLE `questionbank` (
-  `Id` int(4) NOT NULL,
-  `classId` varchar(4) NOT NULL,
-  `subjectId` varchar(25) NOT NULL,
-  `topicId` varchar(100) NOT NULL,
-  `typeId` varchar(5) NOT NULL,
+  `qId` int(4) NOT NULL,
+  `qb_classId` varchar(4) NOT NULL,
+  `qb_subjectId` varchar(25) NOT NULL,
+  `qb_topicId` varchar(100) NOT NULL,
+  `qb_typeId` varchar(5) NOT NULL,
   `question` varchar(1000) NOT NULL,
   `Option_1` varchar(50) NOT NULL,
   `Option_2` varchar(50) NOT NULL,
@@ -133,7 +225,7 @@ CREATE TABLE `questionbank` (
 -- Dumping data for table `questionbank`
 --
 
-INSERT INTO `questionbank` (`Id`, `classId`, `subjectId`, `topicId`, `typeId`, `question`, `Option_1`, `Option_2`, `Option_3`, `Option_4`, `Option_5`, `Option_6`) VALUES
+INSERT INTO `questionbank` (`qId`, `qb_classId`, `qb_subjectId`, `qb_topicId`, `qb_typeId`, `question`, `Option_1`, `Option_2`, `Option_3`, `Option_4`, `Option_5`, `Option_6`) VALUES
 (1, '2', '4', '7', '2', '____ helps clean the house. ', 'Doorman ', 'Maid ', 'Valet ', 'Shopkeeper ', 'None of these', ''),
 (2, '9', '5', '6', '2', 'Two Treatises of Government\' was written by:', 'Rousseau', 'John Locke', 'Montesquieu', 'None of these', '', ''),
 (3, '9', '5', '6', '2', 'Passive citizens of France were:', 'Only men above 25 years', 'Only propertied men', 'Men and women who didn\'t vote', 'Only propertied women', '', ''),
@@ -526,7 +618,7 @@ INSERT INTO `questionbank` (`Id`, `classId`, `subjectId`, `topicId`, `typeId`, `
 (392, '9', '5', '8', '5', 'How unemployment has detrimental impact on the overall growth of an economy?', '', '', '', '', '', ''),
 (393, '9', '5', '8', '5', 'Surplus labour in agriculture has moved to which jobs in secondary and tertiary sector?', '', '', '', '', '', ''),
 (394, '9', '5', '8', '5', 'Which capital would you consider the best-land, labours, physical capital or human capital? ?', '', '', '', '', '', '');
-INSERT INTO `questionbank` (`Id`, `classId`, `subjectId`, `topicId`, `typeId`, `question`, `Option_1`, `Option_2`, `Option_3`, `Option_4`, `Option_5`, `Option_6`) VALUES
+INSERT INTO `questionbank` (`qId`, `qb_classId`, `qb_subjectId`, `qb_topicId`, `qb_typeId`, `question`, `Option_1`, `Option_2`, `Option_3`, `Option_4`, `Option_5`, `Option_6`) VALUES
 (395, '9', '5', '8', '5', 'What do you under3nd by \'people as resource\'?', '', '', '', '', '', ''),
 (396, '9', '5', '8', '5', 'How is human resource different from other resources like land and physical capital?', '', '', '', '', '', ''),
 (397, '9', '5', '8', '5', 'What is the role of education in human capital formation?', '', '', '', '', '', ''),
@@ -570,47 +662,47 @@ INSERT INTO `questionbank` (`Id`, `classId`, `subjectId`, `topicId`, `typeId`, `
 (435, '9', '5', '8', '5', 'Why women are paid less when they are illiterate and not skilled in comparison to educated and skilled ones?', '', '', '', '', '', ''),
 (436, '9', '5', '8', '5', 'What does quality of popu1ion imply?', '', '', '', '', '', ''),
 (437, '9', '5', '8', '5', '\'Health is wealth\', is it true? Describe the role played by health in the individual\'s working life. ?', '', '', '', '', '', ''),
-(438, '1', '2', '9', '2', 'Direction: Identity the odd one out of the four choices given below in each question:', 'Green', 'Red', 'Colour', 'Orange', 'None of these', ''),
-(439, '1', '2', '9', '2', 'Direction: Identity the odd one out of the four choices given below in each question:', 'Venus', 'Mars', 'Pluto', 'Neptune', 'None of these', ''),
-(440, '1', '2', '9', '2', 'Direction: Identity the odd one out of the four choices given below in each question:', 'Happy', 'Gloomy', 'Lively', 'Cheerful', 'None of these', ''),
-(441, '1', '2', '9', '2', 'Direction: Identity the odd one out of the four choices given below in each question:', 'Cub', 'Chicken', 'Pig', 'Pup', 'None of these', ''),
-(442, '1', '2', '9', '2', 'Direction: Identity the odd one out of the four choices given below in each question:', 'Knee', 'Foot', 'Ankle', 'Palm', 'None of these', ''),
-(443, '1', '2', '9', '2', 'Direction: Identity the odd one out of the four choices given below in each question:', 'Immortal', 'Eminent', 'Perpetual', 'Everlasting', 'None of these', ''),
-(444, '1', '2', '9', '2', 'Direction: Identity the odd one out of the four choices given below in each question:', 'Mathematics', 'Algebra', 'Trigonometry', 'Geometry', 'None of these', ''),
-(445, '1', '2', '9', '2', 'Direction: Identity the odd one out of the four choices given below in each question:', 'Adore', 'Like', 'Love', 'Laugh', 'None of these', ''),
-(446, '1', '2', '9', '2', 'Direction: Identity the odd one out of the four choices given below in each question:', 'Club', 'Heart', 'Spade', 'Ace', 'None of these', ''),
-(447, '1', '2', '9', '2', 'Direction: Identity the odd one out of the four choices given below in each question:', 'Dismay', 'Dread', 'Downer', 'Delight', 'None of these', ''),
-(448, '1', '2', '9', '2', 'Direction: Identity the odd one out of the four choices given below in each question:', 'Rose', 'Pink', 'Red', 'Maroon', 'None of these', ''),
-(449, '1', '2', '9', '2', 'Direction: Identity the odd one out of the four choices given below in each question:', 'Mature', 'Youthful', 'Ripen', 'Mellow', 'None of these', ''),
-(450, '1', '2', '9', '2', 'Direction: Each of the following questions is followed by four alternatives out of which one is different from the rest three. This alternative is your answer.', 'Claver', 'Wise', 'Doubly', 'Foolish', 'None of these', ''),
-(451, '1', '2', '9', '2', 'Direction: Each of the following questions is followed by four alternatives out of which one is different from the rest three. This alternative is your answer.', 'Sword', 'Spear', 'Shield', 'Arrow', 'None of these', ''),
-(452, '1', '2', '9', '2', 'Direction: Each of the following questions is followed by four alternatives out of which one is different from the rest three. This alternative is your answer.', 'What', 'Which', 'Who', 'Whoever', 'None of these', ''),
-(453, '1', '2', '9', '2', 'Direction: Each of the following questions is followed by four alternatives out of which one is different from the rest three. This alternative is your answer.', 'Witch', 'Hind', 'Ewe', 'Stag', 'None of these', ''),
-(454, '1', '2', '9', '2', 'Direction: Each of the following questions is followed by four alternatives out of which one is different from the rest three. This alternative is your answer.', 'Best', 'Upper', 'Worst', 'Least', 'None of these', ''),
-(455, '1', '2', '9', '2', 'Direction: Each of the following questions is followed by four alternatives out of which one is different from the rest three. This alternative is your answer.', 'Have', 'Do', 'Can', 'Am', 'None of these', ''),
-(456, '1', '2', '9', '2', 'Direction: Each of the following questions is followed by four alternatives out of which one is different from the rest three. This alternative is your answer.', 'In', 'Or', 'Of', 'Off', 'None of these', ''),
-(457, '1', '2', '9', '2', 'Direction: Each of the following questions is followed by four alternatives out of which one is different from the rest three. This alternative is your answer.', 'But', 'Still', 'Only', 'Else', 'None of these', ''),
-(458, '1', '2', '9', '2', 'Direction: Each of the following questions is followed by four alternatives out of which one is different from the rest three. This alternative is your answer.', 'Nest', 'Shed', 'Stable', 'Kennel', 'None of these', ''),
-(459, '1', '2', '9', '2', 'Direction: Each of the following questions is followed by four alternatives out of which one is different from the rest three. This alternative is your answer.', 'Sad', 'Cheerful', 'Jovial', 'Festive', 'None of these', ''),
-(460, '1', '2', '9', '2', 'Direction: Each of the following questions is followed by four alternatives out of which one is different from the rest three. This alternative is your answer.', 'Helicopter', 'Steamer', 'Chariot', 'Automobile', 'None of these', ''),
-(461, '1', '2', '9', '2', 'Direction: Each of the following questions is followed by four alternatives out of which one is different from the rest three. This alternative is your answer.', 'Long jump', 'Athletics', 'High jump', 'Running', 'None of these', ''),
-(462, '1', '2', '9', '2', 'Direction: Each of the following questions is followed by four alternatives out of which one is different from the rest three. This alternative is your answer.', 'English', 'Biology', 'Mathematics', 'Physics', 'None of these', ''),
-(463, '1', '2', '9', '2', 'Direction: Each of the following questions is followed by four alternatives out of which one is different from the rest three. This alternative is your answer.', 'Magazine', 'Novel', 'Book', 'Dictionary', 'None of these', ''),
-(464, '1', '2', '9', '2', 'Direction: Each of the following questions is followed by four alternatives out of which one is different from the rest three. This alternative is your answer.', 'Day', 'Week', 'Fortnight', 'Calendar', 'None of these', ''),
-(465, '1', '2', '9', '2', 'Direction: Each of the following questions is followed by four alternatives out of which one is different from the rest three. This alternative is your answer.', 'Plumber', 'Tailor', 'Sailor', 'Carpenter', 'None of these', ''),
-(466, '1', '2', '9', '2', 'Direction: Each of the following questions is followed by four alternatives out of which one is different from the rest three. This alternative is your answer.', 'Square', 'Area', 'Triangle', 'Circle', 'None of these', ''),
-(467, '1', '2', '9', '2', 'Direction: Each of the following questions is followed by four alternatives out of which one is different from the rest three. This alternative is your answer.', 'Paper', 'Foot ruler', 'Sharpener', 'Teacher', 'None of these', ''),
-(468, '1', '2', '9', '2', 'Direction: Each of the following questions is followed by four alternatives out of which one is different from the rest three. This alternative is your answer.', 'Bench', 'Sofa', 'Cupboard', 'Chair', 'None of these', ''),
-(469, '1', '2', '9', '2', 'Direction: Each of the following questions is followed by four alternatives out of which one is different from the rest three. This alternative is your answer.', 'Chisel', 'Tools', 'Hammer', 'Axe', 'None of these', ''),
-(470, '1', '2', '9', '2', 'Direction: Each of the following questions is followed by four alternatives out of which one is different from the rest three. This alternative is your answer.', 'Tree', 'Root', 'Flower', 'Leaf', 'None of these', ''),
-(471, '1', '2', '9', '2', 'Direction: Each of the following questions is followed by four alternatives out of which one is different from the rest three. This alternative is your answer.', 'Climber', 'Plant', 'Shrub', 'Creeper', 'None of these', ''),
-(472, '1', '2', '9', '2', 'Direction: Each of the following questions is followed by four alternatives out of which one is different from the rest three. This alternative is your answer.', 'Calcutta', 'Chennai', 'Bengaluru', 'Mumbai', 'None of these', ''),
-(473, '1', '2', '9', '2', 'Direction: Each of the following questions is followed by four alternatives out of which one is different from the rest three. This alternative is your answer.', 'Hut', 'Bungalow', 'Cottage', 'Apartments', 'None of these', ''),
-(474, '1', '2', '9', '2', 'Direction: Each of the following questions is followed by four alternatives out of which one is different from the rest three. This alternative is your answer.', 'Guava', 'Cauliflower', 'Malta', 'Coconut', 'None of these', ''),
-(475, '1', '2', '9', '2', 'Direction: Each of the following questions is followed by four alternatives out of which one is different from the rest three. This alternative is your answer.', 'Gallon', 'Ton', 'Quintal', 'Kilogram', 'None of these', ''),
-(476, '1', '2', '9', '2', 'Direction: Each of the following questions is followed by four alternatives out of which one is different from the rest three. This alternative is your answer.', 'Opening', 'Yawn', 'Junction', 'Cleft', 'None of these', ''),
-(477, '1', '2', '9', '2', 'Direction: Each of the following questions is followed by four alternatives out of which one is different from the rest three. This alternative is your answer.', 'Snooker', 'Badminton', 'Squash', 'Volleyball', 'None of these', ''),
-(478, '8', '2', '10', '7', 'Replace the following underlined phrases with appropriate collective nouns: The people who work in this company are all trained people.', 'staff of this company', 'team of this company', 'organisation of this company', 'crew of this company', ' ', ' '),
+(438, '1', '2', '9', '2', 'Identity the odd one out', 'Green', 'Red', 'Colour', 'Orange', 'None of these', ''),
+(439, '1', '2', '9', '2', 'Identity the odd one out', 'Venus', 'Mars', 'Pluto', 'Neptune', 'None of these', ''),
+(440, '1', '2', '9', '2', 'Identity the odd one out', 'Happy', 'Gloomy', 'Lively', 'Cheerful', 'None of these', ''),
+(441, '1', '2', '9', '2', 'Identity the odd one out', 'Cub', 'Chicken', 'Pig', 'Pup', 'None of these', ''),
+(442, '1', '2', '9', '2', 'Identity the odd one out', 'Knee', 'Foot', 'Ankle', 'Palm', 'None of these', ''),
+(443, '1', '2', '9', '2', 'Identity the odd one out', 'Immortal', 'Eminent', 'Perpetual', 'Everlasting', 'None of these', ''),
+(444, '1', '2', '9', '2', 'Identity the odd one out', 'Mathematics', 'Algebra', 'Trigonometry', 'Geometry', 'None of these', ''),
+(445, '1', '2', '9', '2', 'Identity the odd one out', 'Adore', 'Like', 'Love', 'Laugh', 'None of these', ''),
+(446, '1', '2', '9', '2', 'Identity the odd one out', 'Club', 'Heart', 'Spade', 'Ace', 'None of these', ''),
+(447, '1', '2', '9', '2', 'Identity the odd one out', 'Dismay', 'Dread', 'Downer', 'Delight', 'None of these', ''),
+(448, '1', '2', '9', '2', 'Identity the odd one out', 'Rose', 'Pink', 'Red', 'Maroon', 'None of these', ''),
+(449, '1', '2', '9', '2', 'Identity the odd one out', 'Mature', 'Youthful', 'Ripen', 'Mellow', 'None of these', ''),
+(450, '1', '2', '9', '2', 'Identity the odd one out', 'Claver', 'Wise', 'Doubly', 'Foolish', 'None of these', ''),
+(451, '1', '2', '9', '2', 'Identity the odd one out', 'Sword', 'Spear', 'Shield', 'Arrow', 'None of these', ''),
+(452, '1', '2', '9', '2', 'Identity the odd one out', 'What', 'Which', 'Who', 'Whoever', 'None of these', ''),
+(453, '1', '2', '9', '2', 'Identity the odd one out', 'Witch', 'Hind', 'Ewe', 'Stag', 'None of these', ''),
+(454, '1', '2', '9', '2', 'Identity the odd one out', 'Best', 'Upper', 'Worst', 'Least', 'None of these', ''),
+(455, '1', '2', '9', '2', 'Identity the odd one out', 'Have', 'Do', 'Can', 'Am', 'None of these', ''),
+(456, '1', '2', '9', '2', 'Identity the odd one out', 'In', 'Or', 'Of', 'Off', 'None of these', ''),
+(457, '1', '2', '9', '2', 'Identity the odd one out', 'But', 'Still', 'Only', 'Else', 'None of these', ''),
+(458, '1', '2', '9', '2', 'Identity the odd one out', 'Nest', 'Shed', 'Stable', 'Kennel', 'None of these', ''),
+(459, '1', '2', '9', '2', 'Identity the odd one out', 'Sad', 'Cheerful', 'Jovial', 'Festive', 'None of these', ''),
+(460, '1', '2', '9', '2', 'Identity the odd one out', 'Helicopter', 'Steamer', 'Chariot', 'Automobile', 'None of these', ''),
+(461, '1', '2', '9', '2', 'Identity the odd one out', 'Long jump', 'Athletics', 'High jump', 'Running', 'None of these', ''),
+(462, '1', '2', '9', '2', 'Identity the odd one out', 'English', 'Biology', 'Mathematics', 'Physics', 'None of these', ''),
+(463, '1', '2', '9', '2', 'Identity the odd one out', 'Magazine', 'Novel', 'Book', 'Dictionary', 'None of these', ''),
+(464, '1', '2', '9', '2', 'Identity the odd one out', 'Day', 'Week', 'Fortnight', 'Calendar', 'None of these', ''),
+(465, '1', '2', '9', '2', 'Identity the odd one out', 'Plumber', 'Tailor', 'Sailor', 'Carpenter', 'None of these', ''),
+(466, '1', '2', '9', '2', 'Identity the odd one out', 'Square', 'Area', 'Triangle', 'Circle', 'None of these', ''),
+(467, '1', '2', '9', '2', 'Identity the odd one out', 'Paper', 'Foot ruler', 'Sharpener', 'Teacher', 'None of these', ''),
+(468, '1', '2', '9', '2', 'Identity the odd one out', 'Bench', 'Sofa', 'Cupboard', 'Chair', 'None of these', ''),
+(469, '1', '2', '9', '2', 'Identity the odd one out', 'Chisel', 'Tools', 'Hammer', 'Axe', 'None of these', ''),
+(470, '1', '2', '9', '2', 'Identity the odd one out', 'Tree', 'Root', 'Flower', 'Leaf', 'None of these', ''),
+(471, '1', '2', '9', '2', 'Identity the odd one out', 'Climber', 'Plant', 'Shrub', 'Creeper', 'None of these', ''),
+(472, '1', '2', '9', '2', 'Identity the odd one out', 'Calcutta', 'Chennai', 'Bengaluru', 'Mumbai', 'None of these', ''),
+(473, '1', '2', '9', '2', 'Identity the odd one out', 'Hut', 'Bungalow', 'Cottage', 'Apartments', 'None of these', ''),
+(474, '1', '2', '9', '2', 'Identity the odd one out', 'Guava', 'Cauliflower', 'Malta', 'Coconut', 'None of these', ''),
+(475, '1', '2', '9', '2', 'Identity the odd one out', 'Gallon', 'Ton', 'Quintal', 'Kilogram', 'None of these', ''),
+(476, '1', '2', '9', '2', 'Identity the odd one out', 'Opening', 'Yawn', 'Junction', 'Cleft', 'None of these', ''),
+(477, '1', '2', '9', '2', 'Identity the odd one out', 'Snooker', 'Badminton', 'Squash', 'Volleyball', 'None of these', ''),
+(478, '8', '2', '10', '7', 'Replace the following underlined phrases with appropriate collective nouns: The people who work in this company are all trained people.', 'staff of this company', 'team of this company', 'organisation of this company', 'crew of this company', '', ''),
 (479, '8', '2', '10', '7', 'Replace the following underlined phrases with appropriate collective nouns: The plane got crashed because the people who flew the plane did not know each other\'s language and lacked co-ordination.', 'the gang', 'the crew', 'the squad', 'the corps', '', ''),
 (480, '8', '2', '10', '7', 'Replace the following underlined phrases with appropriate collective nouns: The people who acted in the film were all members of a single family.', 'characters of the film', 'guys of the film', 'actors of the film', 'fellows of the film', '', ''),
 (481, '8', '2', '10', '7', 'Replace the following underlined phrases with appropriate collective nouns: The people in general are fickle.', 'public', 'individuals', 'humans', 'mortals', '', ''),
@@ -687,7 +779,7 @@ INSERT INTO `questionbank` (`Id`, `classId`, `subjectId`, `topicId`, `typeId`, `
 --
 
 CREATE TABLE `questiontype` (
-  `Id` smallint(11) NOT NULL,
+  `qtId` smallint(11) NOT NULL,
   `typeName` varchar(50) NOT NULL,
   `Description` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -696,7 +788,7 @@ CREATE TABLE `questiontype` (
 -- Dumping data for table `questiontype`
 --
 
-INSERT INTO `questiontype` (`Id`, `typeName`, `Description`) VALUES
+INSERT INTO `questiontype` (`qtId`, `typeName`, `Description`) VALUES
 (1, 'LTA', 'Long Type Answers'),
 (2, 'MCQ', 'Multiple Choice Questions'),
 (3, 'STA', 'Short Type Answers'),
@@ -712,7 +804,7 @@ INSERT INTO `questiontype` (`Id`, `typeName`, `Description`) VALUES
 --
 
 CREATE TABLE `sections` (
-  `id` int(11) NOT NULL,
+  `sectionId` int(11) NOT NULL,
   `Sections` varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -720,7 +812,7 @@ CREATE TABLE `sections` (
 -- Dumping data for table `sections`
 --
 
-INSERT INTO `sections` (`id`, `Sections`) VALUES
+INSERT INTO `sections` (`sectionId`, `Sections`) VALUES
 (1, 'A'),
 (2, 'B'),
 (3, 'C'),
@@ -735,39 +827,73 @@ INSERT INTO `sections` (`id`, `Sections`) VALUES
 --
 
 CREATE TABLE `studentdetails` (
-  `Id` varchar(50) NOT NULL,
-  `firstName` char(50) NOT NULL,
-  `lastName` char(50) NOT NULL,
-  `rollNumber` char(10) DEFAULT NULL,
-  `classNumber` char(25) DEFAULT NULL,
-  `sectionAlpha` char(1) DEFAULT NULL,
-  `email` varchar(25) DEFAULT NULL,
-  `systemEmail` varchar(50) NOT NULL COMMENT 'This will be auto generated',
-  `pw` varchar(50) NOT NULL,
-  `joinYear` varchar(25) DEFAULT NULL,
-  `endYear` varchar(25) DEFAULT NULL,
-  `phoneMobile` varchar(15) NOT NULL
+  `sId` varchar(50) NOT NULL,
+  `st_firstName` char(50) NOT NULL,
+  `st_lastName` char(50) NOT NULL,
+  `rollNumber` int(11) NOT NULL,
+  `st_classId` char(25) DEFAULT NULL,
+  `st_sectionId` char(1) DEFAULT NULL,
+  `st_Email` varchar(25) DEFAULT NULL,
+  `st_systemEmail` varchar(50) NOT NULL COMMENT 'This will be auto generated',
+  `st_pw` varchar(50) NOT NULL,
+  `st_joinYear` varchar(25) DEFAULT NULL,
+  `st_endYear` varchar(25) DEFAULT NULL,
+  `st_phoneMobile` varchar(15) NOT NULL,
+  `st_visibility` set('Y','N') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `studentdetails`
 --
 
-INSERT INTO `studentdetails` (`Id`, `firstName`, `lastName`, `rollNumber`, `classNumber`, `sectionAlpha`, `email`, `systemEmail`, `pw`, `joinYear`, `endYear`, `phoneMobile`) VALUES
-('AbhijitPai9196633047', 'Abhijit', 'Pai', '02', 'VIII', 'A', 'apai193@yahoo.co.in', '', '', '0000-00-00', '0000-00-00', '9196633047'),
-('AbhijitPai9663304791', 'Abhijit', 'Pai', '', '', '', 'apai1993@yahoo.com', 'AbhijitPai@mydomain.com', '', '0000-00-00', '0000-00-00', '9663304791'),
-('AdityaPai9663304792', 'Aditya', 'Pai', '01', 'VIII', 'A', 'adityapai@y7mail.com', '', '', '0000-00-00', '0000-00-00', '9663304792'),
-('ChorBhajia3322556688', 'Chor', 'Bhajia', '01', 'VIII', 'B', 'cbha@vkpsolutions.com', '', '', '0000-00-00', '0000-00-00', '3322556688'),
-('DroopyStuppi15995611590', 'Droopy', 'Stuppi', '03', 'IX', 'A', 'dstu@vkpsolutions.com', '', '', '0000-00-00', '0000-00-00', '15995611590'),
-('FalorSofa', 'Falor', 'Sofa', '02', 'VIII', 'B', 'fsof@vkpsolutions.com', '', '', '0000-00-00', '0000-00-00', '1424344454'),
-('fikkSicck1591591590', 'fikk', 'Sicck', '', '', '', 'fs@fds.com', 'fikkSicck@mydomain.com', '', '0000-00-00', '0000-00-00', '1591591590'),
-('IKoota9966338855', 'Piddi', 'Koota', NULL, NULL, NULL, '', 'PiddiKoota@mydomain.com', '', '', '', '9966338855'),
-('IPoori1234567890', 'Joori', 'Poori', NULL, NULL, NULL, 'jooripoori@asd.com', 'JooriPoori@mydomain.com', '', '2018', '2021', '1234567890'),
-('KavyaPai9611907001', 'Kavya', 'Pai', '03', 'VIII', 'A', 'vkaapai@yahoo.com', '', '', '0000-00-00', '0000-00-00', '9611907001'),
-('PramodDumbo3652365201', 'Pramod', 'Dumbo', '02', 'IX', 'A', 'pdum@vkpsolutions.com', '', '', '0000-00-00', '0000-00-00', '3652365201'),
-('VarthaManishu6454342421', 'Vartha', 'Manishu', '03', 'IX', 'B', 'vman@vkpsolutions.com', '', '', '0000-00-00', '0000-00-00', '6454342421'),
-('VBaltu8787878787', 'Faltu', 'Baltu', NULL, NULL, NULL, 'falbal@wewe.com', 'FaltuBaltu@mydomain.com', '', '2017', '2022', '8787878787'),
-('VIPanju4564564560', 'Ganju', 'Panju', NULL, NULL, NULL, '', 'GanjuPanju@mydomain.com', '', '', '', '4564564560');
+INSERT INTO `studentdetails` (`sId`, `st_firstName`, `st_lastName`, `rollNumber`, `st_classId`, `st_sectionId`, `st_Email`, `st_systemEmail`, `st_pw`, `st_joinYear`, `st_endYear`, `st_phoneMobile`, `st_visibility`) VALUES
+('AabhaAcharya7440502336', 'Aabhra', 'Acharya', 15, '10', '5', 'AabhaAcharya@pxp.com', 'AabhaAcharya@mydomain.com', '7440502336', '2017', '', '7440502336', 'Y'),
+('AabharanAgarwal6467471751', 'Aabharan', 'Agarwal', 16, '4', '1', 'AabharanAgarwal@mzb.com', 'AabharanAgarwal@mydomain.com', '6467471751', '2017', '', '6467471751', 'Y'),
+('AabhasAgate2103988461', 'Aabhas', 'Agate', 17, '1', '3', 'AabhasAgate@wbu.com', 'AabhasAgate@mydomain.com', '2103988461', '2018', '', '2103988461', 'Y'),
+('AabhassAggarwal1299381499', 'Aabhadua', 'Aggarwal', 18, '4', '6', 'AabhassAggarwal@jjz.com', 'AabhassAggarwal@mydomain.com', '1299381499', '2019', '', '1299381499', 'Y'),
+('AabhavannanAgrawal1233971509', 'Aabhavannan', 'Agrawal', 19, '1', '4', 'AabhavannanAgrawal@teg.co', 'AabhavannanAgrawal@mydomain.com', '1233971509', '2014', '', '1233971509', 'Y'),
+('AabheerAhluwalia5740600229', 'Aabheer', 'Ahluwalia', 20, '7', '1', 'AabheerAhluwalia@ahx.com', 'AabheerAhluwalia@mydomain.com', '5740600229', '2019', '', '5740600229', 'Y'),
+('AabherAhuja4829971174', 'Aabher', 'Ahuja', 21, '2', '1', 'AabherAhuja@czp.com', 'AabherAhuja@mydomain.com', '4829971174', '2018', '', '4829971174', 'Y'),
+('AacharappanAmble2655320758', 'Aacharappan', 'Amble', 22, '7', '5', 'AacharappanAmble@ltr.com', 'AacharappanAmble@mydomain.com', '2655320758', '2015', '', '2655320758', 'Y'),
+('AacharyaAnand1201548763', 'Aacharya', 'Anand', 23, '5', '5', 'AacharyaAnand@duj.com', 'AacharyaAnand@mydomain.com', '1201548763', '2018', '', '1201548763', 'Y'),
+('AachmanAndra5544423172', 'Aachman', 'Andra', 24, '9', '2', 'AachmanAndra@xtt.com', 'AachmanAndra@mydomain.com', '5544423172', '2014', '', '5544423172', 'Y'),
+('AachuthanAnne2364020462', 'Aachuthan', 'Anne', 25, '10', '2', 'AachuthanAnne@pog.com', 'AachuthanAnne@mydomain.com', '2364020462', '2018', '', '2364020462', 'Y'),
+('AadalarasanArora4293462099', 'Aadalarasan', 'Arora', 27, '10', '3', 'AadalarasanArora@tnp.com', 'AadalarasanArora@mydomain.com', '4293462099', '2016', '', '4293462099', 'Y'),
+('AadalarasuArya1263296970', 'Aadalarasu', 'Arya', 28, '5', '3', 'AadalarasuArya@aqi.com', 'AadalarasuArya@mydomain.com', '1263296970', '2019', '', '1263296970', 'Y'),
+('AadApte2005948474', 'Aad', 'Apte', 26, '5', '3', 'AadApte@nmr.com', 'AadApte@mydomain.com', '2005948474', '2015', '', '2005948474', 'Y'),
+('AadarshAtwal3642347592', 'Aadarsh', 'Atwal', 29, '4', '5', 'AadarshAtwal@aix.com', 'AadarshAtwal@mydomain.com', '3642347592', '2016', '', '3642347592', 'Y'),
+('AadavanAurora5300946917', 'Aadavan', 'Aurora', 30, '6', '4', 'AadavanAurora@awe.com', 'AadavanAurora@mydomain.com', '5300946917', '2019', '', '5300946917', 'Y'),
+('AadavanBabu6833836173', 'Aadavan', 'Babu', 31, '5', '6', 'AadavanBabu@jsx.com', 'AadavanBabu@mydomain.com', '6833836173', '2014', '', '6833836173', 'Y'),
+('AaddharBadal2355862007', 'Aaddhar', 'Badal', 32, '7', '6', 'AaddharBadal@sua.com', 'AaddharBadal@mydomain.com', '2355862007', '2015', '', '2355862007', 'Y'),
+('AadeepBadami6967636528', 'Aadeep', 'Badami', 33, '1', '2', 'AadeepBadami@rnf.com', 'AadeepBadami@mydomain.com', '6967636528', '2019', '', '6967636528', 'Y'),
+('AadeshBahl3212828130', 'Aadesh', 'Bahl', 34, '1', '6', 'AadeshBahl@eey.com', 'AadeshBahl@mydomain.com', '3212828130', '2014', '', '3212828130', 'Y'),
+('AadeshwarBahri2870840118', 'Aadeshwar', 'Bahri', 35, '9', '3', 'AadeshwarBahri@vqx.com', 'AadeshwarBahri@mydomain.com', '2870840118', '2017', '', '2870840118', 'Y'),
+('AadhanBail9873231318', 'Aadhan', 'Bail', 36, '12', '2', 'AadhanBail@irt.com', 'AadhanBail@mydomain.com', '9873231318', '2014', '', '9873231318', 'Y'),
+('AbhijitPai9196633047', 'Abhijit', 'Pai', 12, '8', '1', 'apai193@yahoo.co.in', 'AbhijitPai@mydomain.com', '', '0000-00-00', '0000-00-00', '9196633047', 'Y'),
+('AbhijitPai9663304791', 'Abhijit', 'Pai', 9, '3', '5', 'apai1993@yahoo.com', 'AbhijitPai@mydomain.com', '', '0000-00-00', '0000-00-00', '9663304791', 'Y'),
+('AdityaPai9663304792', 'Aditya', 'Pai', 10, '8', '1', 'adityapai@y7mail.com', 'AdityaPaimydomain.com', '', '0000-00-00', '0000-00-00', '9663304792', 'Y'),
+('ChorBhajia3322556688', 'Chor', 'Bhajia', 6, '2', '2', 'cbha@vkpsolutions.com', 'ChorBhajia@mydomain.com', '', '0000-00-00', '0000-00-00', '3322556688', 'Y'),
+('DaamodarBains6697460354', 'Daamodar', 'Bains', 37, '9', '3', 'DaamodarBains@ciy.com', 'DaamodarBains@mydomain.com', '6697460354', '2016', '', '6697460354', 'Y'),
+('DaarshikBajaj6252028601', 'Daarshik', 'Bajaj', 38, '9', '3', 'DaarshikBajaj@zif.com', 'DaarshikBajaj@mydomain.com', '6252028601', '2019', '', '6252028601', 'Y'),
+('DaarukBajwa9599498968', 'Daaruk', 'Bajwa', 39, '2', '4', 'DaarukBajwa@kia.com', 'DaarukBajwa@mydomain.com', '9599498968', '2017', '', '9599498968', 'Y'),
+('DaarunBakshi1759930847', 'Daarun', 'Bakshi', 40, '4', '3', 'DaarunBakshi@sst.com', 'DaarunBakshi@mydomain.com', '1759930847', '2014', '', '1759930847', 'Y'),
+('DaasuBal5564801148', 'Daasu', 'Bal', 41, '10', '5', 'DaasuBal@idq.com', 'DaasuBal@mydomain.com', '5564801148', '2015', '', '5564801148', 'Y'),
+('DabangBala7816307738', 'Dabang', 'Bala', 42, '5', '5', 'DabangBala@wqj.com', 'DabangBala@mydomain.com', '7816307738', '2015', '', '7816307738', 'Y'),
+('DabeetBala5632918737', 'Dabeet', 'Bala', 43, '1', '3', 'DabeetBala@qzu.com', 'DabeetBala@mydomain.com', '5632918737', '2016', '', '5632918737', 'Y'),
+('DabhitiBalakrishnan3415180208', 'Dabhiti', 'Balakrishnan', 44, '4', '4', 'DabhitiBalakrishnan@cpv.c', 'DabhitiBalakrishnan@mydomain.com', '3415180208', '2015', '', '3415180208', 'Y'),
+('DabnshuBalan5281612819', 'Dabnshu', 'Balan', 45, '9', '1', 'DabnshuBalan@kfz.com', 'DabnshuBalan@mydomain.com', '5281612819', '2017', '', '5281612819', 'Y'),
+('DadasahebBalasubramanian9396067830', 'Dadasaheb', 'Balasubramanian', 46, '12', '2', 'DadasahebBalasubramanian@', 'DadasahebBalasubramanian@mydomain.com', '9396067830', '2019', '', '9396067830', 'Y'),
+('DadhicaBalay2211072885', 'Dadhica', 'Balay', 47, '12', '2', 'DadhicaBalay@vmc.com', 'DadhicaBalay@mydomain.com', '2211072885', '2016', '', '2211072885', 'Y'),
+('DroopyStuppi15995611590', 'Droopy', 'Stuppi', 14, '9', '2', 'dstu@vkpsolutions.com', 'DroopiStuppi@mydomain.com', '', '0000-00-00', '0000-00-00', '15995611590', 'Y'),
+('FalorSofa1424344454', 'Falor', 'Sofa', 13, '9', '2', 'fsof@vkpsolutions.com', 'FalorSofa@mydomain.com', '', '0000-00-00', '0000-00-00', '1424344454', 'Y'),
+('fikkSicck1591591590', 'fikk', 'Sicck', 11, '8', '1', 'fs@fds.com', 'fikkSicck@mydomain.com', '', '0000-00-00', '0000-00-00', '1591591590', 'Y'),
+('IKoota9966338855', 'Piddi', 'Koota', 4, '5', '1', 'pikoo@vkpsolutions.com', 'PiddiKoota@mydomain.com', '', '', '', '9966338855', 'Y'),
+('IPoori1234567890', 'Joori', 'Poori', 7, '3', '5', 'jooripoori@asd.com', 'JooriPoori@mydomain.com', '', '2018', '2021', '1234567890', 'Y'),
+('KavyaPai9611907001', 'Kavya', 'Pai', 1, '1', '1', 'vkaapai@yahoo.com', 'KavyaPai@mydomain.com', '', '0000-00-00', '0000-00-00', '9611907001', 'Y'),
+('PramodDumbo3652365201', 'Pramod', 'Dumbo', 2, '5', '1', 'pdum@vkpsolutions.com', 'PramodDumbo@mydomain.com', '', '0000-00-00', '0000-00-00', '3652365201', 'Y'),
+('VarthaManishu6454342421', 'Vartha', 'Manishu', 3, '1', '2', 'vman@vkpsolutions.com', 'VarthaManishu@mydomain.com', '', '0000-00-00', '0000-00-00', '6454342421', 'Y'),
+('VBaltu8787878787', 'Faltu', 'Baltu', 8, '3', '5', 'falbal@wewe.com', 'FaltuBaltu@mydomain.com', '', '2017', '2022', '8787878787', 'Y'),
+('VIPanju4564564560', 'Ganju', 'Panju', 5, '2', '2', 'ganpan@vkpsolutions.com', 'GanjuPanju@mydomain.com', '', '', '', '4564564560', 'Y');
 
 -- --------------------------------------------------------
 
@@ -776,7 +902,7 @@ INSERT INTO `studentdetails` (`Id`, `firstName`, `lastName`, `rollNumber`, `clas
 --
 
 CREATE TABLE `subjects` (
-  `Id` int(11) NOT NULL,
+  `subjectId` int(11) NOT NULL,
   `Subject` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -784,7 +910,7 @@ CREATE TABLE `subjects` (
 -- Dumping data for table `subjects`
 --
 
-INSERT INTO `subjects` (`Id`, `Subject`) VALUES
+INSERT INTO `subjects` (`subjectId`, `Subject`) VALUES
 (8, 'Biology'),
 (7, 'Chemistry'),
 (12, 'Civics'),
@@ -807,49 +933,50 @@ INSERT INTO `subjects` (`Id`, `Subject`) VALUES
 --
 
 CREATE TABLE `teachers` (
-  `tid` int(11) NOT NULL,
-  `firstName` varchar(25) NOT NULL,
-  `middleName` varchar(25) DEFAULT NULL,
-  `lastName` varchar(25) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `systemEmail` varchar(50) NOT NULL,
-  `phoneMobile` varchar(50) NOT NULL
+  `teacherId` int(11) NOT NULL,
+  `tc_firstName` varchar(25) NOT NULL,
+  `tc_middleName` varchar(25) DEFAULT NULL,
+  `tc_lastName` varchar(25) NOT NULL,
+  `tc_Email` varchar(50) NOT NULL,
+  `tc_systemEmail` varchar(50) NOT NULL,
+  `tc_phoneNumber` varchar(50) NOT NULL,
+  `tc_joinYear` varchar(4) DEFAULT NULL,
+  `tc_leftYear` varchar(4) DEFAULT NULL,
+  `tc_visibility` set('Y','N') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `teachers`
 --
 
-INSERT INTO `teachers` (`tid`, `firstName`, `middleName`, `lastName`, `email`, `systemEmail`, `phoneMobile`) VALUES
-(1, 'Haradi', 'Keshav', 'Pai', 'hkeshavpai@gmail.com', 'HaradiKeshavPai@mydomain.com','+919611907001'),
-(2, 'Haradi', 'Aditya', 'Pai', 'adityapai@y7mail.com', 'HaradiAdityaPai@mydomain.com', '+917619118922/+46735147171'),
-(3, 'Haradi', 'Abhijit', 'Pai', 'apai1993@gmail.com', 'HaradiAbhijitPai@mydomain.com','+919663304791'),
-(4, 'Vinaya', 'Keshav', 'Pai', 'vinayakeshavpai@gmail.com', 'VinayaKeshavPai@mydomain.com','+919663304792'),
-(5, 'Kavya', 'Pai', 'T', 'kavyapai28@gmail.com', 'KavyaPaiT@mydomain.com','+916366856667'),
-(6, 'Vasanta', 'Sudhakar', 'Rao', 'vinayapai@hotmail.com', 'VasantaSudhakarRao@mydomain.com','+919611907001mamama'),
-(7, 'Anita', 'Sudhakar', 'Rao', 'vkaapai@yahoo.com', 'AnitaSudhakarRao@mydomain.com','+919611907001pachi');
+INSERT INTO `teachers` (`teacherId`, `tc_firstName`, `tc_middleName`, `tc_lastName`, `tc_Email`, `tc_systemEmail`, `tc_phoneNumber`, `tc_joinYear`, `tc_leftYear`, `tc_visibility`) VALUES
+(1, 'Haradi', 'Keshav', 'Pai', 'hkeshavpai@gmail.com', 'HaradiKeshavPai@mydomain.com', '+919611907001', NULL, NULL, 'Y'),
+(2, 'Haradi', 'Aditya', 'Pai', 'adityapai@y7mail.com', 'HaradiAdityaPai@mydomain.com', '+917619118922 +46735147171', NULL, NULL, 'Y'),
+(3, 'Haradi', 'Abhijit', 'Pai', 'apai1993@gmail.com', 'HaradiAbhijitPai@mydomain.com', '+919663304791', NULL, NULL, 'Y'),
+(4, 'Vinaya', 'Keshav', 'Pai', 'vinayakeshavpai@gmail.com', 'VinayaKeshavPai@mydomain.com', '+919663304792', NULL, NULL, 'Y'),
+(5, 'Kavya', 'Pai', 'T', 'kavyapai28@gmail.com', 'KavyaPaiT@mydomain.com', '+916366856667', NULL, NULL, 'Y'),
+(6, 'Vasanta', 'Sudhakar', 'Rao', 'vinayapai@hotmail.com', 'VasantaSudhakarRao@mydomain.com', '+919611907001 mamama', NULL, NULL, 'Y'),
+(7, 'Anita', 'Sudhakar', 'Rao', 'vkaapai@yahoo.com', 'AnitaSudhakarRao@mydomain.com', '+919611907001 pachi', NULL, NULL, 'Y'),
+(9, 'Ganda', 'Wala', 'Teacher', 'gwt@asdf.com', 'GandaWalaTeacher@mydomain.com', '9686084792', '', '', 'N');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tests`
+-- Table structure for table `todolist`
 --
 
-CREATE TABLE `tests` (
-  `Id` int(11) NOT NULL,
-  `questions` varchar(50) NOT NULL,
-  `classId` varchar(5) NOT NULL,
-  `subjectId` varchar(3) NOT NULL
+CREATE TABLE `todolist` (
+  `todoId` int(11) NOT NULL,
+  `todoText` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `tests`
+-- Dumping data for table `todolist`
 --
 
-INSERT INTO `tests` (`Id`, `questions`, `classId`, `subjectId`) VALUES
-(1, '2,3,4,5,6', '9', '5'),
-(2, '2,3,4,5,6,32', '9', '5'),
-(3, '1,7,8,9,10', '2', '4');
+INSERT INTO `todolist` (`todoId`, `todoText`) VALUES
+(12, 'Remind Class VI D about assignment'),
+(11, 'Set test paper for Class VB');
 
 -- --------------------------------------------------------
 
@@ -858,9 +985,9 @@ INSERT INTO `tests` (`Id`, `questions`, `classId`, `subjectId`) VALUES
 --
 
 CREATE TABLE `topics` (
-  `Id` int(11) NOT NULL,
-  `classId` varchar(4) NOT NULL,
-  `subjectId` varchar(50) NOT NULL,
+  `topicId` int(11) NOT NULL,
+  `topic_classId` varchar(4) NOT NULL,
+  `topic_subjectId` varchar(50) NOT NULL,
   `topicName` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -868,7 +995,7 @@ CREATE TABLE `topics` (
 -- Dumping data for table `topics`
 --
 
-INSERT INTO `topics` (`Id`, `classId`, `subjectId`, `topicName`) VALUES
+INSERT INTO `topics` (`topicId`, `topic_classId`, `topic_subjectId`, `topicName`) VALUES
 (1, '9', '6', 'Matter (Nat-n-Beh)'),
 (2, '9', '8', 'Org in Liv Wld'),
 (3, '9', '6', 'Mo\'n F\'ce and Wrk'),
@@ -879,47 +1006,71 @@ INSERT INTO `topics` (`Id`, `classId`, `subjectId`, `topicName`) VALUES
 (8, '9', '5', 'PeopleasResource'),
 (9, '1', '2', 'Classification'),
 (10, '8', '2', 'Nouns and Pronouns'),
-(11, '8', '2', 'Verbs');
+(11, '8', '2', 'Verbs'),
+(12, '3', '1', 'kukku'),
+(13, '3', '1', 'Shekhibaaz makkhi\r\n'),
+(14, '3', '1', 'Chand wali amma\r\n'),
+(15, '6', '5', 'Diversity'),
+(16, '6', '5', 'Diversity and Discrimination\r\n'),
+(17, '6', '5', 'Government\r\n'),
+(18, '7', '8', 'Nutrition in Plants\r\n'),
+(19, '7', '8', 'Nutrition in Animals\r\n'),
+(20, '7', '8', 'Fibre to Fabrics\r\n'),
+(21, '8', '9', 'How When and Where\r\n'),
+(22, '8', '9', 'From Trade to Territory\r\n'),
+(23, '8', '9', 'Ruling the Countryside\r\n');
 
 --
 -- Indexes for dumped tables
 --
 
 --
+-- Indexes for table `assessments`
+--
+ALTER TABLE `assessments`
+  ADD PRIMARY KEY (`assessment_Id`);
+
+--
+-- Indexes for table `assessment_questions`
+--
+ALTER TABLE `assessment_questions`
+  ADD UNIQUE KEY `Assessment_Id` (`assessment_Id`,`question_id`);
+
+--
 -- Indexes for table `classes`
 --
 ALTER TABLE `classes`
-  ADD PRIMARY KEY (`Id`),
+  ADD PRIMARY KEY (`classId`),
   ADD UNIQUE KEY `Class Number` (`classNumber`);
 
 --
 -- Indexes for table `classes_taught_by_teacher`
 --
 ALTER TABLE `classes_taught_by_teacher`
-  ADD PRIMARY KEY (`Id`),
-  ADD KEY `Class Number` (`classId`),
-  ADD KEY `Section` (`sectionId`),
-  ADD KEY `Teacher` (`teacherId`),
-  ADD KEY `Subject` (`subjectId`);
+  ADD PRIMARY KEY (`cttId`),
+  ADD UNIQUE KEY `ctt_teacherId` (`ctt_teacherId`,`ctt_classId`,`ctt_sectionId`,`ctt_subjectId`),
+  ADD KEY `Class Number` (`ctt_classId`),
+  ADD KEY `Section` (`ctt_sectionId`),
+  ADD KEY `Subject` (`ctt_subjectId`);
 
 --
--- Indexes for table `classes_taught_by_teachers`
+-- Indexes for table `deploymentlog`
 --
-ALTER TABLE `classes_taught_by_teachers`
-  ADD PRIMARY KEY (`Id`),
-  ADD UNIQUE KEY `classNumber` (`classNumber`,`sectionAlpha`);
+ALTER TABLE `deploymentlog`
+  ADD PRIMARY KEY (`depId`),
+  ADD UNIQUE KEY `Dedupe` (`dep_assessmentId`,`depType`,`schStartDate`) USING BTREE;
 
 --
 -- Indexes for table `questionbank`
 --
 ALTER TABLE `questionbank`
-  ADD PRIMARY KEY (`Id`);
+  ADD PRIMARY KEY (`qId`);
 
 --
 -- Indexes for table `questiontype`
 --
 ALTER TABLE `questiontype`
-  ADD PRIMARY KEY (`Id`),
+  ADD PRIMARY KEY (`qtId`),
   ADD UNIQUE KEY `unitName` (`typeName`),
   ADD UNIQUE KEY `typeName` (`typeName`);
 
@@ -927,106 +1078,113 @@ ALTER TABLE `questiontype`
 -- Indexes for table `sections`
 --
 ALTER TABLE `sections`
-  ADD PRIMARY KEY (`id`),
+  ADD PRIMARY KEY (`sectionId`),
   ADD UNIQUE KEY `Sections` (`Sections`);
 
 --
 -- Indexes for table `studentdetails`
 --
 ALTER TABLE `studentdetails`
-  ADD PRIMARY KEY (`Id`),
-  ADD UNIQUE KEY `firstName_2` (`firstName`,`lastName`,`phoneMobile`),
-  ADD UNIQUE KEY `firstName` (`firstName`,`lastName`,`email`,`phoneMobile`);
+  ADD PRIMARY KEY (`sId`),
+  ADD UNIQUE KEY `firstName` (`st_firstName`,`st_lastName`,`st_Email`,`st_phoneMobile`),
+  ADD KEY `classNumber` (`st_classId`),
+  ADD KEY `sectionAlpha` (`st_sectionId`);
 
 --
 -- Indexes for table `subjects`
 --
 ALTER TABLE `subjects`
-  ADD PRIMARY KEY (`Id`),
+  ADD PRIMARY KEY (`subjectId`),
   ADD UNIQUE KEY `Subjects` (`Subject`);
 
 --
 -- Indexes for table `teachers`
 --
 ALTER TABLE `teachers`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `Email` (`Email`);
+  ADD PRIMARY KEY (`teacherId`);
 
 --
--- Indexes for table `tests`
+-- Indexes for table `todolist`
 --
-ALTER TABLE `tests`
-  ADD PRIMARY KEY (`Id`);
+ALTER TABLE `todolist`
+  ADD PRIMARY KEY (`todoId`),
+  ADD UNIQUE KEY `todoText` (`todoText`);
 
 --
 -- Indexes for table `topics`
 --
 ALTER TABLE `topics`
-  ADD PRIMARY KEY (`Id`);
+  ADD PRIMARY KEY (`topicId`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
+-- AUTO_INCREMENT for table `assessments`
+--
+ALTER TABLE `assessments`
+  MODIFY `assessment_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT for table `classes`
 --
 ALTER TABLE `classes`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `classId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `classes_taught_by_teacher`
 --
 ALTER TABLE `classes_taught_by_teacher`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `cttId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
--- AUTO_INCREMENT for table `classes_taught_by_teachers`
+-- AUTO_INCREMENT for table `deploymentlog`
 --
-ALTER TABLE `classes_taught_by_teachers`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+ALTER TABLE `deploymentlog`
+  MODIFY `depId` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Auto generated unique id for the deployment', AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `questionbank`
 --
 ALTER TABLE `questionbank`
-  MODIFY `Id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=547;
+  MODIFY `qId` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=547;
 
 --
 -- AUTO_INCREMENT for table `questiontype`
 --
 ALTER TABLE `questiontype`
-  MODIFY `Id` smallint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `qtId` smallint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `sections`
 --
 ALTER TABLE `sections`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `sectionId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `subjects`
 --
 ALTER TABLE `subjects`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `subjectId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `teachers`
 --
 ALTER TABLE `teachers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `teacherId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT for table `tests`
+-- AUTO_INCREMENT for table `todolist`
 --
-ALTER TABLE `tests`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `todolist`
+  MODIFY `todoId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `topics`
 --
 ALTER TABLE `topics`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `topicId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- Constraints for dumped tables
@@ -1036,10 +1194,10 @@ ALTER TABLE `topics`
 -- Constraints for table `classes_taught_by_teacher`
 --
 ALTER TABLE `classes_taught_by_teacher`
-  ADD CONSTRAINT `Class Number` FOREIGN KEY (`classId`) REFERENCES `classes` (`id`),
-  ADD CONSTRAINT `Section` FOREIGN KEY (`sectionId`) REFERENCES `sections` (`id`),
-  ADD CONSTRAINT `Subject` FOREIGN KEY (`subjectId`) REFERENCES `subjects` (`id`),
-  ADD CONSTRAINT `Teacher` FOREIGN KEY (`teacherId`) REFERENCES `teachers` (`id`);
+  ADD CONSTRAINT `Class Number` FOREIGN KEY (`ctt_classId`) REFERENCES `classes` (`classId`),
+  ADD CONSTRAINT `Section` FOREIGN KEY (`ctt_sectionId`) REFERENCES `sections` (`sectionId`),
+  ADD CONSTRAINT `Subject` FOREIGN KEY (`ctt_subjectId`) REFERENCES `subjects` (`subjectId`),
+  ADD CONSTRAINT `Teacher` FOREIGN KEY (`ctt_teacherId`) REFERENCES `teachers` (`teacherId`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

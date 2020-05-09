@@ -34,7 +34,7 @@
 						<a data-toggle="tab" href="#savedTests">All Saved Tests</a>
 					</li>
 				  <li>
-						<a data-toggle="tab" href="#previousTests">Previously Administered Tests</a>
+						<a data-toggle="tab" href="#previousTests">Previously Completed Tests</a>
 					</li>
 				</ul>
 				<div class="tab-content">
@@ -102,7 +102,7 @@
 						<div class="panel-title">
 							<h4>Previous Test</h4>
 							<p>These are tests previously given at least once</p>
-							<?php include $_SERVER['DOCUMENT_ROOT']."./Activity/administeredTests.php";  ?>
+							<?php include $_SERVER['DOCUMENT_ROOT']."./Activity/completedTests.php";  ?>
 						</div>
 					</div>
 

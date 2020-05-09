@@ -4,7 +4,7 @@
 	include "../basecode-create_connection.php";
 	$curdate = date("Y-m-d");
 	$slno = 0;
-	$query = $mysqli->query("SELECT * FROM deploymentlog, assessments WHERE deploymentlog.depType = 'T' AND  deploymentlog.deploySuccess = 0 AND assessments.assessment_Id = deploymentlog.dep_assessmentId");
+	$query = $mysqli->query("SELECT * FROM deploymentlog, assessments WHERE deploymentlog.depType = 'T' AND  deploymentlog.deploySuccess = 0 AND assessments.assessment_Id = deploymentlog.assessmentId");
 	$rowcount=mysqli_num_rows($query);
   if ($rowcount>1) {
     $counts = $pageHeading." have";
@@ -12,7 +12,7 @@
   else {
     $counts = $pageHeadSingular." has";
   }
-	    echo "<h6 class='topbanner'>Currently $rowcount $counts never been administered. <span class='small' style='float: right; color: White;'> As on $curdate</span></h6>" ;
+	    echo "<h6 class='topbanner'>$rowcount $counts never been administered. <span class='small' style='float: right; color: White;'> As on $curdate</span></h6>" ;
 
 			if ($rowcount > 0) {
 				//table tag is in the parent page already
@@ -46,7 +46,7 @@
                 					echo "<div style='min-height: 300px; overflow: scroll; margin bottom: 0px;'>";
                     			  $qno = 0;
                     				while ($qrow=$qquery->fetch_assoc()) {
-															$classId = $qrow['qb_classId'];
+															$classId = $qrow['classId'];
                     					$qno = $qno + 1;
 
                     					echo $qno."     <span>".$qrow['question']."</span>";
@@ -107,7 +107,7 @@
 															$type = $pageHeading;
 
 															echo "Scheduled but not deployed <ol style='list-style-type: none'>
-																			<li>To Sec ".$row['dep_sectionId']." on ".$row['schStartDate']." as  ".$type."</li>";
+																			<li>To Sec ".$row['sectionId']." on ".$row['schStartDate']." as  ".$type."</li>";
 
 															echo "</ol>";
 													echo "</div>

@@ -9,8 +9,8 @@ function addClassNumbersToQueryString( $queryString, $selectedClassNumbers ) {
           if($x > 0) {
             $queryString = $queryString."OR ";  //The OR needs to be added to the statement only if there are more than 1 selected entries
           }
-          $queryString = $queryString."qb_classId = '".$selectedClassNumbers[$x]."' ";  //Adding of the class number is common to all statements, and so this will always get executed.
-          // $queryString = $queryString."qb_classId = '".$selectedClassNumbers[$x]."' ";
+          $queryString = $queryString."classId = '".$selectedClassNumbers[$x]."' ";  //Adding of the class number is common to all statements, and so this will always get executed.
+          // $queryString = $queryString."classId = '".$selectedClassNumbers[$x]."' ";
   }
   $queryString = $queryString.") ";
   return $queryString;
@@ -26,7 +26,7 @@ function addSubjectNamesToQueryString( $queryString, $classNumberExists, $select
       $queryString = $queryString."OR ";  //The OR needs to be added to the statement only if there are more than 1 selected entries
     }
     // $queryString = $queryString."subjects.Subject = '".$selectedSubjectNames[$x]."' ";  //Adding of the class number is common to all statements, and so this will always get executed.
-    $queryString = $queryString."qb_subjectId = '".$selectedSubjectNames[$x]."' ";
+    $queryString = $queryString."subjectId = '".$selectedSubjectNames[$x]."' ";
   }
   $queryString = $queryString.") ";
   // echo $queryString;
@@ -38,7 +38,7 @@ function addSubjectNamesToQueryString( $queryString, $classNumberExists, $select
 //     // if ( $classNumberExists || $subjectNameExists) {
 //       $queryString = $queryString."AND ";
 //     // }
-//     $queryString = $queryString."topics.Topic_Name = '".$selectedTopicName."' ";
+//     $queryString = $queryString."topics.Name = '".$selectedTopicName."' ";
 //     // $queryString = $queryString."<br>";
 //   }
 //   return $queryString;

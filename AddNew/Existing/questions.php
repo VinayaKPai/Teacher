@@ -60,8 +60,8 @@ if ($selectedClassNumbers || $selectedSubjectNames) {
           //   $queryString = addTypeNameToQueryString( $queryString, isset($arrayPOST['classNumber']), isset($arrayPOST['subjectName']), isset($arrayPOST['topicName']), $selectedTypeName );
           // }
 
-// $queryString = $queryString." AND classes.classId = questionbank.qb_classId AND subjects.subjectId = questionbank.qb_subjectId ";
-$queryString = $queryString." AND classes.classId = questionbank.qb_classId AND subjects.subjectId = questionbank.qb_subjectId";
+// $queryString = $queryString." AND classes.classId = questionbank.classId AND subjects.subjectId = questionbank.subjectId ";
+$queryString = $queryString." AND classes.classId = questionbank.classId AND subjects.subjectId = questionbank.subjectId";
         // echo $queryString;
         $queryResult = $mysqli->query($queryString);  //use the queryString built above
         // if ($_POST){print_r($queryResult);}

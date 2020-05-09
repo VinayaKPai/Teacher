@@ -1,18 +1,24 @@
 <?php
 	include "../basecode-create_connection.php";
-
+//A new student will have entries in two tables - the users table and the studentdetails table.
+//First create the user in users tables
+//Then query the users table to get the userId
+//Then insert into the student details table the remaining details
 
 		$firstName = $_POST["firstName"];
 		$firstNameSafe = $mysqli->real_escape_string($firstName);
 
+		$middleName = $_POST["middleName"];
+		$lastNameSafe = $mysqli->real_escape_string($middleName);
+
 		$lastName = $_POST["lastName"];
 		$lastNameSafe = $mysqli->real_escape_string($lastName);
 
-		$classNumber = $_POST["classNumber"];
-		$classNumberSafe = $mysqli->real_escape_string($classNumber);
+		$classId = $_POST["classId"];
+		$classIdSafe = $mysqli->real_escape_string($classId);
 
-		$sectionAlpha = $_POST["sectionAlpha"];
-		$sectionAlphaSafe = $mysqli->real_escape_string($sectionAlpha);
+		$sectionId = $_POST["sectionId"];
+		$sectionIdSafe = $mysqli->real_escape_string($sectionId);
 
 		$email = $_POST["email"];
 		$emailSafe = $mysqli->real_escape_string($email);
@@ -28,19 +34,14 @@
 
 		$systemEmail = $firstNameSafe.$lastNameSafe."@mydomain.com" ;
 
-		$newId = $classNumberSafe.$lastName.$phoneMobileSafe;
-		$query = $mysqli->query("SELECT * FROM studentdetails");
+		$role = "S";
 
-			if ($query) {
-				$rowcount=mysqli_num_rows($query);
-				//echo "Currently ".$rowcount." students<br />";
-			}
 		// prepare and bind
 
-			$stmt = $mysqli->prepare("INSERT INTO studentdetails (Id, firstName, lastName, joinYear, endYear, email, systemEmail, phoneMobile) VALUES (?,?, ?, ?, ?, ?, ?,?)");
-			$stmt->bind_param("ssssssss", $newId, $firstNameSafe, $lastNameSafe, $joinYearSafe, $endYearSafe, $emailSafe, $systemEmail, $phoneMobileSafe);
+			$stmt = $mysqli->prepare("INSERT INTO users (role, firstName, lastName, joinYear, endYear, email, systemEmail, phoneMobile, pw) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?)");
+			$stmt->bind_param("sssssssss", $role, $firstNameSafe, $lastNameSafe, $joinYearSafe, $endYearSafe, $emailSafe, $systemEmail, $phoneMobileSafe, $phoneMobileSafe);
 
-			//$stmt->execute();
+			// $stmt->execute();
 			if (!$stmt->execute()) {
 				if (($stmt->errno) == '1062') {
 					$message = "Could not add the Class-Section as ".$firstNameSafe." ".$lastNameSafe." and ".$email." and ".$phoneMobile." already exists in the database!";
@@ -53,8 +54,18 @@
 			else {
 				echo $firstNameSafe . $lastNameSafe . "added to setup";
 			}
+			$stmt->close();
 
-		$stmt->close();
+
+			$last = $mysqli->query("SELECT last_insert_id() FROM users");
+			$lastId = $last->fetch_assoc();
+			$stmts = $mysqli->prepare("INSERT INTO studentdetails (userId, classId, sectionId) VALUES (?,?, ?)");
+			$stmts->bind_param("iii", $lastId, $classIdSafe, $sectionIdSafe);
+
+			if (!$stmts->execute()) {
+				echo "Cannot add student details. Contact administrator with this message.";
+			}
+echo $stmts->errno;
 		$mysqli->close();
-	{header('Location: ../SetUpPages/newStudents.php');}
+	// {header('Location: ../SetUpPages/newStudents.php');}
 ?>

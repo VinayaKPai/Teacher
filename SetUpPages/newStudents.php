@@ -1,6 +1,6 @@
 <?php
 	//include "basecode-create_connection.php";
-	include "../basecode-create_connection.php";
+	include $_SERVER['DOCUMENT_ROOT']."/basecode-create_connection.php";
 
 	$pageHeading = "Set Up New Students";
 	$pageCode = "setup";
@@ -22,9 +22,6 @@
 			<script src="../../Scripts/js/ajaxCallTeachers.js"></script>
 
 			<script type="text/javascript">
-				// var addMultiple = [];
-				// var cntr = 0;
-				// var satr = 0;
 				function modalclick(e) {
 
 					document.getElementById("studentName").innerText = e.innerText;
@@ -33,10 +30,8 @@
 					document.getElementById("studentId").value = e.id;
 					// document.getElementById("classNumber").value = "";
 					// document.getElementById("sectionAlpha").value = "";
-					ajaxCallStudents(e.id,e.innerText);
-				}
-				function clickalert(c) {
-					alert (c.id);
+
+					ajaxCallStudents(e.id);
 				}
 
 				function filterstudents (s) {
@@ -60,6 +55,15 @@
 					alert (e.id);
 					document.getElementById("confirmDiv").style.display = "none";
 					document.getElementById("editDiv").style.display = "block";
+				}
+				function exploreclick(b) {
+					$('#studentModal').modal('hide');
+					// alert (b.id);
+
+					document.getElementById("exploreItem").innerText = document.getElementById("modalSpan").innerText;
+					document.getElementById("expClass").innerText = b.parentNode.parentNode.children[0].innerText+" - ";
+					document.getElementById("expSection").innerText = b.parentNode.parentNode.children[1].innerText+ " - "+ b.parentNode.parentNode.children[2].innerText;
+					ajaxCallExploreItem(b.id);
 				}
 			</script>
 		</head>
@@ -108,6 +112,8 @@
 							<label for="middleName">Middle Name</span></label> <input id="middleName" name="middleName" class="form-control" />
 							<label for="lastName">Last Name<span class="glyphicon glyphicon-asterisk" style="color: Red"></span></label> <input id="lastName" name="lastName" class="form-control" required />
 							<label for="phoneMobile">Mobile<span class="glyphicon glyphicon-asterisk" style="color: Red"></span></label> <input id="phoneMobile" name="phoneMobile" class="form-control" onkeyup="setTempPW(this)"/>
+							<label for="classId">Class / Std <small>(Use only numbers 1-12)</small></span></label> <input id="classId" name="classId" class="form-control" />
+							<label for="sectionId">Section <small>(use only numbers - 1 for A, 2 for B...)</small></span></label> <input id="sectionId" name="sectionId" class="form-control" />
 							<script>
 								function setTempPW(e) {
 									var ei = e.value;
@@ -145,16 +151,18 @@
 					<hr>
 
 				</div>
-
+<input id="studentId" name="studentId" hidden> </input>
 				<div class="col-sm-9 centered" style="border-left: 1px solid Grey;">
 					<h5>Click on the student's name to see details</h5>
+					<table id="existTable" style="width: 100%; padding: 5px; border-spacing: 2px; border-collapse: separate; align: 'center';">
 					<?php include "../AddNew/Existing/students.php"; ?>
-
+				</table>
 
 					<div id="status"></div>
 				</div>
 				<hr>
 		</div>
+		<div id="bottom"><?php include "../Components/bottom.php"; ?></div>
 		</div>
 
 
@@ -162,22 +170,25 @@
 		<div id="studentModal" class="modal modal-xl fade" role="dialog" style="width: 100%;">
 		  <div class="modal-dialog">
 		    <!-- Modal content-->
-				    <div class="modal-content" style="background: var(--BodGradtop)">
+				    <div class="modal-content">
 				      <div class="modal-header">
-				        <button type="button" class="close" data-dismiss="modal" onclick="resetModal()">&times;</button>
+				        <button type="button" class="close" data-dismiss="modal">&times;</button>
 								<!-- need to use reset() but how? -->
-				        <h4 class="modal-title centered">ADD or Change Student Details <span  id="studentName"></span></h4>
+				        <h4 class="modal-title" style="text-align: center;">
+									<span  id="studentName"></span>
+								</h4>
 				      </div>
 				      <div class="modal-body">
 						  <div class="row">
 								<div class="col-sm-12" style="border: 1px solid black;">
+									<h4 class="centered"> Studies in : <span id="modalSpan"></span></h4>
+								  <hr />
 									<div id="ajaxRes">
 								  <hr />
 										<?php
 											include "../Scripts/php/singleStudentDetails.php";
 										?>
-										<input id="studentId" name="studentId" hidden> </input>
-								  </div>
+									</div>
 
 							  </div>
 
@@ -191,6 +202,5 @@
 					</div>
 		  </div>
 
-		<div id="bottom"><?php include "../Components/bottom.php"; ?></div>
 	</body>
 </html>

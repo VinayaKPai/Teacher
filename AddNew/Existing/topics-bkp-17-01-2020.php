@@ -6,7 +6,7 @@ echo "<div>";
 $rwcnt = 0;
 
 
-$query = $mysqli->query("SELECT * FROM topics ORDER BY `topic_classId`");
+$query = $mysqli->query("SELECT * FROM topics ORDER BY `classId`");
 
 			if ($query) {
 				$rowcount=mysqli_num_rows($query);
@@ -24,12 +24,12 @@ $query = $mysqli->query("SELECT * FROM topics ORDER BY `topic_classId`");
 				while ($row = $query->fetch_assoc())  {
 					$rwcnt = $rwcnt+1;
 
-					$classNum = $row['topic_classId'];
+					$classNum = $row['classId'];
 					$clnum = $mysqli->query("SELECT `classNumber` FROM classes WHERE `classId` = $classNum LIMIT 1");
 					$clrow = $clnum->fetch_assoc();
 					$cn = $clrow['classNumber'];
 
-					$subjectName = $row['topic_subjectId'];
+					$subjectName = $row['subjectId'];
 					$subn = $mysqli->query("SELECT `Subject` FROM subjects WHERE `subjectId` = $subjectName LIMIT 1");
 					$srow = $subn->fetch_assoc();
 					$sb = $srow['Subject'];

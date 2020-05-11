@@ -26,12 +26,12 @@
 			<h3 class="centered"><?php include "../Components/top.php"; ?></h3>
 			<hr>
 			<div>
-		    <div>
+		    <!-- <div>
 					<h5  class="panel-title" style="background-color: #C5B2B3;">
         		<a data-toggle="collapse" href="#collapse1">Instructions<span class="glyphicon glyphicon-plus-sign" style="float: right; color: Red"></span></a>
 					</h5>
-				</div>
-				<div id="collapse1" class="panel-collapse collapse">
+				</div> -->
+				<!-- <div id="collapse1" class="panel-collapse collapse">
 					<div class="col-sm-6" style="font-size: x-small;">
 						<h7 style="font-weight: bold;">Add a Single record</h7>
 						<div style="margin-top: 5px;">
@@ -52,13 +52,15 @@
 							<li>Click on ADD ALL to complete the process of inserting these records</li>
 						</div>
 					</div>
-				</div>
+				</div> -->
+<?php include $_SERVER['DOCUMENT_ROOT']."/Components/instructions.html" ; ?>
+
 			</div>
 
 
 			<div>
 
-				<div class="col-sm-9" style="padding: 10px;">
+				<div class="col-sm-3" style="padding: 10px;">
 					<h4 style="color: Green; background-color: LightGrey;">To Add: Select Class Section and Subject from the dropdowns below and click submit.</h4>
 					<hr>
 					<hr>
@@ -74,9 +76,7 @@
 						<div id="ajaxRes" class="col-sm-2">
 
 						</div>
-						<div id="remBtn" class="col-sm-5">
 
-						</div>
 						<div class="col-sm-5">
 							<div id="recsInQ" style="color: blue; font-weight: bold;">
 							</div>
@@ -87,7 +87,8 @@
 				</div>
 				</div>
 
-				<div class="col-sm-3 centered" style="border-left: 1px solid Grey;">
+				<div class="col-sm-9 centered" style="border-left: 1px solid Grey;">
+					<?php include $_SERVER['DOCUMENT_ROOT']."/Components/teacherDropDown.php" ; ?>
 					<?php include "../AddNew/Existing/subjects.php"; ?>
 
 

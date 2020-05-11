@@ -12,44 +12,49 @@
 	echo "<div>";
 
 	$slno = 0;
-	$query = $mysqli->query("SELECT * FROM classes_taught_by_teacher, classes, sections WHERE classes.classId = classes_taught_by_teacher.classId AND sections.sectionId = classes_taught_by_teacher.sectionId ORDER BY classes.classId");
-
+  // $num = 0;
+	$query = $mysqli->query("SELECT users.userId, users.firstName, users.middleName, users.lastName, classes.classNumber, sections.Sections, subjects.Subject
+            FROM users, classes_taught_by_teacher, classes, sections, subjects
+            WHERE users.userId = classes_taught_by_teacher.userId AND classes.classId = classes_taught_by_teacher.classId AND sections.sectionId = classes_taught_by_teacher.sectionId AND classes_taught_by_teacher.subjectId = subjects.subjectId ORDER BY classes.classId ASC, sections.Sections ASC,  subjects.Subject ASC ");
 				if ($query) {
 					$rowcount=mysqli_num_rows($query);
           if ($rowcount > 0) {
-						$cls = "'color: Green;'";
+						$cls = "'color: Green; background-color: LightGrey;'";
 					}
-					else { $cls = "'color: Red;'";}
+					else { $cls = "'color: Red; background-color: LightGrey;'";}
 				}
-				echo "<h4 style='color: Green; background-color: LightGrey;'>Currently $rowcount classes</h4>" ;
+				echo "<h4 style=$cls>Currently $rowcount classes</h4>" ;
 
 				if ($rowcount > 0) {
-          echo "<tr><th>S. No.</th><th>Class</th><th>Section</th><th>Action</th></tr>";
 					while ($row = $query->fetch_assoc())  {
-						{
-              $rescn = strip_tags($row['classId']);
-              $ressa = $row['sectionId'];
-						  $slno++;
-              $cn = $rescn;
-              $sa = $ressa;
+
+            // echo "<tr title=".($row['firstName'])." ".$row['middleName']." ".$row['lastName']."><td colspan=5 style='background-color: #fffff9;'>Teacher: <a href='#' style='color: #009;'>".($row['firstName'])." ".$row['middleName']." ".$row['lastName']."</a></td></tr>";
 
 
-						  $remIdDB = $rescn."-".$ressa;
+                      $rescn = strip_tags($row['classNumber']);
+                      $ressa = $row['Sections'];
+        						  $slno++;
+                      $cn = $rescn;
+                      $sa = $ressa;
 
-            //  $paras = $cn.",".$sa;
-              $url = "../../RemoveRecords/RemoveClass.php?cn=".$rescn."&sa=".$ressa;
-						  echo "<tr>
-                      <td>".$slno."</td>
-                      <td><a href='#' style='color: #fff;'>".($row['classNumber'])."</a></td>
-                      <td><a href='#' style='color: #fff;'>".($row['Sections'])."</a></td>
-                      <td title='Delete $cn $sa from Database'>
-                        <a id=$remIdDB name=$remIdDB  href='$url'><span class='glyphicon glyphicon-trash' style='background-color: Red; color: White; padding: 4px;'></span></a>
-                      </td>
-                    </tr>";
+        						  $remIdDB = $rescn."-".$ressa;
+
+                    //  $paras = $cn.",".$sa;
+                      $url = "../../RemoveRecords/RemoveClass.php?cn=".$rescn."&sa=".$ressa;
+        						  echo "<tr id=trname".$row['userId']." title=".$row['firstName'].$row['middleName'].$row['lastName'].">
+                              <td>".$slno."</td>
+                              <td>".$row['firstName']." ".$row['middleName']." ".$row['lastName']."</td>
+
+                              <td><a href='#' style='color: #fff;'>".$row['classNumber']."</a>-<a href='#' style='color: #fff;'>".$row['Sections']."</a></td>
+                              <td><a href='#' style='color: #fff;'>".($row['Subject'])."</a></td>
+                              <td title='Delete $cn $sa from Database'>
+                                <a id=$remIdDB name=$remIdDB  href='$url'><span class='glyphicon glyphicon-trash' style='background-color: Red; color: White; padding: 4px;'></span></a>
+                              </td>
+                            </tr>";
 
 						}
 					}
-				}
+
 			if(!$query) {
 					echo "Looks like your set up has not been started. Please add the classes and sections you are teaching to the database, so that you can get the benefit of all the features of the App";
 				}

@@ -67,20 +67,34 @@
 				</div>
 			</div>
 			<div>
-				<div class="col-sm-9 centered" style="padding: 10px;">
+				<div class="col-sm-3 centered" style="padding: 10px;">
 					<h4 style="color: Green; background-color: LightGrey;">To Add: Select Class and Section from the dropdowns below and click submit.</h4>
 					<hr>
 					<form name="newClassForm" action="../AddNew/addnewclass.php" method="post">
-						<div class="col-sm-4">
+						<div>
+							<label for='teacherName'>Teacher   <select name='teacherName' id='teacherName'><option></option>
+							<?php
+									$displayType = "dropdown";
+									include $_SERVER['DOCUMENT_ROOT']."/Components/teacherDropDown.php";
+							?>
+						</select></label>
+						</div>
+						<div>
 							<?php
 									$displayType = "dropdown";
 									include $_SERVER['DOCUMENT_ROOT']."/Components/classNumberDropDown.php";
 							?>
 						</div>
-						<div class="col-sm-4">
+						<div>
 							<?php
 									$displayType = "dropdown";
 									include $_SERVER['DOCUMENT_ROOT']."/Components/sectionAlphaDropDown.php";
+							?>
+						</div>
+						<div>
+							<?php
+									$displayType = "dropdown";
+									include $_SERVER['DOCUMENT_ROOT']."/Components/subjectDropDown.php";
 							?>
 						</div>
 						<!-- <input type="button" id="chkRec" value="CHECK" onclick="ajaxChkClassFunction()"/>-->
@@ -92,9 +106,7 @@
 						<div id="ajaxRes" class="col-sm-2">
 
 						</div>
-						<div id="remBtn" class="col-sm-5">
 
-						</div>
 						<div class="col-sm-5">
 							<div id="recsInQ" style="color: blue; font-weight: bold;">
 							</div>
@@ -104,7 +116,39 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-3 centered" style="border-left: 1px solid Grey;">
+				<div class="col-sm-9 centered" style="border-left: 1px solid Grey;">
+						<h6>Filter By: </h6>
+						<div style="display: flex; justify-content: center;">
+							<label for='teacherNameFilter'>Teacher   <select name='teacherNameFilter' id='teacherNameFilter' onchange="filterByTeacher(this)"><option></option>
+									<?php include $_SERVER['DOCUMENT_ROOT']."/Components/teacherDropDown.php" ; ?>
+								</select>
+							</label>
+			<script>
+				function filterByTeacher(e) {
+					alert (e.selectedIndex);
+					var chktr = "trname"+e.selectedIndex;
+					var trarray = document.getElementsByTagName("tr");
+					for (i=0;i<trarray.length;i++) {
+						// document.getElementsByTagName("tr").style.display="table-row";
+						if (trarray[i].id!=chktr) {
+							trarray[i].style.display = "none";
+						}
+						else {
+							trarray[i].style.display = "table-row";
+						}
+					}
+				}
+				function clearFilters() {
+					var trs = document.getElementsByTagName("tr");
+					for (d=0;d<trs.length;d++) {
+						trs[d].style.display="table-row";
+					}
+				}
+			</script>
+							Or: <?php include $_SERVER['DOCUMENT_ROOT']."/Components/classNumberDropDown.php" ; ?>
+							OR: <?php include $_SERVER['DOCUMENT_ROOT']."/Components/subjectDropDown.php" ; ?>
+							<button class="btn btn-default btn-small" onclick=clearFilters()>Clear Filters</button>
+						</div>
 						<?php include $_SERVER['DOCUMENT_ROOT']."/AddNew/Existing/classes_taught_by_teachers.php"; ?>
 
 

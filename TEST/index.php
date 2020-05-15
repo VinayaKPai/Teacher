@@ -8,30 +8,48 @@
       include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/allQueries.php";
       include $_SERVER['DOCUMENT_ROOT']."/basecode-create_connection.php";
       $pageHeading = "Test Page";
+      $a = "A";
     ?>
   </head>
   <body class="body">
     <?php echo $datetime; ?>
     <?php include $_SERVER['DOCUMENT_ROOT']."/Components/top.php"; ?>
-    <h4 class="topbanner">First TEST query = Assignments, ongoing, success 1</h4>
+    <a href="../../SetUpPages/newQuestions.php">
+      <h4 class="btn btn-block topbanner">Create A New Assessment
+        <small style="padding: 10px; color: White;">This will take you to the question bank</small>
+      </h4>
+      Note: This will only create an assessment. To schedule a deployment, you'll need to come back here and deploy it.
+    </a>
+    <!-- <h4 class="topbanner">First TEST query = Assignments, undeployed</h4> -->
     <div class="container">
       <?php
-        $a = "A";
-        $b = " < CURDATE()";
-        $c = " > CURDATE()";
-        $d = "1";
-        activity($a,$b,$c,$d,$mysqli);
+        // $a = "A";
+        $b = "undeployed";
+        activity($a,$b,$mysqli);
       ?>
     </div>
-    <h4 class="topbanner">Second TEST query = Tests, no dates, success 0</h4>
+    <!-- <h4 class="topbanner">Second TEST query = Assignments, ongoing</h4> -->
     <div class="container">
-    <?php
-      $a = "T";
-      $b = "";
-      $c = "";
-      $d = "0";
-      activity($a,$b,$c,$d,$mysqli);
-    ?>
-  </div>
+      <?php
+      // $a = "A";
+        $b = "ongoing";
+        activity($a,$b,$mysqli);
+      ?>
+    </div>
+    <!-- <h4 class="topbanner">Second TEST query = Assignments, completed</h4> -->
+    <div class="container">
+      <?php
+        // $a = "A";
+        $b = "completed";
+        activity($a,$b,$mysqli);
+      ?>
+    </div>
+    <div class="container">
+      <?php
+      // $a = "A";
+      $b = "all";
+      activity($a,$b,$mysqli);
+      ?>
+    </div>
   </body>
 </html>

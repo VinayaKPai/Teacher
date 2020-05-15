@@ -3,24 +3,76 @@
   include $_SERVER['DOCUMENT_ROOT']."/basecode-create_connection.php";
   include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/deployQueryResultToHtmlDiv.php";
 
-  function activity($type, $stDate, $endDate, $successFlag, $mysqli) {
+  // function activity($type, $stDate, $endDate, $successFlag, $mysqli) {
+  function activity($type, $status, $mysqli) {
+    $queryString = "SELECT deploymentlog.depType AS 'Type', deploymentlog.depId AS 'Id', deploymentlog.classId AS 'Class', deploymentlog.sectionId AS 'Section', deploymentlog.schStartDate AS 'Open From', deploymentlog.schEndDate AS 'Open Till', deploymentlog.deploySuccess AS 'Deployed?', assessments.assessment_Title AS 'Title', assessments.assessment_questions AS 'Questions' FROM deploymentlog, assessments WHERE deploymentlog.assessmentId = assessments.assessment_Id AND deploymentlog.depType = '$type'";
 
-    $query = $mysqli->query("SELECT deploymentlog.depType AS 'Type', deploymentlog.depId AS 'Id', deploymentlog.classId AS 'Class', deploymentlog.sectionId AS 'Section', deploymentlog.schStartDate AS 'From', deploymentlog.schEndDate AS 'To', deploymentlog.deploySuccess AS 'Deployed?', assessments.assessment_Title AS 'Title', assessments.assessment_questions AS 'Questions' FROM deploymentlog, assessments WHERE deploymentlog.depType = '$type' AND deploymentlog.schEndDate < CURDATE() AND deploymentlog.deploySuccess = '$successFlag' AND assessments.assessment_Id = deploymentlog.assessmentId ");
+    $queryString1 = "SELECT * FROM assessments";
+    $query1 = '';
+    $cnt1 = '';
+    $stdt = '';
+    $successFlag = '';
+    if ($status == "ongoing") {
+      $str = "deploymentlog.schStartDate < CURDATE() AND deploymentlog.schEndDate > CURDATE() AND deploymentlog.deploySuccess = 1";
+      $successFlag = 1;
+      $queryString = $queryString." AND ".$str ;
+    }
+    if ($status == "completed") {
+      $str = "deploymentlog.schStartDate < CURDATE() AND deploymentlog.schEndDate < CURDATE() AND deploymentlog.deploySuccess = 1";
+      $successFlag = 1;
+      $queryString = $queryString." AND ".$str ;
+    }
+    if ($status == "undeployed") {
+      $str = "deploymentlog.deploySuccess = 0";
+      $successFlag = 0;
+      $queryString = $queryString." AND ".$str ;
+    }
+    if ($status == "all") {
+      $query1 = $mysqli->query($queryString1);
+      $cnt1 = mysqli_num_rows($query1);
+    }
+
+
+    // echo $queryString;
+
+$query = $mysqli->query($queryString);
 
     $cnt = mysqli_num_rows($query);
+    if ($cnt>0) {
+        while ($row=$query->fetch_assoc()) {
+          $cn = $row['Questions'];
+          $qs = explode(",",$cn);
+          $qss = '';
+          for ($r=0;$r<count($qs)-1;$r++) {
+            $qss = $qss. "`qId` = ".$qs[$r]." OR ";
+          }
+          $qss = $qss."`qId` = ".$qs[count($qs)-1];
+          $qquery = $mysqli->query("SELECT `question`, `Option_1`, `Option_2`, `Option_3`, `Option_4`, `Option_5`, `Option_6` FROM questionbank WHERE  $qss");
 
-    while ($row=$query->fetch_assoc()) {
-      $cn = $row['Questions'];
-      $qs = explode(",",$cn);
-      $qss = '';
-      for ($r=0;$r<count($qs)-1;$r++) {
-        $qss = $qss. "`qId` = ".$qs[$r]." OR ";
-      }
-      $qss = $qss."`qId` = ".$qs[count($qs)-1];
-      $qquery = $mysqli->query("SELECT `question`, `Option_1`, `Option_2`, `Option_3`, `Option_4`, `Option_5`, `Option_6` FROM questionbank WHERE  $qss");
-
+        }
+        div($query, $qquery, $cnt, $type, $successFlag, $status);
     }
-    div($query, $qquery, $cnt, $type, $successFlag);
+    else {
+      div(false, false, 0, $type, $successFlag, $status);
+    }
+
+    if ($cnt1>0) {
+        while ($row1=$query1->fetch_assoc()) {
+          $cn1 = $row1['assessment_questions'];
+          $qs1 = explode(",",$cn1);
+          $qss1 = '';
+          for ($r1=0;$r1<count($qs1)-1;$r1++) {
+            $qss1 = $qss1. "`qId` = ".$qs1[$r1]." OR ";
+          }
+          $qss1 = $qss1."`qId` = ".$qs1[count($qs1)-1];
+          $qquery1 = $mysqli->query("SELECT `question`, `Option_1`, `Option_2`, `Option_3`, `Option_4`, `Option_5`, `Option_6` FROM questionbank WHERE  $qss1");
+
+        }
+        diva($query1, $qquery1, $cnt1);
+    }
+    else {
+      diva(false, false, 0);
+    }
   }
 
 // // Ref: Activity/completed quizzes

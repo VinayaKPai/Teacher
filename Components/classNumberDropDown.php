@@ -38,7 +38,7 @@ if (!isset($displayType)) {
             echo "<option id='$cnid' value='$cnid'>".$cn."</option>";
         }
         echo "</select></label>";
-      
+
       }
 
 mysqli_close($mysqli);

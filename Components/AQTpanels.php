@@ -6,7 +6,7 @@
         </h4>
       </div>
       <div id="collapse1" class="panel-collapse collapse">
-        <div class="panel-body" style="height: 300px; overflow: scroll;">
+        <div class="panel-body" style="height: 400px; overflow: scroll;">
           <table style='width: 100%;'>
             <?php
              include $_SERVER['DOCUMENT_ROOT']."/AddNew/Existing/activity.php";
@@ -23,7 +23,7 @@
         </h4>
       </div>
       <div id="collapse2" class="panel-collapse collapse">
-        <div class="panel-body" style="height: 300px; overflow: scroll;">
+        <div class="panel-body" style="height: 400px; overflow: scroll;">
           <h4>Completed <?php echo $pageHeading;?></h4>
           <table style='width: 100%;'>
             <?php
@@ -42,7 +42,7 @@
         </h4>
       </div>
       <div id="collapse3" class="panel-collapse collapse">
-        <div class="panel-body" style="height: 300px; overflow: scroll;"><h4>Ongoing <?php echo $pageHeading;?>s</h4>
+        <div class="panel-body" style="height: 400px; overflow: scroll;"><h4>Ongoing <?php echo $pageHeading;?>s</h4>
         <table style='width: 100%;'>
           <?php
           include $_SERVER['DOCUMENT_ROOT']."/"."Activity"."/ongoing".$pageHeading.".php";
@@ -59,7 +59,7 @@
         </h4>
       </div>
       <div id="collapse4" class="panel-collapse collapse">
-        <div class="panel-body" style="height: 300px; overflow: scroll;">
+        <div class="panel-body" style="height: 400px; overflow: scroll;">
           <table style='width: 100%;'>
             <?php
             include $_SERVER['DOCUMENT_ROOT']."/"."Activity"."/undeployed".$pageHeading.".php";

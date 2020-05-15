@@ -18,9 +18,10 @@
 			if ($_GET){echo $_GET;}
 		?>
 	 <a href="../../SetUpPages/newQuestions.php">
-		 <h4 class="btn btn-block topbanner">Add A New Assignment
+		 <h4 class="btn btn-block topbanner">Create A New Assessment
 			 <small style="padding: 10px; color: White;">This will take you to the question bank</small>
 		 </h4>
+		 Note: This will only create an assessment. To schedule a deployment, you'll need to come back here and deploy it.
 	 </a>
 
 			<?php include $_SERVER['DOCUMENT_ROOT']."/Components/AQTpanels.php"; ?>

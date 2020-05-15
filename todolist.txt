@@ -27,3 +27,8 @@ Classes: 9 May 2020
   a. /SetUpPages/newclasses_taught_by_teachers.php
 Problem: The existing classes display is displaying the some records multiple times and others only once. SOLVED
 Problem: Need to be able to display a Teacher Name and then below that, all the classes-sections-subjects. Currently, each record for each teacher is a separate line.
+*******************
+Single Teacher classes
+  RELEVANT FILE :
+  Scripts/php/singleTeacherClasses.php
+  Problem: "teachers" table in the query needs to be removed

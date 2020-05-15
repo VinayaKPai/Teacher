@@ -19,6 +19,9 @@ if ($mysqli->connect_errno) {
 $data = $_SERVER["REQUEST_TIME"];
 $datetime = date('d/m/Y H:i:s', $data);
 
+//TESTING FOR ALL QUERIES.php
+$datetimet = date('d/m/Y H:i:s', $data);
+
 $data1 = $_SERVER["REQUEST_TIME"] + 1000;
 $datetime1 = date('d/m/Y H:i:s', $data1);
 //echo "server request time  + 1000 is : ", $datetime1, "<br />";

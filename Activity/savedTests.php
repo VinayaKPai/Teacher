@@ -1,5 +1,6 @@
 <?php
     include $_SERVER['DOCUMENT_ROOT']."/basecode-create_connection.php";
+    //THIS CODE IS NO LONGER USED AS THE TESTS TABLE HAS BEEN CONVERTED TO AN ASSESSMENTS TABLE
 		// Display saved tests from the 'tests' table
     $query = $mysqli->query("SELECT * FROM tests, classes, subjects WHERE classes.classId = tests.teclassId AND subjects.subjectId = tesubjectId ORDER BY `classId`, `testId` ASC");
 

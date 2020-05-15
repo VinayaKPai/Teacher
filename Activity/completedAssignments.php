@@ -53,7 +53,7 @@
                     					$qno = $qno + 1;
 
                     					echo $qno."     <span>".$qrow['question']."</span>";
-                    					echo "<div class='left' style='padding: 2px;'><ol style='list-style-type: lower-alpha;'>";
+                    					echo "<div class='left' style='padding: 2px; color: #000;'><ol style='list-style-type: lower-alpha;'>";
                     					if ($qrow['Option_1']) {
                     						echo "<li>".$qrow['Option_1']."</li>";
                     					}
@@ -79,10 +79,8 @@
 														$names = "name".$composite;
                 				echo "</div>
                         </td>
-												<td>
-													<div style='tex-align: center; height: 150px; padding: 10px;'>
-
-													<strong>Deploy to Class ".$classId."</strong>
+												<td style='color: #000000;'>
+													<div style='text-align: center; height: 150px; padding: 10px;'>Deploy to Class ".$classId."
 													<br>
 													<label for='section".$composite."'>Section: </label>
 													<select id='section".$composite."' name=$names>

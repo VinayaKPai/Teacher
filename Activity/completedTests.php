@@ -53,7 +53,7 @@
                     					$qno = $qno + 1;
 
                     					echo $qno."     <span>".$qrow['question']."</span>";
-                    					echo "<div class='left' style='padding: 2px;'><ol style='list-style-type: lower-alpha;'>";
+                    					echo "<div class='left' style='padding: 2px; color: #000;'><ol style='list-style-type: lower-alpha;'>";
                     					if ($qrow['Option_1']) {
                     						echo "<li>".$qrow['Option_1']."</li>";
                     					}

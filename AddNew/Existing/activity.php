@@ -72,9 +72,9 @@
                 				echo "</div>
                         </td>
 												<td>
-													<div style='tex-align: center; height: 150px; padding: 10px;'>
+													<div style='text-align: center; height: 150px; padding: 10px;'>
 
-													<strong>Deploy to Class ".$classId."</strong>
+													Deploy to Class ".$classId."
 													<br>
 													<label for='section".$composite."'>Section: </label>
 													<select id='section".$composite."' name=$names>

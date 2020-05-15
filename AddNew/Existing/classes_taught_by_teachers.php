@@ -36,17 +36,19 @@
         						  $slno++;
                       $cn = $rescn;
                       $sa = $ressa;
+                      $sb = $row['Subject'];
+                      $tch = $row['firstName'].$row['middleName'].$row['lastName'];
 
         						  $remIdDB = $rescn."-".$ressa;
 
                     //  $paras = $cn.",".$sa;
                       $url = "../../RemoveRecords/RemoveClass.php?cn=".$rescn."&sa=".$ressa;
-        						  echo "<tr id=trname".$row['userId']." title=".$row['firstName'].$row['middleName'].$row['lastName'].">
+        						  echo "<tr id=trname".$row['userId']." title=".$tch.">
                               <td>".$slno."</td>
-                              <td>".$row['firstName']." ".$row['middleName']." ".$row['lastName']."</td>
+                              <td><a style='color: #fff;' name=".$tch." onclick='filterByTeacher(this.name)'>".$row['firstName']." ".$row['middleName']." ".$row['lastName']."</td>
 
-                              <td><a href='#' style='color: #fff;'>".$row['classNumber']."</a>-<a href='#' style='color: #fff;'>".$row['Sections']."</a></td>
-                              <td><a href='#' style='color: #fff;'>".($row['Subject'])."</a></td>
+                              <td><a style='color: #fff;' name=".$cn." onclick='filterByClass(this.name)'>".$row['classNumber']."-".$row['Sections']."</a></td>
+                              <td><a href='#' style='color: #fff;' name=".$sb." onclick='filterBySubjecT(this.name)'>".$sb." </a></td>
                               <td title='Delete $cn $sa from Database'>
                                 <a id=$remIdDB name=$remIdDB  href='$url'><span class='glyphicon glyphicon-trash' style='background-color: Red; color: White; padding: 4px;'></span></a>
                               </td>

@@ -38,33 +38,7 @@
 			<h3 class="centered"><?php include "../Components/top.php"; ?></h3>
 			<hr>
 			<div>
-		    <div>
-					<h5  class="panel-title" style="background-color: #C5B2B3;">
-        		<a data-toggle="collapse" href="#collapse1">Instructions<span class="glyphicon glyphicon-plus-sign" style="float: right; color: Red"></span></a>
-					</h5>
-				</div>
-				<div id="collapse1" class="panel-collapse collapse">
-					<div class="col-sm-6" style="font-size: x-small;">
-						<h7 style="font-weight: bold;">Add a Single record</h7>
-						<div style="margin-top: 5px;">
-							<li>Select from drop down Class/Std</li>
-							<li>Select from drop down Section</li>
-							<li>Click on CHECK</li>
-							<li>If there is no popup message, click Submit</li>
-						</div>
-					</div>
-					<div class="col-sm-6" style="font-size: x-small;">
-						<h7 style="font-weight: bold;">Add Multiple records at once</h7>
-						<div style="margin-top: 5px;">
-							<li>Select from drop down Class/Std</li>
-							<li>Select from drop down Section</li>
-							<li>Click on CHECK</li>
-							<li>Repeat above steps until you have several you records in the queue</li>
-							<li>If any record has been added by mistake, click on Remove from Q to remove it from the queued records</li>
-							<li>Click on ADD ALL to complete the process of inserting these records</li>
-						</div>
-					</div>
-				</div>
+				<?php include $_SERVER['DOCUMENT_ROOT']."/Components/instructions.html"; ?>
 			</div>
 			<div>
 				<div class="col-sm-3 centered" style="padding: 10px;">
@@ -119,18 +93,31 @@
 				<div class="col-sm-9 centered" style="border-left: 1px solid Grey;">
 						<h6>Filter By: </h6>
 						<div style="display: flex; justify-content: center;">
-							<label for='teacherNameFilter'>Teacher   <select name='teacherNameFilter' id='teacherNameFilter' onchange="filterByTeacher(this)"><option></option>
+							<!-- <label for='teacherNameFilter'>Teacher   <select name='teacherNameFilter' id='teacherNameFilter' onchange="filterByTeacher(this)"><option></option>
 									<?php include $_SERVER['DOCUMENT_ROOT']."/Components/teacherDropDown.php" ; ?>
 								</select>
-							</label>
+							</label> -->
 			<script>
+				// function filterByTeacher(e) {
+				// 	alert (e.selectedIndex);
+				// 	var chktr = "trname"+e.selectedIndex;
+				// 	var trarray = document.getElementsByTagName("tr");
+				// 	for (i=0;i<trarray.length;i++) {
+				// 		// document.getElementsByTagName("tr").style.display="table-row";
+				// 		if (trarray[i].id!=chktr) {
+				// 			trarray[i].style.display = "none";
+				// 		}
+				// 		else {
+				// 			trarray[i].style.display = "table-row";
+				// 		}
+				// 	}
+				// }
+
 				function filterByTeacher(e) {
-					alert (e.selectedIndex);
-					var chktr = "trname"+e.selectedIndex;
 					var trarray = document.getElementsByTagName("tr");
 					for (i=0;i<trarray.length;i++) {
 						// document.getElementsByTagName("tr").style.display="table-row";
-						if (trarray[i].id!=chktr) {
+						if (trarray[i].title!=e) {
 							trarray[i].style.display = "none";
 						}
 						else {
@@ -138,15 +125,46 @@
 						}
 					}
 				}
+				function filterByClass(e) { // e is the name of the anchor tag
+					// alert (e);
+					var tr = document.getElementsByTagName("tr");
+					// alert (f.length);
+					for (g=0;g<tr.length;g++) { //each tr
+						if (tr[g].children[2].children[0].name==e) {
+							tr[g].style.display = "table-row";
+						}
+						else {
+							tr[g].style.display = "none";
+						}
+					}
+
+				}
+
+				function filterBySubjecT(e) { // e is the name of the anchor tag
+					// alert (e);
+					var tr = document.getElementsByTagName("tr");
+					// alert (f.length);
+					for (g=0;g<tr.length;g++) { //each tr
+						if (tr[g].children[3].children[0].name==e) {
+							tr[g].style.display = "table-row";
+						}
+						else {
+							tr[g].style.display = "none";
+						}
+					}
+
+				}
+
 				function clearFilters() {
 					var trs = document.getElementsByTagName("tr");
 					for (d=0;d<trs.length;d++) {
 						trs[d].style.display="table-row";
 					}
 				}
+
 			</script>
-							Or: <?php include $_SERVER['DOCUMENT_ROOT']."/Components/classNumberDropDown.php" ; ?>
-							OR: <?php include $_SERVER['DOCUMENT_ROOT']."/Components/subjectDropDown.php" ; ?>
+							<!-- Or: <?php include $_SERVER['DOCUMENT_ROOT']."/Components/classNumberDropDown.php" ; ?>
+							OR: <?php include $_SERVER['DOCUMENT_ROOT']."/Components/subjectDropDown.php" ; ?> -->
 							<button class="btn btn-default btn-small" onclick=clearFilters()>Clear Filters</button>
 						</div>
 						<?php include $_SERVER['DOCUMENT_ROOT']."/AddNew/Existing/classes_taught_by_teachers.php"; ?>

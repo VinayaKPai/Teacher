@@ -51,13 +51,13 @@ ul a {
   color: #f0f0f0;
 }
 table {width: 80%; padding: 5px; border-spacing: 2px; border-collapse: separate;}
-table th {background-color: #0a0a0a; color: #fff; font-size: 12px;}
+table th {background-color: #0a0a0a; color: #fff; font-size: 12px; }
 /* table th {background-color: #684654; color: #fff; font-size: 12px;} */
-table th, td {text-align: center;}
-table tr:nth-child(even){background-color: #b69092; color: #fff}
+table td {font-size: 10px;}
+table tr:nth-child(even){background-color: #b69092; color: #000}
 table tr:nth-child(odd){background-color: #684654; color: #fff}
-table a:hover {color: White; background-color: #cfabab;}
-table p {background-color: #684654; color: #fff}
+table a:hover {color: White; background-color: #684654;}
+table p {background-color: #cfabab; color: #fff}
 ul .nav .fade li {
   color: Grey;
   background-color: #684654;

@@ -1,13 +1,14 @@
 <?php
   // include "basecode-create_connection.php";
   include $_SERVER['DOCUMENT_ROOT']."/basecode-create_connection.php";
-  include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/deployQueryResultToHtmlTable.php";
+  include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/deployQueryResultToHtmlDiv.php";
 
   function activity($type, $stDate, $endDate, $successFlag, $mysqli) {
-    $query = $mysqli->query("SELECT deploymentlog.depType, deploymentlog.classId AS 'Class', deploymentlog.sectionId AS 'Section', deploymentlog.schStartDate AS 'From', deploymentlog.schEndDate AS 'To', deploymentlog.deploySuccess AS 'Deployed?', assessments.assessment_Title AS 'Title', assessments.assessment_questions AS 'Questions' FROM deploymentlog, assessments WHERE deploymentlog.depType = '$type' AND deploymentlog.schEndDate < CURDATE() AND deploymentlog.deploySuccess = 1 AND assessments.assessment_Id = deploymentlog.assessmentId ");
+
+    $query = $mysqli->query("SELECT deploymentlog.depType AS 'Type', deploymentlog.depId AS 'Id', deploymentlog.classId AS 'Class', deploymentlog.sectionId AS 'Section', deploymentlog.schStartDate AS 'From', deploymentlog.schEndDate AS 'To', deploymentlog.deploySuccess AS 'Deployed?', assessments.assessment_Title AS 'Title', assessments.assessment_questions AS 'Questions' FROM deploymentlog, assessments WHERE deploymentlog.depType = '$type' AND deploymentlog.schEndDate < CURDATE() AND deploymentlog.deploySuccess = '$successFlag' AND assessments.assessment_Id = deploymentlog.assessmentId ");
 
     $cnt = mysqli_num_rows($query);
-    echo "<h4>".$cnt. " rows retuned<span style='float:right;'> Table display</span></h4>";
+
     while ($row=$query->fetch_assoc()) {
       $cn = $row['Questions'];
       $qs = explode(",",$cn);
@@ -18,15 +19,8 @@
       $qss = $qss."`qId` = ".$qs[count($qs)-1];
       $qquery = $mysqli->query("SELECT `question`, `Option_1`, `Option_2`, `Option_3`, `Option_4`, `Option_5`, `Option_6` FROM questionbank WHERE  $qss");
 
-      //   while ($qrow=$qquery->fetch_assoc()) {
-      //       // $classId = $qrow['classId'];
-      //       // $qno = $qno + 1;
-      //       $ques = $qrow['question'];
-      // }
-      // print_r($qquery);
     }
-    table($query, $qquery);
-    // questionDisplay($qquery);
+    div($query, $qquery, $cnt, $type, $successFlag);
   }
 
 // // Ref: Activity/completed quizzes

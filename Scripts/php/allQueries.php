@@ -1,198 +1,82 @@
 <?php
   // include "basecode-create_connection.php";
   include $_SERVER['DOCUMENT_ROOT']."/basecode-create_connection.php";
+  //This is not required. You will instead be included on the page where the display will happen
   include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/deployQueryResultToHtmlDiv.php";
 
-  // function activity($type, $stDate, $endDate, $successFlag, $mysqli) {
-  function activity($type, $status, $mysqli) {
-    $queryString = "SELECT deploymentlog.depType AS 'Type', deploymentlog.depId AS 'Id', deploymentlog.classId AS 'Class', deploymentlog.sectionId AS 'Section', deploymentlog.schStartDate AS 'Open From', deploymentlog.schEndDate AS 'Open Till', deploymentlog.deploySuccess AS 'Deployed?', assessments.assessment_Title AS 'Title', assessments.assessment_questions AS 'Questions' FROM deploymentlog, assessments WHERE deploymentlog.assessmentId = assessments.assessment_Id AND deploymentlog.depType = '$type'";
+//This function should just execute the query and then return the result (Which will be stored in a variable on the display page)
+  function activity($type, $status, $mysqli) { //status is completed/ongoing/undeoployed/all type is a/q/t
+$str = '';
+$successFlag = '';
+    $queryString = ("SELECT
+    dl.depId AS 'Id',
+    dl.depType AS 'Type',
+    c.classId AS 'Class',
+    s.Sections AS 'Section',
+    dl.schStartDate AS 'Open From',
+    dl.schEndDate AS 'Open Till',
+    dl.deploySuccess AS 'Deployed?',
+    a.assessment_Id AS 'Assessment ID',
+    a.assessment_Title AS 'Title',
+    CONCAT('[',json_arrayagg(
+		json_object(
+			'questionID',qb.qId,
+			'question',qb.question,
+			'option1',qb.Option_1,
+			'option2',qb.Option_2,
+			'option3',qb.Option_3,
+			'option4',qb.Option_4,
+			'option5',qb.Option_5,
+			'option6',qb.Option_6
+		)
+		),']') as 'Questions'
+FROM
+    deploymentlog as dl
+INNER JOIN assessments as a
+	ON a.assessment_Id = dl.assessmentId
+INNER JOIN assessment_questions as aq
+    ON aq.assessment_Id = a.assessment_Id
+INNER JOIN questionbank as qb
+	ON qb.qId = aq.question_id
+INNER JOIN questiontype as qt
+	on dl.depType = qt.qtId
+INNER JOIN classes as c
+	on c.classId = dl.classId
+INNER JOIN sections as s
+	on s.sectionId = dl.sectionId
 
-    $queryString1 = "SELECT * FROM assessments";
-    $query1 = '';
-    $cnt1 = '';
-    $stdt = '';
-    $successFlag = '';
+	");
+
+
+
     if ($status == "ongoing") {
-      $str = "deploymentlog.schStartDate < CURDATE() AND deploymentlog.schEndDate > CURDATE() AND deploymentlog.deploySuccess = 1";
+      $str = "WHERE dl.schStartDate < CURDATE() AND dl.schEndDate > CURDATE() AND dl.deploySuccess = 1 AND dl.depType = '$type'";
       $successFlag = 1;
-      $queryString = $queryString." AND ".$str ;
+      $queryString = $queryString.$str ;
     }
     if ($status == "completed") {
-      $str = "deploymentlog.schStartDate < CURDATE() AND deploymentlog.schEndDate < CURDATE() AND deploymentlog.deploySuccess = 1";
+      $str = "WHERE dl.schStartDate < CURDATE() AND dl.schEndDate < CURDATE() AND dl.deploySuccess = 1 AND dl.depType = '$type'";
       $successFlag = 1;
-      $queryString = $queryString." AND ".$str ;
+      $queryString = $queryString.$str ;
     }
     if ($status == "undeployed") {
-      $str = "deploymentlog.deploySuccess = 0";
+      $str = "WHERE dl.deploySuccess = 0 AND dl.depType = '$type'";
       $successFlag = 0;
-      $queryString = $queryString." AND ".$str ;
+      $queryString = $queryString.$str ;
     }
-    if ($status == "all") {
-      $query1 = $mysqli->query($queryString1);
-      $cnt1 = mysqli_num_rows($query1);
+    if ($status == "All") {
+      $queryString = $queryString ;
     }
-
-
+    $queryString = $queryString."  GROUP BY dl.depId";
     // echo $queryString;
 
-$query = $mysqli->query($queryString);
+    $query = $mysqli->query($queryString);
+    // print_r($query);
+    //
+    // $query should be returned
 
+    //$cnt does not need to be passed to the function. You can mysqli_num_rows($query) in the display functions
     $cnt = mysqli_num_rows($query);
-    if ($cnt>0) {
-        while ($row=$query->fetch_assoc()) {
-          $cn = $row['Questions'];
-          $qs = explode(",",$cn);
-          $qss = '';
-          for ($r=0;$r<count($qs)-1;$r++) {
-            $qss = $qss. "`qId` = ".$qs[$r]." OR ";
-          }
-          $qss = $qss."`qId` = ".$qs[count($qs)-1];
-          $qquery = $mysqli->query("SELECT `question`, `Option_1`, `Option_2`, `Option_3`, `Option_4`, `Option_5`, `Option_6` FROM questionbank WHERE  $qss");
-
-        }
-        div($query, $qquery, $cnt, $type, $successFlag, $status);
-    }
-    else {
-      div(false, false, 0, $type, $successFlag, $status);
-    }
-
-    if ($cnt1>0) {
-        while ($row1=$query1->fetch_assoc()) {
-          $cn1 = $row1['assessment_questions'];
-          $qs1 = explode(",",$cn1);
-          $qss1 = '';
-          for ($r1=0;$r1<count($qs1)-1;$r1++) {
-            $qss1 = $qss1. "`qId` = ".$qs1[$r1]." OR ";
-          }
-          $qss1 = $qss1."`qId` = ".$qs1[count($qs1)-1];
-          $qquery1 = $mysqli->query("SELECT `question`, `Option_1`, `Option_2`, `Option_3`, `Option_4`, `Option_5`, `Option_6` FROM questionbank WHERE  $qss1");
-
-        }
-        diva($query1, $qquery1, $cnt1);
-    }
-    else {
-      diva(false, false, 0);
-    }
+    div($query, $cnt, $type, $successFlag, $status);
   }
-
-// // Ref: Activity/completed quizzes
-//   $query = $mysqli->query("SELECT * FROM deploymentlog, assessments WHERE deploymentlog.depType = 'Q' AND deploymentlog.schEndDate < CURDATE() AND deploymentlog.deploySuccess = 1 AND assessments.assessment_Id = deploymentlog.assessmentId");
-//
-// // Ref: Activity/completed tests
-//   $query = $mysqli->query("SELECT * FROM deploymentlog, assessments WHERE deploymentlog.depType = 'T' AND deploymentlog.schEndDate < '$curdate' AND deploymentlog.deploySuccess = 1 AND assessments.assessment_Id = deploymentlog.assessmentId ");
-//
-// // Ref: Activity/ongoing assignments
-// 	$query = $mysqli->query("SELECT * FROM deploymentlog, assessments WHERE deploymentlog.depType = 'A' AND deploymentlog.schStartDate < '$curdate' AND deploymentlog.schEndDate > '$curdate' AND deploymentlog.deploySuccess = 1 AND assessments.assessment_Id = deploymentlog.assessmentId ");
-//
-// // Ref: Activity/ongoing quizzes
-//   $query = $mysqli->query("SELECT * FROM deploymentlog, assessments WHERE deploymentlog.depType = 'Q' AND deploymentlog.schStartDate < curdate() AND deploymentlog.schEndDate > curdate() AND deploymentlog.deploySuccess = 1 AND assessments.assessment_Id = deploymentlog.assessmentId");
-//
-// // Ref: Activity/ongoing tests
-//   $query = $mysqli->query("SELECT * FROM deploymentlog, assessments WHERE deploymentlog.depType = 'T' AND deploymentlog.schStartDate < '$curdate' AND deploymentlog.schEndDate > '$curdate' AND deploymentlog.deploySuccess = 1 AND assessments.assessment_Id = deploymentlog.assessmentId ");
-//
-// // Ref: Activity/undeployed assignments
-//   $query = $mysqli->query("SELECT * FROM deploymentlog, assessments WHERE deploymentlog.depType = 'A' AND  deploymentlog.deploySuccess = 0 AND assessments.assessment_Id = deploymentlog.assessmentId");
-//
-// // Ref: Activity/undeployed quizzes
-//   $query = $mysqli->query("SELECT * FROM deploymentlog, assessments WHERE deploymentlog.depType = 'Q' AND  deploymentlog.deploySuccess = 0 AND assessments.assessment_Id = deploymentlog.assessmentId");
-//
-// // Ref: Activity/undeployed tests
-//   $query = $mysqli->query("SELECT * FROM deploymentlog, assessments WHERE deploymentlog.depType = 'T' AND  deploymentlog.deploySuccess = 0 AND assessments.assessment_Id = deploymentlog.assessmentId");
-
-// Ref: AddNew/checkclasssections
-//   $query = $mysqli->query("SELECT * FROM classes_taught_by_teachers WHERE classNumber = '$classNumber' AND sectionAlpha = '$sectionAlpha'");
-//
-// Ref: AddNew/checkstudents
-//   $query = $mysqli->query("SELECT * FROM studentdetails WHERE firstName = '$firstName' AND lastName = '$lastName' AND phoneMobile = '$phoneMobile'");
-//
-// Ref: Existing/activity
-//   $query = $mysqli->query("SELECT * FROM assessments");
-//   $qquery = $mysqli->query("SELECT * FROM questionbank WHERE  $qss");
-//   $requery = $mysqli->query("SELECT * FROM deploymentlog WHERE `assessmentId`= $aid ");
-//
-// Ref: Exixting/classes_taught_by_teachers
-// $query = $mysqli->query("SELECT users.userId, users.firstName, users.middleName, users.lastName, classes.classNumber, sections.Sections, subjects.Subject
-//           FROM users, classes_taught_by_teacher, classes, sections, subjects
-//           WHERE users.userId = classes_taught_by_teacher.userId AND classes.classId = classes_taught_by_teacher.classId AND sections.sectionId = classes_taught_by_teacher.sectionId AND classes_taught_by_teacher.subjectId = subjects.subjectId ORDER BY classes.classId ASC, sections.Sections ASC,  subjects.Subject ASC ");
-//
-// Ref: Existing/students
-//   $query = $mysqli->query("SELECT * FROM users, studentdetails, classes, sections WHERE users.userId = studentdetails.userId AND users.role = 'S'
-//   AND classes.classId = studentdetails.classId AND sections.sectionId = studentdetails.sectionId ORDER BY classes.classId, sections.sectionId");
-//
-// Ref: Existing/subjects
-//   $query = $mysqli->query("SELECT * FROM classes_taught_by_teacher ORDER BY `classId`");
-//
-// Ref: Exixting/teachers
-//   $query = $mysqli->query("SELECT * FROM users WHERE `visibility` = 'Y' AND `role` = 'T'");
-//
-// Ref: Existing/todo
-//   $query = $mysqli->query("SELECT * FROM todolist");
-//
-// Ref: Existing/topics
-//   $query = $mysqli->query("SELECT * FROM topics, classes, subjects WHERE topics.classId = classes.classId AND topics.subjectId = Subjects.subjectId ORDER BY `classId`");
-//
-// Ref: ADDNew/getSubForClass
-//   $query = $mysqli->query("SELECT DISTINCT subjectName FROM subjects WHERE classNumber = '$classNumber'");
-//
-// Ref: Components/classNumberDropDown
-//   $query = $mysqli->query("SELECT * FROM classes ORDER BY `classId` ASC");
-//
-// Ref: Components/subjectDropDown
-//   $query = $mysqli->query("SELECT * FROM subjects");
-//
-// Ref: Components/teacherDropdown
-//   $query = $mysqli->query("SELECT * FROM users WHERE `role` = 'T' AND `visibility` = 1 "
-//
-// Ref: topicDropDown
-//   $query = $mysqli->query("SELECT * FROM topics");
-//
-// Ref: Components/topics
-//   $query = $mysqli->query("SELECT * FROM topics");
-//
-// Ref: Components/typeDropDown
-//   $query = $mysqli->query("SELECT DISTINCT typeName FROM questiontype");
-//
-// Ref: Scripts/php/exploreStudent
-//   $query = $mysqli->query("SELECT * FROM users, studentdetails, classes, sections WHERE users.userId = $studentId AND classes.classId = studentdetails.classId AND sections.sectionId = studentdetails.sectionId ");
-//
-// Ref: Scripts/php/exploreTeacher
-//   $query = $mysqli->query("SELECT users.firstName, users.middleName, users.lastName, classes.classNumber, sections.Sections FROM users, studentdetails, classes, sections WHERE users.userId = studentdetails.userId AND studentdetails.sectionId = $sectionId AND studentdetails.classId = $classId AND studentdetails.classId = classes.classId AND studentdetails.sectionId = sections.sectionId ");
-//
-// Ref: Scripts/php/singleStudentDetails
-//   $query = $mysqli->query("SELECT users.Email, users.systemEmail, users.joinYear, users.endYear, users.phoneMobile, users.firstName, users.middleName, users.lastName, classes.classId, classes.classNumber, sections.sectionId, sections.Sections, studentdetails.rollNumber
-//   FROM
-//   users,
-//   studentdetails,
-//   classes,
-//   sections
-//   WHERE
-//   studentdetails.userId = $studentId AND
-//   users.userId = studentdetails.userId AND
-//   classes.classId = studentdetails.classId AND
-//   sections.sectionId = studentdetails.sectionId
-//   ORDER BY classes.classId ASC, sections.sectionId ASC");
-//
-// Ref: Scripts/php/singleTeacherClasses
-// $query = $mysqli->query("SELECT DISTINCT users.firstName, users.middleName, users.lastName, classes.classId, classes.classNumber, sections.sectionId, sections.Sections, subjects.Subject
-//   FROM
-//   users,
-//   classes_taught_by_teacher,
-//   teachers,
-//   classes,
-//   sections,
-//   subjects
-//   WHERE
-//   classes_taught_by_teacher.userId = $teacherId AND
-//   users.userId = classes_taught_by_teacher.userId AND
-//   classes.classId = classes_taught_by_teacher.classId AND
-//   sections.sectionId = classes_taught_by_teacher.sectionId AND
-//   subjects.subjectId = classes_taught_by_teacher.subjectId
-//   ORDER BY classes.classId ASC, sections.sectionId ASC");
-//
-// Ref: Scripts/php/singleTopicDetails
-//   $query = $mysqli->query("SELECT * FROM questionbank, topics, classes, subjects WHERE questionbank.topicId = $topicId AND topics.topicId = $topicId AND classes.classId = questionbank.classId AND subjects.subjectId = topics.subjectId");
-//
-// Ref: /students //Not sure if it is being used anywhere
-//   $query = $mysqli->query("SELECT * FROM studentdetails");
-
 ?>

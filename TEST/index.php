@@ -22,34 +22,36 @@
     </a>
     <!-- <h4 class="topbanner">First TEST query = Assignments, undeployed</h4> -->
     <div class="container">
-      <?php
-        // $a = "A";
-        $b = "undeployed";
-        activity($a,$b,$mysqli);
-      ?>
-    </div>
-    <!-- <h4 class="topbanner">Second TEST query = Assignments, ongoing</h4> -->
-    <div class="container">
-      <?php
-      // $a = "A";
-        $b = "ongoing";
-        activity($a,$b,$mysqli);
-      ?>
-    </div>
-    <!-- <h4 class="topbanner">Second TEST query = Assignments, completed</h4> -->
-    <div class="container">
-      <?php
-        // $a = "A";
+      <div class="panel-group" id="accordion">
+        <?php
         $b = "completed";
         activity($a,$b,$mysqli);
-      ?>
+        ?>
+      </div>
     </div>
     <div class="container">
-      <?php
-      // $a = "A";
-      $b = "all";
-      activity($a,$b,$mysqli);
-      ?>
+      <div class="panel-group" id="accordion">
+        <?php
+        $b = "ongoing";
+        activity($a,$b,$mysqli);
+        ?>
+      </div>
+    </div>
+    <div class="container">
+      <div class="panel-group" id="accordion">
+        <?php
+          $b = "undeployed";
+          activity($a,$b,$mysqli);
+        ?>
+      </div>
+    </div>
+    <div class="container">
+      <div class="panel-group" id="accordion">
+        <?php
+        $b = "all";
+        activity($a,$b,$mysqli);
+        ?>
+      </div>
     </div>
   </body>
 </html>

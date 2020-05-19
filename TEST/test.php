@@ -80,17 +80,9 @@
 
 </html>
 <?php
-    Array ( [classNumber] => Array ( [1] => 1 [2] => 2 [3] => 3 [8] => 8 ) [subjectName] => Array ( [English] => English [Hindi] => Hindi ) [topicName] => [typeName] => )
-    SELECT questionbank.qId as 'ID', classes.classNumber as `Class`, subjects.Subject as `Subject`, topics.topicName as `Topic`, questiontype.typeName as `Type`, questionbank.question as `Question`, questionbank.Option_1 as `Option 1`, questionbank.Option_2 as `Option 2`, questionbank.Option_3 as `Option 3`, questionbank.Option_4 as `Option 4`, questionbank.Option_5 as `Option 5`, questionbank.Option_6 as `Option 6`
-    FROM questionbank, classes, questiontype, subjects, topics
-    WHERE classes.classId = questionbank.classId
-      AND subjects.subjectId = questionbank.subjectId
-      AND topics.topicId = questionbank.topicId
-      AND questiontype.qtId = questionbank.typeId
-      AND (classes.classNumber = '1'
-        OR classes.classNumber = '2'
-        OR classes.classNumber = '3'
-        OR classes.classNumber = '8' )
-      AND (subjects.Subject = 'English'
-        OR subjects.Subject = 'Hindi' )
+  Questions {"questionID": 7, "question": "Which one of the following catches thieves and helps to search for lost things?", "option1": "Engineer", "option2": "Nurse ", "option3": "Policeman ", "option4": "Doctor ", "option5": "None of these", "option6": ""},
+  {"questionID": 8, "question": "Which one of the following is used to send messages by using post office? ", "option1": "Postcard ", "option2": "Letter ", "option3": "E-mail ", "option4": "Both [a] and [b] ", "option5": "None of these", "option6": ""},
+  {"questionID": 9, "question": "____ helps to put out the fire. ", "option1": "Fireman ", "option2": "Policeman ", "option3": "Carpenter ", "option4": "Shopkeeper ", "option5": "None of these", "option6": ""}
+
+
 ?>

@@ -71,6 +71,7 @@
 		<div class="container">
 			<hr>
 			<h3 class="centered"><?php include "../Components/top.php"; ?></h3>
+			<?php include $_SERVER['DOCUMENT_ROOT']."/Components/peopleLinks.php"; ?>
 			<hr>
 		  <div>
 		    <div>

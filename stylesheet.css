@@ -89,6 +89,11 @@ ul .nav .fade li {
 .grid-container {
 	background-color: #F5F5F5;
 }
+.likeh5 {
+  color: maroon;
+  background-color: #DDDDDD;
+  font-weight: bold;
+}
 .modal-dialog  {
   width: 75%;
   background: var(--BodGradtop);
@@ -100,9 +105,10 @@ ul .nav .fade li {
 	background: #DEB887;
 }
 .roundedsquare {
+  width: 80%;
 	border-radius: 25px;
 	border-bottom: 2px solid #4B0082;
- 	background: #DEB887;
+ 	background:  var(--BodyGradient);
   	font-size: 10px;
   	text-align: center;
 }
@@ -228,7 +234,7 @@ ul .nav .fade li {
 }
 .greenbg {
   background-color: Green;
-
+}
 .red {
   color: Red;
 }

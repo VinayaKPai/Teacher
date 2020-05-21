@@ -18,12 +18,17 @@
 						<script src="./Scripts/js/codilytest.js"></script>
 						<link type="text" href="./Modals/modaltest.html"/link>
 					<link rel="stylesheet" type="text/css" href="/stylesheet.css"  />
-
+					<script>
+						function commingSoon(t) {
+							alert (t.innerText + " coming soon!!")
+							t.style.color="white";
+						}
+					</script>
 		</head>
 		<body class="body" style="background: var(--BodyGradient);">
 			<div class="container">
 				<?php echo $datetime1; ?>
-				
+
 				<h3 class="centered" style="background: var(--BodyGradient);"><?php include "Components/top.php"; ?></h3>
 				<div id="login" class="panel-collapse collapse">
 					<?php include $_SERVER['DOCUMENT_ROOT']."/Components/login.php" ;?>
@@ -75,20 +80,20 @@
 						<h5>Assessment</h5>
 						<ul  class="left-align" style="list-style-type: none;">
 								<li>
-									<a href="../../Activity/addnewassignment.php">Assignments</a>
+									<a href="../../Activity/assignments.php">Assignments</a>
 								</li>
 								<li>
-									<a href="../../Activity/addnewtest.php">Tests</a>
+									<a href="../../Activity/tests.php">Tests</a>
 								</li>
 								<li>
-									<a href="../../Activity/addnewquiz.php">Quizzes</a>
+									<a href="../../Activity/quizzes.php">Quizzes</a>
 								</li>
 						</ul>
 						<hr style="border-top: 1px solid maroon;">
 						<h5>Practice</h5>
 						<ul class="left-align" style="list-style-type: none;">
 							<li>
-								<a href="../../Activity/cbsepractice.php">CBSE Practice</a>
+								<a href="#" onclick="commingSoon(this)">CBSE Practice</a>
 							</li>
 						</ul>
 					</div>

@@ -5,13 +5,15 @@
   include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/deployQueryResultToHtmlDiv.php";
 
 //This function should just execute the query and then return the result (Which will be stored in a variable on the display page)
-  function activity($type, $status, $mysqli) { //status is completed/ongoing/undeoployed/all type is a/q/t
+  function activity($type, $status, $mysqli ,$pageHeading) { //status is completed/ongoing/undeoployed/all type is a/q/t
 $str = '';
 $successFlag = '';
     $queryString = ("SELECT
     dl.depId AS 'Id',
     dl.depType AS 'Type',
-    c.classId AS 'Class',
+    c.classNumber AS 'Class',
+    c.classId AS 'Class Id',
+    s.sectionId AS 'SectionId',
     s.Sections AS 'Section',
     dl.schStartDate AS 'Open From',
     dl.schEndDate AS 'Open Till',
@@ -19,15 +21,15 @@ $successFlag = '';
     a.assessment_Id AS 'Assessment ID',
     a.assessment_Title AS 'Title',
     CONCAT('[',json_arrayagg(
-		json_object(
-			'questionID',qb.qId,
-			'question',qb.question,
-			'option1',qb.Option_1,
-			'option2',qb.Option_2,
-			'option3',qb.Option_3,
-			'option4',qb.Option_4,
-			'option5',qb.Option_5,
-			'option6',qb.Option_6
+  		json_object(
+  			'questionID',qb.qId,
+  			'question',qb.question,
+  			'option1',qb.Option_1,
+  			'option2',qb.Option_2,
+  			'option3',qb.Option_3,
+  			'option4',qb.Option_4,
+  			'option5',qb.Option_5,
+  			'option6',qb.Option_6
 		)
 		),']') as 'Questions'
 FROM
@@ -64,19 +66,52 @@ INNER JOIN sections as s
       $successFlag = 0;
       $queryString = $queryString.$str ;
     }
-    if ($status == "All") {
-      $queryString = $queryString ;
-    }
     $queryString = $queryString."  GROUP BY dl.depId";
-    // echo $queryString;
 
+
+      if ($status == "all") {
+        $queryString = ("SELECT
+              a.assessment_Title,
+              a.assessment_Id,
+          	json_arrayagg(
+          		json_object(
+          			'questionID',qb.qId,
+          			'question',qb.question,
+          			'option1',qb.Option_1,
+          			'option2',qb.Option_2,
+          			'option3',qb.Option_3,
+          			'option4',qb.Option_4,
+          			'option5',qb.Option_5,
+          			'option6',qb.Option_6
+          		)
+          		) as 'Questions',
+          	json_arrayagg(DISTINCT
+          		json_object(
+          			'classId', dl.classId,
+                      'section', dl.sectionId,
+                      'startDate', dl.schStartDate,
+                      'endDate', dl.schEndDate,
+                      'deploySuccess', dl.deploySuccess
+          		)
+          		) as 'Deployments'
+          FROM
+              questionbank AS qb
+          INNER JOIN assessment_questions AS aq
+          	on aq.question_id = qb.qId
+          INNER JOIN assessments as a
+          	on a.assessment_Id = aq.assessment_Id
+          LEFT JOIN deploymentlog as dl
+          	on dl.assessmentId = aq.assessment_Id
+          GROUP BY a.assessment_Title;") ;
+      }
     $query = $mysqli->query($queryString);
-    // print_r($query);
     //
     // $query should be returned
 
     //$cnt does not need to be passed to the function. You can mysqli_num_rows($query) in the display functions
     $cnt = mysqli_num_rows($query);
-    div($query, $cnt, $type, $successFlag, $status);
+    div($query, $cnt, $type, $successFlag, $status, $pageHeading);
   }
+
+
 ?>

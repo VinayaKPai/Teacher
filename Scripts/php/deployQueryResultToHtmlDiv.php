@@ -1,12 +1,9 @@
 <?php
 // If you are passing $result to the function, then $count can be removed as a parameter to the function, because you can get it using mysqli_num_rows($query)
 function div( $result,$count, $type, $successFlag, $status ) {
-echo $status;
-//print_r($result->fetch_object());
-$dId = '';
-// print_r($result);
-$result = $result->fetch_array( MYSQLI_ASSOC );
 
+$dId = '';
+// $result = $result->fetch_assoc();
 
   if ($type=='A') {$ass = "Assignment";}
   if ($type=='T') {$ass = "Test";}
@@ -14,49 +11,231 @@ $result = $result->fetch_array( MYSQLI_ASSOC );
   if ($count != 0) {
       if ($successFlag==1) {$success = "Deployed";}
       else {$success = "Undeployed"; }
-
-      echo "<h4 class='topbanner centered'>".$count. " ".$status." ".$ass."</h4>";
+      if ($count>1){$suffix = 's';}
+      else {$suffix = '';}
+      if ($status=='completed' || $status=='ongoing' || $status=='undeployed') {
+      echo "<h4 class='topbanner centered'>".$count. " ".$status." ".$ass.$suffix."</h4>";
       //Set of same status deployments
       //Should hold expandable panels inside also
-      foreach ($result as $resultRow) {
-        $dId = $status."collapse".$resultRow['Id'];
-        echo '<div class="panel-group" id="accordion">';
+      while ($row = $result->fetch_array( MYSQLI_ASSOC )){
+            divBody( $row, $status );
+        }
+      }
+        else {
+          $ass = "Assessment";
+          echo "<h4 class='topbanner centered'>".$count. " ".$ass.$suffix."</h4>";
+            while ($row = $result->fetch_array( MYSQLI_ASSOC )){
+              divBodyAll($row);
+            }
+        }
+    }//if ($count != 0)
+
+}
+//function div for completed, ongoing, Undeployed
+function divBody( $row, $status ) {//for completed, ongoing and undeployed ONLY
+
+        $dId = "collapse".$status.$row['Id'];//unique id for collapse elements
         echo '<div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title centered"><span style="float: left;">Class: '.$row['Class'].' Section: '.$row['Section'].'</span>
+                    <a data-toggle="collapse" data-parent="#accordion" href="#'.$dId.'">               '.$row['Title'].'</a>
+                  <span style="float: right;">From : '
+                    . $row['Open From'].' To : '
+                    . $row['Open Till'].'</span></h4>
+                </div>
+                <div id="'.$dId.'" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    <div class="body col-sm-8 left" style="background:  var(--BodyGradient); border-radius: 25px;
+                  	border-bottom: 2px solid #4B0082;">';
+                    $varr = json_decode($row['Questions'], true);
+                    echo "<ol style='list-style-type: number' >";
+                    for ($j=0;$j<count($varr);$j++) {
+                      $l = $varr[$j];
+                      // print_r($l);
+                      echo "<li>";
+                      echo $l['question'];
+                      echo "<ol style='list-style-type: lower-alpha' > ";
+                        if ($l['option1']) {
+                          echo "<li>".$l['option1']."</li>";
+                        }
+                        if ($l['option2']) {
+                          echo "<li>".$l['option2']."</li>";
+                        }
+                        if ($l['option3']) {
+                          echo "<li>".$l['option3']."</li>";
+                        }
+                        if ($l['option4']) {
+                          echo "<li>".$l['option4']."</li>";
+                        }
+                        if ($l['option5']) {
+                          echo "<li>".$l['option5']."</li>";
+                        }
+                        if ($l['option6']) {
+                          echo "<li>".$l['option6']."</li>";
+                        }
+                      echo "</ol>";
+                      echo "</li>";
+                    }
+                    echo "</ol>";
+
+                    echo "</div>
+                    <div class='body col-sm-4'>";
+                      deployThisAssessment($row['Class'], $row['Class Id'], $row['Section'], $row['SectionId'], $row['Assessment ID']);
+                    echo "</div>";
+              echo '</div>
+              </div>';
+  }
+
+
+//for completed, ongoing, undeployed A/Q/T
+function deployThisAssessment($class, $classId, $section, $sectionId, $assId) {
+  $composite = $classId.$assId;
+  $dates = "date".$composite;
+  $names = "name".$composite;
+  echo 	"<div class='container roundedsquare' style='text-align: left; padding: 10px;'>
+  <h5 class='centered'>Deploy to Class ".$class."</h5>
+    <br>
+    <label for='section".$composite."'>Section: </label>
+    <select id='section".$composite."' name=$names>
+        <option value='1'>A</option>
+        <option value='2'>B</option>
+        <option value='3'>C</option>
+        <option value='4'>D</option>
+        <option value='5'>E</option>
+        <option value='6'>F</option>
+    </select><br>
+    <label for='".$dates."'>Select Date:</label>
+    <input type='date' id='".$dates."' name=".$names."><br>
+    <label for='as".$composite."'>Type:</label>
+      <select id='as".$composite."' name=".$names.">
+        <option name='A' value='A'>Assignment</option>
+        <option name='Q' value='Q'>Quiz</option>
+        <option name='T' value='T'>Test</option>
+      </select><br>
+      <button id=".$assId." onclick='deploy(".$assId.",".$classId.")' style='float: right;'>Deploy</button>
+    </div>";
+
+echo '</div>';
+}
+
+//function div for all assessments
+
+//function div for all assessments
+function divBodyAll($row) {
+$assId = $row['assessment_Id'];
+  $dId = "collapse".$assId;//unique id for collapse elements
+  $varr = json_decode($row['Questions'], true);
+  $title = $row['assessment_Title'];
+  echo '<div class="panel panel-default">
           <div class="panel-heading">
             <h4 class="panel-title centered">
-              <span style="float: left">Class Section</span>
-              <a data-toggle="collapse" data-parent="#accordion" href="#'.$dId.'">
-              '.$resultRow['Title'].'</a>
-              <span style="float: right">From To</span>
+              <a data-toggle="collapse" data-parent="#accordion" href="#'.$dId.'">               '.$title.'</a>
             </h4>
           </div>
           <div id="'.$dId.'" class="panel-collapse collapse">
-            <div class="panel-body">';
-            divBody( $resultRow,  $status, $dId );
+            <div class="panel-body">
+              <div class="body col-sm-8 left" style="background:  var(--BodyGradient); border-radius: 25px;
+              border-bottom: 2px solid #4B0082;">';
+              //lhs div with questions display
+              echo "<ol style='list-style-type: number' >";
+              for ($j=0;$j<count($varr);$j++) {
+                $l = $varr[$j];
+
+                echo "<li>";
+                echo $l['question'];
+                echo "<ol style='list-style-type: lower-alpha' > ";
+                  if ($l['option1']) {
+                    echo "<li>".$l['option1']."</li>";
+                  }
+                  if ($l['option2']) {
+                    echo "<li>".$l['option2']."</li>";
+                  }
+                  if ($l['option3']) {
+                    echo "<li>".$l['option3']."</li>";
+                  }
+                  if ($l['option4']) {
+                    echo "<li>".$l['option4']."</li>";
+                  }
+                  if ($l['option5']) {
+                    echo "<li>".$l['option5']."</li>";
+                  }
+                  if ($l['option6']) {
+                    echo "<li>".$l['option6']."</li>";
+                  }
+                echo "</ol>";
+                echo "</li>";
+              }
+              echo "</ol>";
+//rhs div with dates and adding new deployment feature
+              echo "</div>
+              <div class='body col-sm-4' style='background:  var(--BodyGradient); border-radius: 25px;
+              border-bottom: 2px solid #4B0082;'>";
+              echo "<h5>Scheduled Deployments</h5>";
+              $vard = json_decode($row['Deployments'], true);
+                deployAllAssessments($vard, $assId);
+
+              echo "</div>";
         echo '</div>
-          </div>
         </div>';
-
-        }
-      }
-      echo "</div>";
-  }
-
-function divBody( $result,  $status, $dId ) {
-  echo $status." ".$dId;
-  $questionsArray = json_decode($resultRow['Questions'], true);
-
-  foreach ($resultNew as $y) {//each row of data - ie each deployment
-    foreach ($y as $a => $b) {//$a = Id,Type,Class,Section,Open From,Open Till,Deployed? 1,Assessment ID,Title,Questions
-      echo "<li>".$a." ".$b."</li>";
-      if ($a == "Questions") {
-        echo "<br><br>".$b;
-        $c = json_decode($b);
-        echo gettype($c);
-      }
-    }
-  }
 }
+
+//for ALL assessments
+function deployAllAssessments($vard, $assId) {//$vard is json encode of $row['Deployments'] $assId is assessment Id
+
+  echo "<ol style='list-style-type: number' >";
+  for ($j=0;$j<count($vard);$j++) {
+    $deps = $vard[$j];  //is also an array
+
+    $classId = $deps['classId'];
+    $sectionId = $deps['section'];
+    $schStartDate = $deps['startDate'];
+    $schEndDate = $deps['endDate'];
+    $deploySuccess = $deps['deploySuccess'];
+          $composite = $classId.$assId;
+          $dates = "date".$composite;
+          $names = "name".$composite;
+
+        if ($deps['deploySuccess']==0) {$col = "class='red'"; $txt="<strong>No</strong>";}
+        else {$col = "class='green'"; $txt="<strong>Yes</strong>";}
+        echo "<li>Class ".$deps['classId']." Section ".$deps['section'];
+
+        echo "<ol ".$col." style='list-style-type: lower-alpha' > ";
+            echo "<li>From : ".$deps['startDate']."</li>";
+            echo "<li>To : ".$deps['endDate']."</li>";
+            echo "<li>Deployed : ".$txt."</li>";
+        echo "</ol>";
+        echo "</li>";
+
+
+  }
+  echo "</ol>";
+  echo 	"<div class='container roundedsquare' style='text-align: left; padding: 10px;'>
+  <h5 class='centered'>Deploy to Class ".$classId."</h5>
+    <br>
+    <label for='section".$composite."'>Section: </label>
+    <select id='section".$composite."' name=$names>
+        <option value='1'>A</option>
+        <option value='2'>B</option>
+        <option value='3'>C</option>
+        <option value='4'>D</option>
+        <option value='5'>E</option>
+        <option value='6'>F</option>
+    </select><br>
+    <label for='".$dates."'>Select Date:</label>
+    <input type='date' id='".$dates."' name=".$names."><br>
+    <label for='as".$composite."'>Type:</label>
+      <select id='as".$composite."' name=".$names.">
+        <option name='A' value='A'>Assignment</option>
+        <option name='Q' value='Q'>Quiz</option>
+        <option name='T' value='T'>Test</option>
+      </select><br>
+      <button id=".$assId." onclick='deploy(".$assId.",".$classId.")' style='float: right;'>Deploy</button>
+    </div>";
+
+
+}
+
+
 
 /*
 Step 1

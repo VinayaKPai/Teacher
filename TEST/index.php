@@ -7,7 +7,7 @@
     <?php
       include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/allQueries.php";
       include $_SERVER['DOCUMENT_ROOT']."/basecode-create_connection.php";
-      $pageHeading = "Test Page";
+      $pageHeading = "Assessments";
       $a = "A";
     ?>
   </head>
@@ -25,7 +25,7 @@
       <div class="panel-group" id="accordion">
         <?php
         $b = "completed";
-        activity($a,$b,$mysqli);
+        activity($a,$b,$mysqli,$pageHeading);
         ?>
       </div>
     </div>
@@ -33,7 +33,7 @@
       <div class="panel-group" id="accordion">
         <?php
         $b = "ongoing";
-        activity($a,$b,$mysqli);
+        activity($a,$b,$mysqli,$pageHeading);
         ?>
       </div>
     </div>
@@ -41,7 +41,7 @@
       <div class="panel-group" id="accordion">
         <?php
           $b = "undeployed";
-          activity($a,$b,$mysqli);
+          activity($a,$b,$mysqli,$pageHeading);
         ?>
       </div>
     </div>
@@ -49,7 +49,7 @@
       <div class="panel-group" id="accordion">
         <?php
         $b = "all";
-        activity($a,$b,$mysqli);
+        activity($a,$b,$mysqli,$pageHeading);
         ?>
       </div>
     </div>

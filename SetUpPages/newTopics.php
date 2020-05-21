@@ -2,7 +2,7 @@
 	//include "basecode-create_connection.php";
 	include "../basecode-create_connection.php";
 
-	$pageHeading = "Set Up your Subjects";
+	$pageHeading = "Topics";
 	$pageCode = "setup";
 ?>
 

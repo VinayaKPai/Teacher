@@ -2,7 +2,7 @@
 	//include "basecode-create_connection.php";
 	include $_SERVER['DOCUMENT_ROOT']."/basecode-create_connection.php";
 
-	$pageHeading = "Set Up New Students";
+	$pageHeading = "Students";
 	$pageCode = "setup";
 ?>
 

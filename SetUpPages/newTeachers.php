@@ -5,7 +5,7 @@
 	//include "../Scripts/php/addNewClasses.php";
 //	include "../RemoveRecords/RemoveClass.php";
 	// include "../_Modals/teacherModal.php";
-	$pageHeading = "Set Up New Teachers";
+	$pageHeading = "Teachers";
 	$pageCode = "setup";
 ?>
 

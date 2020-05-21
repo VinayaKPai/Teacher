@@ -2,7 +2,7 @@
 	include "../basecode-create_connection.php";
 // include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/saveActivities.php";
 
-	$pageHeading = "Set Up your Question Bank";
+	$pageHeading = "Question Bank";
 	$pageCode = "setup";
 ?>
 

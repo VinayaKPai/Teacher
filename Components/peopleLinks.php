@@ -18,23 +18,4 @@
     </div>
   </div>
 </h6>
-<div class="top" id="showOptions" style="display: none;">
-  <a id="Teachers" class="topbanner" style="width: 32%; color: #684654; background-color: #DDDDDD;  text-align: center;" href="../../SetUpPages/newTeachers.php">Teachers</a>
-  <a id="Students" class="topbanner" style="width: 32%; color: #684654; background-color: #DDDDDD;  text-align: center;" href="../../SetUpPages/newStudents.php">Students</a>
-  <a id="Assignments" class="topbanner" style="width: 32%; color: #684654; background-color: #DDDDDD;  text-align: center;" href="../../Activity/assignments.php">Assignments</a>
-  <a id="Tests" class="topbanner" style="width: 32%; color: #684654; background-color: #DDDDDD;  text-align: center;" href="../../Activity/tests.php">Tests</a>
-  <a id="Quizzes" class="topbanner" style="width: 32%; color: #684654; background-color: #DDDDDD;  text-align: center;" href="../../Activity/quizzes.php">Quizzes</a>
-</div>
-<script>
-  function showOptions() {
-    var hg = <?php echo $pageHeading; ?>
-    // var h = document.getElementById('heading');
-    // h.disabled;
-    var x = document.getElementById("showOptions");
-  if (x.style.display === "block") {
-    x.style.display = "none";
-  } else {
-    x.style.display = "block";
-  }
-  }
-</script>
+<?php include $_SERVER['DOCUMENT_ROOT']."/Components/internalNav.php"; ?>

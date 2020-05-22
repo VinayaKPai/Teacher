@@ -1,9 +1,0 @@
-30/05/19
-#1	Inspect element shows below code
-		<button onclick="readyToAdd(document.getElementById('classNumber').value,document.getElementById('sectionAlpha').value)">ADD to Q</button>
-	
-	Code comes from ajax call where this button is created. Instead of "document.getElementById('classNumber').value" create a var and use it
-	
-#2	There is no check before ajax is called, to confirm that both fields hold values. Add code to first check that both are selected and then perform ajax call
-
-#3	The CHECK button which calls ajax, at present, allows another ajax call with the same selection again and again. Then, since the record is neither in the db and nor in the Q, adds another ADD to Q button, every time it is clicked...

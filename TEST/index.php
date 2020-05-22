@@ -7,29 +7,43 @@
     <?php
       include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/allQueries.php";
       include $_SERVER['DOCUMENT_ROOT']."/basecode-create_connection.php";
-      $pageHeading = "Assessments";
-      $a = "A";
+      $pageHeading = "Classes-Sections-Teachers";
+      // $a = "A";
     ?>
   </head>
   <body class="body">
     <?php echo $datetime; ?>
     <?php include $_SERVER['DOCUMENT_ROOT']."/Components/top.php"; ?>
-    <a href="../../SetUpPages/newQuestions.php">
+
+    <?php
+    $b = "completed";
+    classes_sections_teachers($a,$b,$mysqli,$pageHeading);
+    ?>
+Classes-Sections-Teachers()
+
+
+
+
+
+
+
+
+
+    <!-- <a href="../../SetUpPages/newQuestions.php">
       <h4 class="btn btn-block topbanner">Create A New Assessment
         <small style="padding: 10px; color: White;">This will take you to the question bank</small>
       </h4>
       Note: This will only create an assessment. To schedule a deployment, you'll need to come back here and deploy it.
-    </a>
-    <!-- <h4 class="topbanner">First TEST query = Assignments, undeployed</h4> -->
-    <div class="container">
+    </a> -->
+    <!-- <div class="container">
       <div class="panel-group" id="accordion">
         <?php
         $b = "completed";
         activity($a,$b,$mysqli,$pageHeading);
         ?>
       </div>
-    </div>
-    <div class="container">
+    </div> -->
+    <!-- <div class="container">
       <div class="panel-group" id="accordion">
         <?php
         $b = "ongoing";
@@ -52,6 +66,6 @@
         activity($a,$b,$mysqli,$pageHeading);
         ?>
       </div>
-    </div>
+    </div> -->
   </body>
 </html>

@@ -1,3 +1,10 @@
+RemoveRecords : Dt : 21/5/2020
+  Relevant files:
+      a. /RemoveRecords/RemoveTeacher.php
+  CHECK:
+    No user records should be ever removed from the database. Check if the query removes the record or flags visibility as 0
+
+
 Deployment of activity:
   Relevant files:
     a. /Activity/addnewtest.php

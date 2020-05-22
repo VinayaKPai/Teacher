@@ -53,83 +53,16 @@
 	<body class="body">
 		<div class="container">
 			<hr>
-			<h3 class="centered"><?php include "../Components/top.php"; ?></h3>
-			<?php include $_SERVER['DOCUMENT_ROOT']."/Components/peopleLinks.php"; ?>
+			<h3 class="centered">
+				<?php include "../Components/top.php"; ?>
+			</h3>
+				<?php include $_SERVER['DOCUMENT_ROOT']."/Components/peopleLinks.php"; ?>
 			<hr>
-		  <div>
-		    <div>
-					<h5  class="panel-title" style="background-color: #C5B2B3;">
-        		<a data-toggle="collapse" href="#collapse1">Instructions
-							<span class="glyphicon glyphicon-plus-sign" style="float: right; color: Red"></span>
-						</a>
-					</h5>
-				</div>
-				<div id="collapse1" class="panel-collapse collapse">
-					<div class="col-sm-6" style="font-size: x-small;">
-						<h7 style="font-weight: bold;">Add a Single record</h7>
-						<div style="margin-top: 5px;">
-							<li>Select from drop down Class/Std</li>
-							<li>Select from drop down Section</li>
-							<li>Click on CHECK</li>
-							<li>If there is no popup message, click Submit</li>
-						</div>
-					</div>
-					<div class="col-sm-6" style="font-size: x-small;">
-						<h7 style="font-weight: bold;">Add Multiple records at once</h7>
-						<div style="margin-top: 5px;">
-							<li>Select from drop down Class/Std</li>
-							<li>Select from drop down Section</li>
-							<li>Click on CHECK</li>
-							<li>Repeat above steps until you have several you records in the queue</li>
-							<li>If any record has been added by mistake, click on Remove from Q to remove it from the queued records</li>
-							<li>Click on ADD ALL to complete the process of inserting these records</li>
-						</div>
-					</div>
-				</div>
-			</div>
+
 			<div class="row">
 				<div class="col-sm-3" style="padding: 10px;">
 					<hr>
-					<form name="newTeacherForm" action="../AddNew/addnewteacher.php" method="post">
-						<div class="form-group">
-							<label for="firstName">First Name<span class="glyphicon glyphicon-asterisk" style="color: Red"></span></label> <input id="firstName" name="firstName" class="form-control" required />
-							<label for="middleName">Middle Name</span></label> <input id="middleName" name="middleName" class="form-control" />
-							<label for="lastName">Last Name<span class="glyphicon glyphicon-asterisk" style="color: Red"></span></label> <input id="lastName" name="lastName" class="form-control" required />
-							<label for="phoneMobile">Mobile<span class="glyphicon glyphicon-asterisk" style="color: Red"></span></label> <input id="phoneMobile" name="phoneMobile" class="form-control" onkeyup="setTempPW(this)"/>
-							<script>
-								function setTempPW(e) {
-									var ei = e.value;
-									document.getElementById("tpw").value = ei;
-								}
-							</script>
-						</div>
-						<div class="form-group">
-							<label for="email">Email</label><input id="email" name="email" class="form-control" />
-						</div>
-						<div class="form-group">
-							<label for="joinYear">Join Year</label> <select id="joinYear" name="joinYear" >
-								<option id="blanksa"></option>
-								<option id="j2017">2017</option>
-								<option id="j2018">2018</option>
-								<option id="j2019">2019</option>
-								<option id="j2020">2020</option>
-								<option id="j2021">2021</option>
-								<option id="j2022">2022</option>
-							</select>
-							<label for="endYear">End Year</label><select id="endYear" name="endYear" >
-								<option id="blanksa"></option>
-								<option id="l2017">2017</option>
-								<option id="l2018">2018</option>
-								<option id="l2019">2019</option>
-								<option id="l2020">2020</option>
-								<option id="l2021">2021</option>
-								<option id="l2022">2022</option>
-							</select><br>
-							<label for="tpw">Assigned Temp PW </label><input id="tpw" name="tpw" disabled/>
-						</div>
-
-						<button name="Submit" id="submit" type="submit">SUBMIT</button>
-					</form>
+					<?php include $_SERVER['DOCUMENT_ROOT']."/Forms/userTeacherForm.php"; ?>
 					<hr>
 
 				</div>

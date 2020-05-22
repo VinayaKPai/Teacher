@@ -26,7 +26,6 @@
 			<hr>
 			<h3 class="centered"><?php include "../Components/top.php"; ?></h3>
 			<hr>
-			<?php include "../Components/instructions.html";?>
 			<div class="row">
 				<div class="col-sm-6" style="padding: 10px;">
 					<hr>

@@ -25,50 +25,18 @@
 			<hr>
 			<h3 class="centered"><?php include "../Components/top.php"; ?></h3>
 			<hr>
-			<div>
-		    <!-- <div>
-					<h5  class="panel-title" style="background-color: #C5B2B3;">
-        		<a data-toggle="collapse" href="#collapse1">Instructions<span class="glyphicon glyphicon-plus-sign" style="float: right; color: Red"></span></a>
-					</h5>
-				</div> -->
-				<!-- <div id="collapse1" class="panel-collapse collapse">
-					<div class="col-sm-6" style="font-size: x-small;">
-						<h7 style="font-weight: bold;">Add a Single record</h7>
-						<div style="margin-top: 5px;">
-							<li>Select from drop down Class/Std</li>
-							<li>Select from drop down Section</li>
-							<li>Click on CHECK</li>
-							<li>If there is no popup message, click Submit</li>
-						</div>
-					</div>
-					<div class="col-sm-6" style="font-size: x-small;">
-						<h7 style="font-weight: bold;">Add Multiple records at once</h7>
-						<div style="margin-top: 5px;">
-							<li>Select from drop down Class/Std</li>
-							<li>Select from drop down Section</li>
-							<li>Click on CHECK</li>
-							<li>Repeat above steps until you have several you records in the queue</li>
-							<li>If any record has been added by mistake, click on Remove from Q to remove it from the queued records</li>
-							<li>Click on ADD ALL to complete the process of inserting these records</li>
-						</div>
-					</div>
-				</div> -->
-<?php include $_SERVER['DOCUMENT_ROOT']."/Components/instructions.html" ; ?>
-
-			</div>
-
 
 			<div>
 
 				<div class="col-sm-3" style="padding: 10px;">
-					<h4 style="color: Green; background-color: LightGrey;">To Add: Select Class Section and Subject from the dropdowns below and click submit.</h4>
-					<hr>
+
 					<hr>
 					<form name="newSubjectForm" action="../AddNew/addnewsubject.php" method="post">
 						<?php $displayType = "dropdown";
 							include "../Components/classNumberDropDown.php";?>
 						<?php include "../Components/sectionAlphaDropDown.php";?>
 						<?php include "../Components/subjectDropDown.php";?>
+						<?php include $_SERVER['DOCUMENT_ROOT']."/Components/teacherDropDown.php" ; ?>
 						<button name="Submit" id="submit" type="submit">SUBMIT</button>
 					</form>
 					<hr>
@@ -88,8 +56,7 @@
 				</div>
 
 				<div class="col-sm-9 centered" style="border-left: 1px solid Grey;">
-					<?php include $_SERVER['DOCUMENT_ROOT']."/Components/teacherDropDown.php" ; ?>
-					<?php include "../AddNew/Existing/subjects.php"; ?>
+					<?php include "../AddNew/Existing/classes_taught_by_teachers.php"; ?>
 
 
 					<div id="status"></div>

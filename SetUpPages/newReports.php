@@ -29,7 +29,10 @@
 			<hr>
 			<h3 class="centered"><?php include "../Components/top.php"; ?></h3>
 			<hr>
-			<?php include "../Components/instructions.html";?>
+			<?php
+				include $_SERVER['DOCUMENT_ROOT']."/Components/C_S_T_internalNav.php";
+				include $_SERVER['DOCUMENT_ROOT']."/Components/internalNav.php";
+			?>
 			<div>
 
 				<div class="col-sm-6" style="padding: 10px;">

@@ -28,9 +28,6 @@
 				if ($rowcount > 0) {
 					while ($row = $query->fetch_assoc())  {
 
-            // echo "<tr title=".($row['firstName'])." ".$row['middleName']." ".$row['lastName']."><td colspan=5 style='background-color: #fffff9;'>Teacher: <a href='#' style='color: #009;'>".($row['firstName'])." ".$row['middleName']." ".$row['lastName']."</a></td></tr>";
-
-
                       $rescn = strip_tags($row['classNumber']);
                       $ressa = $row['Sections'];
         						  $slno++;

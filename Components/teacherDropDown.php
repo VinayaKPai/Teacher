@@ -9,7 +9,7 @@
 
   	$query = $mysqli->query("SELECT * FROM users WHERE `role` = 'T' AND `visibility` = 1 " );
 
-        // echo "<label for='teacherName'>Teacher   <select name='teacherName' id='teacherName'><option></option>";
+        echo "<label for='teacherName'>Teacher   <select name='teacherName' id='teacherName'><option></option>";
         while ($row = $query->fetch_assoc())  {
           $tfn = strip_tags($row['firstName']);
           $tmn = strip_tags($row['middleName']);
@@ -17,7 +17,7 @@
           $tnid = $row['userId'];
             echo "<option id='$tnid' value='$tnid'>".$tfn." ".$tmn." ".$tln."</option>";
         }
-        // echo "</select></label>";
+        echo "</select></label>";
 
 
 mysqli_close($mysqli);

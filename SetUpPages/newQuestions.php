@@ -1,7 +1,5 @@
 <?php
 	include "../basecode-create_connection.php";
-// include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/saveActivities.php";
-
 	$pageHeading = "Question Bank";
 	$pageCode = "setup";
 ?>
@@ -23,7 +21,7 @@
 				<script src="../../Scripts/js/ajaxCallQuestions.js"></script>
 				<script src="../../Scripts/js/ajaxGetAllForClass.js"></script>
 				<script src="../../Scripts/js/filterRecords.js"></script>
-				<script>
+		<script>
 				var chkdarr = [];
 				var slno = 0;
 				function selectedQuestionDisplay(e) {
@@ -77,10 +75,6 @@
 								document.getElementById("axc").style.display = "none";
 								document.getElementById("ajaxButtons").style.display = "none";
 							}
-//to add all the relevant data to the quesry string, we need
-// TO: 1. stringify the arrar
-// TO : 2 get the class classNumber
-// TO : 3 get the subjectName
 							var choose = JSON.stringify(chkdarr);
 							var csb = document.getElementById("classSelectBoxes").children;
 							var csbi = 0;
@@ -98,7 +92,7 @@
 							}
 							// alert (csbi + ssbi)
 							var clk = "ajaxCallSaveNewActivity(" + choose +"," + csbi+ ",\"" + ssbi + "\",this.id)";
-console.log(clk);
+								console.log(clk);
 							var savebuttons = document.getElementsByName("saveButton");
 							for (l=0;l<savebuttons.length;l++){
 								savebuttons[l].setAttribute("onclick", clk);
@@ -111,14 +105,20 @@ console.log(clk);
 
 						console.log(value);
 					}
-				</script>
+		</script>
 	</head>
 	<body class="body">
 		<div class="container">
 			<hr>
-			<h3 class="centered"><?php include "../Components/top.php"; ?></h3>
+			<h3 class="centered">
+				<?php
+					include "../Components/top.php";
+					include $_SERVER['DOCUMENT_ROOT']."/Components/C_S_T_internalNav.php";
+					include $_SERVER['DOCUMENT_ROOT']."/Components/internalNav.php";
+				?>
+
+			</h3>
 			<hr>
-			<?php include "../Components/instructions.html"; ?>
 
 			<div>
 				<div class="col-sm-4" style="padding: 10px;">

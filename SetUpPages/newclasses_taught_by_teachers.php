@@ -1,9 +1,9 @@
 <?php
 	//include "basecode-create_connection.php";
 	include "../basecode-create_connection.php";
+	include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/CSTquerries.php";
 
-
-	$pageHeading = "Set Up your Classes and Sections";
+	$pageHeading = "Classes and Sections";
 	$pageCode = "setup";
 ?>
 
@@ -21,16 +21,6 @@
 			<link rel="stylesheet" type="text/css" href="/stylesheet.css"  />
 				<script src="../../Scripts/js/ajaxCalls.js"></script>
 
-				<script type="text/javascript">
-					var addMultiple = [];
-					function addNewClasses() {	//for ADD ALL button
-					 //document.getElementById("status").innerHTML = "Add New Classes triggered";
-
-
-					 $('#status').html(addMultiple);
-					}
-
-				</script>
 	</head>
 	<body class="body" style="background: var(--BodyGradient);">
 		<div class="container">
@@ -51,7 +41,7 @@
 					<?php
 						include $_SERVER['DOCUMENT_ROOT']."/Forms/newClassForm.php"; ?>
 					<hr>
-					<div  class="row">
+					<!-- <div  class="row">
 						<div id="ajaxRes" class="col-sm-2">
 
 						</div>
@@ -63,14 +53,21 @@
 								<button id="addAll" class="btn-primary"  onclick="ajaxAddAll(addMultiple)" style="display: none;"></button>
 							</div>
 						</div>
-					</div>
+					</div> -->
+
 				</div>
 				<div class="col-sm-9 centered" style="border-left: 1px solid Grey;">
-
-						<?php
+					<!-- <div class="container"> -->
+			      <?php
+			      for ($a=1;$a<13;$a++) {
+			        classes_sections_teachers($a,$mysqli,$pageHeading);
+			      }
+			      ?>
+			    <!-- </div> -->
+						<!-- <?php
 
 							include $_SERVER['DOCUMENT_ROOT']."/AddNew/Existing/classes_taught_by_teachers.php";
-						?>
+						?> -->
 
 
 						<div id="status"></div>

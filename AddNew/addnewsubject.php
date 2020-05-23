@@ -13,7 +13,7 @@
 			$stmt = $mysqli->prepare("INSERT INTO classes_taught_by_teacher (`Subject`) VALUES (?)");
 			$stmt->bind_param("s", $subjectNameSafe);
 
-			//$stmt->execute();
+			//
 			if (!$stmt->execute()) {
 				if ($stmt->errno) {echo $stmt->errno;}
 				if (($stmt->errno) == '1062') {

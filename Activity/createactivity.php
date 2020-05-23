@@ -12,7 +12,7 @@
 
     $stmt->bind_param("ss", $inpTitle,  $arrayGET);
 
-    $stmt->execute();
+    
 
     $stmt->close();
     $mysqli->close();

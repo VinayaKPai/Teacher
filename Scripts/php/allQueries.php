@@ -53,26 +53,27 @@ INNER JOIN sections as s
 
     if ($status == "ongoing") {
       $str = "WHERE dl.schStartDate < CURDATE() AND dl.schEndDate > CURDATE() AND dl.deploySuccess = 1 AND dl.depType = '$type'";
-      $successFlag = 1;
+      $successFlag = 1;//need this separately for display
       $queryString = $queryString.$str ;
     }
     if ($status == "completed") {
       $str = "WHERE dl.schStartDate < CURDATE() AND dl.schEndDate < CURDATE() AND dl.deploySuccess = 1 AND dl.depType = '$type'";
-      $successFlag = 1;
+      $successFlag = 1;//need this separately for display
       $queryString = $queryString.$str ;
     }
     if ($status == "undeployed") {
       $str = "WHERE dl.deploySuccess = 0 AND dl.depType = '$type'";
-      $successFlag = 0;
+      $successFlag = 0;//need this separately for display
       $queryString = $queryString.$str ;
     }
     $queryString = $queryString."  GROUP BY dl.depId";
+    // echo $queryString;
 
 
       if ($status == "all") {
         $queryString = ("SELECT
-              a.assessment_Title,
-              a.assessment_Id,
+              a.assessment_Title AS 'Title',
+              a.assessment_Id AS 'Assessment ID',
           	json_arrayagg(
           		json_object(
           			'questionID',qb.qId,
@@ -105,12 +106,8 @@ INNER JOIN sections as s
           GROUP BY a.assessment_Title;") ;
       }
     $query = $mysqli->query($queryString);
-    //
     // $query should be returned
-
-    //$cnt does not need to be passed to the function. You can mysqli_num_rows($query) in the display functions
-    $cnt = mysqli_num_rows($query);
-    div($query, $cnt, $type, $successFlag, $status, $pageHeading);
+    div($query, $type, $successFlag, $status, $pageHeading);
   }
 
 

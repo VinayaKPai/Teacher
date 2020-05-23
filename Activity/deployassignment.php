@@ -8,7 +8,7 @@
     	$stmt = $mysqli->prepare("INSERT INTO `deploymentlog` (`depType`,`testId`, `schStartDate`) VALUES (?, ?)");
     	$stmt->bind_param("sss", $depTest, $dateToDeploy );
 
-    	$stmt->execute();
+    	
     }
      else {
         trigger_error('U-U!!!! Looks like some fields were empty! :-(');

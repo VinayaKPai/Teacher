@@ -13,7 +13,7 @@
     $stmt = $mysqli->prepare("INSERT INTO tests (testTitle, teclassId, tesubjectId, tequestions) VALUES (?, ?, ?, ?)");
     $stmt->bind_param("ssss", $inpTitle, $classId, $subjectId,$questions);
 
-    $stmt->execute();
+    
 
     $stmt->close();
     $mysqli->close();

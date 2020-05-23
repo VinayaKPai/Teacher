@@ -41,7 +41,7 @@
 			$stmt = $mysqli->prepare("INSERT INTO users (role, firstName, lastName, joinYear, endYear, email, systemEmail, phoneMobile, pw) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?)");
 			$stmt->bind_param("sssssssss", $role, $firstNameSafe, $lastNameSafe, $joinYearSafe, $endYearSafe, $emailSafe, $systemEmail, $phoneMobileSafe, $phoneMobileSafe);
 
-			// $stmt->execute();
+			// 
 			if (!$stmt->execute()) {
 				if (($stmt->errno) == '1062') {
 					$message = "Could not add the Class-Section as ".$firstNameSafe." ".$lastNameSafe." and ".$email." and ".$phoneMobile." already exists in the database!";

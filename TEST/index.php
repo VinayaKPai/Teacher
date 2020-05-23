@@ -5,21 +5,24 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="../../stylesheet.css">
     <?php
-      include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/allQueries.php";
+      include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/CSTquerries.php";
       include $_SERVER['DOCUMENT_ROOT']."/basecode-create_connection.php";
       $pageHeading = "Classes-Sections-Teachers";
-      // $a = "A";
     ?>
   </head>
   <body class="body">
     <?php echo $datetime; ?>
-    <?php include $_SERVER['DOCUMENT_ROOT']."/Components/top.php"; ?>
+    <div class="container">
+      <?php include $_SERVER['DOCUMENT_ROOT']."/Components/top.php"; ?>
+    </div>
+    <div class="container">
+      <?php
+      for ($a=1;$a<13;$a++) {
+        classes_sections_teachers($a,$mysqli,$pageHeading);
+      }
+      ?>
+    </div>
 
-    <?php
-    $b = "completed";
-    classes_sections_teachers($a,$b,$mysqli,$pageHeading);
-    ?>
-Classes-Sections-Teachers()
 
 
 

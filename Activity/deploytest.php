@@ -10,7 +10,7 @@
     	$stmt = $mysqli->prepare("INSERT INTO `deploymentlog` (`depType`,`assessmentId`, `schStartDate`, `classId`, `sectionId`) VALUES (?,?,?,?,?)");
     	$stmt->bind_param("sisii", $depType, $depActivity, $dateToDeploy, $classId, $sectionId );
 
-    	$stmt->execute();
+    	
     }
      else {
         trigger_error('U-U!!!! Looks like some fields were empty! :-(');

@@ -36,7 +36,7 @@
 
 			$stmt->bind_param("sssssssss", $firstNameSafe, $middleNameSafe, $lastNameSafe, $emailSafe, $systemEmail, $phoneMobileSafe, $joinYearSafe, $endYearSafe, 'Y');
 
-			//$stmt->execute();
+			//
 			if (!$stmt->execute()) {
 				if (($stmt->errno) == '1062') {
 					$message = "Could not add the Class-Section as ".$firstNameSafe." ".$lastNameSafe." and ".$email." and ".$phoneMobile." already exists in the database!";

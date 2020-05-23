@@ -18,7 +18,7 @@
 
     $stmt->bind_param("sssss", $assessmentType, $inpTitle, $classId, $subjectId, $newAssignment);
 
-    $stmt->execute();
+    
 
     $stmt->close();
     $mysqli->close();

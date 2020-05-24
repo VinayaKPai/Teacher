@@ -74,6 +74,8 @@ INNER JOIN sections as s
         $queryString = ("SELECT
               a.assessment_Title AS 'Title',
               a.assessment_Id AS 'Assessment ID',
+              dl.classId AS 'classId',
+              c.classNumber AS 'classNumber',
           	json_arrayagg(
           		json_object(
           			'questionID',qb.qId,
@@ -89,10 +91,12 @@ INNER JOIN sections as s
           	json_arrayagg(DISTINCT
           		json_object(
           			'classId', dl.classId,
-                      'section', dl.sectionId,
-                      'startDate', dl.schStartDate,
-                      'endDate', dl.schEndDate,
-                      'deploySuccess', dl.deploySuccess
+                'classNumber', c.classNumber,
+                'sectionId', dl.sectionId,
+                'sectionName', s.Sections,
+                'startDate', dl.schStartDate,
+                'endDate', dl.schEndDate,
+                'deploySuccess', dl.deploySuccess
           		)
           		) as 'Deployments'
           FROM
@@ -103,6 +107,10 @@ INNER JOIN sections as s
           	on a.assessment_Id = aq.assessment_Id
           LEFT JOIN deploymentlog as dl
           	on dl.assessmentId = aq.assessment_Id
+          LEFT JOIN classes as c
+          	on c.classId = dl.classId
+          LEFT JOIN sections as s
+          	on s.sectionId = dl.sectionId
           GROUP BY a.assessment_Title;") ;
       }
     $query = $mysqli->query($queryString);

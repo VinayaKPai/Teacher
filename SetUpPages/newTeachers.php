@@ -1,6 +1,7 @@
 <?php
 	//include "basecode-create_connection.php";
 	include $_SERVER['DOCUMENT_ROOT']."/basecode-create_connection.php";
+	include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/teachersQueryResultToHtmlTable.php";
 	//include "../RemoveRecords/RemoveClass.php";
 	//include "../Scripts/php/addNewClasses.php";
 //	include "../RemoveRecords/RemoveClass.php";

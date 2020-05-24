@@ -23,12 +23,7 @@
 
     if ($count != 0) {
         while ($row = $result->fetch_array( MYSQLI_ASSOC )){
-          // print_r($row);
-          //if A/Q/T, C/O/U, then each $row has Id, Type, Class, Class Id, SectionId, Section, Open From, Open Till, Deployed?, Assessment ID, Title, Questions for each record like this:
-          //Array ( a=>b c=>d .... [Questions] => [{a:b, c:d,....},{a:h, c:i,....}{a:p, c:q,...}] ) >>where each {} is a single deployment  data<<
-          //if ALL, then each $row has Title, Assessment ID, Questions, Deployments for each record like this:
-          //Array ( a=>b c=>d [Questions] => [{a:b, c:d,....},{a:h, c:i,....}{a:p, c:q,...}] ) >>where each {} is a single assessment  data<< [Deployments] => [{a:b, c:d,....},{a:h, c:i,....}{a:p, c:q,...}] >>where each {} is a single deployment  data for THIS particular assessment << )
-          //PROBLEM: WHEN "ALL" ARE DISPLAYED, THEN, EACH QUESTION IN THE ASSESSMENT IS REPEATED 4 TIMES IF THAT PARTICULAR ASSESSMENT HAS BEEN SCHEDULED FOR DEPLOYMENT 4 TIMES. ALSO, THE scheduleDeployment() IS ALSO REPEATED 4 TIMES, AND THE DEPLOYMENT FEATURE IS DISPLAYED 4 TIMES!
+
               divBody( $row, $status, $ass, $type );
           }
     }
@@ -81,42 +76,31 @@
                 <h4 class='panel-title centered'>".$secHeading."</h4></div>";
     	  echo "
             <div id='".$dId."' class='panel-collapse collapse'>
-              <div class='panel-body'>
-                <div class='body col-sm-8 left' style='background:  var(--BodyGradient); border-radius: 25px; border-bottom: 2px solid #4B0082;'>";
-		              displayQuestion($row['Questions']);
-                echo "</div>
-                <div class='body col-sm-4' style='background:  var(--BodyGradient); border-radius: 25px; border-bottom: 2px solid #4B0082;'>";
+              <div class='panel-body'>";
+		              displayAssesmentQuestions($row['Questions']);
+              echo "<div class='body col-sm-4' style='background:  var(--BodyGradient); border-radius: 25px; border-bottom: 2px solid #4B0082;'>";
                    echo "<h5>".$schdTxt . "</h5>";
-                   if (isset($row['Class']) && isset($row['Section']) && isset($row['Open From']) && isset($row['Open Till'])) {
-                      scheduleDeployment($row['Class'], $row['Class Id'], $row['Section'], $row['SectionId'], $row['Assessment ID']);
-                   }
-                 else {
-    	      $vard = json_decode($row['Deployments'], true);
-            for ($j=0;$j<count($vard);$j++) {
-              $deps = $vard[$j];  //is also an array
+                  if(isset($row['Deployments'])) {
+                    displayAllDeployments($row['Deployments']);
+                    $classId = $row['classId'];
+                    $class = $row['classNumber'];
+                    $assId = $row['Assessment ID'];
+                  }
+                  scheduleDeployment($row['classNumber'], $row['classId'], $row['Assessment ID']);
 
-              $classId = $deps['classId'];
-              $sectionId = $deps['section'];
-              $schStartDate = $deps['startDate'];
-              $schEndDate = $deps['endDate'];
-              $deploySuccess = $deps['deploySuccess'];
-              $composite = $classId.$assId;
-              $dates = "date".$composite;
-              $names = "name".$composite;
-
-              if ($deps['deploySuccess']==0) {$col = "class='red'"; $txt="<strong>No</strong>";}
-              else {$col = "class='green'"; $txt="<strong>Yes</strong>";}
-
-              deployAllAssessments($classId, $sectionId,  $schStartDate, $schEndDate, $deploySuccess,  $composite, $dates, $names, $txt, $col, $assId);
-            }
-         }
+                   //   if (isset($row['Class']) && isset($row['Section']) && isset($row['Open From']) && isset($row['Open Till'])) {
+                   //      scheduleDeployment($row['Class'], $row['Class Id'], $row['Assessment ID']);
+                   //   }
+                   // else {
+                   //
+                   //  }
               echo "</div>";
             echo '</div>
           </div>';
       }
 
 //for completed, ongoing, undeployed A/Q/T
-function scheduleDeployment($class, $classId, $section, $sectionId, $assId) {
+function scheduleDeployment($class, $classId, $assId) {
   $composite = $classId.$assId;
   $dates = "date".$composite;
   $names = "name".$composite;
@@ -146,85 +130,63 @@ function scheduleDeployment($class, $classId, $section, $sectionId, $assId) {
 }
 
 //for ALL assessments
-function deployAllAssessments($classId, $sectionId,  $schStartDate, $schEndDate, $deploySuccess, $composite, $dates, $names, $txt, $col,  $assId) {//$vard is json encode of $row['Deployments'] $assId is assessment Id
+function displayAllDeployments($allDeployments) {//$vard is json encode of $row['Deployments'] $assId is assessment Id
 
+$deployments = json_decode($allDeployments, true);
   echo "<ol style='list-style-type: number' >";
-
-
-
-        echo "<li>Class ".$classId." Section ".$sectionId;
-
-        echo "<ol ".$col." style='list-style-type: lower-alpha' > ";
-            echo "<li>From : ".$schStartDate."</li>";
-            echo "<li>To : ".$schEndDate."</li>";
-            echo "<li>Deployed : ".$txt."</li>";
-        echo "</ol>";
-        echo "</li>";
-
-//this ends the existing schedules in the deploymentlog
-  // }
+  foreach ($deployments as $deployment) {
+    displayDeployment($deployment);
+  }
   echo "</ol>";
-  //display the feature to deploy the assessment again using scheduleDeployment()??
-  //Array ( [0] => Array ( [classId] => 9 [section] => 2 [startDate] => 2020-05-06 [endDate] => 2020-05-23 [deploySuccess] => 0 ) )
-  // $class, $classId, $section, $sectionId, $assId
-  echo 	"<div class='container roundedsquare' style='text-align: left; padding: 10px;'>
-  <h5 class='centered'>Deploy to Class ".$classId."</h5>
-    <br>
-    <label for='section".$composite."'>Section: </label>
-    <select id='section".$composite."' name=$names>
-        <option value='1'>A</option>
-        <option value='2'>B</option>
-        <option value='3'>C</option>
-        <option value='4'>D</option>
-        <option value='5'>E</option>
-        <option value='6'>F</option>
-    </select><br>
-    <label for='".$dates."'>Select Date:</label>
-    <input type='date' id='".$dates."' name=".$names."><br>
-    <label for='as".$composite."'>Type:</label>
-      <select id='as".$composite."' name=".$names.">
-        <option name='A' value='A'>Assignment</option>
-        <option name='Q' value='Q'>Quiz</option>
-        <option name='T' value='T'>Test</option>
-      </select><br>
-      <button id=".$assId." onclick='deploy(".$assId.",".$classId.")' style='float: right;'>Deploy</button>
-    </div>";
-
-
 }
 
-function displayQuestion($questionData) {
+function displayDeployment($deploymentDetails) {
+  if ($deploymentDetails['deploySuccess'] == 0) {
+    $col = "class='red'";
+    $txt = "<strong>No</strong>";
+  } else {
+    $col = "class='green'";
+    $txt = "<strong>Yes</strong>";
+  }
+
+  echo "<li>Class ".$deploymentDetails['classNumber']." Section ".$deploymentDetails['sectionId'];
+  echo "<ol ".$col." style='list-style-type: lower-alpha' > ";
+  echo "<li>From : ".$deploymentDetails['startDate']."</li>";
+  echo "<li>To : ".$deploymentDetails['endDate']."</li>";
+  echo "<li>Deployed : ".$txt."</li>";
+  echo "</ol>";
+  echo "</li>";
+}
+
+function displayQuestion($questionDetails) {
   //This should display only 1 question
-  $varr = json_decode($questionData, true);
-  echo "<ol style='list-style-type: number' >";
-  for ($j=0;$j<count($varr);$j++) {
-    $l = $varr[$j];
-    // print_r($l);
+
+    //$questionDetails = $varr[$questionDetails];
+    // print_r($questionDetails);
     echo "<li>";
-    echo $l['question'];
+    echo $questionDetails['question'];
     echo "<ol style='list-style-type: lower-alpha' > ";
-      if ($l['option1']) {
-        echo "<li>".$l['option1']."</li>";
+      if ($questionDetails['option1']) {
+        echo "<li>".$questionDetails['option1']."</li>";
       }
-      if ($l['option2']) {
-        echo "<li>".$l['option2']."</li>";
+      if ($questionDetails['option2']) {
+        echo "<li>".$questionDetails['option2']."</li>";
       }
-      if ($l['option3']) {
-        echo "<li>".$l['option3']."</li>";
+      if ($questionDetails['option3']) {
+        echo "<li>".$questionDetails['option3']."</li>";
       }
-      if ($l['option4']) {
-        echo "<li>".$l['option4']."</li>";
+      if ($questionDetails['option4']) {
+        echo "<li>".$questionDetails['option4']."</li>";
       }
-      if ($l['option5']) {
-        echo "<li>".$l['option5']."</li>";
+      if ($questionDetails['option5']) {
+        echo "<li>".$questionDetails['option5']."</li>";
       }
-      if ($l['option6']) {
-        echo "<li>".$l['option6']."</li>";
+      if ($questionDetails['option6']) {
+        echo "<li>".$questionDetails['option6']."</li>";
       }
     echo "</ol>";
     echo "</li>";
-  }
-  echo "</ol>";
+
 }
 
 
@@ -251,11 +213,20 @@ function displayAllAssessments($allAssessments) {
   }
 }
 
-function displayAssesmentQuestions($assessment) {
+function displayAssessment ($assessmentTitle ) {
+
+}
+
+function displayAssesmentQuestions($jsonQuestions) {
   //This will take 1 assessment and loop through all the questions in it and display it as needed
+  echo "<div class='body col-sm-8 left' style='background:  var(--BodyGradient); border-radius: 25px; border-bottom: 2px solid #4B0082;'>";
+  $assessmentQuestions = json_decode($jsonQuestions, true);
+  echo "<ol style='list-style-type: number' >";
   foreach ($assessmentQuestions as $assessmentQuestion) {
     displayQuestion($assessmentQuestion);
   }
+  echo "</ol>";
+  echo "</div>";
 }
 
 

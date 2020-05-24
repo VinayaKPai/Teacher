@@ -1,9 +1,22 @@
 <form name="newTeacherForm" action="../AddNew/addnewteacher.php" method="post">
   <div class="form-group">
-    <label for="firstName">First Name<span class="glyphicon glyphicon-asterisk" style="color: Red"></span></label> <input id="firstName" name="firstName" class="form-control" required />
-    <label for="middleName">Middle Name</span></label> <input id="middleName" name="middleName" class="form-control" />
-    <label for="lastName">Last Name<span class="glyphicon glyphicon-asterisk" style="color: Red"></span></label> <input id="lastName" name="lastName" class="form-control" required />
-    <label for="phoneMobile">Mobile<span class="glyphicon glyphicon-asterisk" style="color: Red"></span></label> <input id="phoneMobile" name="phoneMobile" class="form-control" onkeyup="setTempPW(this)"/>
+    <label for="firstName">First Name
+      <span class="glyphicon glyphicon-asterisk" style="color: Red">
+      </span>
+    </label>
+    <input id="firstName" name="firstName" class="form-control" required />
+    <label for="middleName">Middle Name</label>
+    <input id="middleName" name="middleName" class="form-control" />
+    <label for="lastName">Last Name
+      <span class="glyphicon glyphicon-asterisk" style="color: Red">
+      </span>
+    </label>
+    <input id="lastName" name="lastName" class="form-control" required />
+    <label for="phoneMobile">Mobile
+      <span class="glyphicon glyphicon-asterisk" style="color: Red">
+      </span>
+    </label>
+    <input id="phoneMobile" name="phoneMobile" class="form-control" onkeyup="setTempPW(this)"/>
     <script>
       function setTempPW(e) {
         var ei = e.value;

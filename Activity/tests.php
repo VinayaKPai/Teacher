@@ -62,11 +62,217 @@
 </body>
 </html>
 <?php
-SELECT a.assessment_Title AS 'Title', a.assessment_Id AS 'Assessment ID', json_arrayagg( json_object( 'questionID',qb.qId, 'question',qb.question, 'option1',qb.Option_1, 'option2',qb.Option_2, 'option3',qb.Option_3, 'option4',qb.Option_4, 'option5',qb.Option_5, 'option6',qb.Option_6 ) ) as 'Questions', json_arrayagg(DISTINCT json_object( 'classId', dl.classId, 'section', dl.sectionId, 'startDate', dl.schStartDate, 'endDate', dl.schEndDate, 'deploySuccess', dl.deploySuccess ) ) as 'Deployments' FROM questionbank AS qb INNER JOIN assessment_questions AS aq on aq.question_id = qb.qId INNER JOIN assessments as a on a.assessment_Id = aq.assessment_Id LEFT JOIN deploymentlog as dl on dl.assessmentId = aq.assessment_Id GROUP BY a.assessment_Title;
+// $query = $mysqli->query(
+"SELECT
+	DISTINCT
+		users.firstName,
+		users.middleName,
+		users.lastName,
+		classes.classId,
+		classes.classNumber,
+		sections.sectionId,
+		sections.Sections,
+		subjects.Subject
+ FROM
+ users,
+ classes_taught_by_teacher,
+ classes,
+ sections,
+ subjects
+ WHERE
+ classes_taught_by_teacher.userId = $teacherId AND
+ users.userId = classes_taught_by_teacher.userId AND
+ classes.classId = classes_taught_by_teacher.classId AND
+ sections.sectionId = classes_taught_by_teacher.sectionId AND
+ subjects.subjectId = classes_taught_by_teacher.subjectId
+ ORDER BY classes.classId ASC, sections.sectionId ASC");
 
-Array ( [Title] => asdf [Assessment ID] => 2 [Questions] => [{"questionID": 3, "question": "Passive citizens of France were:", "option1": "Only men above 25 years", "option2": "Only propertied men", "option3": "Men and women who didn't vote", "option4": "Only propertied women", "option5": "", "option6": ""},{"questionID": 4, "question": "Marseilles' was a: ", "option1": "Representative of third e3te?", "option2": "National anthem of France", "option3": "Political club?", "option4": "Militia", "option5": "", "option6": ""}] [Deployments] => [{"classId": 9, "section": 2, "startDate": "2020-05-06", "endDate": "2020-05-23", "deploySuccess": 0}] )
-8 Assessments
+"SELECT
+	users.firstName,
+	users.middleName,
+	users.lastName,
+	classes.classNumber,
+	sections.Sections
+FROM
+	users,
+	studentdetails,
+	classes,
+	sections
+WHERE
+	users.userId = studentdetails.userId AND
+	studentdetails.sectionId = $sectionId AND
+	studentdetails.classId = $classId AND
+	studentdetails.classId = classes.classId AND
+	studentdetails.sectionId = sections.sectionId ");
+
+
+"SELECT
+		userId AS 'Id',
+		firstName AS 'First Name',
+		middleName AS 'Middle Name',
+		lastName AS 'Last Name',
+		Email AS 'External Email',
+		systemEmail AS 'Internal Email',
+		joinYear AS 'Joined',
+		phoneMobile AS 'Mobile'
+FROM users
+WHERE `visibility` = 'Y'
+AND `role` = 'T'");
+
+users, studentdetails, classes, sections
+users, classes_taught_by_teacher, teachers, classes, sections, subjects
+
+"SELECT
+		users.userId AS 'Id',
+		firstName AS 'First Name',
+		middleName AS 'Middle Name',
+		lastName AS 'Last Name',
+		Email AS 'External Email',
+		systemEmail AS 'Internal Email',
+		joinYear AS 'Joined',
+		phoneMobile AS 'Mobile',
+		CONCAT('[',json_arrayagg(
+			json_object(
+				'Class Id', classes.classId,
+				'Class', classes.classNumber,
+				'Section Id', sections.sectionId,
+				'Section', sections.Sections,
+				'Subject', subjects.Subject
+			)
+		),']') as 'Cl Sec Sub'
+		CONCAT('[',json_arrayagg(
+			json_object(
+				'S First Name', users.firstName,
+				'S First Name', users.middleName,
+				'S First Name', users.lastName,
+				'S Class Number', classes.classNumber,
+				'S Section', sections.Sections
+			)
+		),']') as 'Stu Dets'
+FROM
+	users,
+	classes_taught_by_teacher,
+	classes,
+	sections,
+	subjects
+	studentdetails,
+WHERE
+		users.visibility = 'Y'
+AND users.role = 'T'
+-- AND classes_taught_by_teacher.userId = $teacherId
+-- AND users.userId = classes_taught_by_teacher.userId
+-- AND classes.classId = classes_taught_by_teacher.classId
+-- AND sections.sectionId = classes_taught_by_teacher.sectionId
+-- AND subjects.subjectId = classes_taught_by_teacher.subjectId
+-- AND users.userId = studentdetails.userId
+-- AND studentdetails.sectionId = $sectionId
+-- AND studentdetails.classId = $classId
+-- AND studentdetails.classId = classes.classId
+-- AND studentdetails.sectionId = sections.sectionId
+
+AND classes_taught_by_teacher.userId = $teacherId
+
+-- AND users.userId = classes_taught_by_teacher.userId
+INNER JOIN  ON users.userId = classes_taught_by_teacher.userId
+-- AND classes.classId = classes_taught_by_teacher.classId
+INNER JOIN  ON classes.classId = classes_taught_by_teacher.classId
+-- AND sections.sectionId = classes_taught_by_teacher.sectionId
+INNER JOIN  ON  sections.sectionId = classes_taught_by_teacher.sectionId
+-- AND subjects.subjectId = classes_taught_by_teacher.subjectId
+INNER JOIN  ON  subjects.subjectId = classes_taught_by_teacher.subjectId
+-- AND users.userId = studentdetails.userId
+INNER JOIN  ON  users.userId = studentdetails.userId
+AND studentdetails.sectionId = $sectionId
+AND studentdetails.classId = $classId
+-- AND studentdetails.classId = classes.classId
+INNER JOIN  ON  studentdetails.classId = classes.classId
+-- AND studentdetails.sectionId = sections.sectionId
+INNER JOIN  ON studentdetails.sectionId = sections.sectionId
+ORDER BY classes.classId ASC, sections.sectionId ASC
+"
+
+"SELECT
+		U.userId AS 'T Id',
+		U.firstName AS 'T First Name',
+		U.middleName AS 'T Middle Name',
+		U.lastName AS 'T Last Name',
+		U.Email AS 'T External Email',
+		U.systemEmail AS 'T Internal Email',
+		U.joinYear AS 'Joined',
+		U.phoneMobile AS 'T Mobile',
+		json_arrayagg(
+			json_object(
+				'Class Id', C.classId,
+				'Class', C.classNumber,
+				'Section Id', Sec.sectionId,
+				'Section', Sec.Sections,
+				'Subject', Sub.Subject
+			)
+		)
+		as 'Cl Sec Sub',
+		json_arrayagg(
+			json_object(
+				'S First Name', U.firstName,
+				'S First Name', U.middleName,
+				'S First Name', U.lastName,
+				'S Class Number', C.classNumber,
+				'S Section', Sec.Sections
+			)
+		) as 'Stu Dets'
+FROM
+	users as U
+INNER JOIN classes_taught_by_teacher as CTT
+	ON U.userId = CTT.userId
+INNER JOIN classes as C
+	ON C.classId = CTT.classId
+INNER JOIN sections as Sec
+	ON  Sec.sectionId = CTT.sectionId
+INNER JOIN subjects as Sub
+	ON  Sub.subjectId = CTT.subjectId
+LEFT JOIN studentdetails as StDet
+	ON  StDet.userId = U.userId
+LEFT JOIN studentdetails as StDet2
+	ON  StDet.classId = C.classId
+LEFT JOIN studentdetails as StDet3
+	ON StDet.sectionId = Sec.sectionId
+WHERE
+	U.visibility = 'Y'
+AND U.role = 'T'
+AND StDet.sectionId = CTT.sectionId
+AND StDet.classId = CTT.classId
+
+AND U.userId = $teacherId
+ORDER BY C.classId ASC, Sec.sectionId ASC"
 
 
 
+T Id
+T First Name
+T Middle Name
+T Last Name
+T External Email
+T Internal Email
+Joined
+T Mobile
+Cl Sec Sub
+Stu Dets
+4
+Vinaya
+Keshav
+Pai
+vinayakeshavpai@gmail.com
+VinayaKeshavPai@mydomain.com
+2001
++919663304792
+[
+	{"Class Id": 1, "Class": "I", "Section Id": 2, "Section": "B", "Subject": "English"},
+	{"Class Id": 9, "Class": "IX", "Section Id": 4, "Section": "D", "Subject": "Social Studies"},
+	{"Class Id": 9, "Class": "IX", "Section Id": 6, "Section": "F", "Subject": "Social Studies"},
+	{"Class Id": 2, "Class": "II", "Section Id": 5, "Section": "E", "Subject": "Science"}
+]
+[
+	{"S First Name": "Vinaya", "S First Name": "Keshav", "S First Name": "Pai", "S Class Number": "I", "S Section": "B"},
+	{"S First Name": "Vinaya", "S First Name": "Keshav", "S First Name": "Pai", "S Class Number": "IX", "S Section": "D"},
+	{"S First Name": "Vinaya", "S First Name": "Keshav", "S First Name": "Pai", "S Class Number": "IX", "S Section": "F"},
+	{"S First Name": "Vinaya", "S First Name": "Keshav", "S First Name": "Pai", "S Class Number": "II", "S Section": "E"}]
 ?>

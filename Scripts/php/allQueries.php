@@ -67,7 +67,6 @@ INNER JOIN sections as s
       $queryString = $queryString.$str ;
     }
     $queryString = $queryString."  GROUP BY dl.depId";
-    // echo $queryString;
 
 
       if ($status == "all") {
@@ -112,6 +111,7 @@ INNER JOIN sections as s
           LEFT JOIN sections as s
           	on s.sectionId = dl.sectionId
           GROUP BY a.assessment_Title;") ;
+          echo $queryString;
       }
     $query = $mysqli->query($queryString);
     // $query should be returned

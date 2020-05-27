@@ -24,5 +24,35 @@
 
       Returns all data from deploymentlog, assessments, assessment_questions, questionbank
       // $queryString = "SELECT deploymentlog.depType AS 'Type', deploymentlog.depId AS 'Id', deploymentlog.classId AS 'Class', deploymentlog.sectionId AS 'Section', deploymentlog.schStartDate AS 'Open From', deploymentlog.schEndDate AS 'Open Till', deploymentlog.deploySuccess AS 'Deployed?', assessments.assessment_Title AS 'Title', assessments.assessment_Id, assessment_questions.question_id, questionbank.question, questionbank.Option_1, questionbank.Option_2, questionbank.Option_3, questionbank.Option_4, questionbank.Option_5, questionbank.Option_6 FROM deploymentlog, assessments, assessment_questions, questionbank WHERE deploymentlog.assessmentId = assessments.assessment_Id AND deploymentlog.depType = '$type' AND assessment_questions.question_id = questionbank.qId";
-
+//Query to pull teacher-class-section-subject-Students
+SELECT DISTINCT
+		U.userId AS 'Teacher ID',
+		json_arrayagg( json_object(
+			'FN',U.firstName,
+			'MN',U.middleName,
+			'LN',U.lastName,
+			'Current',U.visibility
+		) ) as 'Teacher',
+		json_arrayagg(DISTINCT json_object(
+			'Sub Id', Sub.subjectId,
+			'Class Id',CTT.classId,
+			'Sec Id', Sec.sectionId
+		) ) as 'Subjects',
+		json_arrayagg(DISTINCT json_object(
+			'Stu Id', SD.userId,
+			'S Id', SD.classId,
+			'sectionId', SD.sectionId
+		) ) as 'Students' 
+		FROM
+			users AS U
+				INNER JOIN classes_taught_by_teacher AS CTT
+					on CTT.userId = U.userId
+				INNER JOIN subjects AS Sub
+					on Sub.subjectId = CTT.subjectId
+				LEFT JOIN sections as Sec
+					on Sec.sectionId= CTT.sectionId
+				LEFT JOIN studentDetails as SD
+					on SD.classId = CTT.classId
+				LEFT JOIN classes as C1 on C1.classId = CTT.classId
+		GROUP BY U.userId
 ?>

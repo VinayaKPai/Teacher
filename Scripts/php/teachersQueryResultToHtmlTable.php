@@ -18,19 +18,18 @@ function table( $result ) {
 }
 
 function tableHead(  $result ) {  //$result is ALL the records for all teachers
-echo "<p>Below is New display using functions. Prefer to replace the modals with expandable sections.</p>";
         echo '<thead>';
         foreach ( $result as $teacher ) {
             echo '<tr>';
-            foreach ( $teacher as $k => $y ) {
-                echo '<th>' . $k . '</th>';
+            foreach ( $teacher as $j => $k ) {
+                if ($j !='Students' AND $j != 'Subjects'){
+                  echo '<th>' . $k . '</th>';
+                }
             }
             echo '<th>Action</th></tr>'; //as we need a delete option for the teacher
             break;
         }
         echo '</thead>';
-
-
 }
 
 function tableBody(  $result ) { //$result is ALL the records for all teachers
@@ -54,46 +53,69 @@ function displayTeacherData($teacher) { //$teacher is the data for a SINGLE teac
       $remIdDB = $teacher['T First Name']."-".$teacher['T Middle Name']."-".$teacher['T Last Name'].$teacher['T Mobile'];
       $url = "../../RemoveRecords/RemoveTeacher.php?fn=".$fn."&mn=".$mn."&ln=".$ln."&pm=".$pm;
 
-      foreach ( $teacher as $y ) {
-          echo "<td><a data-toggle='collapse' style='color:white;' href='#".$togId."'> " . $y . "</a></td>";
-      }
-
+      foreach ( $teacher as $x => $y ) {//the Students and Subject shd not be displayed as theads
+        if ($x !='Students' AND $x != 'Subjects'){//because students and subject are displayed differetly
+          echo "<td>
+            <a data-toggle='collapse' style='color:white;' href='#".$tId."'> " . $y . "</a>
+          </td>";
+        }
+      }//display for columns other than students and subjects OVER
+      //creating a delete button
       echo "<td>
         <a id=$remIdDB name=$remIdDB  href='$url'>
           <span class='glyphicon glyphicon-trash' style='background-color: Red; color: White; padding: 4px;'></span>
         </a>
-      </td>";
-
-      echo "<tr  class='panel panel-default'>
-              <td colspan=9 style='color: White;'>
-                <div class='panel-heading'>
-                    <div id='".$togId."' class='panel-collapse collapse'>
-                  <div class='panel-body'>";
-                     //DATA PASSED HERE WILL LIKELY CHANGE ONCE QUERIES ARE MERGERED
-                    displaySubjectsClassesForTeacher($fn,$mn,$ln,$tId);//first level - display classes-sections-subjects taught by teacher
+      </td>";//end creating a delete button
+      //this tr is for subjects and Students  y class-section for that teacher
+      echo "<tr class='panel panel-default'>";
+      //there will be a set of collapsibles - one each for every class
+          //inside the class collapsible, we need a sections-subjects combo
+          //inside the class collapsible, we also need a section-students combo
+          //so create a function to display a collapsible first which will be passed the teacherId-classId
+          echo "<td colspan=9 style='color: White;'>";
+          collapsibleClasses($teacher['Subjects'],$teacher['Students'],$tId);
+      echo "</td></tr>";
+    }
+    function collapsibleClasses($subjects,$students,$tId) {
+                echo "<div class='panel-heading'>
+                    <div id='".$tId."' class='panel-collapse collapse'>
+                      <div class='panel-body'>";
+                        $subs = json_decode($subjects, true);
+                        foreach ($subs as $subjectByCS) {//each $subjectByCS is a single class-section-subject combo
+                          echo "<div class='panel panel-default' style='color: #00000f'>";
+                          //we call a function to display this combo
+                          $sCSId = "sCsT".$tId.$subjectByCS['Class Id'].$subjectByCS['Sec Id'].$subjectByCS['Sub Id'];
+                          echo "<h6><a data-toggle='collapse' href='#".$sCSId."'>
+                            Class: ". $subjectByCS['Class Id']
+                            . " Section: ".$subjectByCS['Sec Id']
+                            ." Subject: ".$subjectByCS['Sub Id']
+                            . "</a></h6>";
+                              collapsibleSubjectByCS ($subjectByCS,$students,$sCSId,$subjectByCS['Class Id'],$subjectByCS['Sec Id']);
+                          echo "</div>";
+                        }
+                        // foreach ($subs as $a => $b) {
+                        //   displaySubjectsClassesForTeacher($b,$studs,$tId);
+                        // }
                     echo "</div>
-                  </div>
-              </td>
-          </tr>";
-}
+                  </div>";
+    }
+    function collapsibleSubjectByCS($subjectByCS,$students,$sCSId,$studCId,$studSId) {//each $subjectByCS is a single class-section-subject combo, $sCSId is id for the collapsibles, $studCId is the classId for this student and ,$studSId is section Id for this student
+      //we need an id for the collapsibles inside this. Subject is common, class and section are different
+      //here we will create another collapsible which will hold the students in it
 
-function displaySubjectsClassesForTeacher($fn,$mn,$ln,$tId) { //DATA PASSED HERE WILL LIKELY CHANGE ONCE QUERIES ARE MERGERED
-  echo "<h5>
-          <a data-toggle='collapse' style='color:white;' href='#REPLACED".$tId."'>CLICKSubjects - Classes For Teacher ".$fn." ".$mn." ".$ln." go here</a>
-        </h5>";
-  echo "<div class='panel panel-default'>
-          <div class='panel-heading'>
-            <div id='REPLACED".$tId."' class='panel-collapse collapse'>
-              <div class='panel-body'> This is a collapsible panel.<br>";
-              echo "<h5>Classes Students For Teacher ".$fn." ".$mn." ".$ln." go here</h5>";
-                 //DATA PASSED HERE WILL LIKELY CHANGE ONCE QUERIES ARE MERGERED
-                 displayClassSectionsStudentsForTeacher($fn,$mn,$ln);//second level - display list of students for the given class-section
-                echo "</div>
-              </div>
-          </div>
-        </div>";
-}
-function displayClassSectionsStudentsForTeacher($fn,$mn,$ln) { //DATA PASSED HERE WILL LIKELY CHANGE ONCE QUERIES ARE MERGERED
-  echo "<p>Each class section will be another collapsible inside this collapsible";
-}
+      echo "<div class='panel-heading'>
+          <div id='".$sCSId."' class='panel-collapse collapse'>
+            ";
+            $studs = json_decode($students, true);
+            // print_r($studs);
+            foreach ($studs as $cntr => $stuDets) {//$stuDets is an array with 'C Id', 'sectionId', 'Stu Id'
+              if ($stuDets['C Id'] == $studCId && $stuDets['sectionId'] == $studSId) {
+                  echo "<p>Student Id is ".$stuDets['Stu Id']."</p>";
+              }
+
+            }
+      echo "</div></div>";
+
+    }
+
  ?>

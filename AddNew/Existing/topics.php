@@ -1,12 +1,12 @@
 <?php
 
-	include "basecode-create_connection.php";
-	include "../Scripts/php/sqlQueryResultToOptions.php";
+	include $_SERVER['DOCUMENT_ROOT']."/basecode-create_connection.php";
+	include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/sqlQueryResultToOptions.php";
 echo "<div>";
 $rwcnt = 0;
 
 
-$query = $mysqli->query("SELECT * FROM topics, classes, subjects WHERE topics.classId = classes.classId AND topics.subjectId = Subjects.subjectId ORDER BY `classId`");
+$query = $mysqli->query("SELECT * FROM topics, classes, subjects WHERE topics.classId = classes.classId AND topics.subjectId = Subjects.subjectId ORDER BY classes.classId");
 
 			if ($query) {
 				$rowcount=mysqli_num_rows($query);
@@ -38,7 +38,7 @@ $query = $mysqli->query("SELECT * FROM topics, classes, subjects WHERE topics.cl
 						</tr>";
 
 				}
-			
+
 			}
 
 			if(!$query) {

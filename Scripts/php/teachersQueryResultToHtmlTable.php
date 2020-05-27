@@ -76,7 +76,8 @@ function displayTeacherData($teacher) { //$teacher is the data for a SINGLE teac
           collapsibleClasses($teacher['Subjects'],$teacher['Students'],$tId);
       echo "</td></tr>";
     }
-    function collapsibleClasses($subjects,$students,$tId) {
+    
+function collapsibleClasses($subjects,$students,$tId) {
                 echo "<div class='panel-heading'>
                     <div id='".$tId."' class='panel-collapse collapse'>
                       <div class='panel-body'>";

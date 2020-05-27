@@ -1,6 +1,6 @@
 <?php
 	//include "basecode-create_connection.php";
-	include "../basecode-create_connection.php";
+	include $_SERVER['DOCUMENT_ROOT']."/basecode-create_connection.php";
 
 	$pageHeading = "Topics";
 	$pageCode = "setup";

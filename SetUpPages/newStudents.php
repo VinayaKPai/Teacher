@@ -1,7 +1,8 @@
 <?php
 	//include "basecode-create_connection.php";
 	include $_SERVER['DOCUMENT_ROOT']."/basecode-create_connection.php";
-
+	include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/allQueries.php";
+	include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/studentsQueryResultToHtmlTable.php";
 	$pageHeading = "Students";
 	$pageCode = "setup";
 ?>
@@ -80,17 +81,14 @@
 				<div class="col-sm-3" style="padding: 10px;">
 					<hr>
 					<?php include $_SERVER['DOCUMENT_ROOT']."/Forms/userStudentForm.php"; ?>
-
 					<hr>
-
 				</div>
-<input id="studentId" name="studentId" hidden> </input>
+				<input id="studentId" name="studentId" hidden> </input>
 				<div class="col-sm-9 centered" style="border-left: 1px solid Grey;">
 					<h5>Click on the student's name to see details</h5>
 					<table id="existTable" style="width: 100%; padding: 5px; border-spacing: 2px; border-collapse: separate; align: 'center';">
 					<?php include "../AddNew/Existing/students.php"; ?>
 				</table>
-
 					<div id="status"></div>
 				</div>
 				<hr>

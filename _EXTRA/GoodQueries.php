@@ -25,6 +25,7 @@
       Returns all data from deploymentlog, assessments, assessment_questions, questionbank
       // $queryString = "SELECT deploymentlog.depType AS 'Type', deploymentlog.depId AS 'Id', deploymentlog.classId AS 'Class', deploymentlog.sectionId AS 'Section', deploymentlog.schStartDate AS 'Open From', deploymentlog.schEndDate AS 'Open Till', deploymentlog.deploySuccess AS 'Deployed?', assessments.assessment_Title AS 'Title', assessments.assessment_Id, assessment_questions.question_id, questionbank.question, questionbank.Option_1, questionbank.Option_2, questionbank.Option_3, questionbank.Option_4, questionbank.Option_5, questionbank.Option_6 FROM deploymentlog, assessments, assessment_questions, questionbank WHERE deploymentlog.assessmentId = assessments.assessment_Id AND deploymentlog.depType = '$type' AND assessment_questions.question_id = questionbank.qId";
 //Query to pull teacher-class-section-subject-Students
+Returns Teachers-Classes-Sections-Students correctly but without []
 SELECT DISTINCT
 		U.userId AS 'Teacher ID',
 		json_arrayagg( json_object(
@@ -42,7 +43,7 @@ SELECT DISTINCT
 			'Stu Id', SD.userId,
 			'S Id', SD.classId,
 			'sectionId', SD.sectionId
-		) ) as 'Students' 
+		) ) as 'Students'
 		FROM
 			users AS U
 				INNER JOIN classes_taught_by_teacher AS CTT
@@ -55,4 +56,53 @@ SELECT DISTINCT
 					on SD.classId = CTT.classId
 				LEFT JOIN classes as C1 on C1.classId = CTT.classId
 		GROUP BY U.userId
+
+
+Returns Classes-Sections-Students with correct []
+$query = $mysqli->query("SELECT DISTINCT
+    C.classId AS 'C Id',
+    C.classNumber AS 'Class / Std',
+      json_arrayagg(DISTINCT json_object(
+        'SD C Id', SD.classId,
+        'Stu Sec name', Sec.Sections,
+        'SD sectionId', SD.sectionId
+      ) ) as 'Sections',
+      json_arrayagg(DISTINCT json_object(
+        'Stu C Id', SD.classId,
+        'Stu sectionId', SD.sectionId,
+        'Stu Id', SD.userId,
+        'Stu RN', SD.rollNumber,
+        'S First Name', U.firstName,
+        'S Middle Name', U.middleName,
+        'S Last Name', U.lastName
+      ) ) as 'Students',
+      COUNT(SD.userId) AS 'Count'
+    FROM
+      classes as C
+    INNER JOIN studentDetails AS SD
+      ON SD.classId = C.classId
+    LEFT JOIN sections AS Sec
+      ON Sec.sectionId = SD.sectionId
+    INNER JOIN users as U
+      ON U.userId = SD.userId
+
+    Group BY C.classId
+  ");
+
+      stuDiv($query);
+
+Returns duplicates
+
+select cOut.userId , cOut.classId , cOut.sectionId , cOut.subjectId, cIn.*
+from     classes_taught_by_teacher as cOut
+
+join (
+    SELECT
+    userId , classId , sectionId , subjectId, count(*)
+FROM
+    classes_taught_by_teacher
+GROUP BY userId , classId , sectionId , subjectId
+    having count(*) > 1
+) cIn on
+cOut.userId = cIn.userId AND cOut.classId = cIn.classId AND cOut.sectionId = cIn.sectionId AND cOut.subjectId = cIn.subjectId
 ?>

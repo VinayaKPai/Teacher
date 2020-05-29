@@ -143,9 +143,6 @@ SELECT DISTINCT
 				'C Id', SD.classId,
 				'sectionId', SD.sectionId,
 				'Stu Id', SD.userId
-				'S First Name', U.firstName,
-				'S Middle Name', U.middleName,
-				'S Last Name', U.lastName
 			) ) as 'Students'
 			FROM
 				users AS U
@@ -213,7 +210,8 @@ $query = $mysqli->query(
 					json_arrayagg(DISTINCT json_object(
 						'Stu C Id', SD.classId,
 						'Stu sectionId', SD.sectionId,
-						'Stu Id', SD.userId
+						'Stu Id', SD.userId,
+
 					) ) as 'Students'
 				) ) as 'Sections',
 

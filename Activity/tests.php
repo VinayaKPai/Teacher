@@ -143,6 +143,9 @@ SELECT DISTINCT
 				'C Id', SD.classId,
 				'sectionId', SD.sectionId,
 				'Stu Id', SD.userId
+				'S First Name', U.firstName,
+				'S Middle Name', U.middleName,
+				'S Last Name', U.lastName
 			) ) as 'Students'
 			FROM
 				users AS U
@@ -157,5 +160,142 @@ SELECT DISTINCT
 					-- LEFT JOIN classes as C1 on C1.classId = CTT.classId
 			GROUP BY U.userId
             ORDER BY U.userId, CTT.classId, CTT.sectionId, SD.userId
+
+------------------------------------
+$query = $mysqli->query(
+	"SELECT *
+		FROM
+			users,
+			studentdetails,
+			classes,
+			sections
+		WHERE
+			users.userId = studentdetails.userId AND
+			users.role = 'S' AND
+			classes.classId = studentdetails.classId AND
+			sections.sectionId = studentdetails.sectionId
+			ORDER BY classes.classId, sections.sectionId");
+
+$query = $mysqli->query(
+		"SELECT
+			users.firstName,
+			users.middleName,
+			users.lastName,
+			classes.classId,
+			classes.classNumber,
+			sections.sectionId,
+			sections.Sections,
+			studentdetails.rollNumber,
+			users.Email,
+			users.systemEmail,
+			users.joinYear,
+			users.endYear,
+			users.phoneMobile
+			FROM
+				users,
+				studentdetails,
+				classes,
+				sections
+			WHERE
+				users.userId = studentdetails.userId AND
+				users.role = 'S' AND
+				classes.classId = studentdetails.classId AND
+				sections.sectionId = studentdetails.sectionId
+			ORDER BY classes.classId ASC, sections.sectionId ASC"
+	-------------------------------------------
+
+	SELECT DISTINCT
+			C.classId AS 'C Id',
+			C.classNumber AS 'Class / Std',
+				json_arrayagg(DISTINCT json_object(
+					'SD C Id', SD.classId,
+					'SD sectionId', SD.sectionId,
+					json_arrayagg(DISTINCT json_object(
+						'Stu C Id', SD.classId,
+						'Stu sectionId', SD.sectionId,
+						'Stu Id', SD.userId
+					) ) as 'Students'
+				) ) as 'Sections',
+
+			FROM
+				classes as C
+			INNER JOIN studentDetails AS SD
+				ON SD.classId = C.classId
+			LEFT JOIN sections AS Sec
+				ON Sec.sectionId = SD.sectionId
+			INNER JOIN users as U
+				ON U.userId = SD.userId
+
+			Group BY C.classId
+--------------------------------
+$class
+
+'C Id' = 1
+'Class / Std' = I
+'Sections' =
+	[
+		{"SD C Id": 1, "SD sectionId": 3},
+		{"SD C Id": 1, "SD sectionId": 2},
+		{"SD C Id": 1, "SD sectionId": 6},
+		{"SD C Id": 1, "SD sectionId": 5},
+		{"SD C Id": 1, "SD sectionId": 4}
+	]
+	******$secs**json_decode( $class['Sections']************
+	Array (
+		 [0] => Array ( [SD C Id] => 1 [SD sectionId] => 3 )
+		 [1] => Array ( [SD C Id] => 1 [SD sectionId] => 2 )
+		 [2] => Array ( [SD C Id] => 1 [SD sectionId] => 6 )
+		 [3] => Array ( [SD C Id] => 1 [SD sectionId] => 5 )
+		 [4] => Array ( [SD C Id] => 1 [SD sectionId] => 4 )
+		  )
+	******$secs**json_decode( $class['Sections']************
+	^^^^^^^^^^^^^^^^^
+	Class 1 section 3
+	Array (
+		[0] => Array ( [Stu C Id] => 1 [Stu sectionId] => 3 [Stu Id] => 41 )
+		[1] => Array ( [Stu C Id] => 1 [Stu sectionId] => 2 [Stu Id] => 64 )
+		[2] => Array ( [Stu C Id] => 1 [Stu sectionId] => 2 [Stu Id] => 27 )
+		[3] => Array ( [Stu C Id] => 1 [Stu sectionId] => 6 [Stu Id] => 28 )
+		[4] => Array ( [Stu C Id] => 1 [Stu sectionId] => 5 [Stu Id] => 63 )
+		[5] => Array ( [Stu C Id] => 1 [Stu sectionId] => 5 [Stu Id] => 53 )
+		[6] => Array ( [Stu C Id] => 1 [Stu sectionId] => 4 [Stu Id] => 13 )
+		[7] => Array ( [Stu C Id] => 1 [Stu sectionId] => 3 [Stu Id] => 11 ) )
+	^^^^^^^^^^^^^^^^^
+'Students' =
+	[
+		{"Stu C Id": 1, "Stu sectionId": 3, "Stu Id": 41},
+		{"Stu C Id": 1, "Stu sectionId": 2, "Stu Id": 64},
+		{"Stu C Id": 1, "Stu sectionId": 2, "Stu Id": 27},
+		{"Stu C Id": 1, "Stu sectionId": 6, "Stu Id": 28},
+		{"Stu C Id": 1, "Stu sectionId": 5, "Stu Id": 63},
+		{"Stu C Id": 1, "Stu sectionId": 5, "Stu Id": 53},
+		{"Stu C Id": 1, "Stu sectionId": 4, "Stu Id": 13},
+		{"Stu C Id": 1, "Stu sectionId": 3, "Stu Id": 11}
+	]
+	^^^^^^^^^^^^^^^^^$studs^^^^^^^^^^^^^^^^
+	Array (
+		[0] => Array ( [Stu C Id] => 1 [Stu sectionId] => 3 [Stu Id] => 41 )
+		[1] => Array ( [Stu C Id] => 1 [Stu sectionId] => 2 [Stu Id] => 64 )
+		[2] => Array ( [Stu C Id] => 1 [Stu sectionId] => 2 [Stu Id] => 27 )
+		[3] => Array ( [Stu C Id] => 1 [Stu sectionId] => 6 [Stu Id] => 28 )
+		[4] => Array ( [Stu C Id] => 1 [Stu sectionId] => 5 [Stu Id] => 63 )
+		[5] => Array ( [Stu C Id] => 1 [Stu sectionId] => 5 [Stu Id] => 53 )
+		[6] => Array ( [Stu C Id] => 1 [Stu sectionId] => 4 [Stu Id] => 13 )
+		[7] => Array ( [Stu C Id] => 1 [Stu sectionId] => 3 [Stu Id] => 11 ) )
+	^^^^^^^^^^^^^^^^^^$studs^^^^^^^^^^^^^^^
+------------------$class--------------------------
+
+2
+II
+[{"SD C Id": 2, "SD sectionId": 2},{"SD C Id": 2, "SD sectionId": 6},{"SD C Id": 2, "SD sectionId": 4},{"SD C Id": 2, "SD sectionId": 5},{"SD C Id": 2, "SD sectionId": 1}]
+[{"Stu C Id": 2, "Stu sectionId": 2, "Stu Id": 55},{"Stu C Id": 2, "Stu sectionId": 2, "Stu Id": 34},{"Stu C Id": 2, "Stu sectionId": 6, "Stu Id": 26},{"Stu C Id": 2, "Stu sectionId": 4, "Stu Id": 37},{"Stu C Id": 2, "Stu sectionId": 6, "Stu Id": 58},{"Stu C Id": 2, "Stu sectionId": 4, "Stu Id": 24},{"Stu C Id": 2, "Stu sectionId": 5, "Stu Id": 59},{"Stu C Id": 2, "Stu sectionId": 5, "Stu Id": 60},{"Stu C Id": 2, "Stu sectionId": 1, "Stu Id": 14},{"Stu C Id": 2, "Stu sectionId": 5, "Stu Id": 16},{"Stu C Id": 2, "Stu sectionId": 1, "Stu Id": 15},{"Stu C Id": 2, "Stu sectionId": 4, "Stu Id": 70},{"Stu C Id": 2, "Stu sectionId": 6, "Stu Id": 67},{"Stu C Id": 2, "Stu sectionId": 2, "Stu Id": 66},{"Stu C Id": 2, "Stu sectionId": 2, "Stu Id": 65}]
+8
+VIII
+[{"SD C Id": 8, "SD sectionId": 4},{"SD C Id": 8, "SD sectionId": 2},{"SD C Id": 8, "SD sectionId": 1},{"SD C Id": 8, "SD sectionId": 5},{"SD C Id": 8, "SD sectionId": 3}]
+[{"Stu C Id": 8, "Stu sectionId": 4, "Stu Id": 57},{"Stu C Id": 8, "Stu sectionId": 2, "Stu Id": 44},{"Stu C Id": 8, "Stu sectionId": 2, "Stu Id": 45},{"Stu C Id": 8, "Stu sectionId": 4, "Stu Id": 56},{"Stu C Id": 8, "Stu sectionId": 1, "Stu Id": 48},{"Stu C Id": 8, "Stu sectionId": 5, "Stu Id": 50},{"Stu C Id": 8, "Stu sectionId": 1, "Stu Id": 68},{"Stu C Id": 8, "Stu sectionId": 5, "Stu Id": 9},{"Stu C Id": 8, "Stu sectionId": 5, "Stu Id": 54},{"Stu C Id": 8, "Stu sectionId": 2, "Stu Id": 30},{"Stu C Id": 8, "Stu sectionId": 1, "Stu Id": 31},{"Stu C Id": 8, "Stu sectionId": 5, "Stu Id": 39},{"Stu C Id": 8, "Stu sectionId": 5, "Stu Id": 32},{"Stu C Id": 8, "Stu sectionId": 1, "Stu Id": 33},{"Stu C Id": 8, "Stu sectionId": 2, "Stu Id": 19},{"Stu C Id": 8, "Stu sectionId": 3, "Stu Id": 20}]
+9
+IX
+[{"SD C Id": 9, "SD sectionId": 3},{"SD C Id": 9, "SD sectionId": 6},{"SD C Id": 9, "SD sectionId": 4},{"SD C Id": 9, "SD sectionId": 5},{"SD C Id": 9, "SD sectionId": 1},{"SD C Id": 9, "SD sectionId": 2}]
+[{"Stu C Id": 9, "Stu sectionId": 3, "Stu Id": 22},{"Stu C Id": 9, "Stu sectionId": 6, "Stu Id": 61},{"Stu C Id": 9, "Stu sectionId": 6, "Stu Id": 62},{"Stu C Id": 9, "Stu sectionId": 3, "Stu Id": 21},{"Stu C Id": 9, "Stu sectionId": 4, "Stu Id": 18},{"Stu C Id": 9, "Stu sectionId": 3, "Stu Id": 17},{"Stu C Id": 9, "Stu sectionId": 5, "Stu Id": 12},{"Stu C Id": 9, "Stu sectionId": 6, "Stu Id": 69},{"Stu C Id": 9, "Stu sectionId": 4, "Stu Id": 23},{"Stu C Id": 9, "Stu sectionId": 6, "Stu Id": 25},{"Stu C Id": 9, "Stu sectionId": 3, "Stu Id": 29},{"Stu C Id": 9, "Stu sectionId": 4, "Stu Id": 42},{"Stu C Id": 9, "Stu sectionId": 1, "Stu Id": 43},{"Stu C Id": 9, "Stu sectionId": 3, "Stu Id": 38},{"Stu C Id": 9, "Stu sectionId": 5, "Stu Id": 46},{"Stu C Id": 9, "Stu sectionId": 2, "Stu Id": 47},{"Stu C Id": 9, "Stu sectionId": 2, "Stu Id": 36},{"Stu C Id": 9, "Stu sectionId": 4, "Stu Id": 49},{"Stu C Id": 9, "Stu sectionId": 1, "Stu Id": 35},{"Stu C Id": 9, "Stu sectionId": 1, "Stu Id": 52},{"Stu C Id": 9, "Stu sectionId": 5, "Stu Id": 40},{"Stu C Id": 9, "Stu sectionId": 2, "Stu Id": 10}]
 
 ?>

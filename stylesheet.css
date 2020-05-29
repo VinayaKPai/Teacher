@@ -150,6 +150,7 @@ ul .nav .fade li {
   	-webkit-transform: skewX(120deg); /* Safari */
   	transform: skewX(120deg); /* Standard syntax */
 }
+.th {background-color: #0a0a0a; color: #fff;}
 .dropdown {
   position: relative;
   display: inline-block;

@@ -33,7 +33,6 @@
 						on Sec.sectionId= CTT.sectionId
 					LEFT JOIN studentDetails as SD
 						on SD.classId = CTT.classId
-					-- LEFT JOIN classes as C1 on C1.classId = CTT.classId
 			GROUP BY U.userId
             ORDER BY U.userId ASC, CTT.classId ASC, CTT.sectionId ASC, SD.userId ASC");
 

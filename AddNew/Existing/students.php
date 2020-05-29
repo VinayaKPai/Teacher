@@ -3,33 +3,36 @@
 	include $_SERVER['DOCUMENT_ROOT']."/basecode-create_connection.php";
 
 	$slno = 0;
-	$query = $mysqli->query("SELECT
-		users.userId AS 'Id',
-		users.firstName AS 'First Name',
-		users.middleName AS 'Middle Name',
-		users.lastName AS 'Last Name',
-		classes.classId AS 'Class Id',
-		classes.classNumber AS 'Class',
-		sections.sectionId AS 'Sec Id',
-		sections.Sections AS 'Section',
-		studentdetails.rollNumber AS 'Roll Number',
-		users.Email AS 'Ext Email',
-		users.systemEmail AS 'Int Email',
-		users.joinYear AS 'Joined',
-		users.endYear AS 'Left',
-		users.phoneMobile AS 'Mobile'
-		FROM
-			users,
-			studentdetails,
-			classes,
-			sections
-		WHERE
-			users.userId = studentdetails.userId AND
-			users.role = 'S' AND
-			classes.classId = studentdetails.classId AND
-			sections.sectionId = studentdetails.sectionId
-		ORDER BY classes.classId ASC, sections.sectionId ASC");
-			
-				table($query);
+	$query = $mysqli->query("SELECT DISTINCT
+			C.classId AS 'C Id',
+			C.classNumber AS 'Class / Std',
+				json_arrayagg(DISTINCT json_object(
+					'SD C Id', SD.classId,
+					'Stu Sec name', Sec.Sections,
+					'SD sectionId', SD.sectionId
+				) ) as 'Sections',
+				json_arrayagg(DISTINCT json_object(
+					'Stu C Id', SD.classId,
+					'Stu sectionId', SD.sectionId,
+					'Stu Id', SD.userId,
+					'Stu RN', SD.rollNumber,
+					'S First Name', U.firstName,
+					'S Middle Name', U.middleName,
+					'S Last Name', U.lastName
+				) ) as 'Students',
+				COUNT(SD.userId) AS 'Count'
+			FROM
+				classes as C
+			INNER JOIN studentDetails AS SD
+				ON SD.classId = C.classId
+			LEFT JOIN sections AS Sec
+				ON Sec.sectionId = SD.sectionId
+			INNER JOIN users as U
+				ON U.userId = SD.userId
+
+			Group BY C.classId
+		");
+
+				stuDiv($query);
 	mysqli_close($mysqli);
 ?>

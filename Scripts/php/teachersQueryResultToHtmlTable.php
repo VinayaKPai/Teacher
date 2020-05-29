@@ -76,11 +76,12 @@ function displayTeacherData($teacher) { //$teacher is the data for a SINGLE teac
           collapsibleClasses($teacher['Subjects'],$teacher['Students'],$tId);
       echo "</td></tr>";
     }
-    
+
 function collapsibleClasses($subjects,$students,$tId) {
                 echo "<div class='panel-heading'>
                     <div id='".$tId."' class='panel-collapse collapse'>
                       <div class='panel-body'>";
+                      echo gettype($subjects);
                         $subs = json_decode($subjects, true);
                         foreach ($subs as $subjectByCS) {//each $subjectByCS is a single class-section-subject combo
                           echo "<div class='panel panel-default' style='color: #00000f'>";

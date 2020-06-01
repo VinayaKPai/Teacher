@@ -73,51 +73,33 @@ function displayTeacherData($teacher) { //$teacher is the data for a SINGLE teac
           //inside the class collapsible, we also need a section-students combo
           //so create a function to display a collapsible first which will be passed the teacherId-classId
           echo "<td colspan=9 style='color: White;'>";
-          collapsibleClasses($teacher['Subjects'],$teacher['Students'],$tId);
+          collapsibleClasses($teacher['Subjects'],$tId);
       echo "</td></tr>";
     }
 
-function collapsibleClasses($subjects,$students,$tId) {
-                echo "<div class='panel-heading'>
-                    <div id='".$tId."' class='panel-collapse collapse'>
-                      <div class='panel-body'>";
-                      echo gettype($subjects);
-                        $subs = json_decode($subjects, true);
-                        foreach ($subs as $subjectByCS) {//each $subjectByCS is a single class-section-subject combo
-                          echo "<div class='panel panel-default' style='color: #00000f'>";
-                          //we call a function to display this combo
-                          $sCSId = "sCsT".$tId.$subjectByCS['Class Id'].$subjectByCS['Sec Id'].$subjectByCS['Sub Id'];
-                          echo "<h6><a data-toggle='collapse' href='#".$sCSId."'>
-                            Class: ". $subjectByCS['Class Id']
-                            . " Section: ".$subjectByCS['Sec Id']
-                            ." Subject: ".$subjectByCS['Sub Id']
-                            . "</a></h6>";
-                              collapsibleSubjectByCS ($subjectByCS,$students,$sCSId,$subjectByCS['Class Id'],$subjectByCS['Sec Id']);
-                          echo "</div>";
-                        }
-                        // foreach ($subs as $a => $b) {
-                        //   displaySubjectsClassesForTeacher($b,$studs,$tId);
-                        // }
-                    echo "</div>
-                  </div>";
-    }
-    function collapsibleSubjectByCS($subjectByCS,$students,$sCSId,$studCId,$studSId) {//each $subjectByCS is a single class-section-subject combo, $sCSId is id for the collapsibles, $studCId is the classId for this student and ,$studSId is section Id for this student
-      //we need an id for the collapsibles inside this. Subject is common, class and section are different
-      //here we will create another collapsible which will hold the students in it
-
+function collapsibleClasses($subjects,$tId) {
       echo "<div class='panel-heading'>
-          <div id='".$sCSId."' class='panel-collapse collapse'>
-            ";
-            $studs = json_decode($students, true);
-            // print_r($studs);
-            foreach ($studs as $cntr => $stuDets) {//$stuDets is an array with 'C Id', 'sectionId', 'Stu Id'
-              if ($stuDets['C Id'] == $studCId && $stuDets['sectionId'] == $studSId) {
-                  echo "<p>Student Id is ".$stuDets['Stu Id']."</p>";
+          <div id='".$tId."' class='panel-collapse collapse'>
+            <div class='panel-body'>";
+              $subs = json_decode($subjects, true);
+              foreach ($subs as $subjectByCS) {//each $subjectByCS is a single class-section-subject combo
+                echo "<div class='panel panel-default' style='color: #00000f'>";
+                //we call a function to display this combo
+                $cId = $subjectByCS['Class Id'];
+                $secId = $subjectByCS['Sec Id'];
+                $sCSId = "sCsT".$tId.$cId.$secId.$subjectByCS['Sub Id'];
+                echo "<h6><a data-toggle='collapse' href='#".$sCSId."'>
+                  Class: ". $subjectByCS['Class Num']
+                  . " Section: ".$subjectByCS['Sec Name']
+                  ." Subject: ".$subjectByCS['Sub Id']
+                  . "</a></h6>";
+                    // WE NEED TO PASS CLASS ID AND SECTION ID TO THE stuDiv_forTeacher FUNCTION
+                    students($mysqli,$pageHeading,$tId,$cId,$secId);
+                echo "</div>";
               }
-
-            }
-      echo "</div></div>";
-
+          echo "</div>
+        </div>";
     }
+
 
  ?>

@@ -1,11 +1,12 @@
 <?php
-  // include "basecode-create_connection.php";
+  // include $_SERVER['DOCUMENT_ROOT']."/basecode-create_connection.php";
   include $_SERVER['DOCUMENT_ROOT']."/basecode-create_connection.php";
   //This is not required. You will instead be included on the page where the display will happen
   include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/deployQueryResultToHtmlDiv.php";
 
+
 //This function should just execute the query and then return the result (Which will be stored in a variable on the display page)
-  function activity($type, $status, $mysqli ,$pageHeading) { //status is completed/ongoing/undeoployed/all type is a/q/t
+function activity($type, $status, $mysqli ,$pageHeading) { //status is completed/ongoing/undeoployed/all type is a/q/t
         $str = '';
         $successFlag = '';
         $queryString = ("SELECT
@@ -114,37 +115,76 @@
 
   function teachers ($mysqli) {
     $query = $mysqli->query("SELECT DISTINCT
-          U.userId AS 'T Id',
-          U.firstName AS 'T First Name',
-          U.middleName AS 'T Middle Name',
-          U.lastName AS 'T Last Name',
-          U.Email AS 'T External Email',
-          U.systemEmail AS 'T Internal Email',
-          U.phoneMobile AS 'T Mobile',
-          U.visibility AS 'Current',
-        json_arrayagg(DISTINCT json_object(
+      U.userId AS 'T Id',
+      U.firstName AS 'T First Name',
+      U.middleName AS 'T Middle Name',
+      U.lastName AS 'T Last Name',
+      U.Email AS 'T External Email',
+      U.systemEmail AS 'T Internal Email',
+      U.phoneMobile AS 'T Mobile',
+      U.visibility AS 'Current',json_arrayagg(DISTINCT json_object(
           'Class Id',CTT.classId,
+          'Class Num', C.classNumber,
           'Sec Id', Sec.sectionId,
+          'Sec Name', Sec.Sections,
           'Sub Id', Sub.subjectId
-        ) ) as 'Subjects',
-        json_arrayagg(DISTINCT json_object(
-          'C Id', SD.classId,
-          'sectionId', SD.sectionId,
-          'Stu Id', SD.userId
-        ) ) as 'Students'
+        ) ) as 'Subjects'
         FROM
           users AS U
             INNER JOIN classes_taught_by_teacher AS CTT
               on CTT.userId = U.userId
             INNER JOIN subjects AS Sub
               on Sub.subjectId = CTT.subjectId
+            LEFT JOIN classes as C
+              on C.classId= CTT.classId
             LEFT JOIN sections as Sec
               on Sec.sectionId= CTT.sectionId
-            LEFT JOIN studentDetails as SD
-              on SD.classId = CTT.classId
         GROUP BY U.userId
-              ORDER BY U.userId ASC, CTT.classId ASC, CTT.sectionId ASC, SD.userId ASC");
+              ORDER BY U.userId ASC");
 
         table ($query);
   }
+
+  function studentQuery ($mysqli, $pageHeading,$tId,$cId,$secId) {
+    $query = $mysqli->query("SELECT DISTINCT
+        C.classId AS 'C Id',
+        C.classNumber AS 'Class / Std',
+          json_arrayagg(DISTINCT json_object(
+            'SD C Id', SD.classId,
+            'Stu Sec name', Sec.Sections,
+            'SD sectionId', SD.sectionId
+          ) ) as 'Sections',
+          json_arrayagg(DISTINCT json_object(
+            'Stu C Id', SD.classId,
+            'Stu sectionId', SD.sectionId,
+            'Stu Id', SD.userId,
+            'Stu RN', SD.rollNumber,
+            'S First Name', U.firstName,
+            'S Middle Name', U.middleName,
+            'S Last Name', U.lastName
+          ) ) as 'Students',
+          COUNT(SD.userId) AS 'Count'
+        FROM
+          classes as C
+        INNER JOIN studentDetails AS SD
+          ON SD.classId = C.classId
+        LEFT JOIN sections AS Sec
+          ON Sec.sectionId = SD.sectionId
+        INNER JOIN users as U
+          ON U.userId = SD.userId
+
+        Group BY C.classId
+      ");
+      students( $query, $pageHeading,$tId,$cId,$secId );
+  }
+  function students( $query, $flag,$tId,$cId,$secId ) {
+print_r($query);
+      if ($flag=='Students'){
+          stuDiv($query);
+        }
+      else {
+        displayStudentsForClassSec_forTeacher($query,$tId,$cId,$secId);
+      }
+  }
+
 ?>

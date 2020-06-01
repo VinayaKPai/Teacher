@@ -2,7 +2,7 @@
 	//THIS FILE IS NO LONGER BEING USED IN THE APP
 	//Script to display existing classes and sections in the class section table
 	include $_SERVER['DOCUMENT_ROOT']."/basecode-create_connection.php";
-include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/teachersQueryResultToHtmlTable.php";
+
 	$slno = 0;
 	$query = $mysqli->query("SELECT DISTINCT
 				U.userId AS 'T Id',
@@ -37,6 +37,6 @@ include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/teachersQueryResultToHtmlTable.p
             ORDER BY U.userId ASC, CTT.classId ASC, CTT.sectionId ASC, SD.userId ASC");
 
 			table ($query);
-	// mysqli_close($mysqli);
+	mysqli_close($mysqli);
 ?>
 <!-- </table> -->

@@ -66,3 +66,30 @@ function stuDiv( $result ) {
         }
       echo "</ul>";
     }
+
+
+// ONLY for teachers page "displayStudentsForClassSec" changed to "displayStudentsForClassSec_forTeacher"
+
+  function displayStudentsForClassSec_forTeacher($studs,$tId,$cId,$cNum,$secId) {
+    echo "<ul>";
+      foreach ($studs as $cnt => $studets) {
+        if ($studets['Stu C Id']==$cId && $studets['Stu sectionId']==$secId) {
+          echo "<li>Id : "
+              .$studets['Stu Id']
+              ."<ul><li>"
+              ." Roll number : "
+              .$studets['Stu RN']
+              ."</li><li>Name : "
+              .$studets['S First Name']
+              ." "
+              .$studets['S Middle Name']
+              ." "
+              .$studets['S Last Name']
+              ."</li></ul>"
+              ."</li>";
+        }
+      }
+    echo "</ul>";
+  }
+
+?>

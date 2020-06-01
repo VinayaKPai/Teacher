@@ -1,4 +1,6 @@
 <?php
+	//TRANSFERRED THE CODE TO ALLQUERIES.PHP
+	//THIS FILE IS NOT IN USE ANY MORE
 	//Script to display existing classes and sections in the class section table
 	include $_SERVER['DOCUMENT_ROOT']."/basecode-create_connection.php";
 
@@ -34,5 +36,5 @@
 		");
 
 				stuDiv($query);
-	mysqli_close($mysqli);
+	// mysqli_close($mysqli);
 ?>

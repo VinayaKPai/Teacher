@@ -30,7 +30,13 @@
 			<hr>
 			<div>
 				<p>Click on the Class heading to see details</p>
-				<?php include "../AddNew/Existing/students.php"; ?>
+				<?php
+					$tId = '';
+					$cId ='';
+					$secId = '';
+					studentQuery($mysqli, $pageHeading,$tId,$cId,$secId);
+				?>
+
 			</div>
 			<hr>
 			<div id="bottom"><?php include "../Components/bottom.php"; ?></div>

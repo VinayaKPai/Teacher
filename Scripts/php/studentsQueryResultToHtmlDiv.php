@@ -1,5 +1,5 @@
 <?php
-function stuDiv( $result, $pageHeading,$tId,$cIdIn,$secIdIn,$sCSId ) {
+function stuDiv( $result,$pageHeading,$cIdIn,$secIdIn ) {
   // $cId and $scId from the calling function are $ciDIn and $secIdIn here
     $result->fetch_array( MYSQLI_ASSOC );
     if ($result) {
@@ -21,25 +21,21 @@ function stuDiv( $result, $pageHeading,$tId,$cIdIn,$secIdIn,$sCSId ) {
           $togCId = "c".$cId;
           // On teachers page, the display is directly by class+section - so we don't need a all-class-sections bucket
           // the display therefore, should not have the data toggle for class
+          $secs = json_decode( $class['Sections'], true);
+          $studs = json_decode( $class['Students'], true);
           if ($pageHeading=='Students') {
           echo "<h5 style='text-align: center; color: Blue;'>
             <a data-toggle='collapse' href='#".$togCId."'>Class / STD : ".$cNum." has ".$class['Count']." Students</a></h5>";
             echo "<div id='".$togCId."'class='panel panel-default panel-collapse collapse'>";
-            $secs = json_decode( $class['Sections'], true);
-            $studs = json_decode( $class['Students'], true);
             echo "<div>";
-            secsDivCollapsible( $pageHeading,$tId,$secs,$cId,$cIdIn,$secIdIn,$cNum, $studs);
+            secsDivCollapsible( $pageHeading,$secs,$cId,$cIdIn,$secIdIn,$cNum, $studs);
             echo "</div>";
             echo "</div>";
           }
           else {
-            echo "<div id='".$togCId."'class='panel panel-default'>";
-            $secs = json_decode( $class['Sections'], true);
-            $studs = json_decode( $class['Students'], true);
-            echo "<div>";
-            secsDivCollapsible( $pageHeading,$tId,$secs,$cId,$cIdIn,$secIdIn,$cNum, $studs);
-            echo "</div>";
-            echo "</div>";
+            if ($cId=$cIdIn) {
+            secsDivCollapsible( $pageHeading,$secs,$cId,$cIdIn,$secIdIn,$cNum, $studs);
+            }
           }
 
       }
@@ -47,41 +43,50 @@ function stuDiv( $result, $pageHeading,$tId,$cIdIn,$secIdIn,$sCSId ) {
     }
     //$cId is $class['C Id'] and $cIdIn is the class Id coming from the teachers page
     //difference in teachers page and
-    function secsDivCollapsible( $pageHeading,$tId,$secs,$cId,$cIdIn,$secIdIn,$cNum, $studs) {//$secs id json decoded $class['Sections'] AND $studs is json decoded for $class['Students']
-
+    function secsDivCollapsible( $pageHeading,$secs,$cId,$cIdIn,$secIdIn,$cNum, $studs) {//$secs id json decoded $class['Sections'] AND $studs is json decoded for $class['Students']
       foreach ($secs as $cntr => $secArr) {
         $secId = $secArr['SD sectionId'];
         $secName = $secArr['Stu Sec name'];
         $secClsId = "sec".$cId.$secId;
-              echo "
-              <h6 class='panel-heading' style='text-align: center; color: Blue;'><a  data-toggle='collapse' href='#".$secClsId."'>Students for Class ".$cNum." Section ".$secName."</a></h6>";
+        $secClsIdIn = "sec".$cIdIn.$secIdIn;
+              echo "<h6 class='panel-heading' style='text-align: center; color: Blue;'><a  data-toggle='collapse' href='#".$secClsId."'>Students for Class ".$cNum." Section ".$secName."</a></h6>";
+
               echo "<div id='".$secClsId."' class='panel panel-default panel-collapse collapse'>";
-                displayStudentsForClassSec($pageHeading,$tId,$studs,$cId,$cIdIn,$secIdIn,$cNum,$secId);
+              echo $secClsId."*****".$secClsIdIn;
+              echo $pageHeading;
+                displayStudentsForClassSec($studs,$cId,$cNum,$secId,$pageHeading);
+
               echo "</div>";
       }
     }
 
-    function displayStudentsForClassSec($pageHeading,$tId,$studs,$cId,$cIdIn,$secIdIn,$cNum,$secId) {
+    function displayStudentsForClassSec($studs,$cId,$cNum,$secId,$pageHeading) {
       // $cId is the classId for the student $cIdIn is the specific class Id coming from the teacher
 
       echo "<ul>";
         foreach ($studs as $cnt => $studets) {
+          if ($pageHeading=='Students') {
               if ($studets['Stu C Id']==$cId && $studets['Stu sectionId']==$secId) {
-                echo "<li>Id : "
-                    .$studets['Stu Id']
-                    ."<ul><li>"
-                    ." Roll number : "
-                    .$studets['Stu RN']
-                    ."</li><li>Name : "
-                    .$studets['S First Name']
-                    ." "
-                    .$studets['S Middle Name']
-                    ." "
-                    .$studets['S Last Name']
-                    ."</li></ul>"
-                    ."</li>";
+              $dets = "<li>Id : "
+                  .$studets['Stu Id']
+                  ."<ul><li>"
+                  ." Roll number : "
+                  .$studets['Stu RN']
+                  ."</li><li>Name : "
+                  .$studets['S First Name']
+                  ." "
+                  .$studets['S Middle Name']
+                  ." "
+                  .$studets['S Last Name']
+                  ."</li></ul>"
+              ."</li>";
+                echo $dets;
               }
+          }
+          else {
+            print_r($studs);
 
+          }
         }
       echo "</ul>";
     }

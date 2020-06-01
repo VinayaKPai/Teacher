@@ -42,7 +42,7 @@
 				<div class="col-sm-9 centered" style="border-left: 1px solid Grey;">
 					<h5>Click on the teacher's name explore details</h5>
 					<?php
-						teachers($mysqli);
+						teachers($mysqli,$pageHeading);
 					?>
 				</div>
 				<hr>

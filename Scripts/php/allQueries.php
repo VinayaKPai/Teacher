@@ -113,7 +113,7 @@ function activity($type, $status, $mysqli ,$pageHeading) { //status is completed
     div($query, $type, $successFlag, $status, $pageHeading);
   }
 
-  function teachers ($mysqli) {
+  function teachers ($mysqli,$pageHeading) {
     $query = $mysqli->query("SELECT DISTINCT
       U.userId AS 'T Id',
       U.firstName AS 'T First Name',
@@ -142,10 +142,10 @@ function activity($type, $status, $mysqli ,$pageHeading) { //status is completed
         GROUP BY U.userId
               ORDER BY U.userId ASC");
 
-        table ($mysqli, $query);
+        table ($mysqli, $query,$pageHeading);
   }
 
-  function studentQuery ($mysqli, $pageHeading,$tId,$cId,$secId,$sCSId) {
+  function students ($mysqli, $pageHeading,$cId,$secId) {
     $query = $mysqli->query("SELECT DISTINCT
         C.classId AS 'C Id',
         C.classNumber AS 'Class / Std',
@@ -175,10 +175,7 @@ function activity($type, $status, $mysqli ,$pageHeading) { //status is completed
 
         Group BY C.classId
       ");
-      students( $query, $pageHeading,$tId,$cId,$secId,$sCSId );
-  }
-  function students( $query, $pageHeading,$tId,$cId,$secId,$sCSId ) {
-          stuDiv($query, $pageHeading,$tId,$cId,$secId,$sCSId);
+          stuDiv($query,$pageHeading,$cId,$secId);
   }
 
 ?>

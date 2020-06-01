@@ -34,7 +34,8 @@
 					$tId = '';
 					$cId ='';
 					$secId = '';
-					studentQuery($mysqli, $pageHeading,$tId,$cId,$secId);
+					$sCSId = '';
+					studentQuery($mysqli, $pageHeading,$tId,$cId,$secId,$sCSId);
 				?>
 
 			</div>

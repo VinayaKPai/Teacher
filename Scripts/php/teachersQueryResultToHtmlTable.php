@@ -1,5 +1,5 @@
 <?php
-function table( $result ) {
+function table( $mysqli, $result ) {
 
     $result->fetch_array( MYSQLI_ASSOC );
     // print_r($result);
@@ -13,7 +13,7 @@ function table( $result ) {
       echo "<h4 class='topbanner'>Currently $rowcount active Teachers in your setup</h4>" ;
     echo "<table style='width: 100%; padding: 5px; border-spacing: 2px; border-collapse: separate; align: 'center';'>";
         tableHead(  $result );
-        tableBody(  $result );
+        tableBody(  $mysqli,$result );
     echo '</table>';
 }
 
@@ -32,17 +32,17 @@ function tableHead(  $result ) {  //$result is ALL the records for all teachers
         echo '</thead>';
 }
 
-function tableBody(  $result ) { //$result is ALL the records for all teachers
+function tableBody(  $mysqli,$result ) { //$result is ALL the records for all teachers
         echo '<tbody>';
         foreach ( $result as $teacher ) { //$teacher is now data of a single teacher
           echo "<tr>";
-            displayTeacherData($teacher);
+            displayTeacherData($mysqli,$teacher);
           echo "</tr>";
         }
         echo '</tbody>';
 }
 
-function displayTeacherData($teacher) { //$teacher is the data for a SINGLE teacher
+function displayTeacherData($mysqli,$teacher) { //$teacher is the data for a SINGLE teacher
       $tId = $teacher['T Id'];
       $togId = "t".$tId;
       $fn = $teacher['T First Name'];
@@ -73,11 +73,11 @@ function displayTeacherData($teacher) { //$teacher is the data for a SINGLE teac
           //inside the class collapsible, we also need a section-students combo
           //so create a function to display a collapsible first which will be passed the teacherId-classId
           echo "<td colspan=9 style='color: White;'>";
-          collapsibleClasses($teacher['Subjects'],$tId);
+          collapsibleClasses($mysqli,$teacher['Subjects'],$tId);
       echo "</td></tr>";
     }
 
-function collapsibleClasses($subjects,$tId) {
+function collapsibleClasses($mysqli,$subjects,$tId) {
       echo "<div class='panel-heading'>
           <div id='".$tId."' class='panel-collapse collapse'>
             <div class='panel-body'>";
@@ -88,18 +88,20 @@ function collapsibleClasses($subjects,$tId) {
                 $cId = $subjectByCS['Class Id'];
                 $secId = $subjectByCS['Sec Id'];
                 $sCSId = "sCsT".$tId.$cId.$secId.$subjectByCS['Sub Id'];
-                echo "<h6><a data-toggle='collapse' href='#".$sCSId."'>
-                  Class: ". $subjectByCS['Class Num']
-                  . " Section: ".$subjectByCS['Sec Name']
-                  ." Subject: ".$subjectByCS['Sub Id']
-                  . "</a></h6>";
+                // echo "<h6><a data-toggle='collapse' href='#".$sCSId."'>
+                //   Class: ". $subjectByCS['Class Num']
+                //   . " Section: ".$subjectByCS['Sec Name']
+                //   ." Subject: ".$subjectByCS['Sub Id']
+                //   . "</a></h6>";
                     // WE NEED TO PASS CLASS ID AND SECTION ID TO THE stuDiv_forTeacher FUNCTION
-                    students($mysqli,$pageHeading,$tId,$cId,$secId);
+                    // MANUALLY ADDING $PAGEHEADING HERE
+                    $pageHeading = 'Teachers';
+                    studentQuery($mysqli, $pageHeading,$tId,$cId,$secId, $sCSId);
                 echo "</div>";
               }
           echo "</div>
         </div>";
     }
-
+// display of students for each class is taken care of by studentsQueryResultToHtmlDiv.php script
 
  ?>

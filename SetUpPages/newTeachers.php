@@ -3,6 +3,7 @@
 	include $_SERVER['DOCUMENT_ROOT']."/basecode-create_connection.php";
 	include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/allQueries.php";
 	include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/teachersQueryResultToHtmlTable.php";
+	include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/studentsQueryResultToHtmlDiv.php";
 	//include "../RemoveRecords/RemoveClass.php";
 	//include "../Scripts/php/addNewClasses.php";
 //	include "../RemoveRecords/RemoveClass.php";

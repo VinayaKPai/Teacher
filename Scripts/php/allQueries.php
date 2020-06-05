@@ -111,7 +111,7 @@ function activity($type, $status, $mysqli ,$pageHeading) { //status is completed
     $query = $mysqli->query($queryString);
     // $query should be returned
     div($query, $type, $successFlag, $status, $pageHeading);
-  }
+}
 
   function teachers ($mysqli,$pageHeading) {
     $query = $mysqli->query("SELECT DISTINCT
@@ -127,8 +127,15 @@ function activity($type, $status, $mysqli ,$pageHeading) { //status is completed
           'Class Num', C.classNumber,
           'Sec Id', Sec.sectionId,
           'Sec Name', Sec.Sections,
-          'Sub Id', Sub.subjectId
-        ) ) as 'Subjects'
+          'Sub Id', Sub.subjectId,
+          'Sub Name', Sub.Subject
+        ) ) as 'CSSubjects',
+        json_arrayagg(DISTINCT json_object(
+            'SD C Id', CTT.classId,
+            'SD Class Num', C.classNumber,
+            'Stu Sec name', Sec.Sections,
+            'SD sectionId', Sec.sectionId
+          ) ) as 'CSSections'
         FROM
           users AS U
             INNER JOIN classes_taught_by_teacher AS CTT
@@ -145,7 +152,7 @@ function activity($type, $status, $mysqli ,$pageHeading) { //status is completed
         table ($mysqli, $query,$pageHeading);
   }
 
-  function students ($mysqli, $pageHeading,$cId,$secId) {
+  function students ($mysqli, $pageHeading) {
     $query = $mysqli->query("SELECT DISTINCT
         C.classId AS 'C Id',
         C.classNumber AS 'Class / Std',
@@ -175,7 +182,7 @@ function activity($type, $status, $mysqli ,$pageHeading) { //status is completed
 
         Group BY C.classId
       ");
-          stuDiv($query,$pageHeading,$cId,$secId);
+          stuDiv($query,$pageHeading);
   }
 
 ?>

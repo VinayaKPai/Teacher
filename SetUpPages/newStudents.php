@@ -31,10 +31,7 @@
 			<div>
 				<p>Click on the Class heading to see details</p>
 				<?php
-					$cId ='';
-					$secId = '';
-					$sCSId = '';
-					students($mysqli, $pageHeading,$cId,$secId);
+					students($mysqli, $pageHeading);
 				?>
 
 			</div>

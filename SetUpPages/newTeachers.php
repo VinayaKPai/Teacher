@@ -33,13 +33,8 @@
 			</h3>
 				<?php include $_SERVER['DOCUMENT_ROOT']."/Components/peopleLinks.php"; ?>
 			<hr>
-			<div class="row">
-				<div class="col-sm-3" style="padding: 10px;">
-					<hr>
-					<?php include $_SERVER['DOCUMENT_ROOT']."/Forms/userTeacherForm.php"; ?>
-					<hr>
-				</div>
-				<div class="col-sm-9 centered" style="border-left: 1px solid Grey;">
+			<div class="container">
+				<div>
 					<h5>Click on the teacher's name explore details</h5>
 					<?php
 						teachers($mysqli,$pageHeading);

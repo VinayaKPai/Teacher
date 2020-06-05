@@ -2,7 +2,7 @@
 function table( $mysqli, $result,$pageHeading ) {
 
     $result->fetch_array( MYSQLI_ASSOC );
-    // print_r($result);
+    print_r($result);
     if ($result) {
         $rowcount=mysqli_num_rows($result);
         if ($rowcount > 0) {
@@ -13,7 +13,7 @@ function table( $mysqli, $result,$pageHeading ) {
       echo "<h4 class='topbanner'>Currently $rowcount active Teachers in your setup</h4>" ;
     echo "<table style='width: 100%; padding: 5px; border-spacing: 2px; border-collapse: separate; align: 'center';'>";
         tableHead(  $result );
-        tableBody(  $mysqli,$result,$pageHeading );
+        tableBody(  $result,$pageHeading );
     echo '</table>';
 }
 
@@ -22,82 +22,84 @@ function tableHead(  $result ) {  //$result is ALL the records for all teachers
         foreach ( $result as $teacher ) {//create the table heading
             echo '<tr>';
             foreach ( $teacher as $j => $k ) {
-                if ($j !='Students' AND $j != 'Subjects'){
-                  echo '<th>' . $k . '</th>';
+                if ($j !='CSSections' AND $j != 'CSSubjects'){
+                  echo '<th>' . $j . '</th>';
                 }
             }
-            echo '<th>Action</th></tr>'; //as we need a delete option for the teacher
             break;
         }
         echo '</thead>';
 }
 
-function tableBody(  $mysqli,$result,$pageHeading ) { //$result is ALL the records for all teachers
-        echo '<tbody>';
+function tableBody(  $result,$pageHeading ) { //$result is ALL the records for all teachers
+      echo '<tbody>';
         foreach ( $result as $teacher ) { //$teacher is now data of a single teacher
+          $tId = $teacher['T Id'];
+          $togId = "t".$tId;
+
+          $CSSubjects = $teacher['CSSubjects'];
+          $CSSections = $teacher['CSSections'];
+
+          $teacherCSSubs = json_decode($CSSubjects, true);
+          $teacherCSSecs = json_decode($CSSections, true);
+          //to display main data only - ie no CSSubjects or students
           echo "<tr>";
-            displayTeacherData($mysqli,$teacher,$pageHeading);
+            displayTeacherData($teacher,$pageHeading,$tId,$togId,$teacherCSSecs,$teacherCSSubs);
           echo "</tr>";
+          //displaying CORRECTLY
         }
-        echo '</tbody>';
+      echo '</tbody>';
 }
 
-function displayTeacherData($mysqli,$teacher,$pageHeading) { //$teacher is the data for a SINGLE teacher
-      $tId = $teacher['T Id'];
-      $togId = "t".$tId;
-      $fn = $teacher['T First Name'];
-      $mn = $teacher['T Middle Name'];
-      $ln = $teacher['T Last Name'];
+function displayTeacherData($teacher,$pageHeading,$tId,$togId,$teacherCSSecs,$teacherCSSubs) { //$teacher is the data for a SINGLE teacher
 
-      $pm = $teacher['T Mobile'];
-      $remIdDB = $teacher['T First Name']."-".$teacher['T Middle Name']."-".$teacher['T Last Name'].$teacher['T Mobile'];
-      $url = "../../RemoveRecords/RemoveTeacher.php?fn=".$fn."&mn=".$mn."&ln=".$ln."&pm=".$pm;
-
-      foreach ( $teacher as $x => $y ) {//the Subject shd not be displayed as theads
-        if ($x != 'Subjects'){//because students and subject are displayed differetly
-          echo "<td>
-            <a data-toggle='collapse' style='color:white;' href='#".$tId."'> " . $y . "</a>
-          </td>";
+    foreach ( $teacher as $x => $y ) {//the CSSubjects & CSSections shd not be displayed as theads
+        if ($x !='CSSections' AND $x != 'CSSubjects'){//because students and subject are displayed differetly
+          echo "<td>";
+          echo "<a data-toggle='collapse' style='color:white;' href='#".$togId."'> " . $y . "</a>";
+          echo "</td>";  //displaying CORRECTLY
         }
-      }//display for columns other than students and subjects OVER
-      //creating a delete button
-      echo "<td>
-        <a id=$remIdDB name=$remIdDB  href='$url'>
-          <span class='glyphicon glyphicon-trash' style='background-color: Red; color: White; padding: 4px;'></span>
-        </a>
-      </td>";//end creating a delete button
-      //this tr is for subjects and Students  y class-section for that teacher
-      echo "<tr class='panel panel-default'>";
-          echo "<td colspan=9 style='color: White;'>";
-          $subjects = $teacher['Subjects'];
-          collapsibleClasses($mysqli,$subjects,$tId,$pageHeading);
-      echo "</td></tr>";
-    }
+      if ($x=='CSSubjects') {
+        echo "<tr>";
+        echo "<td colspan='8'>";
+              echo "<div id='".$togId."' class='panel panel-default panel-collapse collapse'>";
+                stuDiv( $teacher,$pageHeading );
 
-function collapsibleClasses($mysqli,$subjects,$tId,$pageHeading) {
-      echo "<div class='panel-heading'>
-          <div id='".$tId."' class='panel-collapse collapse'>";
-              $subs = json_decode($subjects, true);
-              foreach ($subs as $subjectByCS) {//each $subjectByCS is a single class-section-subject combo
-
-                $cId = $subjectByCS['Class Id'];
-                $cNum = $subjectByCS['Class Num'];
-                $secId = $subjectByCS['Sec Id'];
-                $sCSId = "sCsT".$tId.$cId.$secId.$subjectByCS['Sub Id'];
-                echo "<h6 class='th white'><a data-toggle='collapse' href='#".$sCSId."' class='white'>
-                  Class: ". $cNum
-                  . " Section: ".$subjectByCS['Sec Name']
-                  ." Subject: ".$subjectByCS['Sub Id']
-                  . "</a></h6>";
-                    // WE NEED TO PASS CLASS ID AND SECTION ID TO THE stuDiv_forTeacher FUNCTION
-                    echo "<div id='".$sCSId."' class='panel panel-default panel-collapse collapse' style='color: #0f0f0f;'>";
-                      // students($mysqli,$pageHeading,$cId,$secId );
-                      displayStudentsForClassSec($subjectByCS,$cId,$cNum,$secId,$pageHeading);
-                    echo "</div>";
-              }
-          echo "</div>
-          </div>";
+                 // createCollapsibleCSS($teacher,$pageHeading,$tId,$togId,$teacherCSSecs,$teacherCSSubs);//WORKING ON IT!!!!!
+              echo "</div>";
+          echo "</td>";  //displaying CORRECTLY
+        echo "</tr>";
+      }
     }
+}
+function createCollapsibleCSS($teacher,$pageHeading,$tId,$togId,$teacherCSSecs,$teacherCSSubs) {
+  //$teacherCSSubs is an array of arrays, where the inner arrays are details of each CSectionSubjects
+  foreach ($teacherCSSubs as $key => $css ){ //$key here is [0],[1]....
+    //and $css is of the format Array ( [Class Id] => 1 [Class Num] => I [Sec Id] => 1 [Sec Name] => A [Sub Id] => 5
+
+    $classId = $css['Class Id'];
+    $sectionId = $css['Sec Id'];
+    $subjectId = $css['Sub Id'];
+
+    $className = $css['Class Num'];
+    $sectionName = $css['Sec Name'];
+    $subjectName = $css['Sub Name'];
+    $cssTogId = "css".$classId.$sectionId.$subjectId.$togId;
+      echo "<div class='panel panel-heading centered'>
+      <a data-toggle='collapse'' href='#".$cssTogId."'>Class " . $className . " Section ". $sectionName . " Subject " . $subjectName . "</a>
+      </div>";
+    // echo "<div id='".$cssTogId."' class='panel panel-body panel-collapse collapse'>";
+    // echo $cssTogId;
+    // print_r($teacherCSSecs);
+        createCollapsibleDivForCSecStu($pageHeading,$teacherCSSecs,$classId,$className,$sectionId,);
+    // echo "</div>";
+  }
+}
+
+function createCollapsibleDivForCSecStu($pageHeading,$teacherCSSecs,$classId,$className,$sectionId) {
+// print_r($teacherCSSubs);
+stuDiv( $result,$pageHeading );
+}
 // display of students for each class is taken care of by studentsQueryResultToHtmlDiv.php script
 
  ?>

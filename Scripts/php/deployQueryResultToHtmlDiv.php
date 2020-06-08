@@ -87,13 +87,6 @@
                     $assId = $row['Assessment ID'];
                   }
                   scheduleDeployment($row['classNumber'], $row['classId'], $row['Assessment ID']);
-
-                   //   if (isset($row['Class']) && isset($row['Section']) && isset($row['Open From']) && isset($row['Open Till'])) {
-                   //      scheduleDeployment($row['Class'], $row['Class Id'], $row['Assessment ID']);
-                   //   }
-                   // else {
-                   //
-                   //  }
               echo "</div>";
             echo '</div>
           </div>';
@@ -237,44 +230,6 @@ function removeBOM($data) {
     }
     return $data;
 }
-//
-// function questionDisplay ($z) {
-//
-//   foreach ( $z as $a ) { //the entire question row, including options
-//     echo $a['Questions'];
-//       foreach ($a as $c => $d){ //$c will be Id, Class, Question, Option_1, Option_2, Option_3, Option_4, Option_5, Option_6
-//         if ($c!='Id' && $c!='Class' && $c!='Question' && $c != 'qId' && $c !='question') {
-//             echo "<ul type='a'>";
-//           if ($d) {
-//             echo "<li>".$d."</li>";
-//           }
-//           echo "</ul>";
-//         }
-//       }
-//
-//   }
-//
-// }
-// function deploymentDisplay ($z) {
-//
-//   foreach ( $z as $a ) { //the entire question row, including options
-//     // echo $a['Questions'];
-//       foreach ($a as $c => $d){ //$c will be Id, Class, Question, Option_1, Option_2, Option_3, Option_4, Option_5, Option_6
-//         echo "<ul>";
-//         if ($c=='Open From' && $c=='Open Till') {
-//           echo $c." is c AND ".$d." is d";
-//         //     echo "<ul type='a'>";
-//         //   if ($d) {
-//         //     echo "<li>".$d."</li>";
-//         //   }
-//         //   echo "</ul>";
-//         }
-//         else { echo "<li>not c or d</li>";}
-//         echo "</ul>";
-//       }
-//
-//   }
-//
-// }
+
 
 ?>

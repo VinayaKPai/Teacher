@@ -2,7 +2,7 @@
 function table( $mysqli, $result,$pageHeading ) {
 
     $result->fetch_array( MYSQLI_ASSOC );
-    print_r($result);
+    // print_r($result);
     if ($result) {
         $rowcount=mysqli_num_rows($result);
         if ($rowcount > 0) {
@@ -65,7 +65,6 @@ function displayTeacherData($teacher,$pageHeading,$tId,$togId,$teacherCSSecs,$te
               echo "<div id='".$togId."' class='panel panel-default panel-collapse collapse'>";
                 stuDiv( $teacher,$pageHeading );
 
-                 // createCollapsibleCSS($teacher,$pageHeading,$tId,$togId,$teacherCSSecs,$teacherCSSubs);//WORKING ON IT!!!!!
               echo "</div>";
           echo "</td>";  //displaying CORRECTLY
         echo "</tr>";
@@ -88,16 +87,13 @@ function createCollapsibleCSS($teacher,$pageHeading,$tId,$togId,$teacherCSSecs,$
       echo "<div class='panel panel-heading centered'>
       <a data-toggle='collapse'' href='#".$cssTogId."'>Class " . $className . " Section ". $sectionName . " Subject " . $subjectName . "</a>
       </div>";
-    // echo "<div id='".$cssTogId."' class='panel panel-body panel-collapse collapse'>";
-    // echo $cssTogId;
-    // print_r($teacherCSSecs);
+
         createCollapsibleDivForCSecStu($pageHeading,$teacherCSSecs,$classId,$className,$sectionId,);
     // echo "</div>";
   }
 }
 
 function createCollapsibleDivForCSecStu($pageHeading,$teacherCSSecs,$classId,$className,$sectionId) {
-// print_r($teacherCSSubs);
 stuDiv( $result,$pageHeading );
 }
 // display of students for each class is taken care of by studentsQueryResultToHtmlDiv.php script

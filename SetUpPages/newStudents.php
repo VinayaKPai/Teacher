@@ -35,6 +35,13 @@
 				?>
 
 			</div>
+			<div>
+				<p>Click on the Class heading to see details</p>
+				<?php
+					stuDiv1($mysqli, $pageHeading);
+				?>
+
+			</div>
 			<hr>
 			<div id="bottom"><?php include "../Components/bottom.php"; ?></div>
 		</div>

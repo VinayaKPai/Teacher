@@ -1,7 +1,5 @@
 <?php
-  // include $_SERVER['DOCUMENT_ROOT']."/basecode-create_connection.php";
-  include $_SERVER['DOCUMENT_ROOT']."/basecode-create_connection.php";
-  //This is not required. You will instead be included on the page where the display will happen
+
   include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/deployQueryResultToHtmlDiv.php";
 
 
@@ -114,6 +112,7 @@ function activity($type, $status, $mysqli ,$pageHeading) { //status is completed
 }
 
   function teachers ($mysqli,$pageHeading) {
+
     $query = $mysqli->query("SELECT DISTINCT
       U.userId AS 'T Id',
       U.firstName AS 'T First Name',
@@ -183,6 +182,40 @@ function activity($type, $status, $mysqli ,$pageHeading) { //status is completed
         Group BY C.classId
       ");
           stuDiv($query,$pageHeading);
+          return ($query->fetch_assoc());
+  }
+
+  function studentsP ($mysqli) {
+    $query = $mysqli->query("SELECT DISTINCT
+        C.classId AS 'C Id',
+        C.classNumber AS 'Class / Std',
+          json_arrayagg(DISTINCT json_object(
+            'SD C Id', SD.classId,
+            'Stu Sec name', Sec.Sections,
+            'SD sectionId', SD.sectionId
+          ) ) as 'Sections',
+          json_arrayagg(DISTINCT json_object(
+            'Stu C Id', SD.classId,
+            'Stu sectionId', SD.sectionId,
+            'Stu Id', SD.userId,
+            'Stu RN', SD.rollNumber,
+            'S First Name', U.firstName,
+            'S Middle Name', U.middleName,
+            'S Last Name', U.lastName
+          ) ) as 'Students',
+          COUNT(SD.userId) AS 'Count'
+        FROM
+          classes as C
+        INNER JOIN studentDetails AS SD
+          ON SD.classId = C.classId
+        LEFT JOIN sections AS Sec
+          ON Sec.sectionId = SD.sectionId
+        INNER JOIN users as U
+          ON U.userId = SD.userId
+
+        Group BY C.classId
+      ");
+      return ($query->fetch_array( MYSQLI_ASSOC ));
   }
 
 ?>

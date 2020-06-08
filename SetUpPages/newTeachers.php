@@ -38,6 +38,10 @@
 					<h5>Click on the teacher's name explore details</h5>
 					<?php
 						teachers($mysqli,$pageHeading);
+						students($mysqli,$pageHeading);
+					?>
+					<?php
+						stuDiv1($mysqli, $pageHeading);
 					?>
 				</div>
 				<hr>

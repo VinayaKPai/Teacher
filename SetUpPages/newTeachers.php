@@ -1,13 +1,8 @@
 <?php
-	//include "basecode-create_connection.php";
 	include $_SERVER['DOCUMENT_ROOT']."/basecode-create_connection.php";
 	include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/allQueries.php";
 	include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/teachersQueryResultToHtmlTable.php";
 	include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/studentsQueryResultToHtmlDiv.php";
-	//include "../RemoveRecords/RemoveClass.php";
-	//include "../Scripts/php/addNewClasses.php";
-//	include "../RemoveRecords/RemoveClass.php";
-	// include "../_Modals/teacherModal.php";
 	$pageHeading = "Teachers";
 	$pageCode = "setup";
 ?>
@@ -37,11 +32,7 @@
 				<div>
 					<h5>Click on the teacher's name explore details</h5>
 					<?php
-						teachers($mysqli,$pageHeading);
-						students($mysqli,$pageHeading);
-					?>
-					<?php
-						stuDiv1($mysqli, $pageHeading);
+						studentsForTeacher($mysqli);
 					?>
 				</div>
 				<hr>

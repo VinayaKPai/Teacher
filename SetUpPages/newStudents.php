@@ -1,5 +1,4 @@
 <?php
-	//include "basecode-create_connection.php";
 	include $_SERVER['DOCUMENT_ROOT']."/basecode-create_connection.php";
 	include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/allQueries.php";
 	include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/studentsQueryResultToHtmlDiv.php";
@@ -32,13 +31,6 @@
 				<p>Click on the Class heading to see details</p>
 				<?php
 					students($mysqli, $pageHeading);
-				?>
-
-			</div>
-			<div>
-				<p>Click on the Class heading to see details</p>
-				<?php
-					stuDiv1($mysqli, $pageHeading);
 				?>
 
 			</div>

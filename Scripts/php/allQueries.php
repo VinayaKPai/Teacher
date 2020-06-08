@@ -2,8 +2,6 @@
 
   include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/deployQueryResultToHtmlDiv.php";
 
-
-//This function should just execute the query and then return the result (Which will be stored in a variable on the display page)
 function activity($type, $status, $mysqli ,$pageHeading) { //status is completed/ongoing/undeoployed/all type is a/q/t
         $str = '';
         $successFlag = '';
@@ -111,45 +109,45 @@ function activity($type, $status, $mysqli ,$pageHeading) { //status is completed
     div($query, $type, $successFlag, $status, $pageHeading);
 }
 
-  function teachers ($mysqli,$pageHeading) {
+function teachers ($mysqli,$stuQuery) {
 
-    $query = $mysqli->query("SELECT DISTINCT
-      U.userId AS 'T Id',
-      U.firstName AS 'T First Name',
-      U.middleName AS 'T Middle Name',
-      U.lastName AS 'T Last Name',
-      U.Email AS 'T External Email',
-      U.systemEmail AS 'T Internal Email',
-      U.phoneMobile AS 'T Mobile',
-      U.visibility AS 'Current',json_arrayagg(DISTINCT json_object(
-          'Class Id',CTT.classId,
-          'Class Num', C.classNumber,
-          'Sec Id', Sec.sectionId,
-          'Sec Name', Sec.Sections,
-          'Sub Id', Sub.subjectId,
-          'Sub Name', Sub.Subject
-        ) ) as 'CSSubjects',
-        json_arrayagg(DISTINCT json_object(
-            'SD C Id', CTT.classId,
-            'SD Class Num', C.classNumber,
-            'Stu Sec name', Sec.Sections,
-            'SD sectionId', Sec.sectionId
-          ) ) as 'CSSections'
-        FROM
-          users AS U
-            INNER JOIN classes_taught_by_teacher AS CTT
-              on CTT.userId = U.userId
-            INNER JOIN subjects AS Sub
-              on Sub.subjectId = CTT.subjectId
-            LEFT JOIN classes as C
-              on C.classId= CTT.classId
-            LEFT JOIN sections as Sec
-              on Sec.sectionId= CTT.sectionId
-        GROUP BY U.userId
-              ORDER BY U.userId ASC");
+  $teacherQuery = $mysqli->query("SELECT DISTINCT
+    U.userId AS 'T Id',
+    U.firstName AS 'T First Name',
+    U.middleName AS 'T Middle Name',
+    U.lastName AS 'T Last Name',
+    U.Email AS 'T External Email',
+    U.systemEmail AS 'T Internal Email',
+    U.phoneMobile AS 'T Mobile',
+    U.visibility AS 'Current',json_arrayagg(DISTINCT json_object(
+        'Class Id',CTT.classId,
+        'Class Num', C.classNumber,
+        'Sec Id', Sec.sectionId,
+        'Sec Name', Sec.Sections,
+        'Sub Id', Sub.subjectId,
+        'Sub Name', Sub.Subject
+      ) ) as 'CSSubjects',
+      json_arrayagg(DISTINCT json_object(
+          'SD C Id', CTT.classId,
+          'SD Class Num', C.classNumber,
+          'Stu Sec name', Sec.Sections,
+          'SD sectionId', Sec.sectionId
+        ) ) as 'CSections'
+      FROM
+        users AS U
+          INNER JOIN classes_taught_by_teacher AS CTT
+            on CTT.userId = U.userId
+          INNER JOIN subjects AS Sub
+            on Sub.subjectId = CTT.subjectId
+          LEFT JOIN classes as C
+            on C.classId= CTT.classId
+          LEFT JOIN sections as Sec
+            on Sec.sectionId= CTT.sectionId
+      GROUP BY U.userId
+            ORDER BY U.userId ASC");
+      table ($mysqli, $teacherQuery,$stuQuery);
 
-        table ($mysqli, $query,$pageHeading);
-  }
+}
 
   function students ($mysqli, $pageHeading) {
     $query = $mysqli->query("SELECT DISTINCT
@@ -184,38 +182,27 @@ function activity($type, $status, $mysqli ,$pageHeading) { //status is completed
           stuDiv($query,$pageHeading);
           return ($query->fetch_assoc());
   }
+  function studentsForTeacher($mysqli) {
+  	$stuQuery = $mysqli->query("SELECT
+      SD.userId AS 'U Id',
+  		SD.classId,
+  		C.classNumber AS 'Class',
+  		SD.sectionId,
+  		S.Sections AS 'Section',
+  		U.firstName AS 'F Name',
+  		U.middleName AS 'M Name',
+  		U.lastName AS 'L Name',
+  		SD.rollNumber AS 'R No.'
+  		FROM studentDetails AS SD
+  		INNER JOIN classes AS C ON C.classId = SD.classId
+  		INNER JOIN sections AS S ON S.sectionId = SD.sectionId
+  		INNER JOIN users AS U ON U.userId = SD.userId
+  		ORDER BY SD.classId ASC, SD.sectionId ASC
+  		");
+  		$q = ($stuQuery->fetch_assoc());
+  teachers($mysqli,$stuQuery);
+  		// teachers($mysqli,$stuQuery);
 
-  function studentsP ($mysqli) {
-    $query = $mysqli->query("SELECT DISTINCT
-        C.classId AS 'C Id',
-        C.classNumber AS 'Class / Std',
-          json_arrayagg(DISTINCT json_object(
-            'SD C Id', SD.classId,
-            'Stu Sec name', Sec.Sections,
-            'SD sectionId', SD.sectionId
-          ) ) as 'Sections',
-          json_arrayagg(DISTINCT json_object(
-            'Stu C Id', SD.classId,
-            'Stu sectionId', SD.sectionId,
-            'Stu Id', SD.userId,
-            'Stu RN', SD.rollNumber,
-            'S First Name', U.firstName,
-            'S Middle Name', U.middleName,
-            'S Last Name', U.lastName
-          ) ) as 'Students',
-          COUNT(SD.userId) AS 'Count'
-        FROM
-          classes as C
-        INNER JOIN studentDetails AS SD
-          ON SD.classId = C.classId
-        LEFT JOIN sections AS Sec
-          ON Sec.sectionId = SD.sectionId
-        INNER JOIN users as U
-          ON U.userId = SD.userId
-
-        Group BY C.classId
-      ");
-      return ($query->fetch_array( MYSQLI_ASSOC ));
-  }
+  	}
 
 ?>

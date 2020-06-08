@@ -1,8 +1,5 @@
 <?php
-	//include "basecode-create_connection.php";
 	include $_SERVER['DOCUMENT_ROOT']."/basecode-create_connection.php";
-	// include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/allQueries.php";
-	// include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/studentsQueryResultToHtmlDiv.php";
 	$pageHeading = "Teachers";
 	$pageCode = "setup";
 ?>
@@ -31,7 +28,7 @@
 			<div>
 				<p>Calling students with 2 param</p>
 				<?php
-					students($mysqli);
+					studentsForTeacher($mysqli);
 				?>
 
 			</div>
@@ -42,8 +39,9 @@
 	</body>
 </html>
 <?php
-function students($mysqli) {
+function studentsForTeacher($mysqli) {
 	$stuQuery = $mysqli->query("SELECT
+		SD.userId AS 'U Id',
 		SD.classId,
 		C.classNumber AS 'Class',
 		SD.sectionId,
@@ -60,7 +58,6 @@ function students($mysqli) {
 		");
 		$q = ($stuQuery->fetch_assoc());
 teachers($mysqli,$stuQuery);
-		// teachers($mysqli,$stuQuery);
 
 	}
 
@@ -108,7 +105,6 @@ function teachers ($mysqli,$stuQuery) {
 function table( $mysqli, $result,$stuQuery ) {
 
     $result->fetch_array( MYSQLI_ASSOC );
-    // print_r($result);
     if ($result) {
         $rowcount=mysqli_num_rows($result);
         if ($rowcount > 0) {
@@ -123,9 +119,9 @@ function table( $mysqli, $result,$stuQuery ) {
     echo '</table>';
 }
 
-function tableHead(  $result ) {  //$result is ALL the records for all teachers
+function tableHead(  $result ) {
         echo '<thead>';
-        foreach ( $result as $teacher ) {//create the table heading
+        foreach ( $result as $teacher ) {
             echo '<tr>';
             foreach ( $teacher as $j => $k ) {
                 if ($j !='CSections' AND $j != 'CSSubjects'){
@@ -137,34 +133,28 @@ function tableHead(  $result ) {  //$result is ALL the records for all teachers
         echo '</thead>';
 }
 
-function tableBody(  $mysqli,$result,$stuQuery ) { //$result is ALL the records for all teachers
+function tableBody(  $mysqli,$result,$stuQuery ) {
 
       echo '<tbody>';
-        foreach ( $result as $teacher ) { //$teacher is now data of a single teacher
+        foreach ( $result as $teacher ) {
           $tId = $teacher['T Id'];
           $togId = "t".$tId;
 
-          // $CSSubjects = ;
-          // $CSections = ;
-
           $teacherCSSubs = json_decode($teacher['CSSubjects'], true);
-          $teacherCSSecs = json_decode($teacher['CSections'], true); //'SD C Id',	'SD Class Num', 'Stu Sec name', 'SD sectionId' as 'CSections'
-          //to display main data only - ie no CSSubjects or students
+          $teacherCSSecs = json_decode($teacher['CSections'], true);
           echo "<tr>";
             displayTeacherData($mysqli,$teacher,$tId,$togId,$teacherCSSecs,$teacherCSSubs,$stuQuery);
           echo "</tr>";
-          //displaying CORRECTLY
         }
       echo '</tbody>';
 }
-//displayTeacherData is working correctly
-function displayTeacherData($mysqli,$teacher,$tId,$togId,$teacherCSSecs,$teacherCSSubs,$stuQuery) { //$teacher is the data for a SINGLE teacher
+function displayTeacherData($mysqli,$teacher,$tId,$togId,$teacherCSSecs,$teacherCSSubs,$stuQuery) {
 
-    foreach ( $teacher as $x => $y ) {//the CSSubjects & CSSections shd not be displayed as theads
-        if ($x !='CSections' AND $x != 'CSSubjects'){//because students and subject are displayed differetly
+    foreach ( $teacher as $x => $y ) {
+        if ($x !='CSections' AND $x != 'CSSubjects'){
           echo "<td>";
           echo "<a data-toggle='collapse' style='color:white;' href='#".$togId."'> " . $y . "</a>";
-          echo "</td>";  //displaying CORRECTLY
+          echo "</td>";
         }
       if ($x=='CSSubjects') {
         echo "<tr>";
@@ -173,17 +163,15 @@ function displayTeacherData($mysqli,$teacher,$tId,$togId,$teacherCSSecs,$teacher
                 createCollapsibleCSS($teacher,$tId,$togId,$teacherCSSecs,$teacherCSSubs,$stuQuery);
 
               echo "</div>";
-          echo "</td>";  //displaying CORRECTLY
+          echo "</td>";
         echo "</tr>";
       }
     }
 }
-//displayTeacherData is working correctly
-//
+
 function createCollapsibleCSS($teacher,$tId,$togId,$teacherCSSecs,$teacherCSSubs,$stuQuery) {
-  //$teacherCSSubs is an array of arrays, where the inner arrays are details of each CSectionSubjects
-  foreach ($teacherCSSubs as $key => $css ){ //$key here is [0],[1].... and $css will have 'SD C Id',	'SD Class Num', 'Stu Sec name', 'SD sectionId' as 'CSections'
-    //and $css is of the format Array ( [Class Id] => 1 [Class Num] => I [Sec Id] => 1 [Sec Name] => A [Sub Id] => 5
+
+  foreach ($teacherCSSubs as $key => $css ){
 
     $classId = $css['Class Id'];
     $sectionId = $css['Sec Id'];
@@ -201,25 +189,21 @@ function createCollapsibleCSS($teacher,$tId,$togId,$teacherCSSecs,$teacherCSSubs
 							</a>
       		</div>";
 			echo "<div id='".$cssTogId."' class='panel panel-default panel-collapse collapse'>";
-				foreach ($teacherCSSecs as $classsections) {
-				displayStudentsForClassSec($classsections,$classId,$className,$sectionId,$stuQuery);
-			}
+				displayStudentsDataForClassSec($classId,$className,$sectionId,$stuQuery);
     echo "</div>";
   }
 }
 
 //****************************************
 
-function displayStudentsForClassSec($classsections,$classId,$className,$sectionId,$stuQuery) {
+function displayStudentsDataForClassSec($classId,$className,$sectionId,$stuQuery) {
+	$cnt = 0;
 	echo "<ul>";
 	foreach ($stuQuery as $key => $st) {
 		if ($st['classId']==$classId && $st['sectionId']==$sectionId) {
-			// foreach ($st as $stu) {
-				echo "<li>".$st['F Name']."</li>";
-			// }
+				echo "<li>".$st['F Name']." ".$st['M Name']." ".$st['L Name']."</li>";
 		}
 	}
 	echo "</ul>";
 }
-// Array ( [classId] => 1 [Class] => I [sectionId] => 2 [Section] => B [F Name] => Ighu [M Name] => [L Name] => Hughug [R No.] => 58 )
 ?>

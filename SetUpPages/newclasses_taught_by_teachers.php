@@ -3,7 +3,7 @@
 	include "../basecode-create_connection.php";
 	include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/CSTquerries.php";
 
-	$pageHeading = "Classes and Sections";
+	$pageHeading = "Teachers ";
 	$pageCode = "setup";
 ?>
 
@@ -41,36 +41,17 @@
 					<?php
 						include $_SERVER['DOCUMENT_ROOT']."/Forms/newClassForm.php"; ?>
 					<hr>
-					<!-- <div  class="row">
-						<div id="ajaxRes" class="col-sm-2">
 
-						</div>
-
-						<div class="col-sm-5">
-							<div id="recsInQ" style="color: blue; font-weight: bold;">
-							</div>
-							<div class="centered">
-								<button id="addAll" class="btn-primary"  onclick="ajaxAddAll(addMultiple)" style="display: none;"></button>
-							</div>
-						</div>
-					</div> -->
 
 				</div>
 				<div class="col-sm-9 centered" style="border-left: 1px solid Grey;">
-					<!-- <div class="container"> -->
+
 			      <?php
 			      for ($a=1;$a<13;$a++) {
 			        classes_sections_teachers($a,$mysqli,$pageHeading);
 			      }
 			      ?>
-			    <!-- </div> -->
-						<!-- <?php
 
-							include $_SERVER['DOCUMENT_ROOT']."/AddNew/Existing/classes_taught_by_teachers.php";
-						?> -->
-
-
-						<div id="status"></div>
 					</div>
 				<hr>
 

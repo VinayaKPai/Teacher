@@ -14,7 +14,7 @@ function table( $a, $result, $pageHeading ) {
           <div class='panel panel-default'>
             <div class='panel-heading'>
               <h4 class='panel-title green'>
-                <a data-toggle='collapse' href='$href'>Currently " .$rowcount." ". $pageHeading." for Class " .$row['Class']."</a>
+                <a data-toggle='collapse' href='$href'>". $pageHeading." for Class " .$row['Class']."</a>
               </h4>
             </div>
             <div id='$hId' class='panel-collapse collapse'>
@@ -31,7 +31,7 @@ function table( $a, $result, $pageHeading ) {
       echo "<div class='panel panel-default'>
           <div class='panel-heading'>
             <h4 class='panel-title red'>
-              <a data-toggle='collapse' href='$href'>Currently 0 ". $pageHeading." for Class ".$a."</a>
+              <a data-toggle='collapse' href='$href'>". $pageHeading." for Class ".$a."</a>
             </h4></div>
             <div id='$hId' class='panel-collapse collapse'>
               <div class='panel-body'>" ;

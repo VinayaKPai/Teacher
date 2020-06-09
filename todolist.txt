@@ -3,7 +3,7 @@ RemoveRecords : Dt : 21/5/2020
       a. /RemoveRecords/RemoveTeacher.php
   CHECK:
     No user records should be ever removed from the database. Check if the query removes the record or flags visibility as 0
-
+*******************************************
 
 Deployment of activity:
   Relevant files:
@@ -15,6 +15,7 @@ Problem: deployment Id is autoincrement. The deploytest.php is saving the record
   Step 1: So created a constraint Dedupe that (assessmentId	+ depType	+ schStartDate) have to be unique. Now it saves only once. However, auto increment jumps a number next time something is saved. This means the sql has used up the missing auto increment but not saved the record.
   Step 2: How to remove this glitch?
   *****************************
+
 Teachers: 8 May 2020
   Relevant files:
   a. /SetUpPages/newTeachers.php
@@ -29,6 +30,7 @@ Teachers: 8 May 2020
   e. /Scripts/php/exploreTeacher.php? with teacher id, class id, and section id
   Problem: Is it over kill? The Explore button only wants to show the students in the relevant class. Why send teacher Id with it?
 *******************************************
+
 Classes: 9 May 2020
   Relevant files:
   a. /SetUpPages/newclasses_taught_by_teachers.php
@@ -39,3 +41,10 @@ Single Teacher classes
   RELEVANT FILE :
   Scripts/php/singleTeacherClasses.php
   Problem: "teachers" table in the query needs to be removed
+*******************************************
+
+Students by teacher's classes
+Relevant files:
+a. /SetUpPages/newTeachers.php
+Problem: When a class-section has no students, there should be a message in the collapsible tr
+********************************************

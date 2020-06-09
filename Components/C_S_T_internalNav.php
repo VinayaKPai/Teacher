@@ -11,14 +11,14 @@
 
     <div style="width: 2px; background-color: #684654;"> </div>
 
-    <a id="Teachers" class="topbanner" style="width: 15%; color: #684654; background-color: #DDDDDD;  text-align: center;" href="../../SetUpPages/addnewclasses_taught_by_teachers.php">Teachers</a>
+    <a id="Teachers" class="topbanner" style="width: 15%; color: #684654; background-color: #DDDDDD;  text-align: center;" href="../../SetUpPages/newclasses_taught_by_teachers.php">Teachers</a>
 
     <div style="width: 2px; background-color: #684654;"> </div>
 
     <a id="Questions" class="topbanner" style="width: 15%; color: #684654; background-color: #DDDDDD;  text-align: center;" href="../../SetUpPages/newQuestions.php">Questions</a>
 
     <div style="width: 2px; background-color: #684654;"> </div>
-    
+
     <?php include $_SERVER['DOCUMENT_ROOT']."/Components/hamMenu.php"; ?>
 
 </h6>

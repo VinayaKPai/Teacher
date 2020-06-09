@@ -83,10 +83,10 @@
                   if(isset($row['Deployments'])) {
                     displayAllDeployments($row['Deployments']);
                     $classId = $row['classId'];
-                    $class = $row['classNumber'];
+                    $class = $row['Class'];
                     $assId = $row['Assessment ID'];
                   }
-                  scheduleDeployment($row['classNumber'], $row['classId'], $row['Assessment ID']);
+                  scheduleDeployment($row['Class'], $row['Class Id'], $row['Assessment ID']);
               echo "</div>";
             echo '</div>
           </div>';
@@ -154,8 +154,6 @@ function displayDeployment($deploymentDetails) {
 function displayQuestion($questionDetails) {
   //This should display only 1 question
 
-    //$questionDetails = $varr[$questionDetails];
-    // print_r($questionDetails);
     echo "<li>";
     echo $questionDetails['question'];
     echo "<ol style='list-style-type: lower-alpha' > ";

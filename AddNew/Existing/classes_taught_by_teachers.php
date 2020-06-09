@@ -1,8 +1,8 @@
-<style>
+<!-- <style>
  table tr:nth-child(even){background-color: #b69092; color: #fff}
  table tr:nth-child(odd){background-color: #684654; color: #fff}
  table td {text-align: center;}
-</style>
+</style> -->
 
 <table id="existTable" style="width: 100%; padding: 5px; border-spacing: 2px; border-collapse: separate; align: 'center';">
 	<?php
@@ -59,6 +59,6 @@
 				}
 
 	echo "</div>";
-	mysqli_close($mysqli);
+	// mysqli_close($mysqli);
 ?>
 </table>

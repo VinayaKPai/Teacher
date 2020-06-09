@@ -1,5 +1,9 @@
 <?php
-
+// used in SetUpPages/newTeachers.php
+// takes the result from query in teachers() in Scripts/php/allQueries.php
+// outputs the display of teachers in table, class-sections-subjects in hidden tr below the tr containing teachers details
+// another level of clickables in the hidden tr, contains the students for that class-sections
+// to get more details of students, tweek the studentsForTeacher() in Scripts/php/allQueries.php
 function table( $mysqli, $result,$stuQuery ) {
 
     $result->fetch_array( MYSQLI_ASSOC );
@@ -38,9 +42,6 @@ function tableBody(  $mysqli,$result,$stuQuery ) { //$result is ALL the records 
         foreach ( $result as $teacher ) { //$teacher is now data of a single teacher
           $tId = $teacher['T Id'];
           $togId = "t".$tId;
-
-          // $CSSubjects = ;
-          // $CSections = ;
 
           $teacherCSSubs = json_decode($teacher['CSSubjects'], true);
           $teacherCSSecs = json_decode($teacher['CSections'], true); //'SD C Id',	'SD Class Num', 'Stu Sec name', 'SD sectionId' as 'CSections'

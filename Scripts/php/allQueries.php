@@ -206,7 +206,7 @@
 
     }
 
-  function classesTaughtByTeachers($mysqli) {
+  function classesTaughtByTeachers_bkp($mysqli) {
     $query = $mysqli->query("SELECT
       subjects.subjectId AS 'Sub Id',
       subjects.Subject AS 'Subject',
@@ -235,4 +235,45 @@
         ");
     cttQueryResultToHtmlTable ( $query);
   }
+
+  function classesTaughtByTeachers($mysqli) {
+    $query = $mysqli->query("SELECT DISTINCT
+      Sub.subjectId AS 'Sub Id',
+      Sub.Subject AS'Sub Name',
+      json_arrayagg(DISTINCT json_object(
+        'T First Name', U.firstName,
+        'T Middle Name', U.middleName,
+        'T Last Name', U.lastName,
+        'T Class Id',CTT.classId,
+        'T Sec Name', Sec.Sections,
+        'T Sub Id', Sub.subjectId
+      ) ) as 'Teachers',
+      json_arrayagg(DISTINCT json_object(
+          'Cl Id',CTT.classId,
+          'Cl Num', C.classNumber
+        ) ) as 'Cls',
+      json_arrayagg(DISTINCT json_object(
+          'Class Id',CTT.classId,
+          'Class Num', C.classNumber,
+          'Sec Id', Sec.sectionId,
+          'Sec Name', Sec.Sections
+        ) ) as 'CSections'
+        FROM
+          subjects AS Sub
+            INNER JOIN classes_taught_by_teacher AS CTT
+              on CTT.subjectId = Sub.subjectId
+            INNER JOIN users AS U
+              on U.userId = CTT.userId
+            LEFT JOIN classes as C
+              on C.classId= CTT.classId
+            LEFT JOIN sections as Sec
+              on Sec.sectionId= CTT.sectionId
+        GROUP BY Sub.subjectId
+              ORDER BY Sub.subjectId ASC
+        ");
+    cttQueryResultToHtmlTable ( $query);
+  }
+
+
+
 ?>

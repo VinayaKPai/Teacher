@@ -36,5 +36,5 @@
 		");
 
 				stuDiv($query);
-	// mysqli_close($mysqli);
+	// //mysqli_close($mysqli);
 ?>

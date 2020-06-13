@@ -49,5 +49,5 @@ if ($arrayGETclassNumbers) {
 
 
 
-mysqli_close($mysqli);
+//mysqli_close($mysqli);
 ?>

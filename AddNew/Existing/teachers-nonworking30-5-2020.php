@@ -37,6 +37,6 @@
             ORDER BY U.userId ASC, CTT.classId ASC, CTT.sectionId ASC, SD.userId ASC");
 
 			table ($query);
-	mysqli_close($mysqli);
+	//mysqli_close($mysqli);
 ?>
 <!-- </table> -->

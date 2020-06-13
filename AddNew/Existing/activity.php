@@ -136,5 +136,5 @@
 					echo "Looks like your set up has not been started. Please add student details to the database, so that you can get the benefit of all the features of the App";
 				}
 
-	mysqli_close($mysqli);
+	//mysqli_close($mysqli);
 ?>

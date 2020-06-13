@@ -20,5 +20,5 @@
         echo "</select></label>";
 
 
-mysqli_close($mysqli);
+//mysqli_close($mysqli);
 ?>

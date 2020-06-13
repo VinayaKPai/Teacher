@@ -51,7 +51,7 @@ echo $queryString;
 $queryResult = $mysqli->query($queryString);  //use the queryString built above
 if ($_POST){print_r($queryResult);}
 table(false, $queryResult);
-	mysqli_close($mysqli);
+	//mysqli_close($mysqli);
   // {header('Location: ../../SetupPages/newQuestions.php');}
 
 ?>

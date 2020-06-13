@@ -1,9 +1,14 @@
 <?php
 
-  include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/deployQueryResultToHtmlDiv.php";
+  include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/deployAQT_QueryResultToHtmlDiv.php";
+  include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/deploySavedAssessments_QueryResultToHtmlDiv.php";
   include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/cttQueryResultToHtmlTable.php";
+  // include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/CSTQueryResultToHtmlTable.php";
 
-  function activity($type, $status, $mysqli ,$pageHeading) { //status is completed/ongoing/undeoployed/all type is a/q/t
+  function aqtActivityQuery($type, $status, $mysqli ,$pageHeading) {
+    //retrieve  deployments for /Activity/assignments.php, /Activity/tests.php, /Activity/quizzes.php
+    //status is completed/ongoing/undeoployed
+    // type is a/q/t
           $str = '';
           $successFlag = '';
           $queryString = ("SELECT
@@ -18,7 +23,7 @@
           dl.deploySuccess AS 'Deployed?',
           a.assessment_Id AS 'Assessment ID',
           a.assessment_Title AS 'Title',
-          CONCAT('[',json_arrayagg(
+            json_arrayagg(
         		json_object(
         			'questionID',qb.qId,
         			'question',qb.question,
@@ -29,21 +34,21 @@
         			'option5',qb.Option_5,
         			'option6',qb.Option_6
       		)
-      		),']') as 'Questions'
+      		)
+          as 'Questions'
           FROM
-              deploymentlog as dl
-          INNER JOIN assessments as a
-          	ON a.assessment_Id = dl.assessmentId
-          INNER JOIN assessment_questions as aq
-              ON aq.assessment_Id = a.assessment_Id
-          INNER JOIN questionbank as qb
-          	ON qb.qId = aq.question_id
-          INNER JOIN questiontype as qt
-          	on dl.depType = qt.qtId
-          INNER JOIN classes as c
-          	on c.classId = dl.classId
-          INNER JOIN sections as s
-          	on s.sectionId = dl.sectionId
+               questionbank AS qb
+           INNER JOIN assessment_questions AS aq
+             on aq.question_id = qb.qId
+           INNER JOIN assessments as a
+             on a.assessment_Id = aq.assessment_Id
+           LEFT JOIN deploymentlog as dl
+             on dl.assessmentId = aq.assessment_Id
+           LEFT JOIN classes as c
+             on c.classId = dl.classId
+           LEFT JOIN sections as s
+             on s.sectionId = dl.sectionId
+           -- GROUP BY a.assessment_Title
       	");
       if ($status == "ongoing") {
         $str = "WHERE dl.schStartDate < CURDATE() AND dl.schEndDate > CURDATE() AND dl.deploySuccess = 1 AND dl.depType = '$type'";
@@ -61,7 +66,17 @@
         $queryString = $queryString.$str ;
       }
       $queryString = $queryString."  GROUP BY dl.depId";
-        if ($status == "all") {
+
+      $query = $mysqli->query($queryString);
+      // $query should be returned
+      deploymentsdiv($query, $type, $successFlag, $status, $pageHeading);
+  }
+
+
+  function savedAssessmentsQuery( $mysqli) {
+    //retrieve assessments and deployments for /Activity/assignments.php, /Activity/tests.php, /Activity/quizzes.php
+    //status is completed/ongoing/undeoployed/all type is a/q/t
+    $successFlag = '';
           $queryString = ("SELECT
                 a.assessment_Title AS 'Title',
                 a.assessment_Id AS 'Assessment ID',
@@ -103,10 +118,9 @@
             LEFT JOIN sections as s
             	on s.sectionId = dl.sectionId
             GROUP BY a.assessment_Title;") ;
-        }
+
       $query = $mysqli->query($queryString);
-      // $query should be returned
-      div($query, $type, $successFlag, $status, $pageHeading);
+      savedAssessmentsdiv($query, $successFlag);
   }
 
   function teachers ($mysqli,$stuQuery) {

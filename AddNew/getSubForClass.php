@@ -30,5 +30,5 @@ $query = $mysqli->query("SELECT DISTINCT subjectName FROM subjects WHERE classNu
 		echo $sendSubjectArray;
 
 
-mysqli_close($mysqli);
+//mysqli_close($mysqli);
 ?>

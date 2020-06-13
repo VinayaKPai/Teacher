@@ -54,7 +54,7 @@ if (isset($arrayPOST['classNumber'])) {
 echo $queryString;
 $queryResult = $mysqli->query($queryString);  //use the queryString built above
 table(false, $queryResult);
-	mysqli_close($mysqli);
+	//mysqli_close($mysqli);
   // {header('Location: ../../SetupPages/newQuestions.php');}
 
 ?>

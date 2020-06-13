@@ -47,5 +47,5 @@ $query = $mysqli->query("SELECT * FROM topics, classes, subjects WHERE topics.cl
 echo "</div>";
 
 
-mysqli_close($mysqli);
+//mysqli_close($mysqli);
 ?>

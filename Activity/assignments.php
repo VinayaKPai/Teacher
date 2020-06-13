@@ -31,28 +31,27 @@
 	 	<div class="panel-group" id="accordion">
 	 		<?php
 	 		$b = "completed";
-	 		activity($a,$b,$mysqli,$pageHeading);
+	 		aqtActivityQuery($a,$b,$mysqli,$pageHeading);
 	 		?>
 	 	</div>
 
 	 	<div class="panel-group" id="accordion">
 	 		<?php
 	 		$b = "ongoing";
-	 		activity($a,$b,$mysqli,$pageHeading);
+	 		aqtActivityQuery($a,$b,$mysqli,$pageHeading);
 	 		?>
 	 	</div>
 
 	 	<div class="panel-group" id="accordion">
 	 		<?php
 	 			$b = "undeployed";
-	 			activity($a,$b,$mysqli,$pageHeading);
+	 			aqtActivityQuery($a,$b,$mysqli,$pageHeading);
 	 		?>
 	 	</div>
 
 	 	<div class="panel-group" id="accordion">
 	 		<?php
-	 		$b = "all";
-	 		activity($a,$b,$mysqli,$pageHeading);
+	 		savedAssessmentsQuery( $mysqli);
 	 		?>
 	 	</div>
 

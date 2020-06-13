@@ -52,5 +52,5 @@ $query = $mysqli->query("SELECT * FROM topics ORDER BY `classId`");
 echo "</div>";
 
 
-mysqli_close($mysqli);
+//mysqli_close($mysqli);
 ?>

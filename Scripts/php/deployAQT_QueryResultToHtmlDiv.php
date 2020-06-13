@@ -1,42 +1,30 @@
 <?php
 
-  function div( $result, $type, $successFlag, $status ) {
-    $count  = mysqli_num_rows($result);
-//$result is (type A/Q/T AND status C/O/U) OR (type ALL WITHOUT status OR $successFlag OR type)
-    if ($type=='A') {$ass = "Assignment";}
-    if ($type=='T') {$ass = "Test";}
-    if ($type=='Q') {$ass = "Quiz";}
-    if ($type=='all') {$ass = "Assessment";}
+function deploymentsdiv( $result, $type, $successFlag, $status ) {
+  $count  = mysqli_num_rows($result);
+  //$result is (type A/Q/T AND status C/O/U)
+  if ($type=='A') {$ass = "Assignment";}
+  if ($type=='T') {$ass = "Test";}
+  if ($type=='Q') {$ass = "Quiz";}
 
-    if ($successFlag==1) {$success = "Deployed";}
-    else {$success = "Undeployed"; }
-    if ($count>1){$suffix = 's';}
-    else {$suffix = '';}
+  if ($successFlag==1) {$success = "Deployed";}
+  else {$success = "Undeployed"; }
+  if ($count>1){$suffix = 's';}
+  else {$suffix = '';}
 
-    if ($status=='completed' || $status=='ongoing' || $status=='undeployed') {
-      echo "<h4 class='topbanner centered'>".$count. " ".$status." ".$ass.$suffix."</h4>";
-    }
-    else {
-      $ass = "Assessment";
-      echo "<h4 class='topbanner centered'>".$count. " ".$ass.$suffix."</h4>";
-    }
+  echo "<h4 class='topbanner centered'>".$count. " ".$status." ".$ass.$suffix."</h4>";
 
-    if ($count != 0) {
-        while ($row = $result->fetch_array( MYSQLI_ASSOC )){
-
-              divBody( $row, $status, $ass, $type );
-          }
-    }
+  if ($count != 0) {
+      while ($row = $result->fetch_array( MYSQLI_ASSOC )){
+            deploymentsDivBody( $row, $status, $ass, $type );
+        }
   }
-
-
-  function divBody( $row, $status, $ass, $type ) {
+}
+  function deploymentsDivBody( $row, $status, $ass, $type ) {
     $dId = '';
     $secId = '';
     $deploymentId = '';
     $assId = $row['Assessment ID'];
-    //we need sectiotionId and deployment Id for finetuning the collapsibles
-    //but since these are not present in the all assessments query, an if is needed
     if (isset($row['SectionId']) && isset($row['Id'])) {
       $secId = $row['SectionId'];
       $deploymentId = $row['Id'];
@@ -59,30 +47,25 @@
       $varr = json_decode($row['Questions'], true);
       $title = $row['Title'];
       //create the section heading
-       if ( $type=== 'A' || $type=== 'Q' || $type=== 'T'	) {
+       // if ( $type=== 'A' || $type=== 'Q' || $type=== 'T'	) {
           $dId = "collapse".$status.$deploymentId.$assId;//unique id for collapse elements
           $schdTxt = "Schedule a Deployment";
           $panelTitle = "<a data-toggle='collapse' data-parent='#accordion' href='#".$dId."' > ".$title."</a>";
           $secHeading = $leftSpan.$panelTitle.$rightSpan;
-       }
-       else { //ie. When $type= "all"
-  	        $dId = "collapse".$assId;//unique id for collapse elements
-            $schdTxt = "Scheduled Deployments";
-            $secHeading = $panelTitle;
-       }
+       // }
 
       echo "<div class='panel panel-default'>
               <div class='panel-heading'>
-                <h4 class='panel-title centered'>".$secHeading."</h4></div>";
+                <h4 class='panel-title centered'>".$secHeading."</h4></div></div>";
     	  echo "
             <div id='".$dId."' class='panel-collapse collapse'>
               <div class='panel-body'>";
-		              displayAssesmentQuestions($row['Questions']);
+		              displayDeploymentQuestions($row['Questions']);
               echo "<div class='body col-sm-4' style='background:  var(--BodyGradient); border-radius: 25px; border-bottom: 2px solid #4B0082;'>";
                    echo "<h5>".$schdTxt . "</h5>";
                   if(isset($row['Deployments'])) {
                     displayAllDeployments($row['Deployments']);
-                    $classId = $row['classId'];
+                    $classId = $row['Class Id'];
                     $class = $row['Class'];
                     $assId = $row['Assessment ID'];
                   }
@@ -122,18 +105,18 @@ function scheduleDeployment($class, $classId, $assId) {
 
 }
 
-//for ALL assessments
+//for ALL Deployments
 function displayAllDeployments($allDeployments) {//$vard is json encode of $row['Deployments'] $assId is assessment Id
 
-$deployments = json_decode($allDeployments, true);
+  $deployments = json_decode($allDeployments, true);
   echo "<ol style='list-style-type: number' >";
   foreach ($deployments as $deployment) {
-    displayDeployment($deployment);
+    displayDeploymentScheduleForm($deployment);
   }
   echo "</ol>";
 }
 
-function displayDeployment($deploymentDetails) {
+function displayDeploymentScheduleForm($deploymentDetails) {
   if ($deploymentDetails['deploySuccess'] == 0) {
     $col = "class='red'";
     $txt = "<strong>No</strong>";
@@ -151,7 +134,21 @@ function displayDeployment($deploymentDetails) {
   echo "</li>";
 }
 
-function displayQuestion($questionDetails) {
+function displayDeploymentQuestions($jsonQuestions) {
+  $assessmentQuestions = json_decode("[".$jsonQuestions."]", true);
+  echo gettype($assessmentQuestions);
+
+  //This will take 1 deployment and loop through all the questions in it and display it as needed
+  echo "<div class='body col-sm-8 left' style='background:  var(--BodyGradient); border-radius: 25px; border-bottom: 2px solid #4B0082;'>";
+  foreach ($assessmentQuestions as $assessmentQuestion) {
+    displayDeploymentQuestion($assessmentQuestion);
+  }
+  echo "</ol>";
+  echo "<ol style='list-style-type: number' >";
+  echo "</div>";
+}
+
+function displayDeploymentQuestion($questionDetails) {
   //This should display only 1 question
 
     echo "<li>";
@@ -181,53 +178,11 @@ function displayQuestion($questionDetails) {
 }
 
 
-
-/*
-Step 1
-$result->fetch_array( MYSQLI_ASSOC ) will give you all the rows returned in the query (So all assessments). You should pass this to displayAllAssessments() and then inside that function, you should loop through all of them, as shown below
-foreach ($result as $resultRow) will select each row (So each assessment)
-
-Step 2
-$questionsArray = json_decode($resultRow['Questions'], true); will give you an array with all the questions. pass this to displayAssesmentQuestions()
-Inside loop through and pass each question to displayQuestion()
-
-Step 3
-displayQuestion() will only display 1 question.
-So echo the output for 1 question
- */
-
-
-function displayAllAssessments($allAssessments) {
-  //This function will take ALL assessments and then will loop through all of them and display it as needed.
-  foreach ($allAssessments as $assessment) {
-    displayAssesmentQuestions($assessment);
-  }
-}
-
 function displayAssessment ($assessmentTitle ) {
 
 }
 
-function displayAssesmentQuestions($jsonQuestions) {
-  //This will take 1 assessment and loop through all the questions in it and display it as needed
-  echo "<div class='body col-sm-8 left' style='background:  var(--BodyGradient); border-radius: 25px; border-bottom: 2px solid #4B0082;'>";
-  $assessmentQuestions = json_decode($jsonQuestions, true);
-  echo "<ol style='list-style-type: number' >";
-  foreach ($assessmentQuestions as $assessmentQuestion) {
-    displayQuestion($assessmentQuestion);
-  }
-  echo "</ol>";
-  echo "</div>";
-}
 
-
-//Remove UTF8 Bom
-function removeBOM($data) {
-    if (0 === strpos(bin2hex($data), 'efbbbf')) {
-       return substr($data, 3);
-    }
-    return $data;
-}
 
 
 ?>

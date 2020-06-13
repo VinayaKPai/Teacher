@@ -73,5 +73,5 @@ if ($_GET){
 }
 
   // {header('Location: ../SetUpPages/newQuestions.php');}
-	mysqli_close($mysqli);
+	//mysqli_close($mysqli);
 ?>

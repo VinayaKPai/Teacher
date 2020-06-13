@@ -113,7 +113,7 @@ $queryString = $queryString." AND classes.classId = questionbank.classId AND sub
         }
         echo "</table>";
         // {header('Location: ../../SetupPages/newQuestions.php');}
-        	mysqli_close($mysqli);
+        	//mysqli_close($mysqli);
 }
 
 ?>

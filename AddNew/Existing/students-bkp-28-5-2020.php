@@ -31,5 +31,5 @@
 		ORDER BY classes.classId ASC, sections.sectionId ASC");
 			
 				table($query);
-	mysqli_close($mysqli);
+	//mysqli_close($mysqli);
 ?>

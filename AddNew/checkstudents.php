@@ -26,5 +26,5 @@ $query = $mysqli->query("SELECT * FROM studentdetails WHERE firstName = '$firstN
 		$returnArray = [$rowcount, $rowId];
 		$sendArray = json_encode($returnArray);
 		echo $sendArray;	//this is what will be held in the ajax Response text in ajaxCalls.js
-mysqli_close($mysqli);
+//mysqli_close($mysqli);
 ?>

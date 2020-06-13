@@ -48,3 +48,8 @@ Relevant files:
 a. /SetUpPages/newTeachers.php
 Problem: When a class-section has no students, there should be a message in the collapsible tr
 ********************************************
+
+Question bank: 14 June 2020
+  Relevant files:
+  a. SetUpPages/newQuestions.php
+Problem: Once an activity is saved, the checkboxes should get unchecked automatically

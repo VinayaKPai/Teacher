@@ -3,7 +3,7 @@
 <head>
 	<?php include $_SERVER['DOCUMENT_ROOT']."/Components/header.php" ;
 				include $_SERVER['DOCUMENT_ROOT']."/basecode-create_connection.php";
-				include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/allQueries.php";
+				include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/allRetrievalQueries.php";
 				$a = "T";
 	?>
 </head>
@@ -19,15 +19,10 @@
 			$pageHeadSingular = "Test";
 			include $_SERVER['DOCUMENT_ROOT']."/Components/top.php";
 			if ($_GET){echo $_GET;}
-			include $_SERVER['DOCUMENT_ROOT']."/Components/activitiesLinks.php";
+			include $_SERVER['DOCUMENT_ROOT']."/Components/internalNav.php";
+			include $_SERVER['DOCUMENT_ROOT']."/Components/createNewAssessment.php";
 		?>
-	 <a href="../../SetUpPages/newQuestions.php">
-		 <h4 class="btn btn-block topbanner">Create A New Assessment
-			 <small style="padding: 10px; color: White;">This will take you to the question bank</small>
-		 </h4>
-		 Note: This will only create an assessment. To schedule a deployment, you'll need to come back here and deploy it.
-	 </a>
-
+	 <div style="background: var(--BodGradbanner);">
 
 	 	 	<div class="panel-group" id="accordion">
 	 	 		<?php
@@ -56,7 +51,7 @@
 	 	 		?>
 	 	 	</div>
 
-
+		</div>
  </div> <!-- container div immediately inside body -->
 </body>
 </html>

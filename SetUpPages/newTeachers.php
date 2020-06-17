@@ -1,6 +1,6 @@
 <?php
 	include $_SERVER['DOCUMENT_ROOT']."/basecode-create_connection.php";
-	include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/allQueries.php";
+	include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/allRetrievalQueries.php";
 	include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/teachersQueryResultToHtmlTable.php";
 	include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/studentsQueryResultToHtmlDiv.php";
 	$pageHeading = "Teachers";
@@ -26,7 +26,7 @@
 			<h3 class="centered">
 				<?php include "../Components/top.php"; ?>
 			</h3>
-				<?php include $_SERVER['DOCUMENT_ROOT']."/Components/peopleLinks.php"; ?>
+				<?php include $_SERVER['DOCUMENT_ROOT']."/Components/internalNav.php"; ?>
 			<hr>
 			<div class="container">
 				<div>

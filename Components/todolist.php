@@ -1,12 +1,18 @@
 <div class="col-sm-12" style="background: var(--BodGradcard); color: #f0f0f0; padding-top: 5px;">
   <h4>To Do List</h4>
   <div class='row'>
-              <div class='col-6'>
+              <div class='col-6' style="border-right: 1px solid #f0f0f0;
+              border-radius: 5px;
+              background-color: #413949;
+              box-shadow: inset -4px -4px -4px -4px #00000f;">
                 <?php include $_SERVER['DOCUMENT_ROOT']."/AddNew/Existing/todos.php";?>
               </div>
 
 
-              <div class='col-6'>
+              <div class='col-6'  style="border-right: 1px solid #f0f0f0;
+              border-radius: 5px;
+              background-color: #413949;
+              box-shadow: inset -4px -4px -4px -4px #00000f;">
         					    <h5  id='addNewTodo'>
                         Add a new To-do
                       </h5>

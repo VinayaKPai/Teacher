@@ -1,7 +1,7 @@
 <?php
 	//include "basecode-create_connection.php";
 	include $_SERVER['DOCUMENT_ROOT']."/basecode-create_connection.php";
-	include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/allQueries.php";
+	include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/allRetrievalQueries.php";
 	$pageHeading = "Subjects";
 	$pageCode = "setup";
 ?>

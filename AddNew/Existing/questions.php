@@ -62,7 +62,7 @@ if ($selectedClassNumbers || $selectedSubjectNames) {
 
 // $queryString = $queryString." AND classes.classId = questionbank.classId AND subjects.subjectId = questionbank.subjectId ";
 $queryString = $queryString." AND classes.classId = questionbank.classId AND subjects.subjectId = questionbank.subjectId";
-        echo $queryString;
+        // echo $queryString;
         $queryResult = $mysqli->query($queryString);  //use the queryString built above
         // if ($_POST){print_r($queryResult);}
         // table(false, $queryResult);

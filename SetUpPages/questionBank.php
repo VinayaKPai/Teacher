@@ -1,6 +1,6 @@
 <?php
 	include "../basecode-create_connection.php";
-	$pageHeading = "New Questions";
+	$pageHeading = "Question Bank";
 	$pageCode = "setup";
 ?>
 
@@ -117,46 +117,58 @@
 				?>
 
 			</h3>
-			<hr>
-<div class="col-sm-4" style="padding: 1px;">
-  <p class="panel-title" style="color: #413949;">Add a Question to the Database</p>
-  <form name="newQuestionForm" action="../AddNew/addnewquestion.php" method="post">
-    <div class="form-group">
-      <label for="classNumberFrm">Class / Std
-        <span class="glyphicon glyphicon-asterisk" style="color: Red"></span>
-      </label>
-      <input id="classNumberFrm" name="classNumberFrm" class="form-control" required />
-      <label for="subjectNameFrm">Subject
-        <span class="glyphicon glyphicon-asterisk" style="color: Red"></span>
-      </label>
-      <input id="subjectNameFrm" name="subjectNameFrm" class="form-control" required />
-      <label for="topicFrm">Topic
-        <span class="glyphicon glyphicon-asterisk" style="color: Red"></span>
-      </label>
-      <select name="topicFrm" id="topicFrm" class="form-control" required>
-        <option id="blanktp"></option>
-        <option id="I">I</option>
-        <option id="II">II</option>
-        <option id="III">III</option>
-      </select>
-      <label for="typeFrm">Question Type
-        <span class="glyphicon glyphicon-asterisk" style="color: Red"></span>
-      </label>
-      <select name="typeFrm" id="typeFrm" class="form-control" required>
-          <option id="blanksa"></option>
-          <option id="lat">LAT</option>
-          <option id="sat">SAT</option>
-          <option id="vsat">VSAT</option>
-          <option id="mcq">MCQ</option>
-      </select>
-      <label for="qn">Question
-        <span class="glyphicon glyphicon-asterisk" style="color: Red"></span>
-      </label>
-      <input id="qn" name="qn" class="form-control" />
-    </div>
+			<!-- <div> -->
 
-    <button name="Submit" id="submit" type="submit">SUBMIT</button>
-  </form>
+				<div class=" row centered" style="padding: 10px 10px 1px 1px; ">
+          <div style="margin-top: 3px;">
+						<p class="panel-title" style="color: #413949;">Select at least one class and one subject to view questions</p>
+					</div>
+					<div id="ajaxReturn"></div>
+					<div class="panel panel-header col-sm-12" style="padding:10px;">
+							<div class="col-sm-3 left-align">Class/STD:<span class='glyphicon glyphicon-asterisk small' style='color: Red'></span></div>
+							<div id="classSelectBoxes" class="input-group col-sm-9 left-align">
+								<?php include "../Components/classNumberDropDown.php" ; ?>
+							</div>
+							<div class="col-sm-3 left-align">Subject:<span class='glyphicon glyphicon-asterisk small' style='color: Red'></span></div>
+							<div id="subjectSelectBoxes" class="input-group col-sm-9 left-align">
+								<?php include "../Components/subjectDropDown.php" ; ?>
+							</div>
+							<div id="filtersInUse"  class="left-align" style="padding:10px;">
+								<div id="filteredClasses"  class="col-sm-6" style="padding: :10px;"></div>
+								<div id="filteredSubjects"  class="col-sm-6" style="padding: :10px; border-left: 1px solid LightGrey"></div>
+							</div>
+					</div>
+					<div class="panel panel-header  col-sm-12" style="padding:10px;">
+						<div style="align-content: center;">
+							<button onclick="ajaxCallGetQuestionsFilter()">View Questions</button>
+						</div>
+					</div>
+				</div>
+			<!-- </div> -->
+				<div class-"row">
+						<div id="ajaxResult" class="container col-sm-8">
 
+						</div>
+						<div id="ajaxButtons" class="container col-sm-4" style="display:none;" >
+							<h5 id="axc" style="text-align: center; display: none;">
+								Create a New Activity - Give it a name:
+								<input id="inpTitle" />
+								<br><small>Note: this will be displayed as the title when you deploy the activity!</small>
+							</h5>
+							<h5 style="text-align: center;">Save It!</h5>
+					      <button name="saveButton" id="assignment" class="btn btn-block" style="color: Green;" onclick="ajaxCallSaveNewAssignment()">Save Activity</button>
+					      <button class='btn btn-block' style='color: Red'>Cancel</button>
+								<div class="h5">Note: If you want to remove any question here, uncheck the corresponding checkbox below</div>
+						</div>
+				</div>
+				<div id="ajret" class="centered">
+						<?php
+								$displayType = "checkbox";
+								include "../AddNew/Existing/questions.php";
+							?>
+					</div>
+				</div>
 
-</div>
+			<div id="bottom"><?php include "../Components/bottom.php"; ?></div>
+	</body>
+</html>

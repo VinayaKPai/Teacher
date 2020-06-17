@@ -2,7 +2,7 @@
 	//include "basecode-create_connection.php";
 	include "../basecode-create_connection.php";
 	include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/CSTquerries.php";
-	// include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/allQueries.php";
+	// include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/allRetrievalQueries.php";
 
 	$pageHeading = "Teachers ";
 	$pageCode = "setup";

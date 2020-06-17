@@ -19,9 +19,9 @@ function ctttableBody( $result ) {
           $sId = $subject['Sub Id'];
           $togId = "s".$sId;
           //create a link for the collapsible
-          echo "<tr><td class='centered'><a class='white' data-toggle='collapse' href='#".$togId."'>";
+          echo "<tr><td class='centered'><a data-toggle='collapse' href='#".$togId."'><h5  class='white'>";
             echo "Subject: ".$subject['Sub Name'];
-          echo "</a></td></tr>";
+          echo "</h5></a></td></tr>";
           //a tr for the collapsible
           echo "<tr><td>";
             subjectNameCollapsible($subject,$togId,$sId);
@@ -47,12 +47,12 @@ function cttSubsDivCollapsible($clsData,$togId,$tchsecs,$sId) {
       $clsId = $data;
       $clsDivId = $togId."c".$clsId;
       // echo "<div class='panel panel-heading centered'>";
-      echo "<h5><a data-toggle='collapse' href='#".$clsDivId."'>";
+      echo "<a style='color: maroon;' data-toggle='collapse' href='#".$clsDivId."'><h5>";
     }
     if ($cls=='Cl Num') {
       echo "Class/Std : ".$data;
       //display section and teacher in one row
-      echo "</a></h5>";
+      echo "</h5></a>";
       // echo "</div>";
       displaySecAndTeacher($tchsecs,$clsId,$clsDivId,$sId);
     }

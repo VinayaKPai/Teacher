@@ -12,13 +12,17 @@ function deploymentsdiv( $result, $type, $successFlag, $status ) {
   if ($count>1){$suffix = 's';}
   else {$suffix = '';}
 
-  echo "<h4 class='topbanner centered'>".$count. " ".$status." ".$ass.$suffix."</h4>";
-
-  if ($count != 0) {
-      while ($row = $result->fetch_array( MYSQLI_ASSOC )){
-            deploymentsDivBody( $row, $status, $ass, $type );
-        }
-  }
+  echo "<a data-toggle='collapse' href='#".$status."'><h4 class='centered topbanner'>".$count. " ".$status." ".$ass.$suffix."</h4></a>";
+  echo "<div id='".$status."' class='collapse' style='padding: 4px;'>";
+    if ($count != 0) {
+        while ($row = $result->fetch_array( MYSQLI_ASSOC )){
+              deploymentsDivBody( $row, $status, $ass, $type );
+          }
+    }
+    else {
+      echo "<div class='panel pane-default'><p>No records</p></div>";
+    }
+  echo "</div>";
 }
   function deploymentsDivBody( $row, $status, $ass, $type ) {
     $dId = '';
@@ -47,16 +51,15 @@ function deploymentsdiv( $result, $type, $successFlag, $status ) {
       $varr = json_decode($row['Questions'], true);
       $title = $row['Title'];
       //create the section heading
-       // if ( $type=== 'A' || $type=== 'Q' || $type=== 'T'	) {
           $dId = "collapse".$status.$deploymentId.$assId;//unique id for collapse elements
           $schdTxt = "Schedule a Deployment";
-          $panelTitle = "<a data-toggle='collapse' data-parent='#accordion' href='#".$dId."' > ".$title."</a>";
-          $secHeading = $leftSpan.$panelTitle.$rightSpan;
-       // }
+          $secHeading = $leftSpan.$title.$rightSpan;
 
-      echo "<div class='panel panel-default'>
-              <div class='panel-heading'>
-                <h4 class='panel-title centered'>".$secHeading."</h4></div></div>";
+      echo "<div>";
+              // echo "<div class='panel-heading paneldefault'>";
+                echo "<a data-toggle='collapse' data-parent='#accordion' href='#".$dId."' > <h6 class='panel-heading centered'>".$secHeading."</h6></a>";
+              // echo "</div>";
+        echo "</div>";
     	  echo "
             <div id='".$dId."' class='panel-collapse collapse'>
               <div class='panel-body'>";
@@ -136,7 +139,6 @@ function displayDeploymentScheduleForm($deploymentDetails) {
 
 function displayDeploymentQuestions($jsonQuestions) {
   $assessmentQuestions = json_decode("[".$jsonQuestions."]", true);
-  echo gettype($assessmentQuestions);
 
   //This will take 1 deployment and loop through all the questions in it and display it as needed
   echo "<div class='body col-sm-8 left' style='background:  var(--BodyGradient); border-radius: 25px; border-bottom: 2px solid #4B0082;'>";

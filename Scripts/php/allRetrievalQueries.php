@@ -9,6 +9,7 @@
     //retrieve  deployments for /Activity/assignments.php, /Activity/tests.php, /Activity/quizzes.php
     //status is completed/ongoing/undeoployed
     // type is a/q/t
+    // WORKING
           $str = '';
           $successFlag = '';
           $queryString = ("SELECT
@@ -72,10 +73,10 @@
       deploymentsdiv($query, $type, $successFlag, $status, $pageHeading);
   }
 
-
   function savedAssessmentsQuery( $mysqli) {
-    //retrieve assessments and deployments for /Activity/assignments.php, /Activity/tests.php, /Activity/quizzes.php
-    //status is completed/ongoing/undeoployed/all type is a/q/t
+    //from Activities/assignments.php, Activities/quizzes.php, Activities/tests.php
+    //to Scripts/php/deploySavedAssessments_QueryResultToHtmlDiv.php
+    //WORKING
     $successFlag = '';
           $queryString = ("SELECT
                 a.assessment_Title AS 'Title',
@@ -124,7 +125,9 @@
   }
 
   function teachers ($mysqli,$stuQuery) {
-
+    //from SetUpPages/newTeachers.php
+    //to Scripts/php/teachersQueryResultToHtmlTable.php
+    //WORKING
     $teacherQuery = $mysqli->query("SELECT DISTINCT
       U.userId AS 'T Id',
       U.firstName AS 'T First Name',
@@ -164,6 +167,9 @@
   }
 
   function students ($mysqli, $pageHeading) {
+    //from SetUpPages/newStudents.php
+    //to Scripts/php/studentsQueryResultToHtmlDiv.php
+    //WORKING
       $query = $mysqli->query("SELECT DISTINCT
           C.classId AS 'C Id',
           C.classNumber AS 'Class / Std',
@@ -190,14 +196,17 @@
             ON Sec.sectionId = SD.sectionId
           INNER JOIN users as U
             ON U.userId = SD.userId
-
           Group BY C.classId
+          ORDER BY C.classId ASC, Sec.sectionId ASC
         ");
             stuDiv($query,$pageHeading);
             return ($query->fetch_assoc());
   }
 
   function studentsForTeacher($mysqli) {
+    //from SetUpPages/newTeachers.php
+    //to teachers() in Scripts/php/allRetrievalQueries.php
+    ////WORKING
     	$stuQuery = $mysqli->query("SELECT
         SD.userId AS 'U Id',
     		SD.classId,
@@ -214,43 +223,12 @@
     		INNER JOIN users AS U ON U.userId = SD.userId
     		ORDER BY SD.classId ASC, SD.sectionId ASC
     		");
-    		$q = ($stuQuery->fetch_assoc());
     teachers($mysqli,$stuQuery);
-    		// teachers($mysqli,$stuQuery);
-
     }
 
-  function classesTaughtByTeachers_bkp($mysqli) {
-    $query = $mysqli->query("SELECT
-      subjects.subjectId AS 'Sub Id',
-      subjects.Subject AS 'Subject',
-      classes.classNumber AS 'Class / Std',
-      classes.classId AS 'C Id',
-      sections.Sections AS 'Section',
-      users.userId AS 'T Id',
-      users.firstName AS 'F Name',
-      users.middleName AS 'M Name',
-      users.lastName AS 'L Name'
-      FROM
-        users,
-        classes_taught_by_teacher,
-        classes,
-        sections,
-        subjects
-      WHERE
-        users.userId = classes_taught_by_teacher.userId AND
-        classes.classId = classes_taught_by_teacher.classId AND
-        sections.sectionId = classes_taught_by_teacher.sectionId AND
-        classes_taught_by_teacher.subjectId = subjects.subjectId
-      ORDER BY
-        subjects.Subject ASC,
-        classes.classId ASC,
-        sections.Sections ASC
-        ");
-    cttQueryResultToHtmlTable ( $query);
-  }
-
   function classesTaughtByTeachers($mysqli) {
+    //from SetUpPages/newSubjects.php
+    //to Scripts/php/cttQueryResultToHtmlTable.php
     $query = $mysqli->query("SELECT DISTINCT
       Sub.subjectId AS 'Sub Id',
       Sub.Subject AS'Sub Name',
@@ -287,7 +265,5 @@
         ");
     cttQueryResultToHtmlTable ( $query);
   }
-
-
 
 ?>

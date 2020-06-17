@@ -1,9 +1,9 @@
 <?php
 // used in SetUpPages/newTeachers.php
-// takes the result from query in teachers() in Scripts/php/allQueries.php
+// takes the result from query in teachers() in Scripts/php/allRetrievalQueries.php
 // outputs the display of teachers in table, class-sections-subjects in hidden tr below the tr containing teachers details
 // another level of clickables in the hidden tr, contains the students for that class-sections
-// to get more details of students, tweek the studentsForTeacher() in Scripts/php/allQueries.php
+// to get more details of students, tweek the studentsForTeacher() in Scripts/php/allRetrievalQueries.php
 function table( $mysqli, $result,$stuQuery ) {
 
     $result->fetch_array( MYSQLI_ASSOC );
@@ -15,7 +15,7 @@ function table( $mysqli, $result,$stuQuery ) {
         }
         else { $cls = "'color: Red;'";}
       }
-      echo "<h4 class='topbanner'>Currently $rowcount active Teachers in your setup</h4>" ;
+      echo "<h4 class='th'>Currently ". $rowcount ." active Teachers in your setup</h4>" ;
     echo "<table style='width: 100%; padding: 5px; border-spacing: 2px; border-collapse: separate; align: 'center';'>";
         tableHead(  $result );
         tableBody(  $mysqli,$result,$stuQuery );
@@ -59,7 +59,9 @@ function displayTeacherData($mysqli,$teacher,$tId,$togId,$teacherCSSecs,$teacher
     foreach ( $teacher as $x => $y ) {//the CSSubjects & CSSections shd not be displayed as theads
         if ($x !='CSections' AND $x != 'CSSubjects'){//because students and subject are displayed differetly
           echo "<td>";
-          echo "<a data-toggle='collapse' style='color:white;' href='#".$togId."'> " . $y . "</a>";
+          echo "<a data-toggle='collapse' style='color:white;' href='#".$togId."'> ";
+          echo  $y ;
+          echo "</a>";
           echo "</td>";  //displaying CORRECTLY
         }
       if ($x=='CSSubjects') {
@@ -77,9 +79,7 @@ function displayTeacherData($mysqli,$teacher,$tId,$togId,$teacherCSSecs,$teacher
 //displayTeacherData is working correctly
 //
 function createCollapsibleCSS($teacher,$tId,$togId,$teacherCSSecs,$teacherCSSubs,$stuQuery) {
-  //$teacherCSSubs is an array of arrays, where the inner arrays are details of each CSectionSubjects
-  foreach ($teacherCSSubs as $key => $css ){ //$key here is [0],[1].... and $css will have 'SD C Id',	'SD Class Num', 'Stu Sec name', 'SD sectionId' as 'CSections'
-    //and $css is of the format Array ( [Class Id] => 1 [Class Num] => I [Sec Id] => 1 [Sec Name] => A [Sub Id] => 5
+  foreach ($teacherCSSubs as $key => $css ){
 
     $classId = $css['Class Id'];
     $sectionId = $css['Sec Id'];
@@ -89,13 +89,13 @@ function createCollapsibleCSS($teacher,$tId,$togId,$teacherCSSecs,$teacherCSSubs
     $sectionName = $css['Sec Name'];
     $subjectName = $css['Sub Name'];
     $cssTogId = "css".$classId.$sectionId.$subjectId.$togId;
-      echo "<div class='panel panel-heading centered'>
-      				<a data-toggle='collapse'' href='#".$cssTogId."'>
+      echo "<a data-toggle='collapse'' href='#".$cssTogId."'>
+              <h6 class='panel-heading'>
 								<span style='float: left;'>Class " . $className . "</span>
 								<span style='float: center;'> Section ". $sectionName . "</span>
 								<span style='float: right;'> Subject " . $subjectName . "</span>
-							</a>
-      		</div>";
+							</h6>
+            </a>";
 			echo "<div id='".$cssTogId."' class='panel panel-default panel-collapse collapse'>";
 				displayStudentsDataForClassSec($classId,$className,$sectionId,$stuQuery);
     echo "</div>";
@@ -109,6 +109,7 @@ function displayStudentsDataForClassSec($classId,$className,$sectionId,$stuQuery
 	echo "<ul>";
 	foreach ($stuQuery as $key => $st) {
 		if ($st['classId']==$classId && $st['sectionId']==$sectionId) {
+      $cnt = $cnt + 1;
 				echo "<li>".$st['F Name']." ".$st['M Name']." ".$st['L Name'];
           echo "<ul>";
             echo "<li>Id : ".$st['U Id']."</li>";
@@ -118,5 +119,8 @@ function displayStudentsDataForClassSec($classId,$className,$sectionId,$stuQuery
 		}
 	}
 	echo "</ul>";
+  if ($cnt==0) {
+    echo "<h6 class='red'>".$cnt ." students in this class</h6>" ;
+  }
 }
  ?>

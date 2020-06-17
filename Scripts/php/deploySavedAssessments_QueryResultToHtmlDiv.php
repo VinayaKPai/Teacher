@@ -10,12 +10,14 @@
     else {$suffix = '';}
 
       $ass = "Assessment";
-      echo "<h4 class='topbanner centered'>".$count. " ".$ass.$suffix."</h4>";
+      echo "<a data-toggle='collapse' href='#".$ass."'><h4 class='topbanner centered'>".$count. " ".$ass.$suffix."</h4></a>";
 
     if ($count != 0) {
+      echo "<div class='collapse' style='padding: 5px;' id='".$ass."'>";
         while ($row = $result->fetch_array( MYSQLI_ASSOC )){
               savedAssessmentsDivBody( $row, $ass );
           }
+      echo "</div>";
     }
   }
 
@@ -26,12 +28,10 @@
       $title = $row['Title'];
       $dId = "collapseAss".$assId;//unique id for collapse elements
       //create the section heading
-      $panelTitle = "<a data-toggle='collapse' data-parent='#accordion' href='#".$dId."' > ".$title."</a>";
       $schdTxt = "Scheduled Deployments";
 
-      echo "<div class='panel panel-default'>
-              <div class='panel-heading'>
-                <h4 class='panel-title centered'>".$panelTitle."</h4></div></div>";
+      echo "<div>
+                <a data-toggle='collapse' data-parent='#accordion' href='#".$dId."' > <h6 class='panel-heading centered'>".$title."</h6></a></div>";
     	  echo "<div id='".$dId."' class='panel-collapse collapse'>
               <div class='panel-body'>";
 		              displayAssessmentQuestions($row['Questions']);
@@ -110,7 +110,6 @@ function displayDeploymentSchForm($deploymentDetails) {
 
 function displayAssessmentQuestions($jsonQuestions) {
   $assessmentQuestions = json_decode($jsonQuestions, true);
-  echo gettype($assessmentQuestions);
   //This will take 1 assessment and loop through all the questions in it and display it as needed
   echo "<div class='body col-sm-8 left' style='background:  var(--BodyGradient); border-radius: 25px; border-bottom: 2px solid #4B0082;'>";
   foreach ($assessmentQuestions as $assessmentQuestion) {

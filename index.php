@@ -37,7 +37,7 @@
 
 			<div class="container" style="background: var(--BodyGradient);">
 				<div class="row centered" style="background: var(--BodyGradient);" style="flex-wrap: wrap; padding: 5%; justify-content: space-between;">
-					<div class="card cards col-sm-3" style="background: var(--BodGradcard); ">
+					<div class="card cards col-sm-3">
 						<h4>Reports</h4>
 						<div class="centered">
 							<h5>Quizzes</h5>
@@ -67,18 +67,13 @@
 								?>
 							</ul>
 						</div>
-						<!-- <div class="dropdown-content centered" style="float: center;">
-							<a href="../../SetUpPages/newReports.php">Manage </a>
-						</div> -->
 					</div>
-					<div class="card cards col-sm-3" style="background: var(--BodGradcard);" >
+					<div class="card cards col-sm-3">
 						<h4>Activity</h4>
 						<h5>Assessment</h5>
-						<ul  class="left-align" style="list-style-type: none;">
 							<?php
 								include $_SERVER['DOCUMENT_ROOT']."/Components/activityList.php";
 							?>
-						</ul>
 						<hr style="border-top: 1px solid maroon;">
 						<h5>Practice</h5>
 						<ul class="left-align" style="list-style-type: none;">
@@ -87,7 +82,7 @@
 							</li>
 						</ul>
 					</div>
-					<div class="card cards col-sm-3" style="background: var(--BodGradcard);">
+					<div class="card cards col-sm-3">
 						<h4>Setup</h4>
 						<h5>People</h5>
 						<ul class="left-align" style="list-style-type: none;">
@@ -103,7 +98,8 @@
 								<li><a href="../../SetUpPages/newSubjects.php">Subjects</a></li>
 								<li><a href="../../SetUpPages/newUnits.php">Units</a></li>
 								<li><a href="../../SetUpPages/newTopics.php">Topics</a></li>
-								<li><a href="../../SetUpPages/newQuestions.php">Question Bank</a></li>
+								<li><a href="../../SetUpPages/newQuestions.php">Questions</a></li>
+								<li><a href="../../SetUpPages/questionBank.php">Question Bank</a></li>
 							</ul>
 					</div>
 				</div>

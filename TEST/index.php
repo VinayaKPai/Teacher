@@ -26,13 +26,6 @@
 			</h3>
 			<?php include $_SERVER['DOCUMENT_ROOT']."/Components/peopleLinks.php"; ?>
 			<hr>
-			<!-- <div>
-				<p>Calling students with 2 param</p>
-				<?php
-					// studentsForTeacher($mysqli);
-				?>
-
-			</div> -->
 
 			<div class="panel-group" id="accordion">
 		 		<?php

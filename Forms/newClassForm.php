@@ -1,28 +1,30 @@
-<form name="newClassForm" action="../AddNew/addnewclass.php" method="post">
-  <div>
+<form name="newClassForm" action="../Scripts/php/allInsertQueries.php" method="post">
+
+  <div style="display: flex; justify-content: space-between;">
     <?php
+        // $pageheading = "CTT";
         $displayType = "dropdown";
+        echo "<span><span class='red'>*</span>";
         include $_SERVER['DOCUMENT_ROOT']."/Components/teacherDropDown.php";
-    ?>
-  </div>
-  <div>
-    <?php
-        $displayType = "dropdown";
+        echo "</span>";
+        echo "<span><span class='red'>*</span>";
         include $_SERVER['DOCUMENT_ROOT']."/Components/classNumberDropDown.php";
-    ?>
-  </div>
-  <div>
-    <?php
-        $displayType = "dropdown";
+        echo "</span>";
+        echo "<span><span class='red'>*</span>";
         include $_SERVER['DOCUMENT_ROOT']."/Components/sectionAlphaDropDown.php";
-    ?>
-  </div>
-  <div>
-    <?php
-        $displayType = "dropdown";
+        echo "</span>";
+        echo "<span><span class='red'>*</span>";
         include $_SERVER['DOCUMENT_ROOT']."/Components/subjectDropDown.php";
+        echo "</span>";
     ?>
   </div>
-  <button name="Submit" id="submit" type="submit">SUBMIT</button>
+  <div style="padding: 10px; display: flex; justify-content: space-around;">
+    <span><span><span class='red'>*</span>
+      <input type="checkbox" name="confirm"  value="<?php echo $pageCode; ?>" required>All data is correct</input>
+    </span>
+    <span>
+      <button name="Submit" id="submit" type="submit">SUBMIT</button>
+    </span>
+  </div>
 
 </form>

@@ -4,7 +4,7 @@
 
   $teacherId = $_GET['teacherId'];
   if ($teacherId) {
-      $query = $mysqli->query("SELECT DISTINCT users.firstName, users.middleName, users.lastName, classes.classId, classes.classNumber, sections.sectionId, sections.Sections, subjects.Subject
+      $query = $mysqli->query("SELECT DISTINCT users.firstName, users.middleName, users.lastName, classes.classId, classes.classNumber, sections.sectionId, sections.sectionName, subjects.subjectName
         FROM
         users,
         classes_taught_by_teacher,
@@ -29,9 +29,9 @@
   while ($row=$query->fetch_assoc()) {
     $cn = $row['classNumber'];
     $cnId = $row['classId'];
-    $sa = $row['Sections'];
+    $sa = $row['sectionName'];
     $saId = $row['sectionId'];
-    $su = $row['Subject'];
+    $su = $row['subjectName'];
     $title = $teacherId." ".$cnId." ".$saId." ".$su;
     echo "<tr title='$title'>";
     echo "<td style='padding:5px; border-right:solid 1px black;' class='col-sm-2'>".$cn."</td>

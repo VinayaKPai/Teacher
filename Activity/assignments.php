@@ -20,7 +20,7 @@
 			include $_SERVER['DOCUMENT_ROOT']."/Components/top.php";
 			if ($_GET){echo $_GET;}
 			include $_SERVER['DOCUMENT_ROOT']."/Components/internalNav.php";
-			include $_SERVER['DOCUMENT_ROOT']."/Components/createNewAssessment.php";
+			include $_SERVER['DOCUMENT_ROOT']."/Components/createNewAssessmentBtn.php";
 		?>
 	 <div style="background: var(--BodGradbanner);">
 		 	<div class="panel-group" id="accordion">
@@ -51,5 +51,6 @@
 		</div>
 
  </div> <!-- container div immediately inside body -->
+ <div class="container" id="bottom"><?php include "../Components/bottom.php"; ?></div>
 </body>
 </html>

@@ -5,7 +5,7 @@
   $studentId = $_GET['studentId'];
 
   if ($studentId) {
-      $query = $mysqli->query("SELECT users.Email, users.systemEmail, users.joinYear, users.endYear, users.phoneMobile, users.firstName, users.middleName, users.lastName, classes.classId, classes.classNumber, sections.sectionId, sections.Sections, studentdetails.rollNumber
+      $query = $mysqli->query("SELECT users.Email, users.systemEmail, users.joinYear, users.endYear, users.phoneMobile, users.firstName, users.middleName, users.lastName, classes.classId, classes.classNumber, sections.sectionId, sections.sectionName, studentdetails.rollNumber
         FROM
         users,
         studentdetails,
@@ -22,7 +22,7 @@
   while ($row=$query->fetch_assoc()) {
     $cn = $row['classNumber'];
     $cnId = $row['classId'];
-    $sa = $row['Sections'];
+    $sa = $row['sectionName'];
     $saId = $row['sectionId'];
     $rn = $row['rollNumber'];
     $altEmail = $row['Email'];
@@ -44,7 +44,7 @@ echo "<div id='moreDetails' style='background: var(--BodyGradient); display:none
           <table class='centered' style='width:100%;'>
             <tr><td class='col-lg-6' style='text-align: right;'>Roll Number: </td><td class='col-lg-6'>". $row['rollNumber']."</td></tr>
             <tr><td class='col-lg-6' style='text-align: right;'>Class: </td><td class='col-lg-6'>". $row['classNumber']."</td></tr>
-            <tr><td class='col-lg-6' style='text-align: right;'>Section: </td><td class='col-lg-6'>". $row['Sections']."</td></tr>
+            <tr><td class='col-lg-6' style='text-align: right;'>Section: </td><td class='col-lg-6'>". $row['sectionName']."</td></tr>
             <tr><td class='col-lg-6' style='text-align: right;'>Email (<small>external</small>): </td><td class='col-lg-6'>". $row['Email']."</td></tr>
             <tr><td class='col-lg-6' style='text-align: right;'>Email: (<small>internal</small>): </td><td class='col-lg-6'>". $row['systemEmail']." </td></tr>
             <tr><td class='col-lg-6' style='text-align: right;'>Joined in: </td><td class='col-lg-6'>". $row['joinYear']."</td></tr>

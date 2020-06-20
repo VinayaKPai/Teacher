@@ -713,7 +713,7 @@ INSERT INTO `questiontype` (`Id`, `typeName`, `Description`) VALUES
 
 CREATE TABLE `sections` (
   `id` int(11) NOT NULL,
-  `Sections` varchar(5) NOT NULL
+  `sectionName` varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -777,14 +777,14 @@ INSERT INTO `studentdetails` (`Id`, `firstName`, `lastName`, `rollNumber`, `clas
 
 CREATE TABLE `subjects` (
   `Id` int(11) NOT NULL,
-  `Subject` varchar(20) NOT NULL
+  `subjectName` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `subjects`
 --
 
-INSERT INTO `subjects` (`Id`, `Subject`) VALUES
+INSERT INTO `subjects` (`Id`, `subjectName`) VALUES
 (8, 'Biology'),
 (7, 'Chemistry'),
 (12, 'Civics'),
@@ -928,7 +928,7 @@ ALTER TABLE `questiontype`
 --
 ALTER TABLE `sections`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `Sections` (`Sections`);
+  ADD UNIQUE KEY `Sections` (`sectionName`);
 
 --
 -- Indexes for table `studentdetails`
@@ -943,7 +943,7 @@ ALTER TABLE `studentdetails`
 --
 ALTER TABLE `subjects`
   ADD PRIMARY KEY (`Id`),
-  ADD UNIQUE KEY `Subjects` (`Subject`);
+  ADD UNIQUE KEY `Subjects` (`subjectName`);
 
 --
 -- Indexes for table `teachers`

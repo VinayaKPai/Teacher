@@ -28,7 +28,7 @@ $queryString;
 $selectedClassNumbers = [];
 $selectedSubjectNames = [];
 
-$queryString = "SELECT topics.Id as 'ID', classes.classNumber as `Class`, subjects.Subject as `Subject`, topics.Name as `Topic` FROM topics, classes, subjects  WHERE classes.id = topics.classNumber AND subjects.id = topics.Subject_Name" ;
+$queryString = "SELECT topics.Id as 'ID', classes.classNumber as `Class`, subjects.subjectName as `Subject`, topics.Name as `Topic` FROM topics, classes, subjects  WHERE classes.id = topics.classNumber AND subjects.id = topics.Subject_Name" ;
 
 
 if ($arrayGETclassNumbers) {

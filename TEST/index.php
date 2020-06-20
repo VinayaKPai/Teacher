@@ -63,7 +63,7 @@
 // 		SD.classId,
 // 		C.classNumber AS 'Class',
 // 		SD.sectionId,
-// 		S.Sections AS 'Section',
+// 		S.sectionName AS 'Section',
 // 		U.firstName AS 'F Name',
 // 		U.middleName AS 'M Name',
 // 		U.lastName AS 'L Name',
@@ -94,14 +94,14 @@
 //         'Class Id',CTT.classId,
 //         'Class Num', C.classNumber,
 //         'Sec Id', Sec.sectionId,
-//         'Sec Name', Sec.Sections,
+//         'Sec Name', Sec.sectionName,
 //         'Sub Id', Sub.subjectId,
-//         'Sub Name', Sub.Subject
+//         'Sub Name', Sub.subjectName
 //       ) ) as 'CSSubjects',
 //       json_arrayagg(DISTINCT json_object(
 //           'SD C Id', CTT.classId,
 //           'SD Class Num', C.classNumber,
-//           'Stu Sec name', Sec.Sections,
+//           'Stu Sec name', Sec.sectionName,
 //           'SD sectionId', Sec.sectionId
 //         ) ) as 'CSections'
 //       FROM
@@ -239,7 +239,7 @@ function aqtActivityQuery($type, $status, $mysqli ,$pageHeading,$successFlag) {
 				c.classNumber AS 'Class',
 				c.classId AS 'Class Id',
 				s.sectionId AS 'SectionId',
-				s.Sections AS 'Section',
+				s.sectionName AS 'Section',
 				dl.schStartDate AS 'Open From',
 				dl.schEndDate AS 'Open Till',
 				dl.deploySuccess AS 'Deployed?',

@@ -30,14 +30,14 @@
               $cn = $clrow['classNumber'];
 
               $sectionAplha = $row['sectionId'];
-              $secAlph = $mysqli->query("SELECT `Sections` FROM sections WHERE `sectionId` = $sectionAplha LIMIT 1");
+              $secAlph = $mysqli->query("SELECT `sectionName` FROM sections WHERE `sectionId` = $sectionAplha LIMIT 1");
               $sarow = $secAlph->fetch_assoc();
-              $sa = $sarow['Sections'];
+              $sa = $sarow['sectionName'];
 
               $subjectName = $row['subjectId'];
-              $subn = $mysqli->query("SELECT `Subject` FROM subjects WHERE `subjectId` = $subjectName LIMIT 1");
+              $subn = $mysqli->query("SELECT `subjectName` FROM subjects WHERE `subjectId` = $subjectName LIMIT 1");
               $srow = $subn->fetch_assoc();
-							$sb = $srow['Subject'];
+							$sb = $srow['subjectName'];
 
 						  $remIdDB = $sb.$cn.$sa;
 

@@ -33,7 +33,7 @@ if (isset($arrayGET['subjectName'])) {$selectedSubjectNames = $getSubjectName;}
 //THIS WILL DISPLAY ALL THE QUESTIONS IN THE DB FOR THAT COMBO OF CLASSNUMBERS AND/OR SUBJECTNAMES
 //FURTHER FILTERING OF THE QUESTIONS IS HANDLES IN THE filterRecords.js file
 if ($selectedClassNumbers || $selectedSubjectNames) {
-        // $queryString = "SELECT questionbank.qId AS 'ID', classes.classNumber AS `Class`, subjects.Subject AS `Subject`, topics.topicName AS `Topic`, questiontype.typeName AS `Type`, questionbank.question AS `Question`, questionbank.Option_1 AS `Option 1`, questionbank.Option_2 AS `Option 2`, questionbank.Option_3 AS `Option 3`, questionbank.Option_4 AS `Option 4`, questionbank.Option_5 AS `Option 5`, questionbank.Option_6 AS `Option 6` FROM questionbank, classes, questiontype, subjects, topics WHERE " ;
+        // $queryString = "SELECT questionbank.qId AS 'ID', classes.classNumber AS `Class`, subjects.subjectName AS `Subject`, topics.topicName AS `Topic`, questiontype.typeName AS `Type`, questionbank.question AS `Question`, questionbank.Option_1 AS `Option 1`, questionbank.Option_2 AS `Option 2`, questionbank.Option_3 AS `Option 3`, questionbank.Option_4 AS `Option 4`, questionbank.Option_5 AS `Option 5`, questionbank.Option_6 AS `Option 6` FROM questionbank, classes, questiontype, subjects, topics WHERE " ;
 
 
         $queryString = "SELECT * FROM questionbank, classes, subjects WHERE ";
@@ -100,7 +100,7 @@ $queryString = $queryString." AND classes.classId = questionbank.classId AND sub
             echo "<tr>
                     <td>".$rwcnt."</td>
                     <td>".$row['classNumber']."</td>
-                    <td>".$row['Subject']."</td>
+                    <td>".$row['subjectName']."</td>
                     <td>".$row['question']."</td>
                     <td>".$row['Option_1']."</td>
                     <td>".$row['Option_2']."</td>

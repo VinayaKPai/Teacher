@@ -3,7 +3,7 @@ classId<?php
   include $_SERVER['DOCUMENT_ROOT']."/basecode-create_connection.php";
   $classId = $_GET['classId'];
   $sectionId = $_GET['sectionId'];
-  $query = $mysqli->query("SELECT users.firstName, users.middleName, users.lastName, classes.classNumber, sections.Sections FROM users, studentdetails, classes, sections WHERE users.userId = studentdetails.userId AND studentdetails.sectionId = $sectionId AND studentdetails.classId = $classId AND studentdetails.classId = classes.classId AND studentdetails.sectionId = sections.sectionId ");
+  $query = $mysqli->query("SELECT users.firstName, users.middleName, users.lastName, classes.classNumber, sections.sectionName FROM users, studentdetails, classes, sections WHERE users.userId = studentdetails.userId AND studentdetails.sectionId = $sectionId AND studentdetails.classId = $classId AND studentdetails.classId = classes.classId AND studentdetails.sectionId = sections.sectionId ");
 
 
 // echo mysqli_num_rows($query);
@@ -11,7 +11,7 @@ classId<?php
   echo "<table style='width:90%;'><tr><th class='col-sm-2'>Class</th><th class='col-sm-2'>Section</th><th class='col-sm-5'>Student</th></tr>";
   while ($row=$query->fetch_assoc()) {
     $cn = $row['classNumber'];
-    $sa = $row['Sections'];
+    $sa = $row['sectionName'];
     $sf = $row['firstName'];
     $sl = $row['lastName'];
     $title = $cn." ".$sa." ".$sl;

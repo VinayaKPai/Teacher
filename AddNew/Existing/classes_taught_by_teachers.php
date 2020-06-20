@@ -13,9 +13,9 @@
 
 	$slno = 0;
   // $num = 0;
-	$query = $mysqli->query("SELECT users.userId, users.firstName, users.middleName, users.lastName, classes.classNumber, sections.Sections, subjects.Subject
+	$query = $mysqli->query("SELECT users.userId, users.firstName, users.middleName, users.lastName, classes.classNumber, sections.sectionName, subjects.subjectName
             FROM users, classes_taught_by_teacher, classes, sections, subjects
-            WHERE users.userId = classes_taught_by_teacher.userId AND classes.classId = classes_taught_by_teacher.classId AND sections.sectionId = classes_taught_by_teacher.sectionId AND classes_taught_by_teacher.subjectId = subjects.subjectId ORDER BY classes.classId ASC, sections.Sections ASC,  subjects.Subject ASC ");
+            WHERE users.userId = classes_taught_by_teacher.userId AND classes.classId = classes_taught_by_teacher.classId AND sections.sectionId = classes_taught_by_teacher.sectionId AND classes_taught_by_teacher.subjectId = subjects.subjectId ORDER BY classes.classId ASC, sections.sectionName ASC,  subjects.subjectName ASC ");
 				if ($query) {
 					$rowcount=mysqli_num_rows($query);
           if ($rowcount > 0) {
@@ -29,11 +29,11 @@
 					while ($row = $query->fetch_assoc())  {
 
                       $rescn = strip_tags($row['classNumber']);
-                      $ressa = $row['Sections'];
+                      $ressa = $row['sectionName'];
         						  $slno++;
                       $cn = $rescn;
                       $sa = $ressa;
-                      $sb = $row['Subject'];
+                      $sb = $row['subjectName'];
                       $tch = $row['firstName'].$row['middleName'].$row['lastName'];
 
         						  $remIdDB = $rescn."-".$ressa;
@@ -44,7 +44,7 @@
                               <td>".$slno."</td>
                               <td><a style='color: #fff;' name=".$tch." onclick='filterByTeacher(this.name)'>".$row['firstName']." ".$row['middleName']." ".$row['lastName']."</td>
 
-                              <td><a style='color: #fff;' name=".$cn." onclick='filterByClass(this.name)'>".$row['classNumber']."-".$row['Sections']."</a></td>
+                              <td><a style='color: #fff;' name=".$cn." onclick='filterByClass(this.name)'>".$row['classNumber']."-".$row['sectionName']."</a></td>
                               <td><a href='#' style='color: #fff;' name=".$sb." onclick='filterBySubjecT(this.name)'>".$sb." </a></td>
                               <td title='Delete $cn $sa from Database'>
                                 <a id=$remIdDB name=$remIdDB  href='$url'><span class='glyphicon glyphicon-trash' style='background-color: Red; color: White; padding: 4px;'></span></a>

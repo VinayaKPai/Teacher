@@ -25,7 +25,7 @@ function addSubjectNamesToQueryString( $queryString, $classNumberExists, $select
     if($x > 0) {
       $queryString = $queryString."OR ";  //The OR needs to be added to the statement only if there are more than 1 selected entries
     }
-    // $queryString = $queryString."subjects.Subject = '".$selectedSubjectNames[$x]."' ";  //Adding of the class number is common to all statements, and so this will always get executed.
+    // $queryString = $queryString."subjects.subjectName = '".$selectedSubjectNames[$x]."' ";  //Adding of the class number is common to all statements, and so this will always get executed.
     $queryString = $queryString."questionbank.subjectId = '".$selectedSubjectNames[$x]."' ";
   }
   $queryString = $queryString.") ";

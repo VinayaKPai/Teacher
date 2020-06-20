@@ -13,7 +13,7 @@
       </div>
       <div class='col-sm-3'>
         <h5>Subject:
-          <span style='color: Navy;'> $row['Subject'] </span>
+          <span style='color: Navy;'> $row['subjectName'] </span>
         </h5>
       </div>
       <div class='col-sm-3 small'>
@@ -83,7 +83,7 @@
 Array (
   [C Id] => 9
   [Class / Std] => IX
-  [Sections] => [
+  [sectionName] => [
     {"SD C Id": 9, "Stu Sec name": "A", "SD sectionId": 1},
     {"SD C Id": 1, "Stu Sec name": "E", "SD sectionId": 5},
     {"SD C Id": 9, "Stu Sec name": "D", "SD sectionId": 4},

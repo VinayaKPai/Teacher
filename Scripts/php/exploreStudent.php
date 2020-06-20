@@ -10,7 +10,7 @@ $query = $mysqli->query("SELECT * FROM users, studentdetails, classes, sections 
   echo "<table style='width:90%;'><tr><th class='col-sm-2'>Class</th><th class='col-sm-2'>Section</th><th class='col-sm-5'>Student</th></tr>";
   while ($row=$query->fetch_assoc()) {
     $cn = $row['classNumber'];
-    $sa = $row['Sections'];
+    $sa = $row['sectionName'];
     $sf = $row['firstName'];
     $sl = $row['lastName'];
     $title = $cn." ".$sa." ".$sl;

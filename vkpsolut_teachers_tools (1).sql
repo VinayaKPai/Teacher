@@ -805,14 +805,14 @@ INSERT INTO `questiontype` (`qtId`, `typeName`, `Description`) VALUES
 
 CREATE TABLE `sections` (
   `sectionId` int(11) NOT NULL,
-  `Sections` varchar(5) NOT NULL
+  `sectionName` varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `sections`
 --
 
-INSERT INTO `sections` (`sectionId`, `Sections`) VALUES
+INSERT INTO `sections` (`sectionId`, `sectionName`) VALUES
 (1, 'A'),
 (2, 'B'),
 (3, 'C'),
@@ -903,14 +903,14 @@ INSERT INTO `studentdetails` (`sId`, `st_firstName`, `st_lastName`, `rollNumber`
 
 CREATE TABLE `subjects` (
   `subjectId` int(11) NOT NULL,
-  `Subject` varchar(20) NOT NULL
+  `subjectName` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `subjects`
 --
 
-INSERT INTO `subjects` (`subjectId`, `Subject`) VALUES
+INSERT INTO `subjects` (`subjectId`, `subjectName`) VALUES
 (8, 'Biology'),
 (7, 'Chemistry'),
 (12, 'Civics'),
@@ -1079,7 +1079,7 @@ ALTER TABLE `questiontype`
 --
 ALTER TABLE `sections`
   ADD PRIMARY KEY (`sectionId`),
-  ADD UNIQUE KEY `Sections` (`Sections`);
+  ADD UNIQUE KEY `Sections` (`sectionName`);
 
 --
 -- Indexes for table `studentdetails`
@@ -1095,7 +1095,7 @@ ALTER TABLE `studentdetails`
 --
 ALTER TABLE `subjects`
   ADD PRIMARY KEY (`subjectId`),
-  ADD UNIQUE KEY `Subjects` (`Subject`);
+  ADD UNIQUE KEY `Subjects` (`subjectName`);
 
 --
 -- Indexes for table `teachers`

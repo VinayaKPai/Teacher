@@ -9,7 +9,7 @@ if ($_GET){
       $classId =  $_GET['classNumber'];
       $subjectId =  $_GET['subjectName'];
 
-      $queryString = $mysqli->query("SELECT classes.classNumber AS 'Class', subjects.Subject, questiontype.typeName AS 'Type', questionbank.question AS 'Question', questionbank.qId, questionbank.Option_1 AS 'Option 1', questionbank.Option_2 AS 'Option 2', questionbank.Option_3 AS 'Option 3', questionbank.Option_4 AS 'Option 4', questionbank.Option_5 AS 'Option 5', questionbank.Option_6 AS 'Option 6', questiontype.typeName AS 'Type'  FROM questionbank, classes, subjects, questiontype WHERE `classId` = $classId AND `subjectId` = $subjectId AND classes.classId = questionbank.classId AND subjects.subjectId = questionbank.subjectId AND questiontype.qtId = questionbank.typeId");
+      $queryString = $mysqli->query("SELECT classes.classNumber AS 'Class', subjects.subjectName, questiontype.typeName AS 'Type', questionbank.question AS 'Question', questionbank.qId, questionbank.Option_1 AS 'Option 1', questionbank.Option_2 AS 'Option 2', questionbank.Option_3 AS 'Option 3', questionbank.Option_4 AS 'Option 4', questionbank.Option_5 AS 'Option 5', questionbank.Option_6 AS 'Option 6', questiontype.typeName AS 'Type'  FROM questionbank, classes, subjects, questiontype WHERE `classId` = $classId AND `subjectId` = $subjectId AND classes.classId = questionbank.classId AND subjects.subjectId = questionbank.subjectId AND questiontype.qtId = questionbank.typeId");
 
 // $queryString = $mysqli->query("SELECT *  FROM questionbank, classes, subjects, questiontype WHERE `classId` = $classId AND `subjectId` = $subjectId AND classes.classId = questionbank.classId AND subjects.subjectId = questionbank.subjectId AND questiontype.qtId = questionbank.typeId");
       if (mysqli_num_rows($queryString)>0) {
@@ -20,13 +20,13 @@ if ($_GET){
       //   <h5 class='centered'>
       //   <div class='col-sm-4'>Class </div>
       //   <div class='col-sm-4' id='$classId' name='classId'>".$row['Class']."</div>
-      //   <div class='col-sm-3' id='$subjectId' name='subjectId'>".$row['Subject']."</div>
+      //   <div class='col-sm-3' id='$subjectId' name='subjectId'>".$row['subjectName']."</div>
       //   </h5>";
       echo "<hr>
         <h5 class='centered'>
         <div class='col-sm-4'>Class </div>
         <div class='col-sm-4' id='$classId' name='classId'>".$row['Class']."</div>
-        <div class='col-sm-3' id='$subjectId' name='subjectId'>".$row['Subject']."</div>
+        <div class='col-sm-3' id='$subjectId' name='subjectId'>".$row['subjectName']."</div>
         </h5>";
 
       echo "<table>";

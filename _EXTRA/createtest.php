@@ -9,7 +9,7 @@
     $inpTitle = $_GET['inpTitle'];
     // $newAssignment = explode(",",$_GET['qarray']);
     $newAssignment = $_GET['qarray'];
-    $query = $mysqli->query("SELECT `subjectId` FROM subjects WHERE `Subject` = '$subjectName'");
+    $query = $mysqli->query("SELECT `subjectId` FROM subjects WHERE `subjectName` = '$subjectName'");
     $row = $query->fetch_assoc();
     $subjectId = $row['subjectId'];
     $assessmentType = "T";
@@ -18,7 +18,7 @@
 
     $stmt->bind_param("sssss", $assessmentType, $inpTitle, $classId, $subjectId, $newAssignment);
 
-    
+
 
     $stmt->close();
     $mysqli->close();

@@ -64,7 +64,7 @@ $query = $mysqli->query("SELECT DISTINCT
     C.classNumber AS 'Class / Std',
       json_arrayagg(DISTINCT json_object(
         'SD C Id', SD.classId,
-        'Stu Sec name', Sec.Sections,
+        'Stu Sec name', Sec.sectionName,
         'SD sectionId', SD.sectionId
       ) ) as 'Sections',
       json_arrayagg(DISTINCT json_object(

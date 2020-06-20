@@ -30,9 +30,9 @@ $query = $mysqli->query("SELECT * FROM topics ORDER BY `classId`");
 					$cn = $clrow['classNumber'];
 
 					$subjectName = $row['subjectId'];
-					$subn = $mysqli->query("SELECT `Subject` FROM subjects WHERE `subjectId` = $subjectName LIMIT 1");
+					$subn = $mysqli->query("SELECT `subjectName` FROM subjects WHERE `subjectId` = $subjectName LIMIT 1");
 					$srow = $subn->fetch_assoc();
-					$sb = $srow['Subject'];
+					$sb = $srow['subjectName'];
 					echo "<tr id=$rwcnt title=$rwcnt>
 							<td style='width: 10%; margin: 5%;'>".$rwcnt."</td>
 							<td style='width: 10%; margin: 5%;'>".$cn."</td>

@@ -1,8 +1,8 @@
-<style>
+<!-- <style>
     table tr:nth-child(even){background-color: #b69092; color: #fff}
     table tr:nth-child(odd){background-color: #684654; color: #fff}
     table td, th {text-align: center;font-size: 14px;}
-</style>
+</style> -->
 <?php
 function table( $a, $result, $pageHeading ) {
     $row = $result->fetch_assoc();
@@ -12,7 +12,7 @@ function table( $a, $result, $pageHeading ) {
     if ($rowcount!=0) {
         echo "
           <div class='panel panel-default'>
-            <div class='panel-heading'>
+            <div class='panel-heading' style='background: var(--BodGradbanner);'>
               <h4 class='panel-title green'>
                 <a data-toggle='collapse' href='$href'>". $pageHeading." for Class " .$row['Class']."</a>
               </h4>
@@ -29,7 +29,7 @@ function table( $a, $result, $pageHeading ) {
     }
     else {
       echo "<div class='panel panel-default'>
-          <div class='panel-heading'>
+          <div class='panel-heading' style='background: var(--BodGradbanner);'>
             <h4 class='panel-title red'>
               <a data-toggle='collapse' href='$href'>". $pageHeading." for Class ".$a."</a>
             </h4></div>

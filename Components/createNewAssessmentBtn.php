@@ -1,4 +1,4 @@
-<a href="../../SetUpPages/newQuestions.php">
+<a href="../../SetUpPages/questionBank.php">
   <h4 class="btn btn-block topbanner">Create A New Assessment
   </h4>
 </a>

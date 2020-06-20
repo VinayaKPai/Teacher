@@ -11,7 +11,7 @@
 		classes.classId AS 'Class Id',
 		classes.classNumber AS 'Class',
 		sections.sectionId AS 'Sec Id',
-		sections.Sections AS 'Section',
+		sections.sectionName AS 'Section',
 		studentdetails.rollNumber AS 'Roll Number',
 		users.Email AS 'Ext Email',
 		users.systemEmail AS 'Int Email',
@@ -29,7 +29,7 @@
 			classes.classId = studentdetails.classId AND
 			sections.sectionId = studentdetails.sectionId
 		ORDER BY classes.classId ASC, sections.sectionId ASC");
-			
+
 				table($query);
 	//mysqli_close($mysqli);
 ?>

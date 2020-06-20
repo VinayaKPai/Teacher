@@ -5,7 +5,7 @@
 	// include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/allRetrievalQueries.php";
 
 	$pageHeading = "Teachers ";
-	$pageCode = "setup";
+	$pageCode = "CTT";
 ?>
 
 
@@ -25,27 +25,21 @@
 	</head>
 	<body class="body" style="background: var(--BodyGradient);">
 		<div class="container">
-			<hr>
-			<h3 class="centered">
+			<h4 class="centered">
 				<?php include "../Components/top.php"; ?>
-			</h3>
+			</h4>
 			<?php
-				include $_SERVER['DOCUMENT_ROOT']."/Components/C_S_T_internalNav.php";
 				include $_SERVER['DOCUMENT_ROOT']."/Components/internalNav.php";
 			?>
-			<hr>
 
 			<div>
-				<div class="col-sm-3 centered" style="padding: 10px;">
-					<h4 style="color: Green; background-color: LightGrey;">Add: Class and Section for a Teacher.</h4>
-					<hr>
+				<div class="centered" style="padding: 10px; border: 1px solid #413949; border-radius: 5px;">
+					<h5 style="color: Green; background-color: LightGrey;">Add: Class and Section for a Teacher.</h5>
 					<?php
 						include $_SERVER['DOCUMENT_ROOT']."/Forms/newClassForm.php"; ?>
-					<hr>
-
 
 				</div>
-				<div class="col-sm-9 centered" style="border-left: 1px solid Grey;">
+				<div class="centered  th_even" >
 
 			      <?php
 			      for ($a=1;$a<13;$a++) {
@@ -54,7 +48,6 @@
 			      ?>
 
 					</div>
-				<hr>
 
 			</div>
 		</div>

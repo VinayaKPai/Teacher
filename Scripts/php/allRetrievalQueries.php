@@ -18,7 +18,7 @@
           c.classNumber AS 'Class',
           c.classId AS 'Class Id',
           s.sectionId AS 'SectionId',
-          s.Sections AS 'Section',
+          s.sectionName AS 'Section',
           dl.schStartDate AS 'Open From',
           dl.schEndDate AS 'Open Till',
           dl.deploySuccess AS 'Deployed?',
@@ -100,7 +100,7 @@
             			'classId', dl.classId,
                   'classNumber', c.classNumber,
                   'sectionId', dl.sectionId,
-                  'sectionName', s.Sections,
+                  'sectionName', s.sectionName,
                   'startDate', dl.schStartDate,
                   'endDate', dl.schEndDate,
                   'deploySuccess', dl.deploySuccess
@@ -140,14 +140,14 @@
           'Class Id',CTT.classId,
           'Class Num', C.classNumber,
           'Sec Id', Sec.sectionId,
-          'Sec Name', Sec.Sections,
+          'Sec Name', Sec.sectionName,
           'Sub Id', Sub.subjectId,
-          'Sub Name', Sub.Subject
+          'Sub Name', Sub.subjectName
         ) ) as 'CSSubjects',
         json_arrayagg(DISTINCT json_object(
             'SD C Id', CTT.classId,
             'SD Class Num', C.classNumber,
-            'Stu Sec name', Sec.Sections,
+            'Stu Sec name', Sec.sectionName,
             'SD sectionId', Sec.sectionId
           ) ) as 'CSections'
         FROM
@@ -175,7 +175,7 @@
           C.classNumber AS 'Class / Std',
             json_arrayagg(DISTINCT json_object(
               'SD C Id', SD.classId,
-              'Stu Sec name', Sec.Sections,
+              'Stu Sec name', Sec.sectionName,
               'SD sectionId', SD.sectionId
             ) ) as 'Sections',
             json_arrayagg(DISTINCT json_object(
@@ -212,7 +212,7 @@
     		SD.classId,
     		C.classNumber AS 'Class',
     		SD.sectionId,
-    		S.Sections AS 'Section',
+    		S.sectionName AS 'Section',
     		U.firstName AS 'F Name',
     		U.middleName AS 'M Name',
     		U.lastName AS 'L Name',
@@ -231,13 +231,13 @@
     //to Scripts/php/cttQueryResultToHtmlTable.php
     $query = $mysqli->query("SELECT DISTINCT
       Sub.subjectId AS 'Sub Id',
-      Sub.Subject AS'Sub Name',
+      Sub.subjectName AS'Sub Name',
       json_arrayagg(DISTINCT json_object(
         'T First Name', U.firstName,
         'T Middle Name', U.middleName,
         'T Last Name', U.lastName,
         'T Class Id',CTT.classId,
-        'T Sec Name', Sec.Sections,
+        'T Sec Name', Sec.sectionName,
         'T Sub Id', Sub.subjectId
       ) ) as 'Teachers',
       json_arrayagg(DISTINCT json_object(
@@ -248,7 +248,7 @@
           'Class Id',CTT.classId,
           'Class Num', C.classNumber,
           'Sec Id', Sec.sectionId,
-          'Sec Name', Sec.Sections
+          'Sec Name', Sec.sectionName
         ) ) as 'CSections'
         FROM
           subjects AS Sub

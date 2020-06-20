@@ -62,22 +62,8 @@ if ($selectedClassNumbers || $selectedSubjectNames) {
 
 // $queryString = $queryString." AND classes.classId = questionbank.classId AND subjects.subjectId = questionbank.subjectId ";
 $queryString = $queryString." AND classes.classId = questionbank.classId AND subjects.subjectId = questionbank.subjectId";
-        // echo $queryString;
-        $queryResult = $mysqli->query($queryString);  //use the queryString built above
-        // if ($_POST){print_r($queryResult);}
-        // table(false, $queryResult);
-        // echo "<div>
-        //         <span style='float: left'> There are ".mysqli_num_rows($queryResult)." question in the QB</span>
-        //         <span class='col-6 dropdown' style='float: right;'>With selected questions create a
-        //           <button id='assignment' class='btn btn-info' onclick='selectActivity(this)'>Assignment </button>
-        //         	<button id='test' class='btn btn-info' onclick='selectActivity(this)'>Test </button>
-        //         	<button id='quiz' class='btn btn-info' onclick='selectActivity(this)'>Quiz </button>
-        //           <button id='CBSEpractice' class='btn btn-info' onclick='selectActivity(this)'>CBSE Practice </button>
-        //         </span>
-        //       </div>";
+        $queryResult = $mysqli->query($queryString);
         $row=$queryResult->fetch_assoc();
-        // header row
-
         $rwcnt = 0;
         echo "<table>
                 <thead>
@@ -100,7 +86,7 @@ $queryString = $queryString." AND classes.classId = questionbank.classId AND sub
             echo "<tr>
                     <td>".$rwcnt."</td>
                     <td>".$row['classNumber']."</td>
-                    <td>".$row['Subject']."</td>
+                    <td>".$row['subjectName']."</td>
                     <td>".$row['question']."</td>
                     <td>".$row['Option_1']."</td>
                     <td>".$row['Option_2']."</td>
@@ -112,8 +98,6 @@ $queryString = $queryString." AND classes.classId = questionbank.classId AND sub
                   </tr>";
         }
         echo "</table>";
-        // {header('Location: ../../SetupPages/newQuestions.php');}
-        	//mysqli_close($mysqli);
 }
 
 ?>

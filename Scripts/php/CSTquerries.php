@@ -20,14 +20,14 @@
                 users.middleName AS 'Middle Name',
                 users.lastName AS 'Last Name',
                 classes.classNumber AS 'Class',
-                sections.Sections AS 'Section',
-                subjects.Subject AS 'Subject'
+                sections.sectionName AS 'Section',
+                subjects.subjectName AS 'Subject'
                 FROM
                   users, classes_taught_by_teacher, classes, sections, subjects
                 WHERE
                   classes.classId = '$a' AND
                   users.userId = classes_taught_by_teacher.userId AND classes.classId = classes_taught_by_teacher.classId AND sections.sectionId = classes_taught_by_teacher.sectionId AND classes_taught_by_teacher.subjectId = subjects.subjectId
-                ORDER BY classes.classId ASC, sections.Sections ASC,  subjects.Subject ASC");
+                ORDER BY classes.classId ASC, sections.sectionName ASC,  subjects.subjectName ASC");
 
 table( $a, $query,$pageHeading );
 

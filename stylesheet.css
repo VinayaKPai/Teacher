@@ -52,7 +52,6 @@ ul a {
 }
 
 .cards {
-    width: 20%;
     z-index: 10;
     padding: 2px 10px 2px 10px;
     margin: 1% 2% 1% 5%;
@@ -65,7 +64,7 @@ ul a {
 .centered {
 	text-align: center;
   align-items: stretch;
-  padding: 2% 2% 2% 2%;
+  padding: 1% 1% 1% 1%;
 }
 
 .modal-dialog  {
@@ -77,10 +76,10 @@ ul a {
 }
 
 .roundedsquare {
-  width: 80%;
-	border-radius: 25px;
+  /* width: 80%; */
+	border-radius: 5px;
 	border-bottom: 2px solid #4B0082;
- 	background:  var(--BodyGradient);
+  min-height: 150px;
   	font-size: 10px;
   	text-align: center;
 }
@@ -93,8 +92,8 @@ ul a {
 }
 
 .th {background-color: #0a0a0a; color: #fff; letter-spacing: 2px;}
-.th_even {background: var(--BodGradtop); color: #fff; letter-spacing: 2px; }
-.th_odd {background: var(--BodGradbanner); color: #fff; letter-spacing: 2px;}
+.th_even {background: var(--BodGradtop); color: #fff; letter-spacing: 2px; font-size: 10px; padding: 5px;}
+.th_odd {background: var(--BodGradbanner); color: #fff; letter-spacing: 2px; font-size: 10px; padding: 5px;}
 .dropdown {
   position: relative;
   display: inline-block;

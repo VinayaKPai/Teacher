@@ -4,7 +4,7 @@
 	include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/teachersQueryResultToHtmlTable.php";
 	include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/studentsQueryResultToHtmlDiv.php";
 	$pageHeading = "Teachers";
-	$pageCode = "setup";
+	$pageCode = "NTD";
 ?>
 
 
@@ -29,14 +29,44 @@
 				<?php include $_SERVER['DOCUMENT_ROOT']."/Components/internalNav.php"; ?>
 			<hr>
 			<div class="container">
-				<div>
+				<div style="padding: 3px; border: 1px solid #413949; border-radius: 5px;">
 					<h5>Click on the teacher's name explore details</h5>
-					<?php
-						studentsForTeacher($mysqli);
-					?>
+						<?php
+							studentsForTeacher($mysqli);
+						?>
 				</div>
-				<hr>
 			</div>
+			<div class="container">
+				<div style="padding: 3px; border: 1px solid #413949; border-radius: 5px;">
+				<h5>These teachers have not been assigned any classes</h5>
+				<small><li>You can add classes for the active teachers by clicking on the "ADD CLASSES" button</li>
+				<li>Only an Admin can change the "Inactive" status to "Active"</li></small>
+
+					<?php teachersWithoutClasses($mysqli); ?>
+					<div class='btn btn-text btn-block topbanner' id='showForm' onclick='clsFm()' style='float: right;'>Add Classes</div>
+					<hr>
+				<!-- </div> -->
+				<div id="classFm" style="display: none;">
+					<?php
+						include $_SERVER['DOCUMENT_ROOT']."/Forms/newClassForm.php";
+					?>
+					<script>
+						function clsFm () {
+							var c = document.getElementById("classFm").style.display;
+							if (c=="none") {
+								document.getElementById("classFm").style.display = "block";
+							}
+							else {
+								document.getElementById("classFm").style.display = "none";
+							}
+						}
+					</script>
+				</div>
+			</div>
+			<?php include $_SERVER['DOCUMENT_ROOT']."/Forms/userTeacherForm.php"; ?>
+		</div>
+			<!-- <div style="padding: 3px; border: 1px solid #413949; border-radius: 5px;"> -->
+			<!-- </div> -->
 			<div id="bottom">
 			<?php include "../Components/bottom.php"; ?>
 		</div>

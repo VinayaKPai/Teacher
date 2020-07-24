@@ -19,11 +19,11 @@ function ctttableBody( $result ) {
           $sId = $subject['Sub Id'];
           $togId = "s".$sId;
           //create a link for the collapsible
-          echo "<tr><td class='centered'><a data-toggle='collapse' href='#".$togId."'><h5  class='white'>";
+          echo "<tr><td class='centered' style='padding: 1px;'><a data-toggle='collapse' href='#".$togId."'><h5  class='maroon'>";
             echo "Subject: ".$subject['Sub Name'];
           echo "</h5></a></td></tr>";
           //a tr for the collapsible
-          echo "<tr><td>";
+          echo "<tr><td style='background: White;'>";
             subjectNameCollapsible($subject,$togId,$sId);
           echo "</td></tr>";
         }
@@ -31,7 +31,7 @@ function ctttableBody( $result ) {
 }
 
 function subjectNameCollapsible($subject,$togId,$sId) {
-        echo "<div id='".$togId."' class='collapse' style='padding-left: 5px;'>" ;
+        echo "<div id='".$togId."' class='collapse' style=' background: LightGrey; padding-left: 5px;'>" ;
             $cls = json_decode($subject['Cls'], true);
             $tchsecs = json_decode($subject['Teachers'], true);
             // for ($i=0;$i<count($cls);$i++) {

@@ -25,21 +25,19 @@
 	</head>
 	<body class="body" style="background: var(--BodyGradient);">
 		<div class="container">
-			<h4 class="centered">
-				<?php include "../Components/top.php"; ?>
-			</h4>
+			<h3 class="centered" style="background: var(--BodyGradient);"><?php include $_SERVER['DOCUMENT_ROOT']."/Components/top.php"; ?></h3>
 			<?php
 				include $_SERVER['DOCUMENT_ROOT']."/Components/internalNav.php";
 			?>
 
 			<div>
-				<div class="centered" style="padding: 10px; border: 1px solid #413949; border-radius: 5px;">
+				<div class="centered" style="padding: 3px; border: 1px solid #413949; border-radius: 5px;">
 					<h5 style="color: Green; background-color: LightGrey;">Add: Class and Section for a Teacher.</h5>
 					<?php
 						include $_SERVER['DOCUMENT_ROOT']."/Forms/newClassForm.php"; ?>
 
 				</div>
-				<div class="centered  th_even" >
+				<div class="centered th_even" style="padding: 3px; margin: 1px;">
 
 			      <?php
 			      for ($a=1;$a<13;$a++) {
@@ -51,6 +49,8 @@
 
 			</div>
 		</div>
-		<div class="container" id="bottom"><?php include "../Components/bottom.php"; ?></div>
+		<div class="container">
+		<?php include $_SERVER['DOCUMENT_ROOT']."/Components/bottom.php"; ?>
+		</div>
 	</body>
 </html>

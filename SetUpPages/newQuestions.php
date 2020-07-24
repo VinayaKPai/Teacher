@@ -22,141 +22,96 @@
 				<script src="../../Scripts/js/ajaxGetAllForClass.js"></script>
 				<script src="../../Scripts/js/filterRecords.js"></script>
 		<script>
-				var chkdarr = [];
-				var slno = 0;
-				function selectedQuestionDisplay(e) {
-					if (e.checked) {
-					// get the entire row
-					chkdarr.push(e.id);
-					slno = slno + 1;
-							var row = e.parentNode.parentNode;
-							//access all the td in the row
-							var rowchild = row.children;
-							var newqdiv = document.createElement("div");
-							newqdiv.id = "n" + e.id;
-							newqdiv.className="container";
-							//display the question
-							var newq = document.createElement("p");	//for the main question
-							newq.innerText = slno + ". " +rowchild[3].innerText + " : ";
-							newqdiv.appendChild(newq);
-							// now add options if they exist
-							if (rowchild[4].innerText!="")	{
-								//---------------
-								var au = document.createElement("ul");
-								// au.class = "list-inline";
-								//---------------
-									for (i=4;i<rowchild.length;i++) {
-										var ap = document.createElement("li");
-										if (rowchild[i].innerText!=""){
-											ap.innerText = rowchild[i].innerText;
-											ap.style.margin = "10px";
-											ap.style.display = "inline";
-											au.appendChild(ap);
-										}
-									}
-								newqdiv.appendChild(au);
+				// var chkdarr = [];
+				// var slno = 0;
 
-								}
-								document.getElementById("ajaxResult").appendChild(newqdiv);
+				// function optionsDisplay(dropDownId) {
+				// 	//dropdown Id 1 is MCQ
+				// 	//options input should be displayed only if the choice is MCQ ie id "1"
+				// 	alert (dropDownId);
+				// 	var tgt = document.getElementById("options");
+				//
+				// 	// var selector = document.getElementById("typeName");
+				// 	if (dropDownId == 1) {
+				// 		tgt.style.display = "block";
+				// 	}
+				// 	else {
+				// 		tgt.style.display = "none";
+				// 	}
+				// 	if (dropDownId == 5) {
+				// 		document.getElementById("cbseNote").style.display = "block";
+				// 	}
+				// 	else {
+				// 		document.getElementById("cbseNote").style.display = "none";
+				// 	}
+				// 		// var value = selector[selector.selectedIndex].value;
+				// 		//
+				// 		// console.log(value);
+				// 	}
 
-							}
-							else {	//ie if checkbox is unchecked
-								var nid = "n" + e.id;
-								var n = document.getElementById(nid);
-								n.remove();
-								var rem = chkdarr.indexOf(e.id);
-								chkdarr.splice(rem,1);
-							}
-							if (document.getElementById("ajaxResult").children.length!=1){
-								document.getElementById("axc").style.display = "block";
-								document.getElementById("ajaxButtons").style.display = "block";
-							}
-							else {
-								document.getElementById("axc").style.display = "none";
-								document.getElementById("ajaxButtons").style.display = "none";
-							}
-							var choose = JSON.stringify(chkdarr);
-							var csb = document.getElementById("classSelectBoxes").children;
-							var csbi = 0;
-							for (j=0;j<csb.length;j++) {
-								if (csb[j].children[0].checked) {
-									csbi = csb[j].children[0].id;
-								}
-							}
-							var ssb = document.getElementById("subjectSelectBoxes").children;
-							var ssbi = "a";	//simply initializing it to "a" as it is giving an error
-							for (k=0;k<ssb.length;k++) {
-								if (ssb[k].children[0].checked) {
-									ssbi = ssb[k].children[0].id;
-								}
-							}
-							// alert (csbi + ssbi)
-							var clk = "ajaxCallSaveNewActivity(" + choose +"," + csbi+ ",\"" + ssbi + "\",this.id)";
-								console.log(clk);
-							var savebuttons = document.getElementsByName("saveButton");
-							for (l=0;l<savebuttons.length;l++){
-								savebuttons[l].setAttribute("onclick", clk);
-							}
-				}
-
-				function testalert(dropDownId) {
-						var selector = document.getElementById(dropDownId);
-						var value = selector[selector.selectedIndex].value;
-
-						console.log(value);
-					}
 		</script>
 	</head>
-	<body class="body">
+		<body class="body">
+			<div class="container">
+				<hr>
+				<h3 class="centered">
+					<?php
+						include "../Components/top.php";
+						include $_SERVER['DOCUMENT_ROOT']."/Components/internalNav.php";
+					?>
+
+				</h3>
+				<div class="centered">
+					<a href="../../SetUpPages/questionBank.php">
+						<h4 class="btn btn-block topbanner">Question Bank</h4>
+					</a>
+				</div>
+				<hr>
+			<div style="align-content: center;">
+			  <h6 class="panel-title col-sm-12" style="color: #413949;">Add a Question to the Database</h6>
+			  <form name="newQuestionForm" action="../AddNew/addnewquestion.php" method="post">
+			    <div class="form-group">
+
+						<?php $displayType = "dropdown"; ?>
+						<div style='margin-top: 2px;'>
+							<span class='col-sm-4'>
+								<span class='red'>*</span>
+									<?php include $_SERVER['DOCUMENT_ROOT']."/Components/classNumberDropDown.php"; ?>
+							</span>
+							<span>
+								<span class='red'>*</span>
+								<?php include $_SERVER['DOCUMENT_ROOT']."/Components/subjectDropDown.php"; ?>
+							</span>
+						</div>
+						<div style='margin-top: 2px;'>
+							<span class='col-sm-4'>
+								<span class='red'>*</span>
+								<?php include $_SERVER['DOCUMENT_ROOT']."/Components/topicDropDown.php"; ?>
+							</span>
+							<span  class='col-sm-8'>
+								<span class='red'>*</span>
+								<?php include $_SERVER['DOCUMENT_ROOT']."/Components/typeDropDown.php"; ?>
+								<span id="cbseNote">Currently no categorization of CBSE questions supported</span>
+							</span>
+						</div>
+						</div>
+						<div style="margin-left: auto; margin-right: auto;">
+				      <span  class='col-sm-12'><span class='red'>*</span>
+							<label for="qn">Question</label>
+				      <input id="qn" name="qn" class="form-control" />
+						</div>
+						<div>
+							<?php include  $_SERVER['DOCUMENT_ROOT']."/Components/MCQoptionsInput.php"; ?>
+						</div>
+
+			    <button name="Submit" id="submit" type="submit" style="float: center;">SUBMIT</button>
+			  </form>
+
+			</div>
+
+		</div>
 		<div class="container">
-			<hr>
-			<h3 class="centered">
-				<?php
-					include "../Components/top.php";
-					include $_SERVER['DOCUMENT_ROOT']."/Components/internalNav.php";
-				?>
-
-			</h3>
-			<hr>
-<div class="col-sm-4" style="padding: 1px;">
-  <p class="panel-title" style="color: #413949;">Add a Question to the Database</p>
-  <form name="newQuestionForm" action="../AddNew/addnewquestion.php" method="post">
-    <div class="form-group">
-      <label for="classNumberFrm">Class / Std
-        <span class="glyphicon glyphicon-asterisk" style="color: Red"></span>
-      </label>
-      <input id="classNumberFrm" name="classNumberFrm" class="form-control" required />
-      <label for="subjectNameFrm">Subject
-        <span class="glyphicon glyphicon-asterisk" style="color: Red"></span>
-      </label>
-      <input id="subjectNameFrm" name="subjectNameFrm" class="form-control" required />
-      <label for="topicFrm">Topic
-        <span class="glyphicon glyphicon-asterisk" style="color: Red"></span>
-      </label>
-      <select name="topicFrm" id="topicFrm" class="form-control" required>
-        <option id="blanktp"></option>
-        <option id="I">I</option>
-        <option id="II">II</option>
-        <option id="III">III</option>
-      </select>
-      <label for="typeFrm">Question Type
-        <span class="glyphicon glyphicon-asterisk" style="color: Red"></span>
-      </label>
-      <select name="typeFrm" id="typeFrm" class="form-control" required>
-          <option id="blanksa"></option>
-          <option id="lat">LAT</option>
-          <option id="sat">SAT</option>
-          <option id="vsat">VSAT</option>
-          <option id="mcq">MCQ</option>
-      </select>
-      <label for="qn">Question
-        <span class="glyphicon glyphicon-asterisk" style="color: Red"></span>
-      </label>
-      <input id="qn" name="qn" class="form-control" />
-    </div>
-
-    <button name="Submit" id="submit" type="submit">SUBMIT</button>
-  </form>
-
-
-</div>
+		<?php include $_SERVER['DOCUMENT_ROOT']."/Components/bottom.php"; ?>
+		</div>
+	</body>
+</html>

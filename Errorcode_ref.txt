@@ -1,0 +1,5 @@
+PHP-SQL error code references
+
+1. Errorcode: 1062 : when MySQL finds a DUPLICATE of a row you are trying to insert
+
+2. Error Code: 1452. Cannot add or update a child row: a foreign key constraint fails

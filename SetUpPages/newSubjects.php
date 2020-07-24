@@ -25,7 +25,9 @@
 			<hr>
 			<h3 class="centered"><?php include "../Components/top.php"; ?></h3>
 			<hr>
-
+			<?php
+				include $_SERVER['DOCUMENT_ROOT']."/Components/internalNav.php";
+			?>
 				<div>
 					<?php
 						classesTaughtByTeachers($mysqli);

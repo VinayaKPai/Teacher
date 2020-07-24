@@ -5,6 +5,8 @@
 				include $_SERVER['DOCUMENT_ROOT']."/basecode-create_connection.php";
 				include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/allRetrievalQueries.php";
 				$a = "Q";
+				$pageHeading = "Quizzes";
+				$pageHeadSingular = "Quiz";
 	?>
 </head>
 <body class="body">
@@ -13,11 +15,8 @@
 					<?php
 						echo $datetime1; ?>
 		</div>
-	<hr>
+	<h3 class="centered" style="background: var(--BodyGradient);"><?php include $_SERVER['DOCUMENT_ROOT']."/Components/top.php"; ?></h3>
 		<?php
-			$pageHeading = "Quizzes";
-			$pageHeadSingular = "Quiz";
-			include $_SERVER['DOCUMENT_ROOT']."/Components/top.php";
 			if ($_GET){echo $_GET;}
 			include $_SERVER['DOCUMENT_ROOT']."/Components/internalNav.php";
 			include $_SERVER['DOCUMENT_ROOT']."/Components/createNewAssessmentBtn.php";
@@ -45,7 +44,12 @@
 	 	 			aqtActivityQuery($a,$b,$mysqli,$pageHeading);
 	 	 		?>
 	 	 	</div>
-
+			<div class="panel-group" id="accordion">
+		 		<?php
+		 			$b = "withdrawn";
+		 			aqtActivityQuery($a,$b,$mysqli,$pageHeading);
+		 		?>
+		 	</div>
 	 	 	<div class="panel-group" id="accordion">
 	 	 		<?php
 	 	 			savedAssessmentsQuery( $mysqli);

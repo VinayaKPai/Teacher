@@ -67,7 +67,7 @@
 								var rem = chkdarr.indexOf(e.id);
 								chkdarr.splice(rem,1);
 							}
-							if (document.getElementById("ajaxResult").children.length!=1){
+							if (document.getElementById("ajaxResult").children.length!=0){
 								document.getElementById("axc").style.display = "block";
 								document.getElementById("ajaxButtons").style.display = "block";
 							}
@@ -99,12 +99,6 @@
 							}
 				}
 
-				function testalert(dropDownId) {
-						var selector = document.getElementById(dropDownId);
-						var value = selector[selector.selectedIndex].value;
-
-						console.log(value);
-					}
 		</script>
 	</head>
 	<body class="body">
@@ -156,7 +150,7 @@
 								<br><small>Note: this will be displayed as the title when you deploy the activity!</small>
 							</h5>
 							<h5 style="text-align: center;">Save It!</h5>
-					      <button name="saveButton" id="assignment" class="btn btn-block" style="color: Green;" onclick="ajaxCallSaveNewAssignment()">Save Activity</button>
+					      <button name="saveButton" id="assignment" class="btn btn-block" style="color: Green;" onclick="ajaxCallSaveNewActivity()">Save Activity</button>
 					      <button class='btn btn-block' style='color: Red'>Cancel</button>
 								<div class="h5">Note: If you want to remove any question here, uncheck the corresponding checkbox below</div>
 						</div>
@@ -169,6 +163,8 @@
 					</div>
 				</div>
 
-			<div id="bottom"><?php include "../Components/bottom.php"; ?></div>
+				<div class="container">
+				<?php include $_SERVER['DOCUMENT_ROOT']."/Components/bottom.php"; ?>
+				</div>
 	</body>
 </html>

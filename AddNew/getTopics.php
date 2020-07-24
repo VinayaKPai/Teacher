@@ -44,7 +44,7 @@ if ($arrayGETclassNumbers) {
 
 	$queryResult = $mysqli->query($queryString);  //use the queryString built above
 
-	selectOption(false, $queryResult);
+	selectOption($queryResult);
 
 
 

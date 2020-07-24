@@ -3,6 +3,7 @@
   include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/deployAQT_QueryResultToHtmlDiv.php";
   include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/deploySavedAssessments_QueryResultToHtmlDiv.php";
   include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/cttQueryResultToHtmlTable.php";
+  include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/sqlQueryResultToList.php";
   // include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/CSTQueryResultToHtmlTable.php";
 
   function aqtActivityQuery($type, $status, $mysqli ,$pageHeading) {
@@ -52,18 +53,23 @@
            -- GROUP BY a.assessment_Title
       	");
       if ($status == "ongoing") {
-        $str = "WHERE dl.schStartDate < CURDATE() AND dl.schEndDate > CURDATE() AND dl.deploySuccess = 1 AND dl.depType = '$type'";
+        $str = "WHERE dl.schStartDate < CURDATE() AND dl.schEndDate > CURDATE() AND dl.deploySuccess = '1' AND dl.depType = '$type'";
         $successFlag = 1;//need this separately for display
         $queryString = $queryString.$str ;
       }
       if ($status == "completed") {
-        $str = "WHERE dl.schStartDate < CURDATE() AND dl.schEndDate < CURDATE() AND dl.deploySuccess = 1 AND dl.depType = '$type'";
+        $str = "WHERE dl.schStartDate < CURDATE() AND dl.schEndDate < CURDATE() AND dl.deploySuccess = '1' AND dl.depType = '$type'";
         $successFlag = 1;//need this separately for display
         $queryString = $queryString.$str ;
       }
       if ($status == "undeployed") {
-        $str = "WHERE dl.deploySuccess = 0 AND dl.depType = '$type'";
+        $str = "WHERE dl.deploySuccess = '0' AND dl.depType = '$type'";
         $successFlag = 0;//need this separately for display
+        $queryString = $queryString.$str ;
+      }
+      if ($status == "withdrawn") {
+        $str = "WHERE dl.deploySuccess = '2' AND dl.depType = '$type'";
+        $successFlag = 1;//need this separately for display
         $queryString = $queryString.$str ;
       }
       $queryString = $queryString."  GROUP BY dl.depId";
@@ -73,52 +79,101 @@
       deploymentsdiv($query, $type, $successFlag, $status, $pageHeading);
   }
 
+  // function savedAssessmentsQuery( $mysqli) {
+  //   //from Activities/assignments.php, Activities/quizzes.php, Activities/tests.php
+  //   //to Scripts/php/deploySavedAssessments_QueryResultToHtmlDiv.php
+  //   //WORKING
+  //   $successFlag = '';
+  //         $queryString = ("SELECT
+  //               a.assessment_Title AS 'Title',
+  //               a.assessment_Id AS 'Assessment ID',
+  //               dl.classId AS 'Class Id',
+  //               qb.classId AS 'QB Class Id',
+  //               c.classNumber AS 'Class',
+  //           	json_arrayagg(
+  //           		json_object(
+  //           			'questionID',qb.qId,
+  //           			'question',qb.question,
+  //           			'option1',qb.Option_1,
+  //           			'option2',qb.Option_2,
+  //           			'option3',qb.Option_3,
+  //           			'option4',qb.Option_4,
+  //           			'option5',qb.Option_5,
+  //           			'option6',qb.Option_6
+  //           		)
+  //           		) as 'Questions',
+  //           	json_arrayagg(DISTINCT
+  //           		json_object(
+  //           			'classId', dl.classId,
+  //                 'classNumber', c.classNumber,
+  //                 'sectionId', dl.sectionId,
+  //                 'sectionName', s.sectionName,
+  //                 'startDate', dl.schStartDate,
+  //                 'endDate', dl.schEndDate,
+  //                 'deploySuccess', dl.deploySuccess
+  //           		)
+  //           		) as 'Deployments'
+  //           FROM
+  //               questionbank AS qb
+  //           INNER JOIN assessment_questions AS aq
+  //           	on aq.question_id = qb.qId
+  //           INNER JOIN assessments as a
+  //           	on a.assessment_Id = aq.assessment_Id
+  //           LEFT JOIN deploymentlog as dl
+  //           	on dl.assessmentId = aq.assessment_Id
+  //           LEFT JOIN classes as c
+  //           	on c.classId = dl.classId
+  //           LEFT JOIN sections as s
+  //           	on s.sectionId = dl.sectionId
+  //           GROUP BY a.assessment_Title;") ;
+  //
+  //     $query = $mysqli->query($queryString);
+  //     savedAssessmentsdiv($query, $successFlag);
+  // }
+
   function savedAssessmentsQuery( $mysqli) {
     //from Activities/assignments.php, Activities/quizzes.php, Activities/tests.php
     //to Scripts/php/deploySavedAssessments_QueryResultToHtmlDiv.php
     //WORKING
     $successFlag = '';
           $queryString = ("SELECT
-                a.assessment_Title AS 'Title',
-                a.assessment_Id AS 'Assessment ID',
-                dl.classId AS 'Class Id',
-                c.classNumber AS 'Class',
-            	json_arrayagg(
-            		json_object(
-            			'questionID',qb.qId,
-            			'question',qb.question,
-            			'option1',qb.Option_1,
-            			'option2',qb.Option_2,
-            			'option3',qb.Option_3,
-            			'option4',qb.Option_4,
-            			'option5',qb.Option_5,
-            			'option6',qb.Option_6
-            		)
-            		) as 'Questions',
-            	json_arrayagg(DISTINCT
-            		json_object(
-            			'classId', dl.classId,
-                  'classNumber', c.classNumber,
-                  'sectionId', dl.sectionId,
-                  'sectionName', s.sectionName,
-                  'startDate', dl.schStartDate,
-                  'endDate', dl.schEndDate,
-                  'deploySuccess', dl.deploySuccess
-            		)
-            		) as 'Deployments'
-            FROM
-                questionbank AS qb
-            INNER JOIN assessment_questions AS aq
-            	on aq.question_id = qb.qId
-            INNER JOIN assessments as a
-            	on a.assessment_Id = aq.assessment_Id
-            LEFT JOIN deploymentlog as dl
-            	on dl.assessmentId = aq.assessment_Id
-            LEFT JOIN classes as c
-            	on c.classId = dl.classId
-            LEFT JOIN sections as s
-            	on s.sectionId = dl.sectionId
-            GROUP BY a.assessment_Title;") ;
+    	       assessments.assessment_Title as 'Title',
+             classes.classNumber as 'Class',
+             classes.classId AS 'Class Id',
+             assessments.assessment_Id AS 'Assessment ID',
+             questionbank.classId AS 'QB Class Id',
+    	json_arrayagg(
+        json_object(
+            'question',questionbank.question,
+        		'option1',questionbank.Option_1,
+        		'option2',questionbank.Option_2,
+            'option3',questionbank.Option_3,
+    		    'option4',questionbank.Option_4,
+            'option5',questionbank.Option_5,
+    		    'option6',questionbank.Option_6
+            )
+        ) as 'Questions',
+        json_arrayagg(
+        json_object(
+            'classId',dp.classId,
+            'classNumber',classes.classNumber,
+        		'sectionId',dp.sectionId,
+        		'deploySuccess',dp.deploySuccess,
+            'startDate',dp.schStartDate,
+            'endDate',dp.schEndDate
+            )
+        ) as 'Deployments'
+      	FROM
+      	`questionbank`
+          	 JOIN assessment_questions as aq
+              ON aq.question_id = questionbank.qId
+               Join assessments
+              ON aq.assessment_Id = assessments.assessment_Id
+               join classes
+              ON questionbank.classId = classes.classId
+              LEFT JOIN deploymentlog as dp
+              ON assessments.assessment_Id = dp.assessmentId
+              GROUP BY assessments.assessment_Title;") ;
 
       $query = $mysqli->query($queryString);
       savedAssessmentsdiv($query, $successFlag);
@@ -163,6 +218,21 @@
         GROUP BY U.userId
               ORDER BY U.userId ASC");
         table ($mysqli, $teacherQuery,$stuQuery);
+
+  }
+
+  function teachersWithoutClasses ($mysqli) {
+    //from SetUpPages/newTeachers.php
+    //to Scripts/php/teachersQueryResultToHtmlTable.php
+    //WORKING
+    $teacherQuery = $mysqli->query("SELECT *
+      FROM `users`
+      WHERE `role` = 'T'
+      -- AND `visibility` = 'Y'
+      AND users.userId
+      NOT IN (
+        SELECT userId FROM classes_taught_by_teacher)");
+        sqlQueryToList ($teacherQuery);
 
   }
 

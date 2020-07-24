@@ -1,5 +1,6 @@
-<label for="joinYear">Join Year</label>
-<select id="joinYear" name="joinYear" >
+<label for="joinYear">Join Year<span class="glyphicon glyphicon-asterisk" style="color: Red">
+</span></label>
+<select id="joinYear" name="joinYear"  class="form-control">
   <option id="blanksa"></option>
   <option id="j2017">2017</option>
   <option id="j2018">2018</option>

@@ -23,7 +23,7 @@
       <input type="checkbox" name="confirm"  value="<?php echo $pageCode; ?>" required>All data is correct</input>
     </span>
     <span>
-      <button name="Submit" id="submit" type="submit">SUBMIT</button>
+      <button name="Submit" id="Submit" type="submit">SUBMIT</button>
     </span>
   </div>
 

@@ -183,13 +183,14 @@ function ajaxCallGetQuestionsFilter () {  //ARRAYS OF CLASSES AND SUBJECTS COMIN
          subjectNames.push(sid.match(/\d+/));
        }
      }
-     if (classNumbers.length==0 || subjectNames==0) {
-       alert ("Select at least one class and subject");
-     }
-     else {
-         var queryString = "/AddNew/Existing/questions.php?classNumber=" + classNumbers + "&&subjectName=" + subjectNames;
-         
+
+   if (classNumbers.length==0 || subjectNames==0) {
+     alert ("Select at least one class and subject");
+   }
+   else {
+       var queryString = "/AddNew/Existing/questions.php?classNumber=" + classNumbers + "&&subjectName=" + subjectNames;
     }
+    
  ajaxRequest.onreadystatechange = function() {
    if(ajaxRequest.readyState == 4) {
      var ajaxReturn = ajaxRequest.responseText;

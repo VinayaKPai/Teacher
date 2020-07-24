@@ -1,9 +1,9 @@
-<div class="centered cards" style="margin: 2% 2%; width: 60%; align-items: center;">
-  <div class="row ">
+<!-- <div id="login" class="centered cards" style="margin: 2% 2%; width: 60%; align-items: center;"> -->
+  <!-- <div class="row "> -->
         <label for="#username">User Name</label><input id="username" />
         <label for="#password">Password</label><input id="password" /><br>
         <button>Login</button>
-  </div>
+  <!-- </div> -->
   <div class="col-sm-6 jumbotron small"  style="margin: 10% 25%;  width: 50%; padding: 2% 2%; border-radius: 5px">
         <span>OR</span>
           <button type="button" class="button btn-secondary btn-small" style="">
@@ -20,4 +20,4 @@
         </p>
       </div>
     </div>
-</div>
+<!-- </div> -->

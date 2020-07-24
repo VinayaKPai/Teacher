@@ -53,3 +53,13 @@ Question bank: 14 June 2020
   Relevant files:
   a. SetUpPages/newQuestions.php
 Problem: Once an activity is saved, the checkboxes should get unchecked automatically
+
+Question bank: 20 July 2020
+  Relevant files:
+  a. SetUpPages/newQuestions.php
+  b. Scripts\js\ajaxCallQuestions.js
+Problem: When a question is unchecked, the serial numbers lose continuity. Devise a mechanism so that the QNos remain in sequence even if a question in the middle is removed
+
+URGENT 20 July 2020 - COMPLETED WORKING 20 July 2020
+Assessment Questions table
+When a new assessment question is created, the assessment_questions table should be autopopulated.

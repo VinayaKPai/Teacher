@@ -218,7 +218,7 @@ function ajaxCallCreateActivity (arr,act) {
 function ajaxCallSaveNewActivity (arr,act) {//function will send a request to the createactivity.php file to save the created activity
   //arr is the array of q nos,
   //act is the title
-
+alert(arr+"====="+act);
   var ajaxRequest;  // The variable that makes Ajax possible!
 
   try {
@@ -241,7 +241,7 @@ function ajaxCallSaveNewActivity (arr,act) {//function will send a request to th
      }
   }
   console.log(act);
-  
+
   var act = document.getElementById("inpTitle").value;
   if (act!="") {
       var queryString = "/Activity/createactivity.php?qarray=" + arr + "&inpTitle=" + act;

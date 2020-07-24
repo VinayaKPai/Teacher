@@ -5,19 +5,15 @@
 				include $_SERVER['DOCUMENT_ROOT']."/basecode-create_connection.php";
 				include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/allRetrievalQueries.php";
 				$a = "T";
+				$pageHeading = "Tests";
+				$pageHeadSingular = "Test";
 	?>
 </head>
 <body class="body">
 	<div class="container">
-		<div class="right-align">
-					<?php
-						echo $datetime1; ?>
-		</div>
-	<hr>
+	<?php	echo $datetime1; ?>
+	<h3 class="centered" style="background: var(--BodyGradient);"><?php include $_SERVER['DOCUMENT_ROOT']."/Components/top.php"; ?></h3>
 		<?php
-			$pageHeading = "Tests";
-			$pageHeadSingular = "Test";
-			include $_SERVER['DOCUMENT_ROOT']."/Components/top.php";
 			if ($_GET){echo $_GET;}
 			include $_SERVER['DOCUMENT_ROOT']."/Components/internalNav.php";
 			include $_SERVER['DOCUMENT_ROOT']."/Components/createNewAssessmentBtn.php";
@@ -44,7 +40,12 @@
 	 	 			aqtActivityQuery($a,$b,$mysqli,$pageHeading);
 	 	 		?>
 	 	 	</div>
-
+			<div class="panel-group" id="accordion">
+		 		<?php
+		 			$b = "withdrawn";
+		 			aqtActivityQuery($a,$b,$mysqli,$pageHeading);
+		 		?>
+		 	</div>
 	 	 	<div class="panel-group" id="accordion">
 	 	 		<?php
 	 	 			savedAssessmentsQuery( $mysqli);

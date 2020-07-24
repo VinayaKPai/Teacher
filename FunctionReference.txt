@@ -25,9 +25,6 @@ JS Functions: {
   File Names:    1. SetupPages/newclasses_taught_by_teachers.php
                  2. Activity/createtestpreview.php
 
-  Function Name:  testalert
-  File Names:     1. SetupPages/newQuestions.php
-
   Function Name:  modalclick
   File Names:     1. SetupPages/newStudents.php
                   2. SetupPages/newTeachers.php

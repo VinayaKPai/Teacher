@@ -38,19 +38,24 @@
               echo "<div class='body col-sm-4' style='background:  var(--BodyGradient); border-radius: 25px; border-bottom: 2px solid #4B0082;'>";
                    echo "<h5>".$schdTxt . "</h5>";
                   if(isset($row['Deployments'])) {
+
                     displayAllAssessments($row['Deployments']);
                     $classId = $row['Class Id'];
                     $class = $row['Class'];
                     $assId = $row['Assessment ID'];
                   }
-                  scheduleToDeploy($row['Class'], $row['Class Id'], $row['Assessment ID']);
+                  else {
+                    echo "NO DEPLOYMENTS";
+                  }
+
+                  scheduleToDeployDiv($row['Class'], $row['QB Class Id'], $row['Assessment ID']);
               echo "</div>";
             echo '</div>
           </div>';
       }
 
 //for all assessments
-function scheduleToDeploy($class, $classId, $assId) {
+function scheduleToDeployDiv($class, $classId, $assId) {
   $composite = $classId.$assId;
   $dates = "date".$composite;
   $names = "name".$composite;
@@ -66,8 +71,10 @@ function scheduleToDeploy($class, $classId, $assId) {
         <option value='5'>E</option>
         <option value='6'>F</option>
     </select><br>
-    <label for='".$dates."'>Select Date:</label>
-    <input type='date' id='".$dates."' name=".$names."><br>
+    <label for='start".$dates."'>Start Date:</label>
+    <input type='date' id='start".$dates."' name=".$names."><br>
+    <label for='end".$dates."'>End Date:</label>
+    <input type='date' id='end".$dates."' name=".$names."><br>
     <label for='as".$composite."'>Type:</label>
       <select id='as".$composite."' name=".$names.">
         <option name='A' value='A'>Assignment</option>
@@ -85,12 +92,12 @@ function displayAllAssessments($allDeployments) {//$vard is json encode of $row[
   $deployments = json_decode($allDeployments, true);
   echo "<ol style='list-style-type: number' >";
   foreach ($deployments as $deployment) {
-    displayDeploymentSchForm($deployment);
+    displayDeployments($deployment);
   }
   echo "</ol>";
 }
 
-function displayDeploymentSchForm($deploymentDetails) {
+function displayDeployments($deploymentDetails) {
   if ($deploymentDetails['deploySuccess'] == 0) {
     $col = "class='red'";
     $txt = "<strong>No</strong>";

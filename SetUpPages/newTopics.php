@@ -23,14 +23,14 @@
 	</head>
 	<body class="body">
 		<div class="container">
-			<hr>
+			<?php echo $datetime; ?>
 			<h3 class="centered"><?php include "../Components/top.php"; ?></h3>
-			<hr>
+			<?php include "../Components/internalNav.php"; ?>
 			<div class="row">
-				<div class="col-sm-6" style="padding: 10px;">
+				<div class="col-sm-4" style="padding: 10px;">
 					<hr>
 					<p class="panel-title" style="background-color: #C5B2B3;">Add a Topic to the Database</p>
-					<form name="newClassForm" action="../AddNew/addnewclass.php" method="post">
+					<form name="newClassForm" action="../AddNew/addnewtopic.php" method="post">
 						<div style="padding: 10px;">
 							<div style="margin-bottom: 10px;">
 							<?php
@@ -46,24 +46,18 @@
 							</div>
 
 							<div style="margin-bottom: 10px;">
-								<label for="topics">New Topic </label>
-								<input id="topics" />
+								<label for="topicName">New Topic </label>
+								<input id="topicName" name="topicName"/>
 							</div>
 
 							<div>
 									<button name="Submit" id="submit" type="submit">SUBMIT</button>
 							</div>
-
-						<!-- <input type="button" id="chkRec" value="CHECK" onclick="ajaxChkClassFunction()"/>-->
 						</div>
 					</form>
 				</div>
-				<div class="col-sm-6 centered" style="border-left: 1px solid Grey;">
-						<style>
-						table tr:nth-child(even){background-color: #b69092; color: #fff}
-						table tr:nth-child(odd){background-color: #684654; color: #fff}
-						table td {text-align: center;}
-						</style>
+				<div class="col-sm-8 centered" style="border-left: 1px solid Grey;">
+
 						<table id="existTable" style="width: 100%; padding: 5px; border-spacing: 2px; border-collapse: separate; align: 'center';">
 							<?php
 								if ($_GET){ $cln = $_GET['classNumber']; echo $cln;}
@@ -74,6 +68,9 @@
 						</table>
 					</div>
 					<hr>
+			</div>
+			<div class="container">
+				<?php include $_SERVER['DOCUMENT_ROOT']."/Components/bottom.php"; ?>
 			</div>
 			<div id="topicQuestionsModal" class="modal modal-xl fade" role="dialog" style="width: 100%;">
 			  <div class="modal-dialog">
@@ -90,8 +87,5 @@
 					    </div>
 						</div>
 			  </div>
-
-			<div id="bottom"><?php include "../Components/bottom.php"; ?></div>
-		</div>
 	</body>
 </html>

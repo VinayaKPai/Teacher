@@ -95,8 +95,10 @@ function scheduleDeployment($class, $classId, $assId) {
         <option value='5'>E</option>
         <option value='6'>F</option>
     </select><br>
-    <label for='".$dates."'>Select Date:</label>
-    <input type='date' id='".$dates."' name=".$names."><br>
+    <label for='start".$dates."'>Start Date:</label>
+    <input type='date' id='start".$dates."' name=".$names."><br>
+    <label for='end".$dates."'>End Date:</label>
+    <input type='date' id='end".$dates."' name=".$names."><br>
     <label for='as".$composite."'>Type:</label>
       <select id='as".$composite."' name=".$names.">
         <option name='A' value='A'>Assignment</option>

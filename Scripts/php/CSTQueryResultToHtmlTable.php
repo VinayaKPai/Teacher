@@ -11,8 +11,8 @@ function table( $a, $result, $pageHeading ) {
     $hId = "collapse".$a;
     if ($rowcount!=0) {
         echo "
-          <div class='panel panel-default'>
-            <div class='panel-heading' style='background: var(--BodGradbanner);'>
+          <div class='panel panel-default' style='padding: 3px;'>
+            <div class='panel-heading' style='background: var(--BodGradbanner); padding: 3px;'>
               <h4 class='panel-title green'>
                 <a data-toggle='collapse' href='$href'>". $pageHeading." for Class " .$row['Class']."</a>
               </h4>
@@ -29,7 +29,7 @@ function table( $a, $result, $pageHeading ) {
     }
     else {
       echo "<div class='panel panel-default'>
-          <div class='panel-heading' style='background: var(--BodGradbanner);'>
+          <div class='panel-heading' style='background: var(--BodGradbanner); padding: 3px;'>
             <h4 class='panel-title red'>
               <a data-toggle='collapse' href='$href'>". $pageHeading." for Class ".$a."</a>
             </h4></div>

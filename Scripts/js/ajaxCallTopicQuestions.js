@@ -4,7 +4,7 @@
 		 // function ajaxCallStudents(t,p) {
     function ajaxCallTopicQuestions(tops) {
        // alert (t+p);
-       alert (tops);
+       // alert (tops);
             var ajaxRequest;  // The variable that makes Ajax possible!
 
             try {
@@ -57,7 +57,7 @@ console.log(queryString);
        // var item = document.getElementById(i.id);
         // alert (i);
         var arr = i.split(" ");
-        alert (arr);
+        // alert (arr);
         var tc = arr[0];
         var cl = arr[1];
         var se = arr[2];

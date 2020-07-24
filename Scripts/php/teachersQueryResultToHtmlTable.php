@@ -15,7 +15,7 @@ function table( $mysqli, $result,$stuQuery ) {
         }
         else { $cls = "'color: Red;'";}
       }
-      echo "<h4 class='th'>Currently ". $rowcount ." active Teachers in your setup</h4>" ;
+      echo "<h4 class='topbanner'>Currently ". $rowcount ." active Teachers in your setup</h4>" ;
     echo "<table style='width: 100%; padding: 5px; border-spacing: 2px; border-collapse: separate; align: 'center';'>";
         tableHead(  $result );
         tableBody(  $mysqli,$result,$stuQuery );
@@ -113,7 +113,7 @@ function displayStudentsDataForClassSec($classId,$className,$sectionId,$stuQuery
 				echo "<li>".$st['F Name']." ".$st['M Name']." ".$st['L Name'];
           echo "<ul>";
             echo "<li>Id : ".$st['U Id']."</li>";
-            echo "<li>Id : ".$st['R No.']."</li>";
+            echo "<li>R No : ".$st['R No.']."</li>";
           echo "</ul>";
         echo "</li>";
 		}

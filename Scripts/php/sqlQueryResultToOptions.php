@@ -1,6 +1,6 @@
 <?php
 
-function selectOption($opt, $result ) {
+function selectOption( $result ) {
 echo '<option></option>';
 
   $result->fetch_array( MYSQLI_ASSOC );

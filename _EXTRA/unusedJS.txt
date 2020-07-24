@@ -1,0 +1,74 @@
+// function selectedQuestionDisplay(e) {
+// 	if (e.checked) {
+// 	// get the entire row
+// 	chkdarr.push(e.id);
+// 	slno = slno + 1;
+// 			var row = e.parentNode.parentNode;
+// 			//access all the td in the row
+// 			var rowchild = row.children;
+// 			var newqdiv = document.createElement("div");
+// 			newqdiv.id = "n" + e.id;
+// 			newqdiv.className="container";
+// 			//display the question
+// 			var newq = document.createElement("p");	//for the main question
+// 			newq.innerText = slno + ". " +rowchild[3].innerText + " : ";
+// 			newqdiv.appendChild(newq);
+// 			// now add options if they exist
+// 			if (rowchild[4].innerText!="")	{
+// 				//---------------
+// 				var au = document.createElement("ul");
+// 				// au.class = "list-inline";
+// 				//---------------
+// 					for (i=4;i<rowchild.length;i++) {
+// 						var ap = document.createElement("li");
+// 						if (rowchild[i].innerText!=""){
+// 							ap.innerText = rowchild[i].innerText;
+// 							ap.style.margin = "10px";
+// 							ap.style.display = "inline";
+// 							au.appendChild(ap);
+// 						}
+// 					}
+// 				newqdiv.appendChild(au);
+//
+// 				}
+// 				document.getElementById("ajaxResult").appendChild(newqdiv);
+//
+// 			}
+// 			else {	//ie if checkbox is unchecked
+// 				var nid = "n" + e.id;
+// 				var n = document.getElementById(nid);
+// 				n.remove();
+// 				var rem = chkdarr.indexOf(e.id);
+// 				chkdarr.splice(rem,1);
+// 			}
+// 			if (document.getElementById("ajaxResult").children.length!=1){
+// 				document.getElementById("axc").style.display = "block";
+// 				document.getElementById("ajaxButtons").style.display = "block";
+// 			}
+// 			else {
+// 				document.getElementById("axc").style.display = "none";
+// 				document.getElementById("ajaxButtons").style.display = "none";
+// 			}
+// 			var choose = JSON.stringify(chkdarr);
+// 			var csb = document.getElementById("classSelectBoxes").children;
+// 			var csbi = 0;
+// 			for (j=0;j<csb.length;j++) {
+// 				if (csb[j].children[0].checked) {
+// 					csbi = csb[j].children[0].id;
+// 				}
+// 			}
+// 			var ssb = document.getElementById("subjectSelectBoxes").children;
+// 			var ssbi = "a";	//simply initializing it to "a" as it is giving an error
+// 			for (k=0;k<ssb.length;k++) {
+// 				if (ssb[k].children[0].checked) {
+// 					ssbi = ssb[k].children[0].id;
+// 				}
+// 			}
+// 			// alert (csbi + ssbi)
+// 			var clk = "ajaxCallSaveNewActivity(" + choose +"," + csbi+ ",\"" + ssbi + "\",this.id)";
+// 				console.log(clk);
+// 			var savebuttons = document.getElementsByName("saveButton");
+// 			for (l=0;l<savebuttons.length;l++){
+// 				savebuttons[l].setAttribute("onclick", clk);
+// 			}
+// }

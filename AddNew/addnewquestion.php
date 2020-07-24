@@ -1,4 +1,5 @@
 <?php
+// Used in SetUpPages/newQuestions.php
 	include "../basecode-create_connection.php";
 	//TO ADD NEW QUESTIONS TO THE DATABASE
 	echo "Added New Question";

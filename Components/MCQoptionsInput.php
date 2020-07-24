@@ -1,3 +1,4 @@
+<!-- Used in SetUpPages/newQuestions.php -->
 <div class="col-sm-12" style="padding: 10px; display: none" id="options">
   <div class="col-sm-6">
     <label for="#option1">Option 1 </label><input type="text" id="option1" name="option1"/>

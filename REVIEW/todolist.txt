@@ -1,0 +1,103 @@
+RemoveRecords : Dt : 21/5/2020
+  Relevant files:
+      a. /RemoveRecords/RemoveTeacher.php
+  CHECK:
+    No user records should be ever removed from the database. Check if the query removes the record or flags visibility as 0
+*******************************************
+Deployment of activity:
+  Relevant files:
+    a. /Activity/addnewtest.php
+      i. process starts with Deploy button > deploy() on same page to prepare ajax call ajaxDeployActivity()
+    b. /Scripts/js/ajaxCallActivities.js > Creates ajax calls sends to the deploytest.php
+    c. /Activity/deploytest.php > saves deployment.
+    Problem: deployment Id is autoincrement. The deploytest.php is saving the record twice in the deploymentlog table. Solution:
+    Step 1: So created a constraint Dedupe that (assessmentId	+ depType	+ schStartDate) have to be unique. Now it saves only once. However, auto increment jumps a number next time something is saved. This means the sql has used up the missing auto increment but not saved the record.
+    Step 2: How to remove this glitch?
+  *****************************
+*******************************************
+Teachers: 8 May 2020
+  Relevant files:
+  a. /SetUpPages/newTeachers.php
+    i. function modalclick(this) calls the following
+    ii. ajaxCallTeachers(e.id,e.innerText) which exists in
+  b. /Scripts/js/ajaxCallTeachers.js
+    i. ajaxCallTeachers(t,p) sends ajax request to
+  c. /Scripts/php/singleTeacherClasses.php?teacherId=" with teacher Id which pulls all the classes, sections, and subjects taught by the teacher. Explore button triggers
+    i. function exploreclick(b) calls the following
+    ii. ajaxCallExploreItem(b.id) which exists in
+  d. /Scripts/js/ajaxCallTeachers.js sends a request to
+  e. /Scripts/php/exploreTeacher.php? with teacher id, class id, and section id
+  Problem: Is it over kill? The Explore button only wants to show the students in the relevant class. Why send teacher Id with it?
+*******************************************
+Classes: 9 May 2020
+  Relevant files:
+  a. /SetUpPages/newclasses_taught_by_teachers.php
+  Problem: The existing classes display is displaying the some records multiple times and others only once. SOLVED
+  Problem: Need to be able to display a Teacher Name and then below that, all the classes-sections-subjects. Currently, each record for each teacher is a separate line.
+*******************
+Single Teacher classes (Irrelevant file deleted 24 July 2020)
+  RELEVANT FILE :
+  Scripts/php/singleTeacherClasses.php
+  Problem: "teachers" table in the query needs to be removed
+*******************************************
+Students by teacher's classes
+  Relevant files:
+  a. /SetUpPages/newTeachers.php
+  Problem: When a class-section has no students, there should be a message in the collapsible tr
+********************************************
+Question bank: 14 June 2020
+  Relevant files:
+  a. SetUpPages/newQuestions.php
+  Problem: Once an activity is saved, the checkboxes should get unchecked automatically
+********************************************
+Question bank: 20 July 2020
+  Relevant files:
+  a. SetUpPages/newQuestions.php
+  b. Scripts\js\ajaxCallQuestions.js
+  Problem: When a question is unchecked, the serial numbers lose continuity. Devise a mechanism so that the QNos remain in sequence even if a question in the middle is removed
+********************************************
+URGENT 20 July 2020 - COMPLETED WORKING 20 July 2020
+  Assessment Questions table
+  When a new assessment question is created, the assessment_questions table should be autopopulated.
+********************************************
+Convert to insert functions in allInsertQueries.php, the following files from AddNew folder - 24 July 2020
+  1.  addNewclass.php (unused file moved to EXTRAS 24 July 2020)
+  2.  addNewclasses_taught_by_teachers.php (unused file moved to EXTRAS 24 July 2020)
+  3.  addnewquestion.php
+  4.  addnewstudent.php
+  5.  addnewsubject.php (unused file moved to EXTRAS 24 July 2020)
+  6.  addnewteacher.php (unused file moved to EXTRAS 24 July 2020)
+  7.  addnewtest.php (? used in Scripts\js\ajaxCallActivities.js)
+  8.  addnewtopic.php
+  9.  adduser.php (unused file moved to EXTRAS24 July 2020)
+  10. getSubForClass.php (? used in Scripts\js\ajaxGetAllForClass.js)
+  11. getTopics.php (? used in Scripts\js\ajaxCalls.js & Scripts\js\ajaxGetAllForClass.js)
+********************************************
+Convert to insert functions in allInsertQueries.php, the following files from AddNew/Existing folder - 24 July 2020
+  1.  classes_taught_by-teachers.php (unused file moved to EXTRAS 24 July 2020)
+  2.  questions.php (used in Scripts\js\ajaxCallQuestions.js & SetUpPages\questionBank.php)
+  3.  reports.php (unused file moved to EXTRAS 24 July 2020)
+  4.  students.php (unused file moved to EXTRAS 24 July 2020)
+  5.  subjects.php (unused file moved to EXTRAS 24 July 2020)
+  6.  teachers.php (unused file moved to EXTRAS 24 July 2020)
+  7.  todos.php
+  8.  topics.php
+  9.  units.php (unused file moved to EXTRAS 24 July 2020)
+********************************************
+Activity/assignments.php
+  The "Deploy to Class" h5 is extending beyond the width of the viewport in PC mode
+********************************************
+Convert to insert functions in allInsertQueries.php, the following files from Scripts/php folder - 24 July 2020
+  1.  addNewClasses.php (used in Scripts\js\ajaxCalls.js)
+  2.  CSTquerries.php (included in SetUpPages\newclasses_taught_by_teachers.php)
+  3.  CSTQueryResultToHtmlTable.php (included in Scripts\php\CSTquerries.php)
+  4. deploySavedAssessments_QueryResultToHtmlDiv (included in Scripts\php\allRetrievalQueries.php)
+  5. explorestudent.php (used in Scripts\js\ajaxCallTopicQuestions.js)
+  6.  newtodo.php
+  7.  queryBuilder (included in several files)
+  8.  sqlQueryResultToHtmlTable.php (included in AddNew\Existing\questions.php, AddNew\getTopics.php)
+  9. sqlQueryResultToList (included in Scripts\php\allRetrievalQueries.php)
+  10. sqlQueryResultToOptions (included in AddNew\Existing\topics.php, AddNew\getTopics.php)
+  11. studentsQueryResultToHtmlDiv (included in SetUpPages\newStudents.php, SetUpPages\newTeachers.php)
+  12. teachersQueryResultToHtmlTable (included in Scripts\php\allRetrievalQueries.php, SetUpPages\newTeachers.php)
+********************************************

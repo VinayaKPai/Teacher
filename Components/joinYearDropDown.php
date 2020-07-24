@@ -1,3 +1,4 @@
+<!-- Used in Forms/userStudentForm.php Forms/userTeacherForm.php -->
 <label for="joinYear">Join Year<span class="glyphicon glyphicon-asterisk" style="color: Red">
 </span></label>
 <select id="joinYear" name="joinYear"  class="form-control">

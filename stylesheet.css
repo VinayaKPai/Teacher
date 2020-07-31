@@ -16,10 +16,12 @@ h4, h6 {
   color: #651a1a;
   background-color: #DDDDDD;
   text-align: center;
+  font-weight: bold;
 }
-h5 {
+h5, .h5 {
   color: maroon;
   background-color: #DDDDDD;
+  text-align: center;
   font-weight: bold;
 }
 .paneldefault { background: Grey;}
@@ -66,7 +68,6 @@ ul a {
   align-items: stretch;
   padding: 1% 1% 1% 1%;
 }
-
 .modal-dialog  {
   width: 75%;
   background: var(--BodGradtop);

@@ -15,85 +15,102 @@
 
 <body class="body">
 
-<div class="container">
-	<div class="row">
-		<h5 class="col-sm-12"><div class="col-sm-6">Call us: <a href="tel:9663304792">9663304792</a></div><div class="col-sm-6" style="float: right;">vkaapai@yahoo.com</div></h5>
-	</div>
-</div>
+<!-- <div class="container"> -->
+
 	<div class="topbanner container-fluid">
-		<span>What are you looking for today?......
-			<span >We'd love to help!&emsp;&emsp;</span>
-		</span>
-		<span style="float:right;">
-			<button class="btn white">
+		<h1>Coming Soon......
+			<span >Our offering to Teachers and schools!&emsp;&emsp;</span><span style="float:right;">
+				<button class="btn white"  data-toggle="modal" data-target="#contact">
+	        <span class="glyphicon glyphicon-envelope"></span> Contact Us
+	      </button>
+
+			</span>
+		</h1>
+
+
+	</div>
+	<!-- <div>
+		<h5><span style="float:right;">
+			<button class="btn white"  data-toggle="modal" data-target="#contact">
         <span class="glyphicon glyphicon-envelope"></span> Contact Us
       </button>
 
-</span>
-		<span class="dropdown" style="float: right;">
-		    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Jump to a Service
-		    <span class="caret"></span></button>
-		    <ul class="dropdown-menu">
-		      <li><a href="#">Web Design and Development</a></li>
-		      <li><a href="htmlcsstemplates.html">HTML CSS Templates</a></li>
-		      <li><a href="bootstraptemplates.php">Bootstrap Templates</a></li>
-		      <li><a href="#">HTML-CSS to Bootstrap conversion</a></li>
-		      <li><a href="#">Software Documentation - New and Update</a></li>
-		      <li><a href="#">Conversion of Word/Excel to HTML</a></li>
-		    </ul>
-		  </span>
+		</span></h5>
+	</div> -->
+</div>
+	<div class="roundedsquare maroon centered" style="background-color: lightgrey;">
+		<h5 class="maroon centered">New offering!</h5>
+
+		<image src= "../../Images/prashnavalilogo.png" style="width:80%; margin: 0px auto 0px auto; z-index: +10;" class="responsive" />
 
 	</div>
-
-<div class="row" style="top: 130px; height:180px; background-color: lightgrey;"> <image src= "../../Images/prashnavalilogo.png" style="width:90%; margin: 0px auto 0px auto;"></div>
-<!-- ****************************** -->
-
-<div class="row " style="justify-content: space-around; padding: 2% 5px 2% 5px;">
-
-		<div class="card col-4 roundedsquare maroon" style="margin: 1% 5px 1% 5px;">
-				<h4>Web Design and Development</h4>
-				<div class="cards" style="background-color: lightgrey; min-height: 50px;"></div>
-				<p>First time Internet presence? We can help you begin your journey to cyberspace by offering design and development support, with responsive design! 5 pages or 50 - we can help you do it ...FAST</p>
-		</div>
-		<div class="card  col-4 roundedsquare maroon" style="margin: 1% 5px 1% 5px;">
-				<h4>HTML CSS Templates</h4>
-				<div class="cards" style="background-color: lightgrey; min-height: 50px;"></div>
-				<p>Are you looking for an easy way to create a website, without spending too much time or money? We can help you to get started, with simple HTML CSS templates where you just put in your content and are up and running in a short time.<br/>Do not want the headache of doing it yourself? Well, we will do it for you...you just hand us your content and choose a template you like...
-				</p>
-		</div>
+	<div>
+		<div class="row">
+			<h5 style="width: 100%;">
+			<!-- <div class="col-sm-6"> -->
+				<image src= "../../Images/No1.png"  class="img-fluid"/>
+					Select Questions
+				<image src= "../../Images/No2.png"  class="img-fluid"/>
+					Give it a name
+			<!-- </div> -->
+			<!-- <div class="col-sm-6"> -->
+				<image src= "../../Images/No3.png"  class="img-fluid"/>
+					Select dates
+				<image src= "../../Images/No4.png"  class="img-fluid"/>
+					Save!!!
+			<!-- </div> -->
+		</h5>
 	</div>
-	<div class="row " style="justify-content: space-around; padding: 2% 5px 2% 5px;">
-		<div  class="card  col-4 roundedsquare maroon" style="margin: 1% 5px 1% 5px;">
-				<h4>Bootstrap Templates</h4>
-				<div class="cards" style="background-color: lightgrey; min-height: 50px;"></div>
-				<p>Are you looking for an easy way to create a website, without spending too much time or money? We can help you to get started, with simple bootstrap templates where you just put in your content and are up and running in a short time.<br/>Do not want the headache of doing it yourself? Well, we will do it for you...you just hand us your content and choose a template you like...
-				</p>
-		</div>
-		<div  class="card  col-4 roundedsquare maroon" style="margin: 1% 5px 1% 5px;">
-				<h4>HTML-CSS to Bootstrap conversion</h4>
-				<div class="cards" style="background-color: lightgrey; min-height: 50px;"></div>
-				<p>Do you have an old, pHTML-CSS website pyou want to keep, but want a new modern look? We can help you transition to new look  by using any of our pHTML-CSS website templatesp, with attractive designs, while retaining some of the old charm!<br/>Or are you building your first Internet presence? We have readymade templates that you short time...
-				</p>
-		</div>
-	</div>
-	<div class="row " style="justify-content: space-around; padding: 2% 5px 2% 5px;">
+	<div>
+			<h5 style="width: 100%;">Behind the scenes....</h5>
+			<h6 class="left-align green" style="padding: 5%;">	<li> Notify you a day before the assessment goes live...  </li>
+				<li>Open the assessment to your students on the selected dates.... </li>
+				<li>Send reminders to you and your students before it closes....</li>
+				<li>...ALL THIS without you having to track dates!</li>
+				<li>You will be up-to-date about your current assessments as soon as you launch the app.... AND</li>
+				<li>Your students will be aware of the tasks they need to perform, when they launch their!</li></h6>
+				<h5>	...and much much more!!
+				<!-- </div> -->
+			</h5>
 
-		<div class="card  col-4 roundedsquare maroon" style="margin: 1% 5px 1% 5px;">
-			<h4>Documentation</h4>
-			<div class="cards" style="background-color: lightgrey; min-height: 50px;"></div>
-			<p>Do you have a product that needs user documents? <br/>
-					Do you need your documents updated?<br/>
-					Let us help you get ahead with your development and leave the documentation to us!
-			</p>
 		</div>
-		<div class="card  col-4 roundedsquare maroon" style="margin: 1% 5px 1% 5px;">
-				<h4>Conversion of Word/Excel to HTML</h4>
-				<div class="cards" style="background-color: lightgrey; min-height: 50px;"></div>
-			<p>Do you have a word or excel documents that you want to display on your website? <br/>
-					Do you need your documents to be converted to clean HTML?<br/>
-					Let us help you get ahead with your development and leave the tedious conversion to us!
-				</p>
-		</div>
+
+			<div class="modal" role="dialogue" id="contact" style="width: 80%;margin: 0px auto 0px auto;">
+				<div class="modal-dialog" style="height:80%; width: 80%;margin: 0px auto 0px auto;">
+					<div class="modal-header" ><h2 class="white">WE'LL get in touch with you!</h2><h4>Drop us a line!<h4></div>
+					<div class="modal-content"  style="height:80%; width: 80%;margin: auto auto auto auto;">
+						<form action="../../Scripts/php/saveMessage.php" method="POST" style="height:80%; width: 80%; margin: 5% auto 5% auto; ">
+							<div style="margin: 5% auto 5% auto; ">
+								<label for="name"><span class="red">*</span> Name</label>
+								<input id="name" name="name" type="text" required class="form-control input-sm" />
+							</div>
+							<div style="margin: 5% auto 5% auto; ">
+								<label for="phone"><span class="red">*</span> Phone</label>
+								<input id="phone" name="phone" type="text" required  class="form-control input-sm"/>
+							</div>
+							<div style="margin: 5% auto 5% auto; ">
+								<label for="email"><span class="red">*</span> Email</label>
+								<input id="email" name="email" type="email" required class="form-control input-sm"/>
+							</div>
+							<div style="margin: 5% auto 5% auto; ">
+								<label for="youare"><span class="red">*</span> You are : </label>
+								<select id="youare" name="youare" required class="form-control input-sm"/>
+									<option></option>
+									<option id="ind">Individual</option>
+									<option id="smOrg">Small organization</option>
+									<option id="lgOrg">Large organization</option>
+								</select>
+							</div>
+							<div style="margin: 5% auto 5% auto; ">
+								<label for="msg"><span class="red">*</span> Message</label>
+								<textarea class="form-control" rows="5"  id="msg" name="msg" required></textarea>
+							</div>
+							<div class="modal-footer" ><button type="submit" class="submit">Submit</button></div>
+						</form>
+					</div>
+					<div class="modal-footer" ><button type="button" class="btn btn-default white" data-dismiss="modal" style="border: solid 1px #fff">Close</button></div>
+				</div>
+			</div>
 	</div>
 </body>
 </html>

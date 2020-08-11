@@ -4,6 +4,9 @@
 	include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/allRetrievalQueries.php";
 	$pageHeading = "Subjects";
 	$pageCode = "setup";
+	$userName = "Guest";
+	$userType = "";
+	$loggedInUserName  = "";
 ?>
 
 
@@ -22,8 +25,11 @@
 		</head>
 	<body class="body" style="background: var(--BodyGradient);">
 		<div class="container">
-			<hr>
-			<h3 class="centered"><?php include "../Components/top.php"; ?></h3>
+			<h3 class="centered">
+				<div id="top" class="row" style="padding: 1px;">
+					<?php include "../Components/top.php"; ?>
+				</div>
+			</h3>
 			<hr>
 			<?php
 				include $_SERVER['DOCUMENT_ROOT']."/Components/internalNav.php";

@@ -7,11 +7,13 @@
 				$a = "A";
 				$pageHeading = "Assignments";
 				$pageHeadSingular = "Assignment";
+				$userName = "Guest (T)";
+				$userType = "";
+				$loggedInUserName  = "";
 	?>
 </head>
 <body class="body">
 	<div class="container">
-		<?php	echo $datetime1; ?>
 	<h3 class="centered" style="background: var(--BodyGradient);"><?php include $_SERVER['DOCUMENT_ROOT']."/Components/top.php"; ?></h3>
 		<?php
 			if ($_GET){echo $_GET;}
@@ -22,26 +24,26 @@
 		 	<div class="panel-group" id="accordion">
 		 		<?php
 		 		$b = "completed";
-		 		aqtActivityQuery($a,$b,$mysqli,$pageHeading);
+		 		aqtActivityQuery($a,$b,$mysqli);
 		 		?>
 		 	</div>
 
 		 	<div class="panel-group" id="accordion">
 		 		<?php
 		 		$b = "ongoing";
-		 		aqtActivityQuery($a,$b,$mysqli,$pageHeading);
+		 		aqtActivityQuery($a,$b,$mysqli);
 		 		?>
 		 	</div>
 			<div class="panel-group" id="accordion">
 		 		<?php
 		 			$b = "undeployed";
-		 			aqtActivityQuery($a,$b,$mysqli,$pageHeading);
+		 			aqtActivityQuery($a,$b,$mysqli);
 		 		?>
 		 	</div>
 		 	<div class="panel-group" id="accordion">
 		 		<?php
 		 			$b = "withdrawn";
-		 			aqtActivityQuery($a,$b,$mysqli,$pageHeading);
+		 			aqtActivityQuery($a,$b,$mysqli);
 		 		?>
 		 	</div>
 		 	<div class="panel-group" id="accordion">

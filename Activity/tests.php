@@ -7,11 +7,13 @@
 				$a = "T";
 				$pageHeading = "Tests";
 				$pageHeadSingular = "Test";
+				$userName = "Guest (T)";
+				$userType = "";
+				$loggedInUserName  = "";
 	?>
 </head>
 <body class="body">
 	<div class="container">
-	<?php	echo $datetime1; ?>
 	<h3 class="centered" style="background: var(--BodyGradient);"><?php include $_SERVER['DOCUMENT_ROOT']."/Components/top.php"; ?></h3>
 		<?php
 			if ($_GET){echo $_GET;}

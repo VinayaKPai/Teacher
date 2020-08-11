@@ -3,9 +3,11 @@
 	include "../basecode-create_connection.php";
 	include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/CSTquerries.php";
 	// include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/allRetrievalQueries.php";
-
+	$userName = "Guest";
 	$pageHeading = "Teachers ";
 	$pageCode = "CTT";
+	$userType = "";
+	$loggedInUserName  = "";
 ?>
 
 
@@ -25,10 +27,13 @@
 	</head>
 	<body class="body" style="background: var(--BodyGradient);">
 		<div class="container">
-			<h3 class="centered" style="background: var(--BodyGradient);"><?php include $_SERVER['DOCUMENT_ROOT']."/Components/top.php"; ?></h3>
-			<?php
-				include $_SERVER['DOCUMENT_ROOT']."/Components/internalNav.php";
-			?>
+			<h3 class="centered" style="background: var(--BodyGradient);">
+				<div id="top" class="row" style="padding: 1px;">
+					<?php include $_SERVER['DOCUMENT_ROOT']."/Components/top.php"; ?></h3>
+				</div>
+				<?php
+					include $_SERVER['DOCUMENT_ROOT']."/Components/internalNav.php";
+				?>
 
 			<div>
 				<div class="centered" style="padding: 3px; border: 1px solid #413949; border-radius: 5px;">

@@ -6,7 +6,6 @@
 </script>
 <div class="centered" style="padding: 3px; border: 1px solid #413949; border-radius: 5px;">
   <h4>Add a new teacher to your setup</h4>
-  <!-- <form name="newTeacherForm" action="../AddNew/addnewteacher.php" method="post"> -->
   <form name="newTeacherForm" action="../Scripts/php/allInsertQueries.php" method="post">
     <div class="form-group">
       <div class="col-sm-4">

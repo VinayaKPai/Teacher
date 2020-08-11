@@ -105,4 +105,19 @@ GROUP BY userId , classId , sectionId , subjectId
     having count(*) > 1
 ) cIn on
 cOut.userId = cIn.userId AND cOut.classId = cIn.classId AND cOut.sectionId = cIn.sectionId AND cOut.subjectId = cIn.subjectId
+
+function getBestCostForHash() {
+  <?php $timeTarget = 0.05; // 50 milliseconds
+
+$cost = 8;
+do {
+$cost++;
+$start = microtime(true);
+password_hash("test", PASSWORD_BCRYPT, ["cost" => $cost]);
+$end = microtime(true);
+} while (($end - $start) < $timeTarget);
+
+echo "Appropriate Cost Found: " . $cost; ?>
+//returned cost as '10' for the xampp server
+}
 ?>

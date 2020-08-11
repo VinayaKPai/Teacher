@@ -1,7 +1,17 @@
 <?php
+	if (isset ($_SESSION)){
+		// remove all session variables
+		session_unset();
+
+		// destroy the session
+		session_destroy();
+	}
 	include "basecode-create_connection.php";
 	$pageHeading = "<span class='loggedin'>Guest</span>" ;
 	$pageCode = "index";
+	$userName = "Guest (T)";
+	$userType = "";
+	$loggedInUserName  = "";
 ?>
 
 
@@ -26,91 +36,19 @@
 					}
 				</script>
 	</head>
-	<body class="body" style="background: var(--BodyGradient);">
+	<body class="body" style="background: var(--BodyGradient); height: 100%;">
 		<div class="container">
-			<?php echo $datetime1; ?>
-
-			<h3 class="centered" style="background: var(--BodyGradient);"><?php include "Components/top.php"; ?></h3>
-
-			<hr>
+			<h3 class="centered" style="background: var(--BodyGradient);">
+				<?php include "Components/top.php"; ?>
+			</h3>
+			<?php echo $datetime1;
+				if (isset($_SESSION)) {print_r($_SESSION);}
+				else {echo "No Session";}
+			?>
 
 			<div class="container" style="background: var(--BodyGradient);">
-				<div class="row" style="background: var(--BodyGradient);" style="flex-wrap: wrap; padding: 5%; justify-content: space-between;">
-					<h4 class="btn btn-block topbanner">Setup</h4>
-						<div class="card cards col-md-5 col-xs-12">
-							<h5>People</h5>
-							<ul class="left-align" style="list-style-type: none;">
-								<li><a href="../../SetUpPages/newTeachers.php">Teachers</a></li>
-								<li><a href="../../SetUpPages/newStudents.php">Students</a></li>
-								<li><a href="../../SetUpPages/newclasses_taught_by_teachers.php">Teachers Classes Sections</a></li>
-							</ul>
-								<hr style="border-top: 1px solid maroon;">
-						</div>
-						<div class="card cards col-md-5 col-xs-12" style="float:right;">
-						<h5>Database</h5>
-						<ul class="left-align" style="list-style-type: none;">
-								<li><a href="../../SetUpPages/newSubjects.php">Subjects</a></li>
-								<li><a href="../../SetUpPages/newUnits.php">Units</a></li>
-								<li><a href="../../SetUpPages/newTopics.php">Topics</a></li>
-								<li><a href="../../SetUpPages/newQuestions.php">Add Questions</a></li>
-								<li><a href="../../SetUpPages/questionBank.php">Question Bank</a></li>
-							</ul>
-					</div>
-					<h4 class="btn btn-block topbanner">Activity</h4>
-						<div class="card cards col-md-5 col-xs-12">
-							<h5>Assessment</h5>
-							<?php
-							include $_SERVER['DOCUMENT_ROOT']."/Components/activityList.php";
-							?>
-							<hr style="border-top: 1px solid maroon;">
-						</div>
-						<div class="card cards col-md-5 col-xs-12">
-						<h5>Practice</h5>
-						<ul class="left-align" style="list-style-type: none;">
-							<li>
-								<a href="#" onclick="commingSoon(this)">CBSE Practice</a>
-							</li>
-						</ul>
-					</div>
-					<h4 class="btn btn-block topbanner">Reports</h4>
-						<div class="card cards col-md-3 col-xs-12">
-							<h5>Assignments</h5>
-							<ul  class="left-align" style="list-style-type: none;">
-								<?php
-									include $_SERVER['DOCUMENT_ROOT']."/Components/reportTypes.php";
-								?>
-							</ul>
-						</div>
-						<div class="card cards col-md-3 col-xs-12">
-							<h5>Quizzes</h5>
-							<div class="left-align" id="quizzes">
-								<ul class="left-align" style="list-style-type: none;">
-									<?php
-										include $_SERVER['DOCUMENT_ROOT']."/Components/reportTypes.php";
-									?>
-								</ul>
-							</div>
-						</div>
-						<div class="card cards col-md-3 col-xs-12">
-							<h5>Tests</h5>
-							<ul  class="left-align" style="list-style-type: none;">
-								<?php
-									include $_SERVER['DOCUMENT_ROOT']."/Components/reportTypes.php";
-								?>
-							</ul>
-						</div>
-						<div class="card cards col-md-3 col-xs-12">
-							<h5>Students</h5>
-							<ul  class="left-align" style="list-style-type: none;">
-								<?php
-									include $_SERVER['DOCUMENT_ROOT']."/Components/reportTypes.php";
-								?>
-							</ul>
-					</div>
-				</div>
-				<!-- <div> -->
-					<?php include $_SERVER['DOCUMENT_ROOT']."/Components/todolist.php"; ?>
-				<!-- </div> -->
+
+				<?php include $_SERVER['DOCUMENT_ROOT']."/Components/loginFrm.php"; ?>
 			</div>
 			<div class="container">
 			<?php include "Components/bottom.php"; ?>

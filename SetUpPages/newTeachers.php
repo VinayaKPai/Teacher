@@ -5,6 +5,9 @@
 	include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/studentsQueryResultToHtmlDiv.php";
 	$pageHeading = "Teachers";
 	$pageCode = "NTD";
+	$userName = "Guest";
+	$userType = "";
+	$loggedInUserName  = "";
 ?>
 
 
@@ -22,9 +25,10 @@
 		</head>
 	<body class="body">
 		<div class="container">
-			<hr>
 			<h3 class="centered">
-				<?php include "../Components/top.php"; ?>
+				<div id="top" class="row" style="padding: 1px;">
+					<?php include "../Components/top.php"; ?>
+				</div>
 			</h3>
 				<?php include $_SERVER['DOCUMENT_ROOT']."/Components/internalNav.php"; ?>
 			<hr>

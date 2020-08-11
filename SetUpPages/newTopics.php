@@ -4,6 +4,9 @@
 
 	$pageHeading = "Topics";
 	$pageCode = "setup";
+	$userName = "Guest";
+	$userType = "";
+	$loggedInUserName  = "";
 ?>
 
 
@@ -24,7 +27,11 @@
 	<body class="body">
 		<div class="container">
 			<?php echo $datetime; ?>
-			<h3 class="centered"><?php include "../Components/top.php"; ?></h3>
+			<h3 class="centered">
+				<div id="top" class="row" style="padding: 1px;">
+					<?php include "../Components/top.php"; ?>
+				</div>
+			</h3>
 			<?php include "../Components/internalNav.php"; ?>
 			<div class="row">
 				<div class="col-sm-4" style="padding: 10px;">

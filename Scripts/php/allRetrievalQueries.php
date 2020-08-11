@@ -6,7 +6,7 @@
   include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/sqlQueryResultToList.php";
   // include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/CSTQueryResultToHtmlTable.php";
 
-  function aqtActivityQuery($type, $status, $mysqli ,$pageHeading) {
+  function aqtActivityQuery($type, $status, $mysqli) {
     //retrieve  deployments for /Activity/assignments.php, /Activity/tests.php, /Activity/quizzes.php
     //status is completed/ongoing/undeoployed
     // type is a/q/t
@@ -25,8 +25,8 @@
           dl.deploySuccess AS 'Deployed?',
           a.assessment_Id AS 'Assessment ID',
           a.assessment_Title AS 'Title',
-            json_arrayagg(
-        		json_object(
+          json_arrayagg(
+      		json_object(
         			'questionID',qb.qId,
         			'question',qb.question,
         			'option1',qb.Option_1,
@@ -76,60 +76,8 @@
 
       $query = $mysqli->query($queryString);
       // $query should be returned
-      deploymentsdiv($query, $type, $successFlag, $status, $pageHeading);
+      deploymentsdiv($query, $type, $successFlag, $status);
   }
-
-  // function savedAssessmentsQuery( $mysqli) {
-  //   //from Activities/assignments.php, Activities/quizzes.php, Activities/tests.php
-  //   //to Scripts/php/deploySavedAssessments_QueryResultToHtmlDiv.php
-  //   //WORKING
-  //   $successFlag = '';
-  //         $queryString = ("SELECT
-  //               a.assessment_Title AS 'Title',
-  //               a.assessment_Id AS 'Assessment ID',
-  //               dl.classId AS 'Class Id',
-  //               qb.classId AS 'QB Class Id',
-  //               c.classNumber AS 'Class',
-  //           	json_arrayagg(
-  //           		json_object(
-  //           			'questionID',qb.qId,
-  //           			'question',qb.question,
-  //           			'option1',qb.Option_1,
-  //           			'option2',qb.Option_2,
-  //           			'option3',qb.Option_3,
-  //           			'option4',qb.Option_4,
-  //           			'option5',qb.Option_5,
-  //           			'option6',qb.Option_6
-  //           		)
-  //           		) as 'Questions',
-  //           	json_arrayagg(DISTINCT
-  //           		json_object(
-  //           			'classId', dl.classId,
-  //                 'classNumber', c.classNumber,
-  //                 'sectionId', dl.sectionId,
-  //                 'sectionName', s.sectionName,
-  //                 'startDate', dl.schStartDate,
-  //                 'endDate', dl.schEndDate,
-  //                 'deploySuccess', dl.deploySuccess
-  //           		)
-  //           		) as 'Deployments'
-  //           FROM
-  //               questionbank AS qb
-  //           INNER JOIN assessment_questions AS aq
-  //           	on aq.question_id = qb.qId
-  //           INNER JOIN assessments as a
-  //           	on a.assessment_Id = aq.assessment_Id
-  //           LEFT JOIN deploymentlog as dl
-  //           	on dl.assessmentId = aq.assessment_Id
-  //           LEFT JOIN classes as c
-  //           	on c.classId = dl.classId
-  //           LEFT JOIN sections as s
-  //           	on s.sectionId = dl.sectionId
-  //           GROUP BY a.assessment_Title;") ;
-  //
-  //     $query = $mysqli->query($queryString);
-  //     savedAssessmentsdiv($query, $successFlag);
-  // }
 
   function savedAssessmentsQuery( $mysqli) {
     //from Activities/assignments.php, Activities/quizzes.php, Activities/tests.php

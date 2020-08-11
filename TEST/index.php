@@ -39,7 +39,7 @@
 	</div> -->
 </div>
 	<div class="roundedsquare maroon centered" style="background-color: lightgrey;">
-		<h5 class="maroon centered">New offering!</h5>
+		<h5 class="maroon centered">New offering! Product as well as Services</h5>
 
 		<image src= "../../Images/prashnavalilogo.png" style="width:80%; margin: 0px auto 0px auto; z-index: +10;" class="responsive" />
 
@@ -114,3 +114,40 @@
 	</div>
 </body>
 </html>
+<?php
+$query = $mysqli->query("SELECT distinct deplog.assessmentId as DEPid,
+deplog.classId as 'class',
+deplog.sectionId as 'sec',
+a.assessment_title as 'A-Title',
+json_arrayagg(
+	json_object (
+        'A-Questions',aq.question_id
+    )
+) as 'assdets'
+from deploymentlog as deplog
+	inner join assessments as a
+    	on a.assessment_Id = deplog.assessmentId
+       inner join assessment_questions as aq
+       	on aq.assessment_Id = a.assessment_Id
+       GROUP BY deplog.classId
+			"
+		);
+
+		DEPid			class 			sec			A-Title				assdets
+		1					2							1			My First assessment
+		[
+			{"A-Questions": 7},
+			{"A-Questions": 8},
+			{"A-Questions": 9},
+			{"A-Questions": 11},
+			{"A-Questions": 13},
+			{"A-Questions": 16},
+			{"A-Questions": 11},
+			{"A-Questions": 13},
+			{"A-Questions": 16},{"A-Questions": 11},{"A-Questions": 13},{"A-Questions": 16},{"A-Questions": 11},{"A-Questions": 13},{"A-Questions": 16},{"A-Questions": 11},{"A-Questions": 13},{"A-Questions": 16},{"A-Questions": 7},{"A-Questions": 8},{"A-Questions": 9}]
+		4					8							4			Dumb and Dumber
+		[{"A-Questions": 481},{"A-Questions": 482},{"A-Questions": 483},{"A-Questions": 484},{"A-Questions": 490},{"A-Questions": 491},{"A-Questions": 494},{"A-Questions": 496},{"A-Questions": 497},{"A-Questions": 480},{"A-Questions": 487},{"A-Questions": 488},{"A-Questions": 481},{"A-Questions": 482},{"A-Questions": 483},{"A-Questions": 484},{"A-Questions": 481},{"A-Questions": 482},{"A-Questions": 483},{"A-Questions": 480},{"A-Questions": 487},{"A-Questions": 488}]
+		2					9						2				Ass 2
+		[{"A-Questions": 3},{"A-Questions": 4}]
+
+?>

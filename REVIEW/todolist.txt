@@ -101,3 +101,12 @@ Convert to insert functions in allInsertQueries.php, the following files from Sc
   11. studentsQueryResultToHtmlDiv (included in SetUpPages\newStudents.php, SetUpPages\newTeachers.php)
   12. teachersQueryResultToHtmlTable (included in Scripts\php\allRetrievalQueries.php, SetUpPages\newTeachers.php)
 ********************************************
+Implement login
+  1.  Create separate user interface?
+  2.  Tables required for secure login module
+  3.
+  ****************
+Student historical data across semesters
+********************************
+FAQ/Q-A for each activity - conv between S&T available to all
+***************************

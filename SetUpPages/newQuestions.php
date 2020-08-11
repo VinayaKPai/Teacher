@@ -2,6 +2,9 @@
 	include "../basecode-create_connection.php";
 	$pageHeading = "New Questions";
 	$pageCode = "setup";
+	$userName = "Guest";
+	$userType = "";
+	$loggedInUserName  = "";
 ?>
 
 
@@ -53,10 +56,13 @@
 	</head>
 		<body class="body">
 			<div class="container">
-				<hr>
 				<h3 class="centered">
+					<div id="top" class="row" style="padding: 1px;">
+						<?php
+							include "../Components/top.php";
+						?>
+					</div>
 					<?php
-						include "../Components/top.php";
 						include $_SERVER['DOCUMENT_ROOT']."/Components/internalNav.php";
 					?>
 

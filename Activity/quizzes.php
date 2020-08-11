@@ -7,14 +7,13 @@
 				$a = "Q";
 				$pageHeading = "Quizzes";
 				$pageHeadSingular = "Quiz";
+				$userName = "Guest (T)";
+				$userType = "";
+				$loggedInUserName  = "";
 	?>
 </head>
 <body class="body">
 	<div class="container">
-		<div class="right-align">
-					<?php
-						echo $datetime1; ?>
-		</div>
 	<h3 class="centered" style="background: var(--BodyGradient);"><?php include $_SERVER['DOCUMENT_ROOT']."/Components/top.php"; ?></h3>
 		<?php
 			if ($_GET){echo $_GET;}

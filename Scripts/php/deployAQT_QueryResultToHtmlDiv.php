@@ -3,16 +3,30 @@
 function deploymentsdiv( $result, $type, $successFlag, $status ) {
   $count  = mysqli_num_rows($result);
   //$result is (type A/Q/T AND status C/O/U)
+  $userType = '';//this actually has to be set as a session variable when login is enabled
   if ($type=='A') {$ass = "Assignment";}
-  if ($type=='T') {$ass = "Test";}
-  if ($type=='Q') {$ass = "Quiz";}
+  elseif ($type=='T') {$ass = "Test";}
+  elseif ($type=='Q') {$ass = "Quiz";}
+  else {$ass = "Section ".$type;}//this is for studentView displays, where the $type is actually the sectionId and not A/Q/T
 
   if ($successFlag==1) {$success = "Deployed";}
   else {$success = "Undeployed"; }
   if ($count>1){$suffix = 's';}
   else {$suffix = '';}
 
-  echo "<a data-toggle='collapse' href='#".$status."'><h4 class='centered topbanner'>".$count. " ".$status." ".$ass.$suffix."</h4></a>";
+  //the collapsible section will differ sor students and Teachers
+  //for teachers, it will be "x completed/ongoing/undeployed/withdrawn ASSIGNMENTS?Quizzes/Test" format
+  //for students it will be in the format "x open activities for Class y Section z"
+  $userType = 'Student';
+  if ($userType=="Student") {
+    $txtForCount = " open activities for ";
+  }
+  else {
+    $txtForCount = "";
+  }
+  echo "<a data-toggle='collapse' href='#".$status."'>
+          <h4 class='centered topbanner'>".$count. " " .$txtForCount. " " .$status." ".$ass.$suffix."</h4>
+        </a>";
   echo "<div id='".$status."' class='collapse' style='padding: 4px;'>";
     if ($count != 0) {
         while ($row = $result->fetch_array( MYSQLI_ASSOC )){

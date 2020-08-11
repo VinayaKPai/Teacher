@@ -1,8 +1,3 @@
-<!-- <style>
-    table tr:nth-child(even){background-color: #b69092; color: #fff}
-    table tr:nth-child(odd){background-color: #684654; color: #fff}
-    table td, th {text-align: center;font-size: 14px;}
-</style> -->
 <?php
 function table( $a, $result, $pageHeading ) {
     $row = $result->fetch_assoc();

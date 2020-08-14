@@ -11,7 +11,8 @@
     postStudentLogin($mysqli, $Utype, $loggedUserId);
   }
   elseif ($Utype=="T") {
-    postTeacherLogin($mysqli, $Utype, $loggedUserId);
+    // postTeacherLogin($mysqli, $Utype, $loggedUserId);
+    teacherLogin($mysqli, $Utype, $loggedUserId);
   }
   elseif ($Utype=="A") {
     postAdminLogin($mysqli, $Utype, $loggedUserId);
@@ -50,6 +51,20 @@
           {header('Location:/StudentViews/indexS.php');}
     }
 
+  function teacherLogin($mysqli, $Utype, $loggedUserId) {
+    $query = $mysqli->query("SELECT * FROM `users` WHERE `Email`='$loggedUserId' AND `role` = '$Utype'");
+    $cnt = mysqli_num_rows($query);
+    if ($cnt==0) {
+      echo "User does not exist";
+    }
+    else {
+      while ($dets = $query->fetch_assoc()) {
+        $userName = $dets['firstName']." ".$dets['middleName']." ".$dets['lastName'];
+        $_SESSION['user'] = $userName;
+      }
+      postTeacherLogin($mysqli, $Utype, $loggedUserId);
+    }
+  }
   function postTeacherLogin($mysqli, $Utype, $loggedUserId) {
     $query = $mysqli->query("SELECT * FROM `classes_taught_by_teacher` as ctt
       INNER JOIN users on users.userId = ctt.userId
@@ -57,24 +72,33 @@
       INNER JOIN sections as s on s.sectionId = ctt.sectionId
       WHERE users.Email = '$loggedUserId'
        ORDER BY ctt.classId ASC");
-    // $dets = $query->fetch_assoc();
+
     $cnt = mysqli_num_rows($query);
+    // echo $cnt;
     if ($cnt==0) {
-      echo "User does not exist";
+      $url = 'Location:/TeacherViews/indexT.php';
     }
 
     else {
         $url = 'Location:/TeacherViews/indexT.php?c=';
+        $clArray = [];
+        $subArray = [];
         while ($dets = $query->fetch_assoc()) {
           $cls = $dets['classNumber'];
           $scs = $dets['sectionName'];
           $url = $url.$cls."-".$scs.",";
           $userName = $dets['firstName']." ".$dets['middleName']." ".$dets['lastName'];
+          array_push($clArray,$dets['classId']); //array_push($a,"blue","yellow");
+          array_push($subArray,$dets['subjectId']);
         }
         $url = rtrim($url, ",");
-      }
-      $_SESSION['user'] = $userName;
-      $url = $url."&cnt=".$cnt;
+        // $_SESSION['user'] = $userName;
+        $_SESSION['c'] = $clArray;
+        $_SESSION['sub'] = $subArray;
+        $url = $url."&cnt=".$cnt;
+        $url = $url."&d=";
+    }
+
       // print_r($)
       {header($url);}
   }

@@ -1,24 +1,24 @@
 <?php
-function table( $includeTickBox, $result ) {
-  if($includeTickBox == false && $result == false) {
+function table( $includeTickBox, $query ) {
+  if($includeTickBox == false && $query == false) {
 
-    // tableHead( $includeTickBox, $result );
-    // tableBody( $includeTickBox, $result );
+    // tableHead( $includeTickBox, $query );
+    // tableBody( $includeTickBox, $query );
     echo '</table>';
   } else {
-    $result->fetch_array( MYSQLI_ASSOC );
-    // print_r($result);
+    $query->fetch_array( MYSQLI_ASSOC );
+    // print_r($query);
     echo '<table>';
-    tableHead( $includeTickBox, $result );
-    tableBody( $includeTickBox, $result );
+    tableHead( $includeTickBox, $query );
+    tableBody( $includeTickBox, $query );
     echo '</table>';
   }
 }
 
-function tableHead( $includeTickBox, $result ) {
+function tableHead( $includeTickBox, $query ) {
   if($includeTickBox) {
     echo '<thead>';
-    foreach ( $result as $x ) {
+    foreach ( $query as $x ) {
         echo '<tr>';
         $i = 0;
         foreach ( $x as $k => $y ) {
@@ -37,7 +37,7 @@ function tableHead( $includeTickBox, $result ) {
 
     else {
         echo '<thead>';
-        foreach ( $result as $x ) {
+        foreach ( $query as $x ) {
             echo '<tr>';
             foreach ( $x as $k => $y ) {
                 echo '<th>' . ucfirst( $k ) . '</th>';
@@ -50,10 +50,10 @@ function tableHead( $includeTickBox, $result ) {
 
 }
 
-function tableBody( $includeTickBox, $result ) {
+function tableBody( $includeTickBox, $query ) {
   if($includeTickBox) {
         echo '<tbody>';
-        foreach ( $result as $x ) {
+        foreach ( $query as $x ) {
         echo '<tr>';
         $i = 0;
         foreach ( $x as $y ) {
@@ -69,7 +69,7 @@ function tableBody( $includeTickBox, $result ) {
         echo '</tbody>';
       } else {
         echo '<tbody>';
-        foreach ( $result as $x ) {
+        foreach ( $query as $x ) {
         echo '<tr>';
         foreach ( $x as $y ) {
             echo '<td>' . $y . '</td>';

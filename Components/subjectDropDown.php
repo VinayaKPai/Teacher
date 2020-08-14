@@ -1,4 +1,5 @@
 <?php
+// echo "<h1>";print_r($_SESSION['sub']);echo "</h1>";
   	include $_SERVER['DOCUMENT_ROOT']."/basecode-create_connection.php";
 
 if (!isset($displayType)) {
@@ -23,13 +24,20 @@ if (!isset($displayType)) {
 
      if ($displayType=="checkbox"){
 
- while ($row = $query->fetch_assoc())  {
-        {
+       while ($row = $query->fetch_assoc())  {
+         $muted = '';
           $sn = strip_tags($row['subjectName']);
           $si = strip_tags($row['subjectId']);
-          echo "<label for='$sn'><input id='$sn' type='checkbox' name='subjectName[$si]' aria-label='$sn' style='margin: 10px;' onclick='updateFilters(\"subjectSelectBoxes\",\"filteredSubjects\");' value='$sn'>$sn</label>";        }
-      }
+          if(!in_array($si, $_SESSION['sub'])){
+            $muted = "disabled";
+            echo "<label for='$sn'><input id='$sn' type='checkbox' name='subjectName[$si]' aria-label='$sn' style='margin: 10px;' onclick='updateFilters(\"subjectSelectBoxes\",\"filteredSubjects\");' value='$sn' $muted>$sn</label>";
+          }
+          else {
+            echo "<label for='$sn'><input id='$sn' type='checkbox' name='subjectName[$si]' aria-label='$sn' style='margin: 10px;' onclick='updateFilters(\"subjectSelectBoxes\",\"filteredSubjects\");' value='$sn'>$sn</label>";
+          }
         }
+
+      }
 
       if ($displayType=="dropdown"){
         echo "<label for='subjectName'>Subject <select name='subjectName' id='subjectName'><option></option>";

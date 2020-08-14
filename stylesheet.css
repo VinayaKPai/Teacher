@@ -86,7 +86,10 @@ ul a {
 .modal-content {
   background: #b6b3af;
 }
-
+.normal {
+  font-size: 12px;
+  color: #000;
+}
 .roundedsquare {
 	border-radius: 5px;
 	border-bottom: 2px solid #4B0082;

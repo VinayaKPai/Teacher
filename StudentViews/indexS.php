@@ -3,6 +3,7 @@
   include $_SERVER['DOCUMENT_ROOT']."/basecode-create_connection.php";
   include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/studentActivityQueries.php";
   $loggedInUserName = $_SESSION['user'];
+  $pageCode = "S";
 
 ?>
 <html>
@@ -14,7 +15,7 @@
       <h3 class="centered" style="background: var(--BodyGradient);">
         <?php
           include $_SERVER['DOCUMENT_ROOT']."/Components/loggedtop.php";
-          echo "<h6>Class: ".$_SESSION['c']." Section: ".$_SESSION['d'];
+          // echo "<h6>Class: ".$_SESSION['c']." Section: ".$_SESSION['d'];
         ?>
       </h3>
     </div>

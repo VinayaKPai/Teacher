@@ -1,10 +1,11 @@
 <?php
+	session_start();
 	include "../basecode-create_connection.php";
 	$pageHeading = "Question Bank";
 	$pageCode = "setup";
-	$userName = "Guest";
-	$userType = "";
-	$loggedInUserName  = "";
+	// $userName = "Guest";
+	// $userType = "";
+	// $loggedInUserName  = "";
 ?>
 
 
@@ -109,7 +110,7 @@
 			<h3 class="centered">
 				<div id="top" class="row" style="padding: 1px;">
 					<?php
-					include "../Components/top.php";
+					include $_SERVER['DOCUMENT_ROOT']."/Components/loggedtop.php";
 					?>
 				</div>
 				<?php

@@ -37,6 +37,7 @@
   function insertUser ($d, $mysqli,$conf) {
     //insert both student and teacher basic details into the users table
     // print_r($_POST);
+    // Admin role user will ONLY be inserted by super admin, so there is no need for it here
     if ($conf=="NTD") {
       $role = 'T';
     }

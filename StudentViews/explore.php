@@ -5,10 +5,12 @@
     include $_SERVER['DOCUMENT_ROOT']."/basecode-create_connection.php";
     include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/studentActivityQueries.php";
     $userType = "Student";
+    $pageCode = "S";
   ?>
   <body  class="body" style="background: var(--BodyGradient);">
+    <?php echo $_SESSION['user']; ?>
 		<div class="container">
-    <h3 class="centered" style="background: var(--BodyGradient);">
+    <h3 style="background: var(--BodyGradient);">
       <?php
         include $_SERVER['DOCUMENT_ROOT']."/Components/loggedtop.php";
       ?>
@@ -25,13 +27,18 @@
   </div>
   <div class="container">
     <h2><?php echo $_GET['sub']; ?></h2>
-    <a href="#">
-      <button type="button" class="btn btn-primary sqbtn">Open Activities</button>
-    </a>
-    <a href="#">
-      <button type="button" class="btn btn-secondary sqbtn">Completed Activities</button>
-    </a>
-      <button type="button" class="btn btn-info sqbtn"><a data-toggle="collapse" href="#readingmaterial">Reading Material</a></button>
+    <div>
+      <a data-toggle="collapse" href="#openactivities">
+        <button type="button" class="btn btn-primary sqbtn" style="white-space: wrap;">Open<br> Activities</button>
+      </a>
+      <a href="#" style="margin: 3%;">
+        <button type="button" class="btn btn-secondary sqbtn"  style="white-space: wrap;">Completed <br> Activities</button>
+      </a>
+      <a data-toggle="collapse" href="#readingmaterial">
+        <button type="button" class="btn btn-info sqbtn" style="white-space: wrap;">Reading <br> Material</button>
+      </a>
+    </div>
+  </div>
     <div class=" sqbtn collapse" id="readingmaterial" >
       <?php
         $dir = $_SERVER['DOCUMENT_ROOT']."/pdfs/";
@@ -53,8 +60,12 @@
 
       ?>
 
-    </div>
 
-  </div>
+    </div>
+    <div class="container collapse" id="openactivities">
+      <?php
+        include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/generateOpenActivities.php";
+      ?>
+    </div>
   </body>
 </html>

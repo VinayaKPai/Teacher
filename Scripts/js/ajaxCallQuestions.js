@@ -135,7 +135,7 @@ function ajaxCallGetQuestions () {
 }
 
 
-function ajaxCallGetQuestionsFilter () {  //ARRAYS OF CLASSES AND SUBJECTS COMING FROM SETUP - NEWQUESTIONS.PHP TO BE SENT TO EXISTING/QUESTIONS.PHP
+function ajaxCallGetQuestionsFilter () {  //ARRAYS OF CLASSES AND SUBJECTS COMING FROM SETUP - QUESTIONBANK.PHP TO BE SENT TO  EXISTING/QUESTIONS.PHP
 
 
  var ajaxRequest;  // The variable that makes Ajax possible!
@@ -190,7 +190,7 @@ function ajaxCallGetQuestionsFilter () {  //ARRAYS OF CLASSES AND SUBJECTS COMIN
    else {
        var queryString = "/AddNew/Existing/questions.php?classNumber=" + classNumbers + "&&subjectName=" + subjectNames;
     }
-    
+
  ajaxRequest.onreadystatechange = function() {
    if(ajaxRequest.readyState == 4) {
      var ajaxReturn = ajaxRequest.responseText;

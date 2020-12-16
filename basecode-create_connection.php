@@ -10,7 +10,7 @@ $mysqli = new mysqli($host, $user,$wd,$db);
 // old connection string
 // $mysqli = new mysqli("localhost", "vkpso_admin","PassWord1234!@#$","vkpsolut_teachers_tools");
 // new connection string for teachers_tool
-$mysqli = new mysqli("localhost", "vkpso_admin","PassWord1234!@#$","teachers_tool");
+$mysqli = new mysqli("localhost", "teachtool_admin","PassWord1234!@#$","teachers_tool");
 
 //check connection and raise error on failure
 if ($mysqli->connect_errno) {
@@ -18,7 +18,8 @@ if ($mysqli->connect_errno) {
 }
 
 //capture date time
-$data = $_SERVER["REQUEST_TIME"];
+// $data = $_SERVER["REQUEST_TIME"];
+$data = date_default_timezone_set('Asia/Kolkata');
 $datetime = date('d/m/Y H:i:s', $data);
 
 //TESTING FOR ALL QUERIES.php

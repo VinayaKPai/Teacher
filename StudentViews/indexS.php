@@ -4,18 +4,20 @@
   include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/studentActivityQueries.php";
   $loggedInUserName = $_SESSION['user'];
   $pageCode = "S";
-
+print_r($_SESSION['c'] . $_SESSION['d']);
 ?>
 <html>
+<?php print_r($_SESSION); ?>
   <?php
     include $_SERVER['DOCUMENT_ROOT']."/Components/header.php";
   ?>
   <body  class="body" style="background: var(--BodyGradient);">
+
 		<div class="container">
+      <?php include $_SERVER['DOCUMENT_ROOT']."/Components/logintimebtn.php"; ?>
       <h3 class="centered" style="background: var(--BodyGradient);">
         <?php
           include $_SERVER['DOCUMENT_ROOT']."/Components/loggedtop.php";
-          // echo "<h6>Class: ".$_SESSION['c']." Section: ".$_SESSION['d'];
         ?>
       </h3>
     </div>
@@ -33,10 +35,10 @@
       <button type="button" class="btn btn-danger sqbtn">Science</button>
     </a>
     <a href="../../StudentViews/explore.php?sub=Social Studies">
-      <button type="button" class="btn btn-warning sqbtn">Social Studies</button>
+      <button type="button" class="btn btn-warning sqbtn text-wrap">Social Studies</button>
     </a>
     <a href="../../StudentViews/explore.php?sub=My Old Stuff">
-      <button type="button" class="btn btn-info sqbtn">My Old Stuff</button>
+      <button type="button" class="btn btn-info sqbtn text-wrap">My Old Stuff</button>
     </a>
 
   </div>

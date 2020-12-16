@@ -7,15 +7,17 @@
 //MODIFY BELOW CODE FOR INSERTING ASSIGNMENT INTO THE DB
     $inpTitle = $_GET['inpTitle'];
 
-    $stmt = $mysqli->prepare("INSERT INTO `assessments`( `assessment_Title`, `assessment_questions`) VALUES (?, ?)");
-    $stmt->bind_param("ss", $inpTitle,  $arrayGET);
+    // $stmt = $mysqli->prepare("INSERT INTO `assessments`( `assessment_Title`, `assessment_questions`) VALUES (?, ?)");
+    // $stmt->bind_param("ss", $inpTitle,  $arrayGET);
+    $stmt = $mysqli->prepare("INSERT INTO `assessments`( `assessment_Title`) VALUES (?)");
+    $stmt->bind_param("s", $inpTitle);
     $mysqli->autocommit(TRUE);
 $stmt->execute();
 echo $mysqli->errno;
 
 
 
-echo "===============";
+// echo "===============";
 $assId = $mysqli->insert_id;
 
 $arg = explode(",",$arrayGET);

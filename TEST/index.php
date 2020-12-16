@@ -18,6 +18,74 @@
 
 		include $_SERVER['DOCUMENT_ROOT']."/Components/classNumberDropDown.php";
 		include $_SERVER['DOCUMENT_ROOT']."/Components/subjectDropDown.php";
+
+		[
+			{"Class Id": 1, "Class Num": "I", "Sec Id": 1, "Sec Name": "A", "Stu Id": 11},
+			{"Class Id": 1, "Class Num": "I", "Sec Id": 1, "Sec Name": "A", "Stu Id": 13},
+			{"Class Id": 1, "Class Num": "I", "Sec Id": 1, "Sec Name": "A", "Stu Id": 27},
+			{"Class Id": 1, "Class Num": "I", "Sec Id": 1, "Sec Name": "A", "Stu Id": 28},
+			{"Class Id": 1, "Class Num": "I", "Sec Id": 1, "Sec Name": "A", "Stu Id": 41},
+			{"Class Id": 1, "Class Num": "I", "Sec Id": 1, "Sec Name": "A", "Stu Id": 51},
+			{"Class Id": 1, "Class Num": "I", "Sec Id": 1, "Sec Name": "A", "Stu Id": 53},
+			{"Class Id": 1, "Class Num": "I", "Sec Id": 1, "Sec Name": "A", "Stu Id": 63},
+			{"Class Id": 1, "Class Num": "I", "Sec Id": 1, "Sec Name": "A", "Stu Id": 64},
+			{"Class Id": 1, "Class Num": "I", "Sec Id": 2, "Sec Name": "B", "Stu Id": 11},
+			{"Class Id": 1, "Class Num": "I", "Sec Id": 2, "Sec Name": "B", "Stu Id": 13},
+			{"Class Id": 1, "Class Num": "I", "Sec Id": 2, "Sec Name": "B", "Stu Id": 27},
+			{"Class Id": 1, "Class Num": "I", "Sec Id": 2, "Sec Name": "B", "Stu Id": 28},
+			{"Class Id": 1, "Class Num": "I", "Sec Id": 2, "Sec Name": "B", "Stu Id": 41},
+			{"Class Id": 1, "Class Num": "I", "Sec Id": 2, "Sec Name": "B", "Stu Id": 51},
+			{"Class Id": 1, "Class Num": "I", "Sec Id": 2, "Sec Name": "B", "Stu Id": 53},
+			{"Class Id": 1, "Class Num": "I", "Sec Id": 2, "Sec Name": "B", "Stu Id": 63},
+			{"Class Id": 1, "Class Num": "I", "Sec Id": 2, "Sec Name": "B", "Stu Id": 64}
+		]
+		[
+			{"Class Id": 1, "Class Num": "I", "Sec Id": 1, "Sec Name": "A", "Stu Id": 11},
+			{"Class Id": 1, "Class Num": "I", "Sec Id": 1, "Sec Name": "A", "Stu Id": 13},
+			{"Class Id": 1, "Class Num": "I", "Sec Id": 1, "Sec Name": "A", "Stu Id": 27},
+			{"Class Id": 1, "Class Num": "I", "Sec Id": 1, "Sec Name": "A", "Stu Id": 28},
+			{"Class Id": 1, "Class Num": "I", "Sec Id": 1, "Sec Name": "A", "Stu Id": 41},
+			{"Class Id": 1, "Class Num": "I", "Sec Id": 1, "Sec Name": "A", "Stu Id": 51},
+			{"Class Id": 1, "Class Num": "I", "Sec Id": 1, "Sec Name": "A", "Stu Id": 53},
+			{"Class Id": 1, "Class Num": "I", "Sec Id": 1, "Sec Name": "A", "Stu Id": 63},
+			{"Class Id": 1, "Class Num": "I", "Sec Id": 1, "Sec Name": "A", "Stu Id": 64}
+		]
+		[
+			{"Class Id": 1, "Class Num": "I", "Sec Id": 2, "Sec Name": "B", "Stu Id": 11},
+			{"Class Id": 1, "Class Num": "I", "Sec Id": 2, "Sec Name": "B", "Stu Id": 13},
+			{"Class Id": 1, "Class Num": "I", "Sec Id": 2, "Sec Name": "B", "Stu Id": 27},
+			{"Class Id": 1, "Class Num": "I", "Sec Id": 2, "Sec Name": "B", "Stu Id": 28},
+			{"Class Id": 1, "Class Num": "I", "Sec Id": 2, "Sec Name": "B", "Stu Id": 41},
+			{"Class Id": 1, "Class Num": "I", "Sec Id": 2, "Sec Name": "B", "Stu Id": 51},
+			{"Class Id": 1, "Class Num": "I", "Sec Id": 2, "Sec Name": "B", "Stu Id": 53},
+			{"Class Id": 1, "Class Num": "I", "Sec Id": 2, "Sec Name": "B", "Stu Id": 63},
+			{"Class Id": 1, "Class Num": "I", "Sec Id": 2, "Sec Name": "B", "Stu Id": 64}
+		]
+
+		$clsData
+		Array (
+			[0] => 1
+			[CId] => 1
+			[1] => I
+			[Class] => I
+			[2] => 2
+			[Sec Id] => 2
+			[3] => B
+			[Section] => B
+			[4] => [
+				{"User Id": 27, "ST RN": 33, "St FN": "Aadeep", "St MN": "", "St LN": "Badami", "ST CId": 1, "ST SecId": 2},
+				{"User Id": 64, "ST RN": 58, "St FN": "Ighu", "St MN": null, "St LN": "Hughug", "ST CId": 1, "ST SecId": 2}
+			]
+			[CSections] => [
+				{"User Id": 27, "ST RN": 33, "St FN": "Aadeep", "St MN": "", "St LN": "Badami", "ST CId": 1, "ST SecId": 2},
+				{"User Id": 64, "ST RN": 58, "St FN": "Ighu", "St MN": null, "St LN": "Hughug", "ST CId": 1, "ST SecId": 2}
+			]
+		)
+Array ( [Id] => 1 [Type] => A [Class] => I [Class Id] => 1 [SectionId] => 1 [Section] => A [Open From] => 2020-12-01 [Open Till] => 2020-12-15 [Deployed?] => 1 [Assessment ID] => 15 )
+Array ( [Id] => 7 [Type] => A [Class] => I [Class Id] => 1 [SectionId] => 1 [Section] => A [Open From] => 2020-12-01 [Open Till] => 2020-12-22 [Deployed?] => 1 [Assessment ID] => 16 )
+Array ( [Id] => 2 [Type] => A [Class] => I [Class Id] => 1 [SectionId] => 2 [Section] => B [Open From] => 2020-12-01 [Open Till] => 2020-12-15 [Deployed?] => 1 [Assessment ID] => 15 )
+Array ( [Id] => 5 [Type] => A [Class] => IX [Class Id] => 9 [SectionId] => 2 [Section] => B [Open From] => 2020-12-03 [Open Till] => 2020-12-10 [Deployed?] => 1 [Assessment ID] => 6 )
+Array ( [Id] => 6 [Type] => A [Class] => IX [Class Id] => 9 [SectionId] => 4 [Section] => D [Open From] => 2020-12-03 [Open Till] => 2020-12-10 [Deployed?] => 1 [Assessment ID] => 6 )
 	 ?>
 </body>
 </html>

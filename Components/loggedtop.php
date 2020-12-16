@@ -1,3 +1,4 @@
+<h3 class="centered" style="background: var(--BodyGradient);">
 	<div class="col-sm-4 topbanner left"  style="background: var(--BodGradtop); padding: 5px;">
 		Prashnavali
 		<span class="col-sm-4" style="float: right;">
@@ -9,9 +10,10 @@
 				echo "Welcome " . $_SESSION['user'];
 				if ($pageCode=='S') {echo "Class ".$_SESSION['c']. " Sec ".$_SESSION['d'];}
 		?>
-		<form style="float: right; padding-bottom: 0px" action="/Scripts/php/logout.php" method="post">
+		<form style="float: right; padding-bottom: 0px;" action="/Scripts/php/logout.php" method="post">
 			<button type="submit" value="logout">
 				<span class="glyphicon glyphicon-off red" style="margin-bottom: 0px"></span>
 			</button>
 		</form>
 	</div>
+</h3>

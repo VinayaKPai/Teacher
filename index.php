@@ -27,7 +27,6 @@
 				  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 				  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 				<link rel="stylesheet" type="text/css" href="/stylesheet.css"  />
-				<link type="text" href="./Modals/modaltest.html"/link>
 				<script src="./Scripts/js/codilytest.js"></script>
 				<script>
 					function commingSoon(t) {
@@ -41,10 +40,7 @@
 			<h3 class="centered" style="background: var(--BodyGradient);">
 				<?php include "Components/top.php"; ?>
 			</h3>
-			<?php echo $datetime1;
-				if (isset($_SESSION)) {print_r($_SESSION);}
-				else {echo "No Session";}
-			?>
+			<button class="btn btn-warning pull-right"><?php echo $datetime1; ?></button>
 
 			<div class="container" style="background: var(--BodyGradient);">
 

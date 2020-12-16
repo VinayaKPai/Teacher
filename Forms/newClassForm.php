@@ -1,3 +1,4 @@
+
 <form name="newClassForm" action="../Scripts/php/allInsertQueries.php" method="post">
 
   <div style="display: flex; justify-content: space-between;">

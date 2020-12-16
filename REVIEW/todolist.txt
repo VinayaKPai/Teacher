@@ -110,3 +110,23 @@ Student historical data across semesters
 ********************************
 FAQ/Q-A for each activity - conv between S&T available to all
 ***************************
+Record start time of an activity by student
+  1.  On click of start button on StudentViews/explore.php?sub= page
+  2.  Display that time on the Scripts/php/generateAnswerSheet.php?sub= page
+  3.  Add a "Time Elapsed" button
+  4.  If there is a designated time limit, display that time
+  5.  If (4), then a TIME REMAINING button
+  6.  Record time in a log?
+***********************************
+Record login time of an a user
+  1.  On click of login button on index.php page
+  2.  Display that time on the <user>Views.index<x>.php and subsequent pages
+  3.  Record time in a log?
+***********************************
+Topicdropdown
+  Relevant files:
+    a.  /Components/topicdropdown.php
+    b.  /SetUpPages/newQuestions.php
+    c.  /SetUpPages/questionBank.php (potential usage)
+  Problem: As classes, subjects are filled up, the number of topics will be huge, and will not be user friendly to use.
+  Problem: Currently the dropdown does not filter by selected class and subject

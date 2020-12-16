@@ -4,22 +4,29 @@
 
   $Utype = $_POST['Utype'];
   $loggedUserId = $_POST['phemail'];
+  echo $Utype." ".$loggedUserId;
   //right now assuming that this is the email.
   //Will need to include other forms of identification later .
 
   if ($Utype=="S") {
+    $userType = "Student";
+    $_SESSION['userType'] = $userType;
     postStudentLogin($mysqli, $Utype, $loggedUserId);
   }
   elseif ($Utype=="T") {
-    // postTeacherLogin($mysqli, $Utype, $loggedUserId);
+    $userType = "Teacher";
+    $_SESSION['userType'] = $userType;
     teacherLogin($mysqli, $Utype, $loggedUserId);
   }
   elseif ($Utype=="A") {
-    postAdminLogin($mysqli, $Utype, $loggedUserId);
+    $userType = "Administrator";
+    $_SESSION['userType'] = $userType;
+    adminLogin($mysqli, $Utype, $loggedUserId);
   }
   else {
     echo "Unauthorized login attempt";
   }
+
   function postStudentLogin ($mysqli, $Utype, $loggedUserId) {
       $query = $mysqli->query("SELECT * FROM `studentdetails`
         INNER JOIN users on users.userId = studentdetails.userId
@@ -52,6 +59,8 @@
     }
 
   function teacherLogin($mysqli, $Utype, $loggedUserId) {
+    echo  $Utype.", ".$loggedUserId;
+    //only checks for the teacher in the user table and creates a couple of session variables.
     $query = $mysqli->query("SELECT * FROM `users` WHERE `Email`='$loggedUserId' AND `role` = '$Utype'");
     $cnt = mysqli_num_rows($query);
     if ($cnt==0) {
@@ -61,11 +70,14 @@
       while ($dets = $query->fetch_assoc()) {
         $userName = $dets['firstName']." ".$dets['middleName']." ".$dets['lastName'];
         $_SESSION['user'] = $userName;
+        $_SESSION['userId'] = $dets['userId'];
       }
       postTeacherLogin($mysqli, $Utype, $loggedUserId);
     }
   }
   function postTeacherLogin($mysqli, $Utype, $loggedUserId) {
+    //get all the classes taught by the teacher
+    //create session variables to facilitate getting appropriate data for other teacher view pages
     $query = $mysqli->query("SELECT * FROM `classes_taught_by_teacher` as ctt
       INNER JOIN users on users.userId = ctt.userId
       INNER JOIN classes as c on c.classId = ctt.classId
@@ -81,20 +93,34 @@
 
     else {
         $url = 'Location:/TeacherViews/indexT.php?c=';
-        $clArray = [];
-        $subArray = [];
+        $clArray = [];//used in loggedtop.php and generateopenactivities.php for students
+
+        $subArray = [];//used in subjectdropdown.php
+        $clsecArray = [];//to be used in Scripts/php/studentsQueryResultToHtmlDiv
+
         while ($dets = $query->fetch_assoc()) {
-          $cls = $dets['classNumber'];
-          $scs = $dets['sectionName'];
+          $cls = $dets['classNumber']; //I,II etc
+          $scs = $dets['sectionName'];//A,B etc
+          $cli = $dets['classId'];
+          $sci = $dets['sectionId'];
+          // $clsecid = $dets['classId'];
+          // $scid = $dets['sectionId'];
+          // $csIds = [$clsecid,$scid];
+          // array_push($clsecIdArray,$csIds);
+          //create the $_GET parameters
+          $clsec = $cli."-".$cls."-".$scs."-".$sci;
           $url = $url.$cls."-".$scs.",";
           $userName = $dets['firstName']." ".$dets['middleName']." ".$dets['lastName'];
-          array_push($clArray,$dets['classId']); //array_push($a,"blue","yellow");
-          array_push($subArray,$dets['subjectId']);
+
+          array_push($clArray,$cli);
+          array_push($clsecArray,$clsec);
+          array_push($subArray,$dets['subjectId']);//1,2,3 etc
         }
         $url = rtrim($url, ",");
-        // $_SESSION['user'] = $userName;
+        // $_SESSION['clsecIdArray'] = $clsecIdArray;
         $_SESSION['c'] = $clArray;
         $_SESSION['sub'] = $subArray;
+        $_SESSION['clsec'] = $clsecArray;
         $url = $url."&cnt=".$cnt;
         $url = $url."&d=";
     }
@@ -102,8 +128,63 @@
       // print_r($)
       {header($url);}
   }
-  if ($Utype=="A") {
-    {header('Location:/AdminViews/indexA.php');}
+
+  function adminLogin($mysqli, $Utype, $loggedUserId) {
+    $query = $mysqli->query("SELECT * FROM `users` WHERE `Email`='$loggedUserId' AND `role` = '$Utype'");
+    $cnt = mysqli_num_rows($query);
+    if ($cnt==0) {
+      echo "User does not exist";
+    }
+    else {
+      while ($dets = $query->fetch_assoc()) {
+        $userName = $dets['firstName']." ".$dets['middleName']." ".$dets['lastName'];
+        $_SESSION['user'] = $userName;
+        $_SESSION['userId'] = $dets['userId'];
+      }
+      postAdminLogin($mysqli, $Utype, $loggedUserId);
+    }
+  }
+  function postAdminLogin($mysqli, $Utype, $loggedUserId) {
+    $query = $mysqli->query("SELECT * FROM `classes_taught_by_teacher` as ctt
+      INNER JOIN users on users.userId = ctt.userId
+      INNER JOIN classes as c on c.classId = ctt.classId
+      INNER JOIN sections as s on s.sectionId = ctt.sectionId
+      WHERE users.Email = '$loggedUserId'
+       ORDER BY ctt.classId ASC");
+
+    $cnt = mysqli_num_rows($query);
+    // echo $cnt;
+    if ($cnt==0) {
+      $url = 'Location:/AdminViews/indexA.php';
+    }
+
+    else {
+        $url = 'Location:/AdminViews/indexA.php?c=';
+        $clArray = [];
+        $subArray = [];
+        $clsecArray = [];
+        while ($dets = $query->fetch_assoc()) {
+          $cls = $dets['classNumber']; //I,II etc
+          $scs = $dets['sectionName'];
+          //create the $_GET parameters
+          $clsec = $cls."-".$scs;
+          $url = $url.$cls."-".$scs.",";
+          $userName = $dets['firstName']." ".$dets['middleName']." ".$dets['lastName'];
+          array_push($clArray,$dets['classId']); //array_push($a,"blue","yellow");
+          array_push($clsecArray,$clsec);
+          array_push($subArray,$dets['subjectId']);//1,2,3 etc
+        }
+        $url = rtrim($url, ",");
+
+        $_SESSION['c'] = $clArray;
+        $_SESSION['sub'] = $subArray;
+        $_SESSION['clsec'] = $clsecArray;
+        $url = $url."&cnt=".$cnt;
+        $url = $url."&d=";
+    }
+
+      // print_r($)
+      {header($url);}
   }
 
 

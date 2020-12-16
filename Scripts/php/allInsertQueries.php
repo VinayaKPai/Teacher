@@ -5,6 +5,7 @@
   //INSERT INTO `classes_taught_by_teacher`(`cttId`, `userId`, `classId`, `sectionId`, `subjectId`) VALUES ([value-1],[value-2],[value-3],[value-4],[value-5])
 
   // create acceptable data for the 'confirm' post variable to prevent highjacked data
+// print_r($_POST);
   $confArray = [
     "NSD" => "insertUser",
     "NTD" => "insertUser",
@@ -49,18 +50,19 @@
     $lastName = $_POST['lastName'];
     $phoneMobile = $_POST['phoneMobile'];
     $email = $_POST['email'];
+    $systemEmail = strtolower($firstName).strtolower($middleName).strtolower($lastName)."@mydomain.com";
     $joinYear = $_POST['joinYear'];
     $endYear = $_POST['endYear'];
     $tpw = $_POST['phoneMobile'];
     $visibility = 'Y';
 
-    $stmt = $mysqli->prepare("INSERT INTO `users`( `role`, `firstName`, `middleName`, `lastName`, `Email`, `pw`, `joinYear`, `endYear`, `phoneMobile`, `visibility`) VALUES (?,?,?,?,?,?,?,?,?,?)");
+    $stmt = $mysqli->prepare("INSERT INTO `users`( `role`, `firstName`, `middleName`, `lastName`, `Email`, `systemEmail`, `pw`, `joinYear`, `endYear`, `phoneMobile`, `visibility`) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
 
-    $stmt->bind_param("ssssssssss", $role, $firstName, $middleName, $lastName, $email, $tpw, $joinYear, $endYear, $phoneMobile, $visibility);
+    $stmt->bind_param("sssssssssss", $role, $firstName, $middleName, $lastName, $email, $systemEmail, $tpw, $joinYear, $endYear, $phoneMobile, $visibility);
     // $stmt->execute();
     if (!$stmt->execute()){
     echo ("Errorcode: " . $mysqli -> errno);}
-    {header('Location: ../SetUpPages/newTeachers.php');}
+    {header('Location: /SetUpPages/newUsers.php');}
   }
 
 

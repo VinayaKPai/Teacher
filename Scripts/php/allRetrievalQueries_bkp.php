@@ -1,25 +1,19 @@
 <?php
-// NOTE- ALL JSON TYPE QUERIES ARE IN THE BKP OF THIS FILE
+
   include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/deployAQT_QueryResultToHtmlDiv.php";
   include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/deploySavedAssessments_QueryResultToHtmlDiv.php";
   include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/cttQueryResultToHtmlTable.php";
   include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/sqlQueryResultToList.php";
   // include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/CSTQueryResultToHtmlTable.php";
 
-  function aqtActivityQuery($type,$status,$secClassId, $secSectionId, $pageHeading, $mysqli) {
-    //EVERYTHING OTHER THAN QUESTION DATA HERE
+  function aqtActivityQuery($type, $status, $mysqli) {
+    //retrieve  deployments for /Activity/assignments.php, /Activity/tests.php, /Activity/quizzes.php
+    //status is completed/ongoing/undeoployed
+    // type is a/q/t
+    // WORKING
           $str = '';
           $successFlag = '';
-        /*
-        This query should be split into 2. By doing the following the need for json_arrayagg will dissappear.
-        1. For getting all the deployments.
-        2. For getting all the questions related to the assessment.
-          Desctiption:
-          The reason you need json aggregate right now is because, you will get 1 entry for each deployment and as an assessment can have multiple questions, you will need to merge them into 1.
-
-          If you get all deployments and questions seperately then you can you can just get the query and with very little processing, you can do the display part of it.
-         */
-      	$queryString = ("SELECT
+          $queryString = ("SELECT
           dl.depId AS 'Id',
           dl.depType AS 'Type',
           c.classNumber AS 'Class',
@@ -29,199 +23,97 @@
           dl.schStartDate AS 'Open From',
           dl.schEndDate AS 'Open Till',
           dl.deploySuccess AS 'Deployed?',
-          dl.assessmentId AS 'Assessment ID'
-          FROM
-          deploymentlog AS dl
-           INNER JOIN classes as c
-             on c.classId = dl.classId
-           INNER JOIN sections as s
-             on s.sectionId = dl.sectionId
-          WHERE
-            dl.classId = $secClassId
-          AND
-            dl.sectionId = $secSectionId");
-      if ($status == "ongoing") {
-        $str = " AND dl.schStartDate < CURDATE() AND dl.schEndDate > CURDATE() AND dl.deploySuccess = '1' AND dl.depType = '$type'";
-        $successFlag = 1;//need this separately for display
-        $queryString = $queryString.$str ;
-      }
-      if ($status == "completed") {
-        $str = " AND dl.schStartDate < CURDATE() AND dl.schEndDate < CURDATE() AND dl.deploySuccess = '1' AND dl.depType = '$type'";
-        $successFlag = 1;//need this separately for display
-        $queryString = $queryString.$str ;
-      }
-      if ($status == "undeployed") {
-        $str = " AND dl.deploySuccess = '0' AND dl.depType = '$type'";
-        $successFlag = 0;//need this separately for display
-        $queryString = $queryString.$str ;
-      }
-      if ($status == "withdrawn") {
-        $str = " AND dl.deploySuccess = '2' AND dl.depType = '$type'";
-        $successFlag = 1;//need this separately for display
-        $queryString = $queryString.$str ;
-      }
-
-      $queryString = $queryString."  ORDER BY dl.classId, dl.sectionId ASC";
-      $query = $mysqli->query($queryString);
-      // print_r($query);
-      return $query;
-      // deploymentsdiv($query,$type,$pageHeading,$status,$mysqli);
-  }
-
-  function aqtActivityQuestions($assId,$mysqli) {
-    // $classes = implode(", ",$_SESSION['c']);
-    // ONLY the questions data for the AQT query here
-        /*
-        This query should be split into 2. By doing the following the need for json_arrayagg will dissappear.
-        1. For getting all the deployments.
-        2. For getting all the questions related to the assessment.
-          Desctiption:
-          The reason you need json aggregate right now is because, you will get 1 entry for each deployment and as an assessment can have multiple questions, you will need to merge them into 1.
-
-          If you get all deployments and questions seperately then you can you can just get the query and with very little processing, you can do the display part of it.
-         */
-         $queryAssQ = $mysqli->query("SELECT
           a.assessment_Id AS 'Assessment ID',
-          -- a.assessment_Title AS 'Title',
-          qb.qId AS 'questionID',
-          qb.question AS	'question',
-          qb.Option_1 AS	'option1',
-          qb.Option_2 AS 'option2',
-          qb.Option_3 AS 'option3',
-          qb.Option_4 AS 'option4',
-          qb.Option_5 AS 'option5',
-          qb.Option_6 AS	'option6'
-          -- count(a.assessment_Id) AS 'COUNT'
+          a.assessment_Title AS 'Title',
+          json_arrayagg(
+      		json_object(
+        			'questionID',qb.qId,
+        			'question',qb.question,
+        			'option1',qb.Option_1,
+        			'option2',qb.Option_2,
+        			'option3',qb.Option_3,
+        			'option4',qb.Option_4,
+        			'option5',qb.Option_5,
+        			'option6',qb.Option_6
+      		)
+      		)
+          as 'Questions'
           FROM
                questionbank AS qb
            INNER JOIN assessment_questions AS aq
              on aq.question_id = qb.qId
            INNER JOIN assessments as a
              on a.assessment_Id = aq.assessment_Id
-          WHERE a.assessment_Id = '$assId'");
-          return $queryAssQ;
-  }
+           LEFT JOIN deploymentlog as dl
+             on dl.assessmentId = aq.assessment_Id
+           LEFT JOIN classes as c
+             on c.classId = dl.classId
+           LEFT JOIN sections as s
+             on s.sectionId = dl.sectionId
+           -- GROUP BY a.assessment_Title
+      	");
 
-  //need to get the assessment title for heading, which cannot be done from outside the while statement of the display code in ActivitySectionPanel.php
-  function aqtDepTitle($assId,$mysqli) {
-    $titleQuery = $mysqli->query("SELECT `assessment_Title` FROM assessments WHERE `assessment_Id` = '$assId'");
-    $title = $titleQuery->fetch_assoc();
-    return $title;
-  }
+      if ($status == "ongoing") {
+        $str = " WHERE dl.schStartDate < CURDATE() AND dl.schEndDate > CURDATE() AND dl.deploySuccess = '1' AND dl.depType = '$type'";
+        $successFlag = 1;//need this separately for display
+        $queryString = $queryString.$str ;
+      }
+      if ($status == "completed") {
+        $str = " WHERE dl.schStartDate < CURDATE() AND dl.schEndDate < CURDATE() AND dl.deploySuccess = '1' AND dl.depType = '$type'";
+        $successFlag = 1;//need this separately for display
+        $queryString = $queryString.$str ;
+      }
+      if ($status == "undeployed") {
+        $str = " WHERE dl.deploySuccess = '0' AND dl.depType = '$type'";
+        $successFlag = 0;//need this separately for display
+        $queryString = $queryString.$str ;
+      }
+      if ($status == "withdrawn") {
+        $str = " WHERE dl.deploySuccess = '2' AND dl.depType = '$type'";
+        $successFlag = 1;//need this separately for display
+        $queryString = $queryString.$str ;
+      }
+      $queryString = $queryString."  GROUP BY dl.depId";
 
-  // function aqtActivityQuery_bkp($type, $status, $mysqli) {
-  //   //retrieve  deployments for /Activity/assignments.php, /Activity/tests.php, /Activity/quizzes.php
-  //   //status is completed/ongoing/undeoployed
-  //   // type is a/q/t
-  //   // WORKING
-  //         $str = '';
-  //         $successFlag = '';
-  //       //   look at bkp of this file for json arrayagg type query
-  //
-  //       /*
-  //       This query should be split into 2. By doing the following the need for json_arrayagg will dissappear.
-  //       1. For getting all the deployments.
-  //       2. For getting all the questions related to the assessment.
-  //         Desctiption:
-  //         The reason you need json aggregate right now is because, you will get 1 entry for each deployment and as an assessment can have multiple questions, you will need to merge them into 1.
-  //
-  //         If you get all deployments and questions seperately then you can you can just get the query and with very little processing, you can do the display part of it.
-  //        */
-  //       $queryString = ("SELECT
-  //         dl.depId AS 'Id',
-  //         dl.depType AS 'Type',
-  //         c.classNumber AS 'Class',
-  //         c.classId AS 'Class Id',
-  //         s.sectionId AS 'SectionId',
-  //         s.sectionName AS 'Section',
-  //         dl.schStartDate AS 'Open From',
-  //         dl.schEndDate AS 'Open Till',
-  //         dl.deploySuccess AS 'Deployed?',
-  //         a.assessment_Id AS 'Assessment ID',
-  //         a.assessment_Title AS 'Title',
-  //         qb.qId AS 'questionID',
-  //         qb.question AS	'question',
-  //         qb.Option_1 AS		'option1',
-  //         qb.Option_2 AS 'option2',
-  //         qb.Option_3 AS 'option3',
-  //         qb.Option_4 AS 'option4',
-  //         qb.Option_5 AS 'option5',
-  //         qb.Option_6 AS	'option6'
-  //         FROM
-  //              questionbank AS qb
-  //          INNER JOIN assessment_questions AS aq
-  //            on aq.question_id = qb.qId
-  //          INNER JOIN assessments as a
-  //            on a.assessment_Id = aq.assessment_Id
-  //          LEFT JOIN deploymentlog as dl
-  //            on dl.assessmentId = aq.assessment_Id
-  //          LEFT JOIN classes as c
-  //            on c.classId = dl.classId
-  //          LEFT JOIN sections as s
-  //            on s.sectionId = dl.sectionId");
-  //     if ($status == "ongoing") {
-  //       $str = " WHERE dl.schStartDate < CURDATE() AND dl.schEndDate > CURDATE() AND dl.deploySuccess = '1' AND dl.depType = '$type'";
-  //       $successFlag = 1;//need this separately for display
-  //       $queryString = $queryString.$str ;
-  //     }
-  //     if ($status == "completed") {
-  //       $str = " WHERE dl.schStartDate < CURDATE() AND dl.schEndDate < CURDATE() AND dl.deploySuccess = '1' AND dl.depType = '$type'";
-  //       $successFlag = 1;//need this separately for display
-  //       $queryString = $queryString.$str ;
-  //     }
-  //     if ($status == "undeployed") {
-  //       $str = " WHERE dl.deploySuccess = '0' AND dl.depType = '$type'";
-  //       $successFlag = 0;//need this separately for display
-  //       $queryString = $queryString.$str ;
-  //     }
-  //     if ($status == "withdrawn") {
-  //       $str = " WHERE dl.deploySuccess = '2' AND dl.depType = '$type'";
-  //       $successFlag = 1;//need this separately for display
-  //       $queryString = $queryString.$str ;
-  //     }
-  //     // $queryString = $queryString."  GROUP BY dl.depId";
-  //     $queryString = $queryString."  ORDER BY dl.classId, dl.sectionId ASC";
-  //     // print_r($queryString);
-  //     $query = $mysqli->query($queryString);
-  //     // $query should be returned
-  //     deploymentsdiv($query, $type, $successFlag, $status);
-  // }
-  //
+      // print_r($queryString);
+      $query = $mysqli->query($queryString);
+      // $query should be returned
+      deploymentsdiv($query, $type, $successFlag, $status);
+  }
 
   function savedAssessmentsQuery( $mysqli) {
     //from Activities/assignments.php, Activities/quizzes.php, Activities/tests.php
     //to Scripts/php/deploySavedAssessments_QueryResultToHtmlDiv.php
     //WORKING
-    /*
-    Split getting the questions for an assessment and the rest. This will make this query much easier.
-    This will create multiple queries but we can look into optimisation later on.
-     */
     $successFlag = '';
           $queryString = ("SELECT
-            dp.Id AS 'DepId',
-            dp.classId AS 'classId',
-            classes.classNumber AS 'classNumber',
-            dp.sectionId AS 'sectionId',
-            dp.deploySuccess AS 'deploySuccess',
-            dp.schStartDate AS 'startDate',
-            dp.schEndDate AS 'endDate',
-
     	       assessments.assessment_Title as 'Title',
              classes.classNumber as 'Class',
              classes.classId AS 'Class Id',
              assessments.assessment_Id AS 'Assessment ID',
              questionbank.classId AS 'QB Class Id',
-
-            questionbank.question AS 'question',
-            questionbank.Option_1 AS 'option1',
-            questionbank.Option_2 AS 'option2',
-            questionbank.Option_3 AS 'option3',
-            questionbank.Option_4 AS 'option4',
-            questionbank.Option_5 AS 'option5',
-            questionbank.Option_6 AS 'option6'
-
-
-        FROM
+    	JSON_ARRAYAGG(
+        json_object(
+            'question',questionbank.question,
+        		'option1',questionbank.Option_1,
+        		'option2',questionbank.Option_2,
+            'option3',questionbank.Option_3,
+    		    'option4',questionbank.Option_4,
+            'option5',questionbank.Option_5,
+    		    'option6',questionbank.Option_6
+            )
+        ) as 'Questions',
+        JSON_ARRAYAGG(
+        json_object(
+            'classId',dp.classId,
+            'classNumber',classes.classNumber,
+        		'sectionId',dp.sectionId,
+        		'deploySuccess',dp.deploySuccess,
+            'startDate',dp.schStartDate,
+            'endDate',dp.schEndDate
+            )
+        ) as 'Deployments'
+      	FROM
       	`questionbank`
           	 JOIN assessment_questions as aq
               ON aq.question_id = questionbank.qId
@@ -241,15 +133,6 @@
     //from SetUpPages/newTeachers.php
     //to Scripts/php/teachersQueryResultToHtmlTable.php
     //WORKING
-    /*
-    This query shows Subjects and sections for all teachers.
-
-    If you execute this query for 1 teacher at a time, then you dont need to json_arrayagg.
-
-    At the moment if there are 5 teachers teaching 4 subjects for 3 sections, then you will get 5*4*3 number of rows.
-
-    If you do it per teacher, then
-     */
     $teacherQuery = $mysqli->query("SELECT DISTINCT
       U.userId AS 'T Id',
       U.firstName AS 'T First Name',

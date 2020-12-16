@@ -3,9 +3,6 @@
 	include "../basecode-create_connection.php";
 	$pageHeading = "Question Bank";
 	$pageCode = "setup";
-	// $userName = "Guest";
-	// $userType = "";
-	// $loggedInUserName  = "";
 ?>
 
 
@@ -18,7 +15,6 @@
 			<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 			  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 			  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-				<link type="text" href="./Modals/modaltest.html"/>
 			<link rel="stylesheet" type="text/css" href="/stylesheet.css"  />
 				<script src="../../Scripts/js/ajaxCalls.js"></script>
 				<script src="../../Scripts/js/ajaxCallActivities.js"></script>
@@ -114,7 +110,7 @@
 					?>
 				</div>
 				<?php
-					include $_SERVER['DOCUMENT_ROOT']."/Components/internalNav.php";
+					include $_SERVER['DOCUMENT_ROOT']."/Components/teacherNavBar.php";
 				?>
 
 			</h3>

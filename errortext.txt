@@ -1,0 +1,43 @@
+ADMIN login
+http://localhost/SetUpPages/newTeachers.php
+
+Fatal error: Uncaught Error: Call to a member function fetch_array() on boolean in D:\Teachers\Scripts\php\teachersQueryResultToHtmlTable.php:9 Stack trace: #0 D:\Teachers\Scripts\php\allRetrievalQueries.php(169): table(Object(mysqli), false, Object(mysqli_result)) #1 D:\Teachers\Scripts\php\allRetrievalQueries.php(245): teachers(Object(mysqli), Object(mysqli_result)) #2 D:\Teachers\SetUpPages\newTeachers.php(39): studentsForTeacher(Object(mysqli)) #3 {main} thrown in D:\Teachers\Scripts\php\teachersQueryResultToHtmlTable.php on line 9
+====================================
+
+http://localhost/SetUpPages/newStudents.php
+Fatal error: Uncaught Error: Call to undefined function stuDiv() in D:\Teachers\Scripts\php\allRetrievalQueries.php:221 Stack trace: #0 D:\Teachers\SetUpPages\newStudents.php(31): students(Object(mysqli), 'Students') #1 {main} thrown in D:\Teachers\Scripts\php\allRetrievalQueries.php on line 221
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+TEACHER login
+http://localhost/SetUpPages/newStudents.php
+
+Fatal error: Uncaught Error: Call to undefined function stuDiv() in D:\Teachers\Scripts\php\allRetrievalQueries.php:221 Stack trace: #0 D:\Teachers\SetUpPages\newStudents.php(31): students(Object(mysqli), 'Students') #1 {main} thrown in D:\Teachers\Scripts\php\allRetrievalQueries.php on line 221
+====================================
+
+http://localhost/TeacherViews/myStudents.php
+
+Fatal error: Uncaught Error: Call to a member function fetch_assoc() on boolean in D:\Teachers\Scripts\php\studentsQueryResultToHtmlDiv.php:14 Stack trace: #0 D:\Teachers\Scripts\php\allRetrievalQueries.php(315): teacherStudentDiv(false) #1 D:\Teachers\TeacherViews\myStudents.php(31): studentsForATeacher(Object(mysqli), '4') #2 {main} thrown in D:\Teachers\Scripts\php\studentsQueryResultToHtmlDiv.php on line 14
+================================
+
+http://localhost/Activity/assignments.php (same for tests and quizzes too)
+
+open activities for completed Assignment
+Warning: mysqli_num_rows() expects parameter 1 to be mysqli_result, boolean given in D:\Teachers\Scripts\php\deployAQT_QueryResultToHtmlDiv.php on line 4
+
+open activities for ongoing Assignment
+Warning: mysqli_num_rows() expects parameter 1 to be mysqli_result, boolean given in D:\Teachers\Scripts\php\deployAQT_QueryResultToHtmlDiv.php on line 4
+
+open activities for undeployed Assignment
+Warning: mysqli_num_rows() expects parameter 1 to be mysqli_result, boolean given in D:\Teachers\Scripts\php\deployAQT_QueryResultToHtmlDiv.php on line 4
+
+open activities for withdrawn Assignment
+Warning: mysqli_num_rows() expects parameter 1 to be mysqli_result, boolean given in D:\Teachers\Scripts\php\deployAQT_QueryResultToHtmlDiv.php on line 4
+
+Assessment
+Warning: mysqli_num_rows() expects parameter 1 to be mysqli_result, boolean given in D:\Teachers\Scripts\php\deploySavedAssessments_QueryResultToHtmlDiv.php on line 4
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+STUDENT login
+http://localhost/StudentViews/explore.php?sub=Maths
+Open activities (for all subjects)
+Fatal error: Uncaught Error: Call to a member function fetch_assoc() on boolean in D:\Teachers\Scripts\php\generateOpenActivities.php:20 Stack trace: #0 D:\Teachers\StudentViews\explore.php(73): include() #1 {main} thrown in D:\Teachers\Scripts\php\generateOpenActivities.php on line 20

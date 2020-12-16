@@ -1,92 +1,57 @@
 <?php
-function stuDiv( $result,$pageHeading ) {
-  // IF REQ COMING FROM STUDENTS PAGE, THEN $RESULT IS A MYSQLI RESULT AND NEEDS TO A FETCH_***()
-  // IF $RESULT IS FROM TEACHERS, IT IS A SINGLE TEACHER DATA
-
-    $result->fetch_array( MYSQLI_ASSOC );
-    if ($result) {
-      $rowcount=mysqli_num_rows($result);
-      if ($rowcount > 0) {
-        $cls = "text-align: center; ";
-      }
-      else { $cls = "background-color: Red; text-align: center; ";}
-    }
-    echo "<h4 class='th' style='".$cls."'>Currently $rowcount active Classes in your setup</h4>" ;
-    //Outermost collapsible for each class/std with clickable heading
-    echo "<div class='th_even' style='width: 100%; padding: 5px; border-spacing: 2px; border-collapse: separate; align: 'center';'>";
-    foreach ( $result as $class ) { //$class is now data of a single class - including ALL sections
-      $cId = $class['C Id'];
-      $cNum = $class['Class / Std'];
-      $togCId = "c".$cId;
-      $secs = json_decode( $class['Sections'], true);
-      // $studs = json_decode( $class['Students'], true);
-      // $STUDS AND $SECS ARE NOW ARRAYS
-        echo "<a data-toggle='collapse' href='#".$togCId."' style='color: #fff'><h6 class='th_odd' style='text-align: center;'>
-        Class / STD : <span class='blue'>".$cNum."</span> has <span class='blue'>".$class['Count']."</span> Students</h6></a>";
-        echo "<div id='".$togCId."'class='panel panel-default panel-collapse collapse'>";
-        echo "<div>";
-          secsDivCollapsible( $pageHeading,$secs,$cId,$cNum, $class['Students']);
-        echo "</div>";
-        echo "</div>";
-    }
-  echo '</div>';
-}
-
-function secsDivCollapsible( $pageHeading,$secs,$cId,$cNum, $classstuds) {//$secs id json decoded $class['Sections'] AND $studs is json decoded for $class['Students']
-  $studs = json_decode( $classstuds, true);
-      foreach ($secs as $cntr => $secArr) {
-        $secId = $secArr['SD sectionId'];
-        $secName = $secArr['Stu Sec name'];
-        $secClsId = "sec".$cId.$secId;
-              echo "<a  data-toggle='collapse' href='#".$secClsId."'><h6 class='panel-heading' style='text-align: center; color: Blue;'>
-                Students for Class ".$cNum." Section ".$secName."
-              </h6></a>";
-
-              echo "<div id='".$secClsId."' class='panel panel-default panel-collapse collapse'>";
-
-                displayStudentsForClassSec($studs,$cId,$cNum,$secId,$pageHeading);
-
-              echo "</div>";
-      }
-    }
-
-function displayStudentsForClassSec($studs,$cId,$cNum,$secId,$pageHeading) {
-      // $cId is the classId for the student $cIdIn is the specific class Id coming from the teacher
-
-      echo "<ul style='color: #000;'>";
-        foreach ($studs as $cnt => $studets) {
-          if ($pageHeading=='Students') {
-              if ($studets['Stu C Id']==$cId && $studets['Stu sectionId']==$secId) {
-              $dets = "<li>Id : "
-                  .$studets['Stu Id']
-                  ."<ul><li>"
-                  ." Roll number : "
-                  .$studets['Stu RN']
-                  ."</li><li>Name : "
-                  .$studets['S First Name']
-                  ." "
-                  .$studets['S Middle Name']
-                  ." "
-                  .$studets['S Last Name']
-                  ."</li></ul>"
-              ."</li>";
-                echo $dets;
-              }
-          }
-          else { // ie page heading is teachers
-            //
-            echo "last else of student disaplay";
+  function teacherStudentDiv( $query ) {
+    //Used in TeacherViews/myStudents.php
+    //Take the query result, which will have the class blocks arrayaggs
+    //And create collapsible class panels
+    //Using foreach for each class block, call the next function
+    //This function, takes the data for all sections in the class block
+    //And creates section panels
+    //Using foreach for each section block, call the next function
+    //This function takes the data for each student in the section
+    //And creates the div for displaying each student data
+    //Using foreach(?) / for(?) display the student data
+    $arr = $_SESSION['clsec'];
+      while ($result = $query->fetch_assoc()) {
+        for ($i=0;$i<count($arr);$i++) {
+        $cs = explode('-',$arr[$i]);
+          if($cs[0]==$result['CId'] && $cs[3]==$result['Sec Id']) {
+            $togId = $result['CId'].$result['Sec Id'];
+            echo "<a data-toggle='collapse' href='#".$togId."'><h5>STD: ".$cs[1]."-".$cs[2]."</h5></a>";
+            // echo gettype($result['CSections']);
+            createClassBlock($result['CSections'],$togId);
           }
         }
-      echo "</ul>";
-}
-//8888888888888888888888888888888888888888888
-//
-function stuDiv1 ($mysqli, $pageHeading) {
-  print_r(students($mysqli, $pageHeading));
-}
-function collapsibleClass($key,$value,$classId,$className) {
+      }
+  }
+  function createClassBlock($CSection,$togId) {
+    echo "<div id='".$togId."' class='collapse' style='padding: 4px;'>";
+    $CSec = json_decode($CSection,true);
+    for ($i=0;$i<count($CSec);$i++) {
+        createStudentHolderBlock($CSec[$i]);
+    }
+  echo "</div>";
+  }
 
+  function createStudentHolderBlock($s) {
+    $stId = "s".$s['User Id'];
+    echo "<a data-toggle='collapse' href='#".$stId." '><p style='background-color: #554a5f; font-size: 12px; color: White; padding: 1px;'>";
+      echo $s['St FN']." ";
+      if ($s['St MN']!="" || $s['St MN']=NULL) {echo $s['St MN']." ";}
+      echo $s['St LN'];
+    echo "</p></a>";
+    // print_r($s);
+    echo "<div id='".$stId."' class='collapse'>";
+          displayStudentDetails($s);
+    echo "</div>";
+  }
+  function displayStudentDetails($s) {
+    echo "<ul>";
+    foreach ($s as $k=>$v) {
+      if ($k=="User Id" || $k=="ST RN") {
+        echo "<li>".$k." => ".$v."</li>";
+      }
+    }
+    echo "</ul><hr>";
 
-}
+  }
 ?>

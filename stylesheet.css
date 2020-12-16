@@ -12,7 +12,7 @@
 body {
   background:  var(--BodyGradient);
 }
-h4, h6 {
+h4, h6 .h6 {
   color: #651a1a;
   background-color: #DDDDDD;
   text-align: center;
@@ -150,6 +150,15 @@ ul a {
   font-size: 18px;
   color: White;
   padding: 1px;
+}
+.stuName {
+  background-color: #554a5f;
+  font-size: 24px;
+  color: White;
+  padding: 1px;
+}
+.stuDets {
+
 }
 .left {
   border-right: 1px	solid #2E1114;

@@ -4,8 +4,9 @@
     document.getElementById("tpw").value = ei;
   }
 </script>
-<div class="centered" style="padding: 3px; border: 1px solid #413949; border-radius: 5px;">
-  <h4>Add a new teacher to your setup</h4>
+<!-- <div class="centered" style="padding: 3px; border: 1px solid #413949; border-radius: 5px;"> -->
+
+
   <form name="newTeacherForm" action="../Scripts/php/allInsertQueries.php" method="post">
     <div class="form-group">
       <div class="col-sm-4">
@@ -50,12 +51,9 @@
         include $_SERVER['DOCUMENT_ROOT']."/Components/endYearDropDown.php";
       ?>
     </div>
-    <!-- <div class="col-sm-4">
-      <label for="tpw">Assigned Temp PW </label><input id="tpw" name="tpw"  class="form-control" readonly="readonly"/>
-    </div> -->
     <div style="padding: 10px; display: flex; justify-content: space-around;">
       <span><span><span class='red'>*</span>
-        <input type="checkbox" name="confirm"  value="<?php echo $pageCode; ?>" required>All data is correct</input>
+        <input type="checkbox" name="confirm"  value="NTD" required>All data is correct</input>
       </span>
       <span>
         <button name="Submit" id="submit" type="submit">SUBMIT</button>
@@ -64,7 +62,7 @@
 
   </div>
   </form>
-</div>
+<!-- </div> -->
 <!-- Add more teacher details -->
 <!-- <div id="moreTeacherDetails" style="display: none; padding: 3px; border: 1px solid #413949; border-radius: 5px;">
   <h4>Add more teacher details</h4>

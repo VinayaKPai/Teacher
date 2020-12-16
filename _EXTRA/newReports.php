@@ -30,8 +30,8 @@
 			<h3 class="centered"><?php include "../Components/top.php"; ?></h3>
 			<hr>
 			<?php
-				// include $_SERVER['DOCUMENT_ROOT']."/Components/C_S_T_internalNav.php";
-				include $_SERVER['DOCUMENT_ROOT']."/Components/internalNav.php";
+				// include $_SERVER['DOCUMENT_ROOT']."/Components/C_S_T_teacherNavBar.php";
+				include $_SERVER['DOCUMENT_ROOT']."/Components/teacherNavBar.php";
 			?>
 			<div>
 

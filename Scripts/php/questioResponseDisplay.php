@@ -15,7 +15,7 @@
     $Option_4	= $eachRow['Option_4'];
     $Option_5	= $eachRow['Option_5'];
     $Option_6 = $eachRow['Option_6'];
-    echo "<div class='container cards white'>".$assessment_title  ;
+    echo "<div class='container cards white'>"  ;
       echo "<div class='panel panel-heading normal'>".$displayInstructions."</div>";//for instruction
       echo "<div class='panel-heading' style='border: 1px solid #fff;'><span style='font-size: 14px;'>". $Question	."</div>";
       echo "<div class='container'>Your Answer:";

@@ -8,8 +8,8 @@
 			$userType = "";
 			$loggedInUserName  = "";
 			include $_SERVER['DOCUMENT_ROOT']."/basecode-create_connection.php";
-			include $_SERVER['DOCUMENT_ROOT']."/Components/header.php";
-			include $_SERVER['DOCUMENT_ROOT']."/Components/top.php";
+			include $_SERVER['DOCUMENT_ROOT']."/Components/PageComponents/header.php";
+			include $_SERVER['DOCUMENT_ROOT']."/Components/PageComponents/top.php";
 		?>
 	 <h4>CBSE Practice</h4>
 

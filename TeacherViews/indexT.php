@@ -16,7 +16,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 		<?php
-	    include $_SERVER['DOCUMENT_ROOT']."/Components/header.php";
+	    include $_SERVER['DOCUMENT_ROOT']."/Components/PageComponents/header.php";
 	  ?>
 	<script>
 		function commingSoon(t) {
@@ -28,16 +28,16 @@
 		<div class="container">
 			<?php
 			// print_r($_SESSION);
-			include $_SERVER['DOCUMENT_ROOT']."/Components/logintimebtn.php" ;?>
+			include $_SERVER['DOCUMENT_ROOT']."/Components/LoginComponents/logintimebtn.php" ;?>
 			<?php
-				include $_SERVER['DOCUMENT_ROOT']."/Components/loggedtop.php";
+				include $_SERVER['DOCUMENT_ROOT']."/Components/LoginComponents/loggedtop.php";
 			?>
 			<?php
-				include $_SERVER['DOCUMENT_ROOT']."/Components/teacherNavBar.php";
+				include $_SERVER['DOCUMENT_ROOT']."/Components/NavBarComponents/teacherNavBar.php";
 			?>
 			<div class="container-fluid">
 			<?php
-				include $_SERVER['DOCUMENT_ROOT']."/Components/classSectionList.php";
+				include $_SERVER['DOCUMENT_ROOT']."/Components/NavBarComponents/classSectionList.php";
 			?>
 		</div>
 			<div class="container" style="background: var(--BodyGradient);">
@@ -45,7 +45,7 @@
 					<h4 class="btn btn-block topbanner" <?php echo $display; ?> >Activity</h4>
 					<?php
 						if (isset($_SESSION['clsec']) && $_SESSION['clsec']!='') {
-							include $_SERVER['DOCUMENT_ROOT']."/Components/activityList.php";
+							include $_SERVER['DOCUMENT_ROOT']."/Components/ActivityComponents/activityList.php";
 							include $_SERVER['DOCUMENT_ROOT']."/Components/CBSEPractice.php";
 						}
 					?>

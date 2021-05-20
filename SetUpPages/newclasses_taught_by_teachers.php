@@ -28,10 +28,10 @@
 		<div class="container">
 			<h3 class="centered" style="background: var(--BodyGradient);">
 				<div id="top" class="row" style="padding: 1px;">
-					<?php include $_SERVER['DOCUMENT_ROOT']."/Components/top.php"; ?></h3>
+					<?php include $_SERVER['DOCUMENT_ROOT']."/Components/PageComponents/top.php"; ?></h3>
 				</div>
 				<?php
-					include $_SERVER['DOCUMENT_ROOT']."/Components/teacherNavBar.php";
+					include $_SERVER['DOCUMENT_ROOT']."/Components/NavBarComponents/teacherNavBar.php";
 				?>
 
 			<div>
@@ -54,7 +54,7 @@
 			</div>
 		</div>
 		<div class="container">
-		<?php include $_SERVER['DOCUMENT_ROOT']."/Components/bottom.php"; ?>
+		<?php include $_SERVER['DOCUMENT_ROOT']."/Components/PageComponents/bottom.php"; ?>
 		</div>
 	</body>
 </html>

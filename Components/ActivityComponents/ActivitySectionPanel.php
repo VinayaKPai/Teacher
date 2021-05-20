@@ -15,7 +15,7 @@
       $countQS = mysqli_num_rows($depQuestions);
       echo "<hr>";
       echo "<div id=".$toggleActivityId." class='panel panel-default collapse'>";
-        include $_SERVER['DOCUMENT_ROOT']."/Components/ActivityDeploymentPanel.php";
+        include $_SERVER['DOCUMENT_ROOT']."/Components/ActivityComponents/ActivityDeploymentPanel.php";
       echo "</div>";
       echo "<hr>";
     }

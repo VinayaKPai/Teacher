@@ -109,116 +109,24 @@
     return $title;
   }
 
-  // function aqtActivityQuery_bkp($type, $status, $mysqli) {
-  //   //retrieve  deployments for /Activity/assignments.php, /Activity/tests.php, /Activity/quizzes.php
-  //   //status is completed/ongoing/undeoployed
-  //   // type is a/q/t
-  //   // WORKING
-  //         $str = '';
-  //         $successFlag = '';
-  //       //   look at bkp of this file for json arrayagg type query
-  //
-  //       /*
-  //       This query should be split into 2. By doing the following the need for json_arrayagg will dissappear.
-  //       1. For getting all the deployments.
-  //       2. For getting all the questions related to the assessment.
-  //         Desctiption:
-  //         The reason you need json aggregate right now is because, you will get 1 entry for each deployment and as an assessment can have multiple questions, you will need to merge them into 1.
-  //
-  //         If you get all deployments and questions seperately then you can you can just get the query and with very little processing, you can do the display part of it.
-  //        */
-  //       $queryString = ("SELECT
-  //         dl.depId AS 'Id',
-  //         dl.depType AS 'Type',
-  //         c.classNumber AS 'Class',
-  //         c.classId AS 'Class Id',
-  //         s.sectionId AS 'SectionId',
-  //         s.sectionName AS 'Section',
-  //         dl.schStartDate AS 'Open From',
-  //         dl.schEndDate AS 'Open Till',
-  //         dl.deploySuccess AS 'Deployed?',
-  //         a.assessment_Id AS 'Assessment ID',
-  //         a.assessment_Title AS 'Title',
-  //         qb.qId AS 'questionID',
-  //         qb.question AS	'question',
-  //         qb.Option_1 AS		'option1',
-  //         qb.Option_2 AS 'option2',
-  //         qb.Option_3 AS 'option3',
-  //         qb.Option_4 AS 'option4',
-  //         qb.Option_5 AS 'option5',
-  //         qb.Option_6 AS	'option6'
-  //         FROM
-  //              questionbank AS qb
-  //          INNER JOIN assessment_questions AS aq
-  //            on aq.question_id = qb.qId
-  //          INNER JOIN assessments as a
-  //            on a.assessment_Id = aq.assessment_Id
-  //          LEFT JOIN deploymentlog as dl
-  //            on dl.assessmentId = aq.assessment_Id
-  //          LEFT JOIN classes as c
-  //            on c.classId = dl.classId
-  //          LEFT JOIN sections as s
-  //            on s.sectionId = dl.sectionId");
-  //     if ($status == "ongoing") {
-  //       $str = " WHERE dl.schStartDate < CURDATE() AND dl.schEndDate > CURDATE() AND dl.deploySuccess = '1' AND dl.depType = '$type'";
-  //       $successFlag = 1;//need this separately for display
-  //       $queryString = $queryString.$str ;
-  //     }
-  //     if ($status == "completed") {
-  //       $str = " WHERE dl.schStartDate < CURDATE() AND dl.schEndDate < CURDATE() AND dl.deploySuccess = '1' AND dl.depType = '$type'";
-  //       $successFlag = 1;//need this separately for display
-  //       $queryString = $queryString.$str ;
-  //     }
-  //     if ($status == "undeployed") {
-  //       $str = " WHERE dl.deploySuccess = '0' AND dl.depType = '$type'";
-  //       $successFlag = 0;//need this separately for display
-  //       $queryString = $queryString.$str ;
-  //     }
-  //     if ($status == "withdrawn") {
-  //       $str = " WHERE dl.deploySuccess = '2' AND dl.depType = '$type'";
-  //       $successFlag = 1;//need this separately for display
-  //       $queryString = $queryString.$str ;
-  //     }
-  //     // $queryString = $queryString."  GROUP BY dl.depId";
-  //     $queryString = $queryString."  ORDER BY dl.classId, dl.sectionId ASC";
-  //     // print_r($queryString);
-  //     $query = $mysqli->query($queryString);
-  //     // $query should be returned
-  //     deploymentsdiv($query, $type, $successFlag, $status);
-  // }
-  //
 
   function savedAssessmentsQuery( $mysqli) {
     //from Activities/assignments.php, Activities/quizzes.php, Activities/tests.php
     //to Scripts/php/deploySavedAssessments_QueryResultToHtmlDiv.php
-    //WORKING
-    /*
-    Split getting the questions for an assessment and the rest. This will make this query much easier.
-    This will create multiple queries but we can look into optimisation later on.
-     */
-    $successFlag = '';
-          $queryString = ("SELECT
-            dp.Id AS 'DepId',
-            dp.classId AS 'classId',
-            classes.classNumber AS 'classNumber',
-            dp.sectionId AS 'sectionId',
-            dp.deploySuccess AS 'deploySuccess',
-            dp.schStartDate AS 'startDate',
-            dp.schEndDate AS 'endDate',
 
+          $queryString = ("SELECT
     	       assessments.assessment_Title as 'Title',
              classes.classNumber as 'Class',
              classes.classId AS 'Class Id',
              assessments.assessment_Id AS 'Assessment ID',
              questionbank.classId AS 'QB Class Id',
-
-            questionbank.question AS 'question',
-            questionbank.Option_1 AS 'option1',
-            questionbank.Option_2 AS 'option2',
-            questionbank.Option_3 AS 'option3',
-            questionbank.Option_4 AS 'option4',
-            questionbank.Option_5 AS 'option5',
-            questionbank.Option_6 AS 'option6'
+              questionbank.question AS 'question',
+              questionbank.Option_1 AS 'option1',
+              questionbank.Option_2 AS 'option2',
+              questionbank.Option_3 AS 'option3',
+              questionbank.Option_4 AS 'option4',
+              questionbank.Option_5 AS 'option5',
+              questionbank.Option_6 AS 'option6'
 
 
         FROM
@@ -229,12 +137,13 @@
               ON aq.assessment_Id = assessments.assessment_Id
                join classes
               ON questionbank.classId = classes.classId
-              LEFT JOIN deploymentlog as dp
-              ON assessments.assessment_Id = dp.assessmentId
+              -- LEFT JOIN deploymentlog as dp
+              -- ON assessments.assessment_Id = dp.assessmentId
               GROUP BY assessments.assessment_Title;") ;
 
       $query = $mysqli->query($queryString);
-      savedAssessmentsdiv($query, $successFlag);
+      // savedAssessmentsdiv($query, $successFlag);
+      savedAssessmentsdiv($query);
   }
 
   function teachers ($mysqli,$stuQuery) {
@@ -406,6 +315,37 @@
 
   function studentsForATeacher($mysqli,$teacherId) {
     $query = $mysqli->query("SELECT DISTINCT
+      SD.classId AS 'CId',
+      C.classNumber AS 'STD',
+      SD.sectionId AS 'Sec Id',
+      Sec.sectionName AS 'Section'
+      -- json_arrayagg(DISTINCT json_object(
+      --     'User Id',U.userId,
+      --     'ST RN',SD.rollNumber,
+      --     'St FN',U.firstName,
+      --     'St MN',U.middleName,
+      --     'St LN',U.lastName,
+      --     'ST CId',SD.classId,
+      --     'ST SecId',SD.sectionId
+      --   ) ) as 'CSections'
+        FROM
+          studentdetails AS SD
+            INNER JOIN users AS U
+              on U.userId = SD.userId
+            LEFT JOIN classes as C
+              on C.classId= SD.classId
+            LEFT JOIN sections as Sec
+              on Sec.sectionId= SD.sectionId
+
+        GROUP BY SD.classId, SD.sectionId
+              ORDER BY SD.classId ASC"
+    );
+
+    teacherStudentDiv ( $query);//Scripts\php\studentsQueryResultToHtmlDiv.php
+  }
+
+  function studentsDetailsForATeacher($mysqli,$teacherId) {
+    $query = $mysqli->query("SELECT DISTINCT
     	SD.classId AS 'CId',
       C.classNumber AS 'STD',
       SD.sectionId AS 'Sec Id',
@@ -433,4 +373,95 @@
     );
     teacherStudentDiv ( $query);//Scripts\php\studentsQueryResultToHtmlDiv.php
   }
+  function studentsForATeacher_bkp($mysqli,$teacherId) {
+    $query = $mysqli->query("SELECT DISTINCT
+      SD.classId AS 'CId',
+      C.classNumber AS 'STD',
+      SD.sectionId AS 'Sec Id',
+      Sec.sectionName AS 'Section',
+      json_arrayagg(DISTINCT json_object(
+          'User Id',U.userId,
+          'ST RN',SD.rollNumber,
+          'St FN',U.firstName,
+          'St MN',U.middleName,
+          'St LN',U.lastName,
+          'ST CId',SD.classId,
+          'ST SecId',SD.sectionId
+        ) ) as 'CSections'
+        FROM
+          studentdetails AS SD
+            INNER JOIN users AS U
+              on U.userId = SD.userId
+            LEFT JOIN classes as C
+              on C.classId= SD.classId
+            LEFT JOIN sections as Sec
+              on Sec.sectionId= SD.sectionId
+
+        GROUP BY SD.classId, SD.sectionId
+              ORDER BY SD.classId ASC"
+    );
+    teacherStudentDiv ( $query);//Scripts\php\studentsQueryResultToHtmlDiv.php
+  }
+function studentSummaryDetailsThisClass ($mysqli,$clId,$clsecsId) {
+  //get all students for this specific class+section
+  $query = $mysqli->query("SELECT
+        U.userId AS 'User Id',
+        SD.rollNumber AS 'ST RN',
+        U.firstName AS 'St FN',
+        U.middleName AS 'St MN',
+        U.lastName AS 'St LN',
+        SD.classId AS 'ST CId',
+        SD.sectionId AS 'ST SecId'
+
+      FROM
+        studentdetails AS SD
+          INNER JOIN users AS U
+            on U.userId = SD.userId
+          LEFT JOIN classes as C
+            on C.classId= SD.classId
+          LEFT JOIN sections as Sec
+            on Sec.sectionId= SD.sectionId
+      WHERE SD.classId = $clId
+      AND SD.sectionId = $clsecsId
+      -- GROUP BY SD.classId, SD.sectionId
+            ORDER BY SD.classId ASC"
+  );
+// print_r($query->fetch_assoc());
+studentsDisplay($mysqli,$query);
+
+}
+
+function singleStudentComprehensive() {
+  echo "<h5>Assignments</h5>";
+    echo "<div><span>Open - Completed</span></div>";
+  echo "<h5>Quizzes</h5>";
+    echo "<div><span>Open - Completed</span></div>";
+  echo "<h5>Tests</h5>";
+    echo "<div><span>Open - Completed</span></div>";
+
+}
+
+function studentSubjects($mysqli, $userId) {
+  $query = $mysqli->query("SELECT
+    U.userId AS 'Id',
+    S.subjectName AS 'Subject',
+    S.subjectId AS 'Subject Id',
+    SD.classId AS 'Class',
+    U.firstName AS 'FN',
+    U.middleName AS 'MN',
+    U.lastName AS 'L'
+
+    FROM `users` AS U
+    INNER JOIN student_subjects AS SS
+    ON SS.userId = U.userId
+    INNER JOIN `subjects` AS S
+    ON S.subjectId = SS.subjectId
+    INNER JOIN `studentdetails` AS SD
+    ON SD.userId = U.userId
+    WHERE U.userId = '$userId'");
+    return $query;
+
+}
+
+
 ?>

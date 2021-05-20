@@ -37,6 +37,7 @@
       if (mysqli_num_rows($query)==0) {
         echo "User does not exist";
       }
+
       $role = $dets['role'];
       if ($role != $Utype) {
         echo "You are not authorised to view this page.";
@@ -48,6 +49,7 @@
           $classNumber = $dets['classId'];
           $sectionNumber = $dets['sectionId'];
 
+          $_SESSION['userId'] = $dets['userId'];
           $_SESSION['user'] = $userName;
           $_SESSION['sectionNumber'] = $sectionNumber;
           $_SESSION['classNumber'] = $classNumber;

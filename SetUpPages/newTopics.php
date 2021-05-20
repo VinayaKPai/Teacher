@@ -28,10 +28,10 @@
 			<?php echo $datetime; ?>
 			<h3 class="centered">
 				<div id="top" class="row" style="padding: 1px;">
-					<?php include "../Components/top.php"; ?>
+					<?php include "../Components/PageComponents/top.php"; ?>
 				</div>
 			</h3>
-			<?php include "../Components/teacherNavBar.php"; ?>
+			<?php include "../Components/NavBarComponents/teacherNavBar.php"; ?>
 			<div class="row">
 				<div class="col-sm-4" style="padding: 10px;">
 					<hr>
@@ -41,13 +41,13 @@
 							<div style="margin-bottom: 10px;">
 							<?php
 									$displayType = "dropdown";
-									include $_SERVER['DOCUMENT_ROOT']."/Components/classNumberDropDown.php";
+									include $_SERVER['DOCUMENT_ROOT']."/Components/Components/DropDownComponents/classNumberDropDown.php";
 							?>
 							</div>
 							<div style="margin-bottom: 10px;">
 								<?php
 										$displayType = "dropdown";
-										include $_SERVER['DOCUMENT_ROOT']."/Components/subjectDropDown.php";
+										include $_SERVER['DOCUMENT_ROOT']."/Components/Components/DropDownComponents/subjectDropDown.php";
 								?>
 							</div>
 
@@ -76,7 +76,7 @@
 					<hr>
 			</div>
 			<div class="container">
-				<?php include $_SERVER['DOCUMENT_ROOT']."/Components/bottom.php"; ?>
+				<?php include $_SERVER['DOCUMENT_ROOT']."/Components/PageComponents/bottom.php"; ?>
 			</div>
 			<div id="topicQuestionsModal" class="modal modal-xl fade" role="dialog" style="width: 100%;">
 			  <div class="modal-dialog">

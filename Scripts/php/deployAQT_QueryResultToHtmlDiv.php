@@ -37,7 +37,7 @@ function deploymentsdiv( $result,$type,$pageHeading,$status,$mysqli) {
 
   for ($i=1;$i<$count;$i++) {
     echo "<h6>".$count."==".$i."</h6>";
-    include $_SERVER['DOCUMENT_ROOT']."/Components/ActivityDeploymentPanel.php";
+    include $_SERVER['DOCUMENT_ROOT']."/Components/ActivityComponents/ActivityDeploymentPanel.php";
   }
 }
 

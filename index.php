@@ -38,16 +38,16 @@
 	<body class="body" style="background: var(--BodyGradient); height: 100%;">
 		<div class="container">
 			<h3 class="centered" style="background: var(--BodyGradient);">
-				<?php include "Components/top.php"; ?>
+				<?php include "Components/PageComponents/top.php"; ?>
 			</h3>
 			<button class="btn btn-warning pull-right"><?php echo $datetime1; ?></button>
 
 			<div class="container" style="background: var(--BodyGradient);">
 
-				<?php include $_SERVER['DOCUMENT_ROOT']."/Components/loginFrm.php"; ?>
+				<?php include $_SERVER['DOCUMENT_ROOT']."/Components/LoginComponents/loginFrm.php"; ?>
 			</div>
 			<div class="container">
-			<?php include "Components/bottom.php"; ?>
+			<?php include "Components/PageComponents/bottom.php"; ?>
 			</div>
 		</div>
 

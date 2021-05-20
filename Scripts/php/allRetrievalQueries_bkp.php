@@ -81,7 +81,7 @@
       deploymentsdiv($query, $type, $successFlag, $status);
   }
 
-  function savedAssessmentsQuery( $mysqli) {
+function savedAssessmentsQuery( $mysqli) {
     //from Activities/assignments.php, Activities/quizzes.php, Activities/tests.php
     //to Scripts/php/deploySavedAssessments_QueryResultToHtmlDiv.php
     //WORKING
@@ -127,9 +127,9 @@
 
       $query = $mysqli->query($queryString);
       savedAssessmentsdiv($query, $successFlag);
-  }
+}
 
-  function teachers ($mysqli,$stuQuery) {
+function teachers ($mysqli,$stuQuery) {
     //from SetUpPages/newTeachers.php
     //to Scripts/php/teachersQueryResultToHtmlTable.php
     //WORKING
@@ -170,9 +170,9 @@
               ORDER BY U.userId ASC");
         table ($mysqli, $teacherQuery,$stuQuery);
 
-  }
+}
 
-  function teachersWithoutClasses ($mysqli) {
+function teachersWithoutClasses ($mysqli) {
     //from SetUpPages/newTeachers.php
     //to Scripts/php/teachersQueryResultToHtmlTable.php
     //WORKING
@@ -185,9 +185,9 @@
         SELECT userId FROM classes_taught_by_teacher)");
         sqlQueryToList ($teacherQuery);
 
-  }
+}
 
-  function students ($mysqli, $pageHeading) {
+function students ($mysqli, $pageHeading) {
     //from SetUpPages/newStudents.php
     //to Scripts/php/studentsQueryResultToHtmlDiv.php
     //WORKING
@@ -222,9 +222,9 @@
         ");
             stuDiv($query,$pageHeading);
             return ($query->fetch_assoc());
-  }
+}
 
-  function studentsForTeacher($mysqli) {
+function studentsForTeacher($mysqli) {
     //from SetUpPages/newTeachers.php
     //to teachers() in Scripts/php/allRetrievalQueries.php
     ////WORKING
@@ -245,9 +245,9 @@
     		ORDER BY SD.classId ASC, SD.sectionId ASC
     		");
     teachers($mysqli,$stuQuery);
-    }
+  }
 
-  function classesTaughtByTeachers($mysqli) {
+function classesTaughtByTeachers($mysqli) {
     //from SetUpPages/newSubjects.php
     //to Scripts/php/cttQueryResultToHtmlTable.php
     $query = $mysqli->query("SELECT DISTINCT
@@ -285,9 +285,9 @@
               ORDER BY Sub.subjectId ASC
         ");
     cttQueryResultToHtmlTable ( $query);
-  }
+}
 
-  function studentsForATeacher($mysqli,$teacherId) {
+function studentsForATeacher($mysqli,$teacherId) {
     $query = $mysqli->query("SELECT DISTINCT
     	SD.classId AS 'CId',
       C.classNumber AS 'STD',
@@ -315,5 +315,5 @@
               ORDER BY SD.classId ASC"
     );
     teacherStudentDiv ( $query);//Scripts\php\studentsQueryResultToHtmlDiv.php
-  }
+}
 ?>

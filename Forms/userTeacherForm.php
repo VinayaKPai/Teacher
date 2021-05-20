@@ -43,12 +43,12 @@
       </div>
     <div class="col-sm-4">
       <?php
-        include $_SERVER['DOCUMENT_ROOT']."/Components/joinYearDropDown.php";
+        include $_SERVER['DOCUMENT_ROOT']."/Components/Components/DropDownComponents/joinYearDropDown.php";
       ?>
     </div>
     <div class="col-sm-4">
       <?php
-        include $_SERVER['DOCUMENT_ROOT']."/Components/endYearDropDown.php";
+        include $_SERVER['DOCUMENT_ROOT']."/Components/Components/DropDownComponents/endYearDropDown.php";
       ?>
     </div>
     <div style="padding: 10px; display: flex; justify-content: space-around;">
@@ -69,16 +69,16 @@
   <form name="additionalTeacherDetailsForm" action="../Scripts/php/allInsertQueries.php" method="post">
     <div style="padding: 10px; display: flex; justify-content: space-around;">
       <div class="col-sm-3">
-          <span class='red'>*</span><?php $displayType = "dropdown"; include $_SERVER['DOCUMENT_ROOT']."/Components/teacherDropDown.php"; ?>
+          <span class='red'>*</span><?php $displayType = "dropdown"; include $_SERVER['DOCUMENT_ROOT']."/Components/Components/DropDownComponents/teacherDropDown.php"; ?>
       </div>
       <div class="col-sm-3">
-          <span class='red'>*</span><?php $displayType = "dropdown"; include $_SERVER['DOCUMENT_ROOT']."/Components/classNumberDropDown.php"; ?>
+          <span class='red'>*</span><?php $displayType = "dropdown"; include $_SERVER['DOCUMENT_ROOT']."/Components/Components/DropDownComponents/classNumberDropDown.php"; ?>
       </div>
       <div class="col-sm-3">
-          <span class='red'>*</span><?php include $_SERVER['DOCUMENT_ROOT']."/Components/sectionAlphaDropDown.php"; ?>
+          <span class='red'>*</span><?php include $_SERVER['DOCUMENT_ROOT']."/Components/Components/DropDownComponents/sectionAlphaDropDown.php"; ?>
       </div>
       <div class="col-sm-3">
-          <span class='red'>*</span><?php include $_SERVER['DOCUMENT_ROOT']."/Components/subjectDropDown.php"; ?>
+          <span class='red'>*</span><?php include $_SERVER['DOCUMENT_ROOT']."/Components/Components/DropDownComponents/subjectDropDown.php"; ?>
       </div>
 
       <div><span><span class='red'>*</span>

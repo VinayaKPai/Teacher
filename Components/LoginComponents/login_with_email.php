@@ -19,7 +19,7 @@
         </form>
         <div class="footer-container">
           <p class="text-foot">or
-            <a href="../../Components/login.php">Log in with your broker, Google or Facebook</a>
+            <a href="../../Components/LoginComponents/login.php">Log in with your broker, Google or Facebook</a>
           </p>
         </div>
       </div>

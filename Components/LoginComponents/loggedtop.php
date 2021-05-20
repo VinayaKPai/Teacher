@@ -8,7 +8,7 @@
 	<div class="col-sm-8 topbanner" style="background: var(--BodGradtop);  text-align: center;">
 		<?php
 				echo "Welcome " . $_SESSION['user'];
-				if ($pageCode=='S') {echo "Class ".$_SESSION['c']. " Sec ".$_SESSION['d'];}
+				if ($pageCode=='S') {echo " || Class ".$_SESSION['c']. " Sec ".$_SESSION['d'];}
 		?>
 		<form style="float: right; padding-bottom: 0px;" action="/Scripts/php/logout.php" method="post">
 			<button type="submit" value="logout">

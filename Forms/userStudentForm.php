@@ -18,10 +18,10 @@
   </div>
   <div class="form-group">
     <?php
-      include $_SERVER['DOCUMENT_ROOT']."/Components/joinYearDropDown.php";
+      include $_SERVER['DOCUMENT_ROOT']."/Components/Components/DropDownComponents/joinYearDropDown.php";
     ?>
     <?php
-      include $_SERVER['DOCUMENT_ROOT']."/Components/endYearDropDown.php";
+      include $_SERVER['DOCUMENT_ROOT']."/Components/Components/DropDownComponents/endYearDropDown.php";
     ?>
     <label for="tpw">Assigned Temp PW </label><input id="tpw" name="tpw" disabled/>
   </div>

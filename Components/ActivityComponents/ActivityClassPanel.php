@@ -16,7 +16,7 @@
           echo "</a>";
           echo "<div class='panel panel-default collapse' id='".$toggleClassSectionId."'>";
             // echo "<br>".$toggleClassSectionId;
-            include $_SERVER['DOCUMENT_ROOT']."/Components/ActivitySectionPanel.php";
+            include $_SERVER['DOCUMENT_ROOT']."/Components/ActivityComponents/ActivitySectionPanel.php";
           echo "</div>";
 
         }

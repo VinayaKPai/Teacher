@@ -6,16 +6,16 @@
         // $pageheading = "CTT";
         $displayType = "dropdown";
         echo "<span><span class='red'>*</span>";
-        include $_SERVER['DOCUMENT_ROOT']."/Components/teacherDropDown.php";
+        include $_SERVER['DOCUMENT_ROOT']."/Components/Components/DropDownComponents/teacherDropDown.php";
         echo "</span>";
         echo "<span><span class='red'>*</span>";
-        include $_SERVER['DOCUMENT_ROOT']."/Components/classNumberDropDown.php";
+        include $_SERVER['DOCUMENT_ROOT']."/Components/Components/DropDownComponents/classNumberDropDown.php";
         echo "</span>";
         echo "<span><span class='red'>*</span>";
-        include $_SERVER['DOCUMENT_ROOT']."/Components/sectionAlphaDropDown.php";
+        include $_SERVER['DOCUMENT_ROOT']."/Components/Components/DropDownComponents/sectionAlphaDropDown.php";
         echo "</span>";
         echo "<span><span class='red'>*</span>";
-        include $_SERVER['DOCUMENT_ROOT']."/Components/subjectDropDown.php";
+        include $_SERVER['DOCUMENT_ROOT']."/Components/Components/DropDownComponents/subjectDropDown.php";
         echo "</span>";
     ?>
   </div>

@@ -22,7 +22,7 @@
 			<div style="text-align: right">
 				<?php echo $datetime1; ?>
 			</div>
-				<?php include $_SERVER['DOCUMENT_ROOT']."/Components/top.php";
+				<?php include $_SERVER['DOCUMENT_ROOT']."/Components/PageComponents/top.php";
 				?>
 <div>
 <hr>
@@ -48,11 +48,11 @@
 							<div class="panel panel-header">
 										<?php
 												$displayType = "dropdown";
-												include $_SERVER['DOCUMENT_ROOT']."/Components/classNumberDropDown.php";
+												include $_SERVER['DOCUMENT_ROOT']."/Components/Components/DropDownComponents/classNumberDropDown.php";
 										?>
 										<?php
 												$displayType = "dropdown";
-												include $_SERVER['DOCUMENT_ROOT']."/Components/subjectDropDown.php";
+												include $_SERVER['DOCUMENT_ROOT']."/Components/Components/DropDownComponents/subjectDropDown.php";
 										?>
 										<button type='button' onclick="ajaxCallGetQuestionsForTest()">Fetch Questions</button>
 								</div>
@@ -88,9 +88,9 @@
 							<div class="panel panel-header">
 
 								<?php include
-								$_SERVER['DOCUMENT_ROOT']."../Components/classNumberDropDown.php";
-								include $_SERVER['DOCUMENT_ROOT']."../Components/sectionAlphaDropDown.php";
-								include $_SERVER['DOCUMENT_ROOT']."../Components/subjectDropDown.php"; ?>
+								$_SERVER['DOCUMENT_ROOT']."../Components/Components/DropDownComponents/classNumberDropDown.php";
+								include $_SERVER['DOCUMENT_ROOT']."../Components/Components/DropDownComponents/sectionAlphaDropDown.php";
+								include $_SERVER['DOCUMENT_ROOT']."../Components/Components/DropDownComponents/subjectDropDown.php"; ?>
 
 								<button type="button" class="btn btn-small" onclick="filterTests()">Filter Tests</button>
 						</div>

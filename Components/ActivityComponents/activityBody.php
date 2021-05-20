@@ -14,7 +14,7 @@
     echo "</div>";
     echo "<div class='panel panel-default collapse' id='".$toggleClassId."'>";
       // classLevelPanels($sessionClassId, $result, $queryAssQ,$toggleClassId);
-      include $_SERVER['DOCUMENT_ROOT']."/Components/ActivityClassPanel.php";
+      include $_SERVER['DOCUMENT_ROOT']."/Components/ActivityComponents/ActivityClassPanel.php";
     echo "</div>";
   }
  ?>

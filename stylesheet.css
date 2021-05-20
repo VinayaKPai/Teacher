@@ -52,7 +52,6 @@ ul a {
    left: 0;
    bottom: 0;
 }
-
 .cards {
     z-index: 10;
     padding: 2px 10px 2px 10px;
@@ -92,7 +91,7 @@ ul a {
 }
 .roundedsquare {
 	border-radius: 5px;
-	border-bottom: 2px solid #4B0082;
+	border: 2px solid #4B0082;
   min-height: 150px;
 	font-size: 10px;
 	text-align: center;
@@ -181,6 +180,9 @@ ul a {
 }
 .blue {
   color: Blue;
+}
+.bluebg {
+  background-color: Blue;
 }
 .green {
   color: Green;

@@ -24,13 +24,13 @@
 	<body class="body">
 		<div class="container">
 			<?php
-				include $_SERVER['DOCUMENT_ROOT']."/Components/logintimebtn.php" ;
+				include $_SERVER['DOCUMENT_ROOT']."/Components/LoginComponents/logintimebtn.php" ;
 			?>
 			<?php
-				include $_SERVER['DOCUMENT_ROOT']."/Components/loggedtop.php";
+				include $_SERVER['DOCUMENT_ROOT']."/Components/LoginComponents/loggedtop.php";
 			?>
 			<?php
-				include $_SERVER['DOCUMENT_ROOT']."/Components/adminNavBar.php";
+				include $_SERVER['DOCUMENT_ROOT']."/Components/Components/NavBarComponents/adminNavBar.php";
 			?>
 			<div class="container">
 				<div style="padding: 3px; border: 1px solid #413949; border-radius: 5px;">
@@ -88,7 +88,7 @@
 			<!-- <div style="padding: 3px; border: 1px solid #413949; border-radius: 5px;"> -->
 			<!-- </div> -->
 			<!-- <div id="bottom">
-			<?php include "../Components/bottom.php"; ?>
+			<?php include "../Components/PageComponents/bottom.php"; ?>
 		</div> -->
 		</div>
 

@@ -27,11 +27,11 @@
 	<body style="background: var(--BodyGradient);">
 		<div class="container">
 			<hr>
-			<h3 class="centered"><?php include "../Components/top.php"; ?></h3>
+			<h3 class="centered"><?php include "../Components/PageComponents/top.php"; ?></h3>
 			<hr>
 			<?php
-				// include $_SERVER['DOCUMENT_ROOT']."/Components/C_S_T_teacherNavBar.php";
-				include $_SERVER['DOCUMENT_ROOT']."/Components/teacherNavBar.php";
+				// include $_SERVER['DOCUMENT_ROOT']."/Components/C_S_T_Components/NavBarComponents/teacherNavBar.php";
+				include $_SERVER['DOCUMENT_ROOT']."/Components/NavBarComponents/teacherNavBar.php";
 			?>
 			<div>
 
@@ -42,7 +42,7 @@
 						<?php
 							//when login is enabled, there will be no need for the dropdown
 							//instead, the logged person's id will be automatically taken
-							include "../Components/teacherDropDown.php"; ?>
+							include "../Components/Components/DropDownComponents/teacherDropDown.php"; ?>
 					</div>
 					<ul  class="left-align" style="list-style-type: none;"  id="myReports">
 						<li onclick="addReportToPreview(this)" style="cursor: pointer; color: blue;" id="myClasses">My Classes</li>
@@ -55,9 +55,9 @@
 					<hr>
 					<form name="newReportForm" action="../AddNew/addnewreport.php" method="post">
 						<?php $displayType = "dropdown";
-									include "../Components/classNumberDropDown.php";?>
-						<?php include "../Components/sectionAlphaDropDown.php";?>
-						<?php include "../Components/subjectDropDown.php";?>
+									include "../Components/Components/DropDownComponents/classNumberDropDown.php";?>
+						<?php include "../Components/Components/DropDownComponents/sectionAlphaDropDown.php";?>
+						<?php include "../Components/Components/DropDownComponents/subjectDropDown.php";?>
 						<button name="Submit" id="submit" type="submit">Create New Report</button>
 					</form>
 					<hr>
@@ -79,7 +79,7 @@
 				</div>
 <hr>
 		</div>
-		<div id="bottom" class="col-sm-12"><?php include "../Components/bottom.php"; ?></div>
+		<div id="bottom" class="col-sm-12"><?php include "../Components/PageComponents/bottom.php"; ?></div>
 		</div>
 	</body>
 </html>

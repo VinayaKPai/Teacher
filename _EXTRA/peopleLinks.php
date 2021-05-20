@@ -18,4 +18,4 @@
     </div>
   </div>
 </h6>
-<?php include $_SERVER['DOCUMENT_ROOT']."/Components/teacherNavBar.php"; ?>
+<?php include $_SERVER['DOCUMENT_ROOT']."/Components/NavBarComponents/teacherNavBar.php"; ?>

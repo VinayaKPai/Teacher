@@ -3,11 +3,14 @@
 function cancel() {
   alert ("Your responses will not be saved");
 }
+function emptyResponseAlert() {
+  alert ("Your response has been saved. You will be able to complete and submit your response till the end date. ");
+}
 </script>
 
 <?php
 session_start();
-  include $_SERVER['DOCUMENT_ROOT']."/Components/header.php";
+  include $_SERVER['DOCUMENT_ROOT']."/Components/PageComponents/header.php";
   include $_SERVER['DOCUMENT_ROOT']."/basecode-create_connection.php";
   include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/questioResponseDisplay.php";
   echo "<div class='container'>";
@@ -29,6 +32,7 @@ session_start();
         qt.displayInputType,
         qt.displayInputAttributes,
         qt.maxLength,
+        qt.minLength,
         qb.question,
         qb.Option_1,
         qb.Option_2,
@@ -43,22 +47,26 @@ session_start();
     INNER JOIN questiontype as qt ON qt.qtId = qb.typeId
     INNER JOIN subjects as sub ON sub.subjectId = a.subjectId
     WHERE deplog.depId = '$depId' ");
-  $cnt = 0;
-  $row = $query->fetch_assoc();
-  echo "<div class='topbanner' >Class ";
-  echo $_SESSION['c'] . " Section " . $_SESSION['d'];
-  echo "<span style='float: right;'>Open: ".$row['schStartDate']." To: ".$row['schEndDate']."</span>";
-  echo "<span style='float: right;' class='col-sm-4'>Subject: ".$row['subjectName']."</span></div>";
-  echo "<h4>".$_GET['aname']."</h4>";
-  echo "<form action='../../Scripts/php/saveResponse.php' method='post'>";
-    while ($row = $query->fetch_assoc()) {
-      $cnt = $cnt + 1;
-      echo "<div class='topbanner'>Question ".$cnt."</div>";
-      qpDisplay($row);
-    }
-  echo "<button class='btn btn-primary' type='submit' onsubmit='emptyResponseAlert()'>Submit My Response</button>";
-  echo "</form>";
-  echo "<a class='btn btn-default pull-right' href='$href' onclick='cancel()'>Cancel (response will not be saved)</a>";
 
+
+  // $cnt = 0;
+  // $row = $query->fetch_assoc();
+  // echo "<div class='topbanner' >Class ";
+  // echo $_SESSION['c'] . " Section " . $_SESSION['d'];
+  // echo "<span style='float: right;'>Open: ".$row['schStartDate']." To: ".$row['schEndDate']."</span>";
+  // echo "<span style='float: right;' class='col-sm-4'>Subject: ".$row['subjectName']."</span></div>";
+  // echo "<h4>".$_GET['aname']."</h4>";
+  // echo "<form action='../../Scripts/php/saveResponse.php' method='post'>";
+  //   while ($row = $query->fetch_assoc()) {
+  //     $cnt = $cnt + 1;
+  //     echo "<div class='topbanner'>Question ".$cnt."</div>";
+  //     qpDisplay($row);
+  //   }
+  // echo "<button class='btn btn-primary' type='submit' onsubmit='emptyResponseAlert()'>Submit My Response</button>";
+  // echo "</form>";
+  // echo "<a class='btn btn-default pull-right' href='$href' onclick='cancel()'>Cancel (response will not be saved)</a>";
+
+//Sent to Scripts\php\questioResponseDisplay.php
+  questionBlockDisplay($query,$mysqli);
  ?>
 </html>

@@ -11,6 +11,7 @@
     //And creates the div for displaying each student data
     //Using foreach(?) / for(?) display the student data
     $arr = $_SESSION['clsec'];
+    print_r($query);
       while ($result = $query->fetch_assoc()) {
         for ($i=0;$i<count($arr);$i++) {
         $cs = explode('-',$arr[$i]);

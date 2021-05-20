@@ -17,16 +17,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 		<?php
-	    include $_SERVER['DOCUMENT_ROOT']."/Components/header.php";
+	    include $_SERVER['DOCUMENT_ROOT']."/Components/PageComponents/header.php";
 	  ?>
     <body class="body" style="background: var(--BodyGradient);">
   		<div class="container">
-  			<?php include $_SERVER['DOCUMENT_ROOT']."/Components/logintimebtn.php" ;?>
+  			<?php include $_SERVER['DOCUMENT_ROOT']."/Components/LoginComponents/logintimebtn.php" ;?>
   			<?php
-  				include $_SERVER['DOCUMENT_ROOT']."/Components/loggedtop.php";
+  				include $_SERVER['DOCUMENT_ROOT']."/Components/LoginComponents/loggedtop.php";
   			?>
   			<?php
-  				include $_SERVER['DOCUMENT_ROOT']."/Components/adminNavBar.php";
+  				include $_SERVER['DOCUMENT_ROOT']."/Components/Components/NavBarComponents/adminNavBar.php";
   			?>
       </div>
     </body>

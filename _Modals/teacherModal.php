@@ -93,11 +93,11 @@
               <hr />
               <form action="/AddNew/addnewclasses_taught_by_teachers.php" method="post" id="add_det_form">
                   <?php $displayType = "dropdown";
-                    include $_SERVER['DOCUMENT_ROOT']."/Components/classNumberDropDown.php";
+                    include $_SERVER['DOCUMENT_ROOT']."/Components/Components/DropDownComponents/classNumberDropDown.php";
                     echo "<br>";
-                    include $_SERVER['DOCUMENT_ROOT']."/Components/sectionAlphaDropDown.php";
+                    include $_SERVER['DOCUMENT_ROOT']."/Components/Components/DropDownComponents/sectionAlphaDropDown.php";
                     echo "<br>";
-                    include $_SERVER['DOCUMENT_ROOT']."/Components/subjectDropDown.php";
+                    include $_SERVER['DOCUMENT_ROOT']."/Components/Components/DropDownComponents/subjectDropDown.php";
                   ?>
                   <br>
                   <input id="teacherId" name="teacherId" hidden> </input>

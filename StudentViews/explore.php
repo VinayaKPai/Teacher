@@ -1,9 +1,9 @@
 <html>
   <?php
   session_start();
-    include $_SERVER['DOCUMENT_ROOT']."/Components/header.php";
+    include $_SERVER['DOCUMENT_ROOT']."/Components/PageComponents/header.php";
     include $_SERVER['DOCUMENT_ROOT']."/basecode-create_connection.php";
-    include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/studentActivityQueries.php";
+    include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/allRetrievalQueries.php";
     $userType = "Student";
     $pageCode = "S";
   ?>
@@ -12,14 +12,22 @@
 		<div class="container">
     <h3 style="background: var(--BodyGradient);">
       <?php
-        include $_SERVER['DOCUMENT_ROOT']."/Components/loggedtop.php";
+        include $_SERVER['DOCUMENT_ROOT']."/Components/LoginComponents/loggedtop.php";
       ?>
     </h3>
   </div>
   <div class="container">
+    <a href="../../StudentViews/indexS.php">
+      <button type="button" class="btn btn-outline-primary">HOME</button>
+    </a>
     <?php
-    include $_SERVER['DOCUMENT_ROOT']."/Components/studentNavBar.php";
+    $buttonClass = "btn btn-primary";
+
+    include $_SERVER['DOCUMENT_ROOT']."/Components/NavBarComponents/studentNavBar.php";
     ?>
+    <a href="../../StudentViews/explore.php?sub=My Old Stuff">
+      <button type="button" class="btn btn-info">My Old Stuff</button>
+    </a>
   </div>
   <!-- <div class="container">
 
@@ -29,7 +37,7 @@
     <h2><?php echo $_GET['sub']; ?></h2>
     <div>
       <a data-toggle="collapse" href="#openactivities">
-        <button type="button" class="btn btn-primary sqbtn text-wrap" style="white-space: wrap;">Open<br> Activities</button>
+        <button type="button" class="btn btn-success sqbtn text-wrap" style="white-space: wrap;">Open<br> Activities</button>
       </a>
       <a href="#" style="margin: 3%;">
         <button type="button" class="btn btn-secondary sqbtn text-wrap"  style="white-space: wrap;">Completed Activities</button>
@@ -63,11 +71,6 @@
 
     </div>
     <div class="container collapse" id="openactivities">
-      <script>
-        function emptyResponseAlert() {
-          alert ("Triggered");
-        }
-      </script>
       <?php
         $subject = $_GET['sub'];
         include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/generateOpenActivities.php";

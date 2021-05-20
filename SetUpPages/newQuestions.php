@@ -12,17 +12,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-	<?php include $_SERVER['DOCUMENT_ROOT']."/Components/header.php"; ?>
+	<?php include $_SERVER['DOCUMENT_ROOT']."/Components/PageComponents/header.php"; ?>
 	<body class="body">
 		<div class="container">
 			<?php
-				include $_SERVER['DOCUMENT_ROOT']."/Components/logintimebtn.php" ;
+				include $_SERVER['DOCUMENT_ROOT']."/Components/LoginComponents/logintimebtn.php" ;
 			?>
 			<?php
-				include $_SERVER['DOCUMENT_ROOT']."/Components/loggedtop.php";
+				include $_SERVER['DOCUMENT_ROOT']."/Components/LoginComponents/loggedtop.php";
 			?>
 			<?php
-				include $_SERVER['DOCUMENT_ROOT']."/Components/adminNavBar.php";
+				include $_SERVER['DOCUMENT_ROOT']."/Components/Components/NavBarComponents/adminNavBar.php";
 			?>
 				<div class="centered">
 					<a href="../../SetUpPages/questionBank.php">
@@ -39,21 +39,21 @@
 						<div style='margin-top: 2px;'>
 							<span class='col-sm-4'>
 								<span class='red'>*</span>
-									<?php include $_SERVER['DOCUMENT_ROOT']."/Components/classNumberDropDown.php"; ?>
+									<?php include $_SERVER['DOCUMENT_ROOT']."/Components/Components/DropDownComponents/classNumberDropDown.php"; ?>
 							</span>
 							<span>
 								<span class='red'>*</span>
-								<?php include $_SERVER['DOCUMENT_ROOT']."/Components/subjectDropDown.php"; ?>
+								<?php include $_SERVER['DOCUMENT_ROOT']."/Components/Components/DropDownComponents/subjectDropDown.php"; ?>
 							</span>
 						</div>
 						<div style='margin-top: 2px;'>
 							<span class='col-sm-4'>
 								<span class='red'>*</span>
-								<?php include $_SERVER['DOCUMENT_ROOT']."/Components/topicDropDown.php"; ?>
+								<?php include $_SERVER['DOCUMENT_ROOT']."/Components/Components/DropDownComponents/topicDropDown.php"; ?>
 							</span>
 							<span  class='col-sm-8'>
 								<span class='red'>*</span>
-								<?php include $_SERVER['DOCUMENT_ROOT']."/Components/typeDropDown.php"; ?>
+								<?php include $_SERVER['DOCUMENT_ROOT']."/Components/Components/DropDownComponents/typeDropDown.php"; ?>
 								<span id="cbseNote">Currently no categorization of CBSE questions supported</span>
 							</span>
 						</div>
@@ -74,7 +74,7 @@
 
 		</div>
 		<div class="container">
-		<?php include $_SERVER['DOCUMENT_ROOT']."/Components/bottom.php"; ?>
+		<?php include $_SERVER['DOCUMENT_ROOT']."/Components/PageComponents/bottom.php"; ?>
 		</div>
 	</body>
 </html>

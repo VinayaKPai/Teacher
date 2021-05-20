@@ -3,7 +3,7 @@
 <head>
 	<?php
 		session_start();
-		include $_SERVER['DOCUMENT_ROOT']."/Components/header.php" ;
+		include $_SERVER['DOCUMENT_ROOT']."/Components/PageComponents/header.php" ;
 				include $_SERVER['DOCUMENT_ROOT']."/basecode-create_connection.php";
 				include $_SERVER['DOCUMENT_ROOT']."/Scripts/php/allRetrievalQueries.php";
 				$type = "T";
@@ -18,14 +18,14 @@
 	<div class="container">
 		<div class="container-flex">
 			<h3 class="centered" style="background: var(--BodyGradient);">
-				<?php include $_SERVER['DOCUMENT_ROOT']."/Components/loggedtop.php"; ?>
+				<?php include $_SERVER['DOCUMENT_ROOT']."/Components/LoginComponents/loggedtop.php"; ?>
 			</h3>
 		</div>
 
 		<div class="container-flex">
 			<?php
 				if ($_GET){echo $_GET;}
-				include $_SERVER['DOCUMENT_ROOT']."/Components/teacherNavBar.php";
+				include $_SERVER['DOCUMENT_ROOT']."/Components/NavBarComponents/teacherNavBar.php";
 				include $_SERVER['DOCUMENT_ROOT']."/Components/createNewAssessmentBtn.php";
 			?>
 		</div>
@@ -35,7 +35,7 @@
 		 		<?php
 					$status = "completed";
 					$successFlag = 1;
-	 			 include $_SERVER['DOCUMENT_ROOT']."/Components/activityBody.php";
+	 			 include $_SERVER['DOCUMENT_ROOT']."/Components/ActivityComponents/activityBody.php";
 				?>
 		 	</div>
 
@@ -44,7 +44,7 @@
 		 		<?php
 					$status = "ongoing";
 					$successFlag = 1;
-	 			 include $_SERVER['DOCUMENT_ROOT']."/Components/activityBody.php";
+	 			 include $_SERVER['DOCUMENT_ROOT']."/Components/ActivityComponents/activityBody.php";
 		 		?>
 		 	</div>
 			<div class="panel-group" id="accordion">
@@ -52,7 +52,7 @@
 		 		<?php
 					$status = "undeployed";
 					$successFlag = 0;
-	 			 include $_SERVER['DOCUMENT_ROOT']."/Components/activityBody.php";
+	 			 include $_SERVER['DOCUMENT_ROOT']."/Components/ActivityComponents/activityBody.php";
 		 		?>
 		 	</div>
 		 	<div class="panel-group" id="accordion">
@@ -60,7 +60,7 @@
 		 		<?php
 					$status = "withdrawn";
 					$successFlag = 2;
-		 		 include $_SERVER['DOCUMENT_ROOT']."/Components/activityBody.php";
+		 		 include $_SERVER['DOCUMENT_ROOT']."/Components/ActivityComponents/activityBody.php";
 		 		?>
 		 	</div>
 

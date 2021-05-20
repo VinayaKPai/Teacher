@@ -14,78 +14,144 @@
 	</head>
 
 <body class="body container">
-	<?php
+	<div class='container-flex cards white'>"  ;
+		<div class='panel panel-heading 	normal'>".$displayInstructions."(".$typeName.": Max length = ".$MaxLength.")
+		</div>";//for instruction
+		<div class='panel-heading' style='border: 1px solid #fff;'>
+			<span style='font-size: 14px;'>". $Question	."</span>
+		</div>";
+		<div class='container-flex'>Your Answer:
+				<div class='blue col-9'>";
+							<!-- if ($typeName=="MCQ"){
+								if ($Option_1 != "") {
+										<".  $DisplayInputType ." ". $displayInputAttributes ." name=".$qId." value=".$Option_1.">".$Option_1	."</".$DisplayInputType.">";
+								}
+								if ($Option_2 != "") {
+										<".  $DisplayInputType ." ". $displayInputAttributes ."name=".$qId." value=".$Option_2.">".$Option_2	."</".$DisplayInputType.">";
+								}
+								if ($Option_3 != "") {
+										<".  $DisplayInputType ." ". $displayInputAttributes ." name=".$qId." value=".$Option_3.">".$Option_3	."</".$DisplayInputType.">";
+								}
+								if ($Option_4 != "") {
+										<".  $DisplayInputType ." ". $displayInputAttributes ."name=".$qId." value=".$Option_4.">".$Option_4	."</".$DisplayInputType.">";
+								}
+								if ($Option_5 != "") {
+										<".  $DisplayInputType ." ". $displayInputAttributes ."name=".$qId." value=".$Option_5.">".$Option_5	."</".$DisplayInputType.">";
+								}
+								if ($Option_6 != "") {
+										<".  $DisplayInputType ." ". $displayInputAttributes ."name=".$qId." value=".$Option_6.">".$Option_6	."</".$DisplayInputType.">";
+								}
+							}
+							else { -->
+						<textarea id=".$qId." onkeyup='len(asdf)'></textarea>
+					</div>
+					<div class='col-2 white'>
+						<span id='chars".$qId."' style='float: right; color: white; margin: 5px;'></span>";
+							<!-- } -->
+					</div>
+		</div>";//for question
+	</div>";
+	Aaradhya	Kalimuthu	Abbi
+Adah	Kalpesh	Abburi
+Adhira	Kantilal	Abhyankar
+Alisha	Karan	Abraham
+Amoli	Karthik	Acharya
+Anaisha	Karthikeyan	Achrekar
+Ananya	Kaushal	Adani
+Anika	Kaustubh	Adhikane
+Anushka	Kazi	Adhikari
+Asmee	Khakhar	Adiga
+Avni	Kishor	Advani
+Carina	Kishore	Agarkar
+Drishti	Kripa	Agarwal
+Hiya	Kripesh	Agate
+Ira	Krishnadev	Agnihotri
+Ishana	Krishnappa	Agvan
+Ishita	Krishnayya	Ahlawat
+Kaia	Kulasekhara	Ahluwalia
+Kashvi	Kulbhushan	Ahuja
+Keya	Kumar	Aiyappa
+Kimaya	Kalimuthu	Ajgaonkar
+Krisha	Kalpesh	Akash
+Larisa	Kantilal	Akhtar
+Mahika	Karan	Akkineni
+Mayra	Karthik	Ali
+Mehar	Karthikeyan	Amarnath
+Mirai	Kaushal	Ambani
+Mishka	Kaustubh	Ambaty
+Naitee	Kazi	Ambedkar
+Navya	Khakhar	Ambekar
+Nehrika	Kishor	Amble
+Neysa	Kishore	Ambuja
+Pavati	Kripa 	Ambulkar
+Prisha	Kripesh	Ameer
+Ryka	Krishnadev	Amin
+Rebecca	Krishnappa	Amladi
+Saanvi	Krishnayya	Amravatikar
+Sahana	Kulasekhara	Amrutham
+Sai	Kulbhushan	Anand
+Saisha	Kumar	Anandi
+Saloni	Kalimuthu	Anchan
+Shanaya	Kalpesh	Anchan
+Shrishti	Kantilal	Aneja
+Sneha	Karan 	Animireddy
+Taahira	Karthik	Antony
+Taara	Karthikeyan	Anumula
+Tanvi	Kaushal	Apdev
+Viti	Kaustubh	Apte
+Zara	Kazi 	Apture
+Aahva	Khakhar	Argade
+Aadiv	Kishor	Agvan
+Aarav	Kishor	Ahlawat
+Akanksh	Kripa	Ahluwalia
+Alex	Kripesh	Ahuja
+Anant	Krishnadev	Aiyappa
+Atiksh	Krishnappa	Ajgaonkar
+Ayaan	Krishnayya	Ambaty
+Bhuv	Kulasekhara	Amble
+Dasya	Kulbhushan	Anand
+Gian	Kumar	Apte
+Hem	Kalimuthu	Karthikeyan
+Idhant	Kalpesh	Khakhar
+Ishank	Kantilal	Kripesh
+Jash	Karan	Kulasekhara
+Jay	Karthik	Kishor
+Joseph	Karthikeyan	Krishnadev
+Kabir	Kaushal	Kulasekhara
+Kahaan	Kaustubh	Kaustubh
+Kairav	Kaz	Kripa
+Kevin	Khakhar	Krishnappa
+Laksh	Kishor	Agarwal
+Luv	Kishore	Ahluwalia
+Manan	Kripa	Amarnath
+Mohammad	Kripesh	Ambaty
+Naksh	Krishnadev	Amladi
+Nimit	Krishnappa	Amble
+Nirav	Krishnayya	Khakhar
+Pahal	Kulasekhara	Kalpesh
+Parv	Kulbhushan	Karan
+Pranay	Kumar 	Khakhar
+Rachit	Kalimuthu	Kripa
+Raj	Kalpesh	Krishnadev
+Ranbir	Kantilal	Karan
+Raunak	Karan	Kaustubh
+Reyansh	Karthik	Kishor
+Rishaan	Karthikeyan	Naksh
+Rishit	Kaushal	Parv
+Rohan	Kaustubh	Ranbir
+Rudra	Kaz	Rohan
+Rushil	Khakhar	Taksh
+Sadhil	Kishor	Vivaan
+Sarthak	Kishore	Zuber
+Taarush	Kripa 	Bhuv
+Taksh	Kripesh	Hem
+Ved	Krishnadev	Idhant
+Vihaan	Krishnappa	Laksh
+Vivaan	Krishnayya	Rishit
+Yash	Kulasekhara	Rudra
+Yug	Kulbhushan	Sarthak
+Zuber	Kumar	Vivaan
 
-		include $_SERVER['DOCUMENT_ROOT']."/Components/classNumberDropDown.php";
-		include $_SERVER['DOCUMENT_ROOT']."/Components/subjectDropDown.php";
 
-		[
-			{"Class Id": 1, "Class Num": "I", "Sec Id": 1, "Sec Name": "A", "Stu Id": 11},
-			{"Class Id": 1, "Class Num": "I", "Sec Id": 1, "Sec Name": "A", "Stu Id": 13},
-			{"Class Id": 1, "Class Num": "I", "Sec Id": 1, "Sec Name": "A", "Stu Id": 27},
-			{"Class Id": 1, "Class Num": "I", "Sec Id": 1, "Sec Name": "A", "Stu Id": 28},
-			{"Class Id": 1, "Class Num": "I", "Sec Id": 1, "Sec Name": "A", "Stu Id": 41},
-			{"Class Id": 1, "Class Num": "I", "Sec Id": 1, "Sec Name": "A", "Stu Id": 51},
-			{"Class Id": 1, "Class Num": "I", "Sec Id": 1, "Sec Name": "A", "Stu Id": 53},
-			{"Class Id": 1, "Class Num": "I", "Sec Id": 1, "Sec Name": "A", "Stu Id": 63},
-			{"Class Id": 1, "Class Num": "I", "Sec Id": 1, "Sec Name": "A", "Stu Id": 64},
-			{"Class Id": 1, "Class Num": "I", "Sec Id": 2, "Sec Name": "B", "Stu Id": 11},
-			{"Class Id": 1, "Class Num": "I", "Sec Id": 2, "Sec Name": "B", "Stu Id": 13},
-			{"Class Id": 1, "Class Num": "I", "Sec Id": 2, "Sec Name": "B", "Stu Id": 27},
-			{"Class Id": 1, "Class Num": "I", "Sec Id": 2, "Sec Name": "B", "Stu Id": 28},
-			{"Class Id": 1, "Class Num": "I", "Sec Id": 2, "Sec Name": "B", "Stu Id": 41},
-			{"Class Id": 1, "Class Num": "I", "Sec Id": 2, "Sec Name": "B", "Stu Id": 51},
-			{"Class Id": 1, "Class Num": "I", "Sec Id": 2, "Sec Name": "B", "Stu Id": 53},
-			{"Class Id": 1, "Class Num": "I", "Sec Id": 2, "Sec Name": "B", "Stu Id": 63},
-			{"Class Id": 1, "Class Num": "I", "Sec Id": 2, "Sec Name": "B", "Stu Id": 64}
-		]
-		[
-			{"Class Id": 1, "Class Num": "I", "Sec Id": 1, "Sec Name": "A", "Stu Id": 11},
-			{"Class Id": 1, "Class Num": "I", "Sec Id": 1, "Sec Name": "A", "Stu Id": 13},
-			{"Class Id": 1, "Class Num": "I", "Sec Id": 1, "Sec Name": "A", "Stu Id": 27},
-			{"Class Id": 1, "Class Num": "I", "Sec Id": 1, "Sec Name": "A", "Stu Id": 28},
-			{"Class Id": 1, "Class Num": "I", "Sec Id": 1, "Sec Name": "A", "Stu Id": 41},
-			{"Class Id": 1, "Class Num": "I", "Sec Id": 1, "Sec Name": "A", "Stu Id": 51},
-			{"Class Id": 1, "Class Num": "I", "Sec Id": 1, "Sec Name": "A", "Stu Id": 53},
-			{"Class Id": 1, "Class Num": "I", "Sec Id": 1, "Sec Name": "A", "Stu Id": 63},
-			{"Class Id": 1, "Class Num": "I", "Sec Id": 1, "Sec Name": "A", "Stu Id": 64}
-		]
-		[
-			{"Class Id": 1, "Class Num": "I", "Sec Id": 2, "Sec Name": "B", "Stu Id": 11},
-			{"Class Id": 1, "Class Num": "I", "Sec Id": 2, "Sec Name": "B", "Stu Id": 13},
-			{"Class Id": 1, "Class Num": "I", "Sec Id": 2, "Sec Name": "B", "Stu Id": 27},
-			{"Class Id": 1, "Class Num": "I", "Sec Id": 2, "Sec Name": "B", "Stu Id": 28},
-			{"Class Id": 1, "Class Num": "I", "Sec Id": 2, "Sec Name": "B", "Stu Id": 41},
-			{"Class Id": 1, "Class Num": "I", "Sec Id": 2, "Sec Name": "B", "Stu Id": 51},
-			{"Class Id": 1, "Class Num": "I", "Sec Id": 2, "Sec Name": "B", "Stu Id": 53},
-			{"Class Id": 1, "Class Num": "I", "Sec Id": 2, "Sec Name": "B", "Stu Id": 63},
-			{"Class Id": 1, "Class Num": "I", "Sec Id": 2, "Sec Name": "B", "Stu Id": 64}
-		]
-
-		$clsData
-		Array (
-			[0] => 1
-			[CId] => 1
-			[1] => I
-			[Class] => I
-			[2] => 2
-			[Sec Id] => 2
-			[3] => B
-			[Section] => B
-			[4] => [
-				{"User Id": 27, "ST RN": 33, "St FN": "Aadeep", "St MN": "", "St LN": "Badami", "ST CId": 1, "ST SecId": 2},
-				{"User Id": 64, "ST RN": 58, "St FN": "Ighu", "St MN": null, "St LN": "Hughug", "ST CId": 1, "ST SecId": 2}
-			]
-			[CSections] => [
-				{"User Id": 27, "ST RN": 33, "St FN": "Aadeep", "St MN": "", "St LN": "Badami", "ST CId": 1, "ST SecId": 2},
-				{"User Id": 64, "ST RN": 58, "St FN": "Ighu", "St MN": null, "St LN": "Hughug", "ST CId": 1, "ST SecId": 2}
-			]
-		)
-Array ( [Id] => 1 [Type] => A [Class] => I [Class Id] => 1 [SectionId] => 1 [Section] => A [Open From] => 2020-12-01 [Open Till] => 2020-12-15 [Deployed?] => 1 [Assessment ID] => 15 )
-Array ( [Id] => 7 [Type] => A [Class] => I [Class Id] => 1 [SectionId] => 1 [Section] => A [Open From] => 2020-12-01 [Open Till] => 2020-12-22 [Deployed?] => 1 [Assessment ID] => 16 )
-Array ( [Id] => 2 [Type] => A [Class] => I [Class Id] => 1 [SectionId] => 2 [Section] => B [Open From] => 2020-12-01 [Open Till] => 2020-12-15 [Deployed?] => 1 [Assessment ID] => 15 )
-Array ( [Id] => 5 [Type] => A [Class] => IX [Class Id] => 9 [SectionId] => 2 [Section] => B [Open From] => 2020-12-03 [Open Till] => 2020-12-10 [Deployed?] => 1 [Assessment ID] => 6 )
-Array ( [Id] => 6 [Type] => A [Class] => IX [Class Id] => 9 [SectionId] => 4 [Section] => D [Open From] => 2020-12-03 [Open Till] => 2020-12-10 [Deployed?] => 1 [Assessment ID] => 6 )
-	 ?>
 </body>
 </html>

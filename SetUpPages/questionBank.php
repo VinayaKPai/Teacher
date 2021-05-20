@@ -106,11 +106,11 @@
 			<h3 class="centered">
 				<div id="top" class="row" style="padding: 1px;">
 					<?php
-					include $_SERVER['DOCUMENT_ROOT']."/Components/loggedtop.php";
+					include $_SERVER['DOCUMENT_ROOT']."/Components/LoginComponents/loggedtop.php";
 					?>
 				</div>
 				<?php
-					include $_SERVER['DOCUMENT_ROOT']."/Components/teacherNavBar.php";
+					include $_SERVER['DOCUMENT_ROOT']."/Components/NavBarComponents/teacherNavBar.php";
 				?>
 
 			</h3>
@@ -124,11 +124,11 @@
 					<div class="panel panel-header col-sm-12" style="padding:10px;">
 							<div class="col-sm-3 left-align">Class/STD:<span class='glyphicon glyphicon-asterisk small' style='color: Red'></span></div>
 							<div id="classSelectBoxes" class="input-group col-sm-9 left-align">
-								<?php include "../Components/classNumberDropDown.php" ; ?>
+								<?php include "../Components/Components/DropDownComponents/classNumberDropDown.php" ; ?>
 							</div>
 							<div class="col-sm-3 left-align">Subject:<span class='glyphicon glyphicon-asterisk small' style='color: Red'></span></div>
 							<div id="subjectSelectBoxes" class="input-group col-sm-9 left-align">
-								<?php include "../Components/subjectDropDown.php" ; ?>
+								<?php include "../Components/Components/DropDownComponents/subjectDropDown.php" ; ?>
 							</div>
 							<div id="filtersInUse"  class="left-align" style="padding:10px;">
 								<div id="filteredClasses"  class="col-sm-6" style="padding: :10px;"></div>
@@ -167,7 +167,7 @@
 				</div>
 
 				<div class="container">
-				<?php include $_SERVER['DOCUMENT_ROOT']."/Components/bottom.php"; ?>
+				<?php include $_SERVER['DOCUMENT_ROOT']."/Components/PageComponents/bottom.php"; ?>
 				</div>
 	</body>
 </html>

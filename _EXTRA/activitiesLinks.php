@@ -17,5 +17,5 @@
         <div style="width: 90%; height: 2px; background-color: #684654; margin: 6px 2px; display:block;"></div>
     </div>
   </div> -->
-  <?php include $_SERVER['DOCUMENT_ROOT']."/Components/teacherNavBar.php"; ?>
+  <?php include $_SERVER['DOCUMENT_ROOT']."/Components/NavBarComponents/teacherNavBar.php"; ?>
 </h6>

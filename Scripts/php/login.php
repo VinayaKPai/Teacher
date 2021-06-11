@@ -56,7 +56,6 @@
           $_SESSION['c'] = $dets['classNumber'];
           $_SESSION['d'] = $dets['sectionName'];
         }
-          // {header('Location:/StudentViews/indexS.php?c='.$clnm.'&d='.$scnm);}
           {header('Location:/StudentViews/indexS.php');}
     }
 
@@ -77,7 +76,7 @@
       postTeacherLogin($mysqli, $Utype, $loggedUserId);
     }
   }
-  function postTeacherLogin($mysqli, $Utype, $loggedUserId) {
+  function postTeacherLogin($mysqli, $Utype, $loggedUserId) {//FULLY FUNCTIONAL
     //get all the classes taught by the teacher
     //create session variables to facilitate getting appropriate data for other teacher view pages
     $query = $mysqli->query("SELECT * FROM `classes_taught_by_teacher` as ctt
@@ -85,10 +84,9 @@
       INNER JOIN classes as c on c.classId = ctt.classId
       INNER JOIN sections as s on s.sectionId = ctt.sectionId
       WHERE users.Email = '$loggedUserId'
-       ORDER BY ctt.classId ASC");
+       ORDER BY ctt.classId, ctt.sectionId ASC");
 
     $cnt = mysqli_num_rows($query);
-    // echo $cnt;
     if ($cnt==0) {
       $url = 'Location:/TeacherViews/indexT.php';
     }
@@ -105,11 +103,7 @@
           $scs = $dets['sectionName'];//A,B etc
           $cli = $dets['classId'];
           $sci = $dets['sectionId'];
-          // $clsecid = $dets['classId'];
-          // $scid = $dets['sectionId'];
-          // $csIds = [$clsecid,$scid];
-          // array_push($clsecIdArray,$csIds);
-          //create the $_GET parameters
+
           $clsec = $cli."-".$cls."-".$scs."-".$sci;
           $url = $url.$cls."-".$scs.",";
           $userName = $dets['firstName']." ".$dets['middleName']." ".$dets['lastName'];
@@ -119,15 +113,12 @@
           array_push($subArray,$dets['subjectId']);//1,2,3 etc
         }
         $url = rtrim($url, ",");
-        // $_SESSION['clsecIdArray'] = $clsecIdArray;
         $_SESSION['c'] = $clArray;
         $_SESSION['sub'] = $subArray;
         $_SESSION['clsec'] = $clsecArray;
         $url = $url."&cnt=".$cnt;
         $url = $url."&d=";
     }
-
-      // print_r($)
       {header($url);}
   }
 
@@ -155,7 +146,6 @@
        ORDER BY ctt.classId ASC");
 
     $cnt = mysqli_num_rows($query);
-    // echo $cnt;
     if ($cnt==0) {
       $url = 'Location:/AdminViews/indexA.php';
     }
@@ -172,9 +162,9 @@
           $clsec = $cls."-".$scs;
           $url = $url.$cls."-".$scs.",";
           $userName = $dets['firstName']." ".$dets['middleName']." ".$dets['lastName'];
-          array_push($clArray,$dets['classId']); //array_push($a,"blue","yellow");
+          array_push($clArray,$dets['classId']);
           array_push($clsecArray,$clsec);
-          array_push($subArray,$dets['subjectId']);//1,2,3 etc
+          array_push($subArray,$dets['subjectId']);
         }
         $url = rtrim($url, ",");
 
@@ -184,8 +174,6 @@
         $url = $url."&cnt=".$cnt;
         $url = $url."&d=";
     }
-
-      // print_r($)
       {header($url);}
   }
 

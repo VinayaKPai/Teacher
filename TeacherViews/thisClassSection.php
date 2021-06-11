@@ -33,7 +33,6 @@
 	 			 include $_SERVER['DOCUMENT_ROOT']."/Components/PageComponents/ClassSectionPanel.php";
 				 //need to create new session variables for the student name being explored and then destroy it when clicked on another student
 				?>
-				echo "ClassSectionPanel";
 
 		</div>
 

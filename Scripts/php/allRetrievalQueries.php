@@ -63,9 +63,7 @@
 
       $queryString = $queryString."  ORDER BY dl.classId, dl.sectionId ASC";
       $query = $mysqli->query($queryString);
-      // print_r($query);
       return $query;
-      // deploymentsdiv($query,$type,$pageHeading,$status,$mysqli);
   }
 
   function aqtActivityQuestions($assId,$mysqli) {
@@ -127,8 +125,6 @@
               questionbank.Option_4 AS 'option4',
               questionbank.Option_5 AS 'option5',
               questionbank.Option_6 AS 'option6'
-
-
         FROM
       	`questionbank`
           	 JOIN assessment_questions as aq
@@ -137,9 +133,9 @@
               ON aq.assessment_Id = assessments.assessment_Id
                join classes
               ON questionbank.classId = classes.classId
-              -- LEFT JOIN deploymentlog as dp
-              -- ON assessments.assessment_Id = dp.assessmentId
-              GROUP BY assessments.assessment_Title;") ;
+              WHERE classes.classId = 2
+              GROUP BY assessments.assessment_Title
+              ;") ;
 
       $query = $mysqli->query($queryString);
       // savedAssessmentsdiv($query, $successFlag);
@@ -313,38 +309,43 @@
     cttQueryResultToHtmlTable ( $query);
   }
 
-  function studentsForATeacher($mysqli,$teacherId) {
+  function studentsForATeacher($mysqli,$teacherId, $classId,$sectionId) {
+    //this function is now working perfectly
     $query = $mysqli->query("SELECT DISTINCT
       SD.classId AS 'CId',
       C.classNumber AS 'STD',
       SD.sectionId AS 'Sec Id',
-      Sec.sectionName AS 'Section'
-      -- json_arrayagg(DISTINCT json_object(
-      --     'User Id',U.userId,
-      --     'ST RN',SD.rollNumber,
-      --     'St FN',U.firstName,
-      --     'St MN',U.middleName,
-      --     'St LN',U.lastName,
-      --     'ST CId',SD.classId,
-      --     'ST SecId',SD.sectionId
-      --   ) ) as 'CSections'
-        FROM
-          studentdetails AS SD
-            INNER JOIN users AS U
-              on U.userId = SD.userId
-            LEFT JOIN classes as C
-              on C.classId= SD.classId
-            LEFT JOIN sections as Sec
-              on Sec.sectionId= SD.sectionId
+      Sec.sectionName AS 'Section',
+      U.userId AS 'User Id',
+      SD.rollNumber AS 'ST RN',
+      U.firstName AS 'St FN',
+      U.middleName AS 'St MN',
+      U.lastName AS 'St LN',
+      SD.classId AS 'ST CId',
+      SD.sectionId AS 'ST SecId'
+      FROM
+        studentdetails AS SD
+          INNER JOIN users AS U
+            on U.userId = SD.userId
+          INNER JOIN classes_taught_by_teacher as ctt
+          	on ctt.classId = SD.classId AND
+            ctt.sectionId = SD.sectionId
+          LEFT JOIN classes as C
+            on C.classId= SD.classId
+          LEFT JOIN sections as Sec
+            on Sec.sectionId= SD.sectionId
 
-        GROUP BY SD.classId, SD.sectionId
-              ORDER BY SD.classId ASC"
+        WHERE ctt.userId = '$teacherId' AND
+              SD.classId = '$classId' AND
+              SD.sectionId = '$sectionId'
+              ORDER BY SD.classId, SD.sectionId, U.firstName ASC"
     );
-
-    teacherStudentDiv ( $query);//Scripts\php\studentsQueryResultToHtmlDiv.php
+    return $query;
+    // teacherStudentDiv ( $query);//Scripts\php\studentsQueryResultToHtmlDiv.php
+    //this function is now working perfectly
   }
 
-  function studentsDetailsForATeacher($mysqli,$teacherId) {
+  function studentsDetailsForATeacher($mysqli,$teacherId,$sessionClassId,$secSectionId) {
     $query = $mysqli->query("SELECT DISTINCT
     	SD.classId AS 'CId',
       C.classNumber AS 'STD',
@@ -371,7 +372,7 @@
         GROUP BY SD.classId, SD.sectionId
               ORDER BY SD.classId ASC"
     );
-    teacherStudentDiv ( $query);//Scripts\php\studentsQueryResultToHtmlDiv.php
+    // teacherStudentDiv ( $query);//Scripts\php\studentsQueryResultToHtmlDiv.php
   }
   function studentsForATeacher_bkp($mysqli,$teacherId) {
     $query = $mysqli->query("SELECT DISTINCT
@@ -400,7 +401,7 @@
         GROUP BY SD.classId, SD.sectionId
               ORDER BY SD.classId ASC"
     );
-    teacherStudentDiv ( $query);//Scripts\php\studentsQueryResultToHtmlDiv.php
+    // teacherStudentDiv ( $query);//Scripts\php\studentsQueryResultToHtmlDiv.php
   }
 function studentSummaryDetailsThisClass ($mysqli,$clId,$clsecsId) {
   //get all students for this specific class+section

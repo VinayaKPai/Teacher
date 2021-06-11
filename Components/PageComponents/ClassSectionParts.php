@@ -49,6 +49,7 @@
     }
   }
   </script>
+  <div id="bkbtn" class="centered"></div>
 <!-- create divs for different types of this class section data and call the details therein -->
 <div class="container-flex" id="uppercont" style="display: block;">
   <!-- uppercon has Students and Assignments divs -->
@@ -103,5 +104,3 @@
         </div>
     </div>
 </div>
-
-<div id="bkbtn" class="centered"></div>

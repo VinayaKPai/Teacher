@@ -1,5 +1,5 @@
 <?php
-print_r($_SESSION);
+// print_r($_SESSION);
   $link = "../../TeacherViews/SingleStudentDetails.php?stId=".$row['User Id']."&f=".$row['St FN']."&l=".$row['St LN'];
 
   echo "<div class='cards white'><a href=".$link." class='white'>
@@ -8,4 +8,5 @@ print_r($_SESSION);
     <p class='right-align'> More....</p>";
 
   echo "</a></div>";
+  echo "<div id='bkbtn' class='centered'></div>";
 ?>

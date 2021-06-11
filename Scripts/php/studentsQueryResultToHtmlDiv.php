@@ -1,58 +1,32 @@
 <?php
   function teacherStudentDiv( $query ) {
     //Used in TeacherViews/myStudents.php
-    //Take the query result, which will have the class blocks arrayaggs
-    //And create collapsible class panels
-    //Using foreach for each class block, call the next function
-    //This function, takes the data for all sections in the class block
-    //And creates section panels
-    //Using foreach for each section block, call the next function
-    //This function takes the data for each student in the section
-    //And creates the div for displaying each student data
-    //Using foreach(?) / for(?) display the student data
+    //takes the session array clsec, which holds the data about the classes taken by this particulat teacher, to create separate sections for each class+section combo using the for loop
     $arr = $_SESSION['clsec'];
-    print_r($query);
-      while ($result = $query->fetch_assoc()) {
-        for ($i=0;$i<count($arr);$i++) {
-        $cs = explode('-',$arr[$i]);
-          if($cs[0]==$result['CId'] && $cs[3]==$result['Sec Id']) {
-            $togId = $result['CId'].$result['Sec Id'];
-            echo "<a data-toggle='collapse' href='#".$togId."'><h5>STD: ".$cs[1]."-".$cs[2]."</h5></a>";
-            // echo gettype($result['CSections']);
-            createClassBlock($result['CSections'],$togId);
+    $no = mysqli_num_rows($query);
+$result = "";
+    for ($i=0;$i<count($arr);$i++){
+      $exp = explode('-',$arr[$i]);
+      echo "<div class='card cards white'>".$exp[1]." - ".$exp[2]."</div>";
+      $togId = $exp[0]."cs".$exp[3];
+      echo "<div class='h5 boxshadow' id='$togId'>";
+      while ($result = $query->fetch_assoc()){
+        if ($result['CId']==$exp[0] && $result['Sec Id']==$exp[3]) {
+          createClassBlock($togId,$exp[0],$exp[3],$result);
+          print_r($result);
           }
         }
-      }
-  }
-  function createClassBlock($CSection,$togId) {
-    echo "<div id='".$togId."' class='collapse' style='padding: 4px;'>";
-    $CSec = json_decode($CSection,true);
-    for ($i=0;$i<count($CSec);$i++) {
-        createStudentHolderBlock($CSec[$i]);
+      echo "</div>";
     }
-  echo "</div>";
   }
 
-  function createStudentHolderBlock($s) {
-    $stId = "s".$s['User Id'];
-    echo "<a data-toggle='collapse' href='#".$stId." '><p style='background-color: #554a5f; font-size: 12px; color: White; padding: 1px;'>";
-      echo $s['St FN']." ";
-      if ($s['St MN']!="" || $s['St MN']=NULL) {echo $s['St MN']." ";}
-      echo $s['St LN'];
-    echo "</p></a>";
-    // print_r($s);
-    echo "<div id='".$stId."' class='collapse'>";
-          displayStudentDetails($s);
-    echo "</div>";
-  }
-  function displayStudentDetails($s) {
-    echo "<ul>";
-    foreach ($s as $k=>$v) {
-      if ($k=="User Id" || $k=="ST RN") {
-        echo "<li>".$k." => ".$v."</li>";
-      }
-    }
-    echo "</ul><hr>";
+  function createClassBlock($togId,$cId,$sId,$result) {
+      displayStudent($result);
+      print_r($result);
 
+  }
+
+  function displayStudent($result) {
+    echo "<br>HAHAHAHAHAHAH<br>";
   }
 ?>

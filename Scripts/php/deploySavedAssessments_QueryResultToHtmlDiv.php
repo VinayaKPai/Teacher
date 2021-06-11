@@ -1,11 +1,12 @@
 <?php
 
-  function savedAssessmentsdiv( $result, $successFlag ) {
+  // function savedAssessmentsdiv( $result, $successFlag )
+  function savedAssessmentsdiv( $result ) {
     $count  = mysqli_num_rows($result);
     $ass = "Assessment";
 
-    if ($successFlag==1) {$success = "Deployed";}
-    else {$success = "Undeployed"; }
+    // if ($successFlag==1) {$success = "Deployed";}
+    // else {$success = "Undeployed"; }
     if ($count>1){$suffix = 's';}
     else {$suffix = '';}
 
@@ -24,7 +25,7 @@
   function savedAssessmentsDivBody( $row, $ass ) {
     $dId = '';
     $assId = $row['Assessment ID'];
-      $varr = json_decode($row['Questions'], true);
+      // $varr = json_decode($row['Questions'], true);
       $title = $row['Title'];
       $dId = "collapseAss".$assId;//unique id for collapse elements
       //create the section heading
@@ -119,7 +120,7 @@ function displayAssessmentQuestions($jsonQuestions) {
   $assessmentQuestions = json_decode($jsonQuestions, true);
   //This will take 1 assessment and loop through all the questions in it and display it as needed
   echo "<div class='body col-sm-8 left' style='background:  var(--BodyGradient); border-radius: 25px; border-bottom: 2px solid #4B0082;'>";
-  foreach ($assessmentQuestions as $assessmentQuestion) {
+  foreach ($assessmentQuestions as $k => $assessmentQuestion) {
     displayAssessmentQuestion($assessmentQuestion);
   }
   echo "</ol>";

@@ -29,7 +29,7 @@
 				include $_SERVER['DOCUMENT_ROOT']."/Components/createNewAssessmentBtn.php";
 			?>
 		</div>
-	 <div style="background: var(--BodGradbanner);">
+	 <div class="boxshadow" >
 		 	<div class="panel-group" id="accordion">
 				<h5 class='centered topbanner'>Completed Tests</h5>
 		 		<?php

@@ -20,16 +20,14 @@
 				<?php include $_SERVER['DOCUMENT_ROOT']."/Components/LoginComponents/loggedtop.php"; ?>
 			</h3>
 		</div>
-
 		<div class="container-flex">
 			<?php
 				if ($_GET){echo $_GET;}
 				include $_SERVER['DOCUMENT_ROOT']."/Components/NavBarComponents/teacherNavBar.php";
 				include $_SERVER['DOCUMENT_ROOT']."/Components/createNewAssessmentBtn.php";
-				
 			?>
 		</div>
-	 <div style="background: var(--BodGradbanner);">
+	<div class="boxshadow" >
 		 	<div class="panel-group" id="accordion">
 				<h5 class='centered topbanner'>Completed Assignments</h5>
 		 		<?php
@@ -68,7 +66,7 @@
 			<div class="panel-group" id="accordion">
 				<h5 class='centered topbanner'>All Saved Assessments</h5>
 		 		<?php
-		 		savedAssessmentsQuery( $mysqli);
+		 			savedAssessmentsQuery( $mysqli);
 		 		?>
 		 	</div>
 		</div>
